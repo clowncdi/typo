@@ -1,14 +1,14 @@
 @font-face {
   font-family: 'S-CoreDream-3Light';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
-  /* font-weight: normal; */
-  /* font-style: normal; */
+  font-weight: normal;
+  font-style: normal;
 }
 @font-face {
   font-family: 'S-CoreDream-6Bold';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff') format('woff');
-  /* font-weight: normal; */
-  /* font-style: normal; */
+  font-weight: normal;
+  font-style: normal;
 }
 .container {
   margin: auto;
@@ -17,8 +17,9 @@
   grid-template-rows: 50px 60px 1fr 100px;
   width: 500px;
   height: 500px;
-  background: url('/images/logo512.png') no-repeat center center / cover;
+  background: #19202C url('/images/logo512.png') no-repeat center center / cover;
   border-radius: 5px;
+  background-size: contain;
 }
 .input-wrap label {
   display: none;
@@ -79,6 +80,10 @@
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.7);
   transform: translateY(-2px);
 }
+.btn.btn-dark {
+  color: white;
+  background-color: #19202C;
+}
 input[type="date"] {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -112,6 +117,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   border-radius: 5px;
   outline: none;
 }
+#country {
+  font-family: 'S-CoreDream-3Light';
+}
 .clearBtn {
   margin: 10px 0 0 1px;
   font-size: 8px;
@@ -136,7 +144,27 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   width: 100%;
 }
 .result-wrap #download a {
+  margin: 10px auto;
   text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #19202C;
+  border-bottom: 1px solid rgba(25, 32, 44, 0.7);
+  border-bottom-right-radius: 23px;
+}
+.result-wrap #download a p {
+  font-family: 'S-CoreDream-6Bold';
+  margin: 0;
+}
+.result-wrap #download a p span {
+  font-family: 'S-CoreDream-3Light';
+  font-size: 12px;
+  color: grey;
+  margin-right: 20px;
+}
+.result-wrap #download a .btn {
+  margin: 0;
 }
 .weather-icon-wrap {
   grid-column: 1/3;

@@ -11,15 +11,25 @@ const imageContainer = document.getElementById("imageContainer");
 const download = document.getElementById("download");
 let weatherUrl = '';
 
+// 오늘 날짜를 yyyy-mm-dd 형식으로 반환한다.
+function getToday() {
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = today.getMonth() < 9 ? "0"+(today.getMonth()+1) : today.getMonth()+1;
+  const dd = today.getDate() < 10 ? "0"+today.getDate() : today.getDate();
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+
 // document onload event. dateinput value is set to today's date.
 document.addEventListener("DOMContentLoaded", async () => {
-  const today = new Date();
-  dateInput.value = today.toISOString().substring(0, 10);
-  // icon.value = '약간 흐림';
+  dateInput.value = getToday();
+  weatherUrl = "/images/sun.svg";
+  document.querySelector(".sun").style.fill = "chartreuse";
   city.value = "서울";
   country.value = 'S.Korea, Seoul';
-  lowTemp.value = -1;
-  highTemp.value = 8;
+  // lowTemp.value = 0;
+  // highTemp.value = 0;
   addClearIcon();
 
   // location is set to the current location.
@@ -41,8 +51,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   // }
 });
 
+// 날씨 아이콘을 선택하면, 선택된 아이콘의 색을 chartreuse로 변경한다.
 const icons = document.querySelectorAll(".weather-icon");
 icons.forEach(icon => icon.addEventListener("click", (e) => {
+  if (e.target.style.fill == "chartreuse") {
+    e.target.style.fill = "white";
+    weatherUrl = "";
+    return;
+  }
   if (e.target.tagName == "IMG" || e.target.tagName == "svg") {
     icons.forEach(icon => {
       icon.children[0].style.fill = "white";
@@ -52,7 +68,7 @@ icons.forEach(icon => icon.addEventListener("click", (e) => {
   }
 }));
 
-// input focus event. when input is focused, the value is set to empty. function is called when input is focused.
+// input element에 clear 버튼을 추가한다.
 const inputs = document.querySelectorAll("input");
 function addClearIcon() {
   inputs.forEach(input => {
@@ -92,29 +108,24 @@ submitButton.addEventListener("click", async () => {
   imageContainer.innerHTML = "";
   download.innerHTML = "";
   
-  if (!fileInput.files[0]) return alert("이미지를 선택해주세요.");
-  if (!weatherUrl) return alert("날씨 아이콘을 선택해주세요.");
+  if (!fileInput.files[0]) return alert("이미지를 넣어 주세요.");
+  // if (!weatherUrl) return alert("날씨 아이콘을 선택해주세요.");
   inputs.forEach(input => checkValue(input));
 
   const low = lowTemp.value;
   const high = highTemp.value;
   const file = fileInput.files[0];
   const reader = new FileReader();
-  const reader2 = new FileReader();
   const date = dateInput.value.replaceAll('-', '');
-  const weatherIcon = await fetch(weatherUrl).then(response => response.blob())
   reader.readAsDataURL(file);
-  reader2.readAsDataURL(weatherIcon);
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
-
+  
   reader.onload = () => {
     const img = new Image();
     img.src = reader.result;
-    const iconImg = new Image();
-    iconImg.src = reader2.result;
-
-    img.onload = () => {
+    
+    img.onload = async () => {
       const height50 = 48;
       const height100 = 97;
       canvas.width = 1000;
@@ -133,6 +144,24 @@ submitButton.addEventListener("click", async () => {
         let startY = (1000 - canvasHeight)  / 2;
         ctx.drawImage(img, x, y, img.width, img.height, 0, startY, 1000, canvasHeight);
       }
+
+      // 날씨 아이콘을 추가한다.
+      if (weatherUrl) {
+        console.log('weatherUrl: ', weatherUrl);
+        const weatherIcon = await fetch(weatherUrl).then(response => response.blob());
+        console.log('weatherIcon: ', weatherIcon)
+        const reader2 = new FileReader();
+        reader2.readAsDataURL(weatherIcon);
+        console.log('reader2: ', reader2)
+        reader2.onload = () => {
+          const iconImg = new Image();
+          iconImg.src = reader2.result;
+          console.log('iconImg: ', iconImg)
+          iconImg.onload = () => {
+            ctx.drawImage(iconImg, 50, 160);
+          }
+        }
+      } 
       
       ctx.font = "50px S-CoreDream-6Bold";
       ctx.fillStyle = "white";
@@ -141,44 +170,46 @@ submitButton.addEventListener("click", async () => {
       ctx.shadowOffsetX = 0;
       ctx.shadowOffsetY = 0;
       ctx.textAlign = "right";
-      ctx.fillText(url.value, 950, 42+height50);
-
-      ctx.drawImage(iconImg, 50, 160);
+      url && ctx.fillText(url.value, 950, 42+height50);
       
       ctx.font = "50px S-CoreDream-3Light";
       ctx.textAlign = "left";
-      ctx.fillText(date.substring(0, 4), 60, 802+height50);
+      date && ctx.fillText(date.substring(0, 4), 60, 802+height50);
       ctx.textAlign = "right";
-      ctx.fillText(country.value, 950, 792+height50);
+      country && ctx.fillText(country.value, 950, 792+height50);
       
       ctx.font = "90px S-CoreDream-3Light";
       ctx.textAlign = "left";
-      let delim = 95+Math.round(ctx.measureText(low).width);
-      ctx.fillText('/', delim, 30+height100);
+      let delim = 90+Math.round(ctx.measureText(low).width);
+      low && high && ctx.fillText('/', delim, 30+height100);
       
       ctx.font = "100px S-CoreDream-6Bold";
       ctx.textAlign = "left";
-      ctx.fillText(low+'°', 44, 35+height100);
-      ctx.fillText(high+'°', 40+ctx.measureText(low+"°/").width, 35+height100);
+      low && ctx.fillText(low+'°', 44, 35+height100);
+      high && ctx.fillText(high+'°', 40+ctx.measureText(low+"°/").width, 35+height100);
       ctx.letterSpacing = '-1px';
-      ctx.fillText(date.substring(4), 55, 856+height100);
+      date && ctx.fillText(date.substring(4), 55, 856+height100);
       ctx.textAlign = "right";
-      ctx.fillText(city.value, 950, 846+height100);
+      city && ctx.fillText(city.value, 950, 846+height100);
+      
       imageContainer.appendChild(canvas);
-
-      const a = document.createElement("a");
-      a.href = canvas.toDataURL("image/png");
-      a.download = `${dateInput.value}.png`
-      a.innerText = `${dateInput.value}.png`;
-      const button = document.createElement("button");
-      button.innerText = "다운로드";
-      button.className = "btn";
-      a.appendChild(button);
-      download.appendChild(a);
+      addDownloadButton(canvas);
     };
-
   };
 });
+
+function addDownloadButton(canvas) {
+  const a = document.createElement("a");
+  a.href = canvas.toDataURL("image/jpeg");
+  a.download = `${dateInput.value}.jpg`;
+  a.innerHTML = `<p><span>File Name</span>${dateInput.value}.jpg</p>`;
+  const button = document.createElement("button");
+  button.innerText = "다운로드";
+  button.className = "btn btn-dark";
+  a.appendChild(button);
+  download.appendChild(a);
+}
+
 
 
 // function imageSize() {
