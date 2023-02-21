@@ -23,9 +23,20 @@
 .input-wrap label {
   display: none;
 }
-.temp-wrap, .input-wrap {
+.input-wrap {
   display: flex;
   align-items: center;
+}
+.temp-wrap {
+  grid-column: 1/2;
+  grid-row: 1/2;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.temp-wrap .input-wrap {
+  flex-basis: 100px;
 }
 .url-wrap {
   grid-column: 2/3;

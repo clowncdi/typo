@@ -29,27 +29,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.querySelector(".sun").style.fill = "chartreuse";
   city.value = "서울";
   country.value = 'S.Korea, Seoul';
-  // lowTemp.value = 0;
-  // highTemp.value = 0;
   addClearIcon();
-
-  // location is set to the current location.
-  // if (navigator.geolocation) {
-  //   navigator.geolocation.getCurrentPosition(position => {
-  //     const lat = position.coords.latitude;
-  //     const lon = position.coords.longitude;
-  //     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=df7f31de88c66695af838929a775e0b8&units=metric&lang=kr`;
-  //     fetch(url)
-  //       .then(response => response.json())
-  //       .then(data => {
-  //         console.log(data)
-  //         city.value = data.name == "Seoul" || "Kwangmyŏng" ? "서울" : data.name;
-  //         country.value = data.sys.country == 'KR' ? 'S.Korea, Seoul' : data.sys.country;
-  //         lowTemp.value = data.main.temp_min;
-  //         highTemp.value = data.main.temp_max;
-  //       });
-  //   });
-  // }
 });
 
 // 날씨 아이콘을 선택하면, 선택된 아이콘의 색을 chartreuse로 변경한다.
@@ -114,12 +94,12 @@ submitButton.addEventListener("click", async () => {
   // initialize canvas.
   imageContainer.innerHTML = "";
   download.innerHTML = "";
-  
+  // check if fileInput is empty.
   if (!fileInput.files[0]) {
     fileInput.previousElementSibling.style.backgroundColor="red";
     fileInput.previousElementSibling.style.color="white";
   }
-  // if (!weatherUrl) return alert("날씨 아이콘을 선택해주세요.");
+  // check if input values are empty.
   inputs.forEach(input => checkValue(input));
 
   const low = lowTemp.value;
@@ -209,37 +189,3 @@ function addDownloadButton(canvas) {
   a.appendChild(button);
   download.appendChild(a);
 }
-
-
-
-// function imageSize() {
-//   // Get the image element
-//   const image = document.querySelector('#imgDiv canvas');
-
-//   let startX, startY, startWidth, startHeight;
-//   image.addEventListener('mousedown', startDrag);
-//   image.addEventListener('touchstart', startDrag);
-
-//   function startDrag(e) {
-//     startX = e.clientX || e.touches[0].clientX;
-//     startY = e.clientY || e.touches[0].clientY;
-//     startWidth = parseInt(document.defaultView.getComputedStyle(image).width, 10);
-//     startHeight = parseInt(document.defaultView.getComputedStyle(image).height, 10);
-//     window.addEventListener('mousemove', doDrag, false);
-//     window.addEventListener('touchmove', doDrag, false);
-//     window.addEventListener('mouseup', stopDrag, false);
-//     window.addEventListener('touchend', stopDrag, false);
-//   }
-  
-//   function doDrag(e) {
-//     image.style.width = (startWidth + ((e.clientX || e.touches[0].clientX) - startX)) + 'px';
-//     image.style.height = (startHeight + ((e.clientY || e.touches[0].clientY) - startY)) + 'px';
-//   }
-  
-//   function stopDrag() {
-//     window.removeEventListener('mousemove', doDrag, false);
-//     window.removeEventListener('touchmove', doDrag, false);
-//     window.removeEventListener('mouseup', stopDrag, false);
-//     window.removeEventListener('touchend', stopDrag, false);
-//   }
-// }
