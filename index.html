@@ -11,16 +11,16 @@
       <div class="temp-wrap">
         <div class="input-wrap">
           <label for="lowTemp">Lowest Temperature</label>
-          <input type="text" id="lowTemp" placeholder="0" />
+          <input type="text" id="lowTemp" placeholder="최저기온" maxlength="3" />
         </div>
         <div class="input-wrap">
           <label for="highTemp">Highest Temperature</label>
-          <input type="text" id="highTemp" placeholder="0" />
+          <input type="text" id="highTemp" placeholder="최고기온" maxlength="2" />
         </div>
       </div>
       <div class="input-wrap url-wrap">
         <label for="url">Url</label>
-        <input type="text" id="url" value="Weaco.co.kr" />
+        <input type="text" id="url" placeholder="Weaco.co.kr" maxlength="30" />
       </div>
       <ul class="weather-icon-wrap">
         <li class="weather-icon">
@@ -79,7 +79,7 @@
         <input type="text" id="icon" />
       </div>
       <div class="input-wrap file-wrap">
-        <label for="fileInput" class="btn">Image File Upload</label>
+        <label for="fileInput" class="btn">Choose File</label>
         <input type="file" id="fileInput" accept="image/*" />
       </div>
       <div class="input-wrap date-wrap">
@@ -89,11 +89,11 @@
       <div class="city-wrap">
         <div class="input-wrap">
           <label for="country">Country</label>
-          <input type="text" id="country" />
+          <input type="text" id="country" placeholder="S.Korea, Seoul" maxlength="30" />
         </div>
         <div class="input-wrap">
           <label for="city">City</label>
-          <input type="text" id="city" />
+          <input type="text" id="city" placeholder="서울" maxlength="20" />
         </div>
       </div>
     </div>

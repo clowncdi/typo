@@ -24,6 +24,7 @@ function getToday() {
 // document onload event. dateinput value is set to today's date.
 document.addEventListener("DOMContentLoaded", async () => {
   dateInput.value = getToday();
+  url.value = "Weaco.co.kr";
   weatherUrl = "/images/sun.svg";
   document.querySelector(".sun").style.fill = "chartreuse";
   city.value = "서울";
@@ -96,10 +97,16 @@ const container = document.querySelector(".container");
 fileInput.addEventListener("change", () => {
   container.style.backgroundImage = "";
   const file = fileInput.files[0];
+  const img = new Image();
+  img.src = URL.createObjectURL(file);
   const reader = new FileReader();
   reader.readAsDataURL(file);
   reader.onload = () => {
+    fileInput.previousElementSibling.style.backgroundColor="chartreuse";
+    fileInput.previousElementSibling.style.color="black";
     container.style.backgroundImage = `url(${reader.result})`;
+    container.style.backgroundSize = img.height > img.width ? "cover" : "contain";
+    fileInput.previousElementSibling.innerText="Change File";
   }
 });
 
@@ -108,7 +115,10 @@ submitButton.addEventListener("click", async () => {
   imageContainer.innerHTML = "";
   download.innerHTML = "";
   
-  if (!fileInput.files[0]) return alert("이미지를 넣어 주세요.");
+  if (!fileInput.files[0]) {
+    fileInput.previousElementSibling.style.backgroundColor="red";
+    fileInput.previousElementSibling.style.color="white";
+  }
   // if (!weatherUrl) return alert("날씨 아이콘을 선택해주세요.");
   inputs.forEach(input => checkValue(input));
 
@@ -116,14 +126,19 @@ submitButton.addEventListener("click", async () => {
   const high = highTemp.value;
   const file = fileInput.files[0];
   const reader = new FileReader();
+  const reader2 = new FileReader();
   const date = dateInput.value.replaceAll('-', '');
+  const weatherIcon = await fetch(weatherUrl).then(response => response.blob());
   reader.readAsDataURL(file);
+  reader2.readAsDataURL(weatherIcon);
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
   
   reader.onload = () => {
     const img = new Image();
     img.src = reader.result;
+    const iconImg = new Image();
+    iconImg.src = reader2.result;
     
     img.onload = async () => {
       const height50 = 48;
@@ -144,24 +159,6 @@ submitButton.addEventListener("click", async () => {
         let startY = (1000 - canvasHeight)  / 2;
         ctx.drawImage(img, x, y, img.width, img.height, 0, startY, 1000, canvasHeight);
       }
-
-      // 날씨 아이콘을 추가한다.
-      if (weatherUrl) {
-        console.log('weatherUrl: ', weatherUrl);
-        const weatherIcon = await fetch(weatherUrl).then(response => response.blob());
-        console.log('weatherIcon: ', weatherIcon)
-        const reader2 = new FileReader();
-        reader2.readAsDataURL(weatherIcon);
-        console.log('reader2: ', reader2)
-        reader2.onload = () => {
-          const iconImg = new Image();
-          iconImg.src = reader2.result;
-          console.log('iconImg: ', iconImg)
-          iconImg.onload = () => {
-            ctx.drawImage(iconImg, 50, 160);
-          }
-        }
-      } 
       
       ctx.font = "50px S-CoreDream-6Bold";
       ctx.fillStyle = "white";
@@ -171,6 +168,9 @@ submitButton.addEventListener("click", async () => {
       ctx.shadowOffsetY = 0;
       ctx.textAlign = "right";
       url && ctx.fillText(url.value, 950, 42+height50);
+
+      // 날씨 아이콘을 추가한다.
+      iconImg && ctx.drawImage(iconImg, 50, 160);
       
       ctx.font = "50px S-CoreDream-3Light";
       ctx.textAlign = "left";

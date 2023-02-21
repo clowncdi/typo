@@ -19,17 +19,13 @@
   height: 500px;
   background: #19202C url('/images/logo512.png') no-repeat center center / cover;
   border-radius: 5px;
-  background-size: contain;
 }
 .input-wrap label {
   display: none;
 }
-.temp-wrap {
+.temp-wrap, .input-wrap {
   display: flex;
-  justify-content: space-between;
-}
-.temp-wrap .input-wrap {
-  display: flex;
+  align-items: center;
 }
 .url-wrap {
   grid-column: 2/3;
@@ -44,7 +40,6 @@
   grid-column: 1/3;
   grid-row: 3/4;
   z-index: 1;
-  display: flex;
 }
 .file-wrap #fileInput {
   display: none;
@@ -58,6 +53,12 @@
 .city-wrap {
   grid-column: 2/3;
   grid-row: 4/5;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: stretch;
+  row-gap: 10px;
+  margin-bottom: 5%;
 }
 .input-wrap.file-wrap .btn,
 .btn {
@@ -101,18 +102,23 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   color: transparent;
   cursor: pointer;
 }
-
+.container div.input-wrap input::placeholder {
+  font-size: 14px;
+}
+.container div.input-wrap input:focus::placeholder {
+  color: transparent;
+}
 .container div.input-wrap input {
   display: inline-block;
   font-family: 'S-CoreDream-6Bold';
   font-size: 20px;
   color: #fff;
   text-align: center;
-  margin: 10px 0 0 10px;
+  margin-left: 10px;
   padding: 0;
   width: 80%;
   height: 30px;
-  border: 2px solid chartreuse;
+  border: 1px solid chartreuse;
   background: rgba(0, 0, 0, 0.5);
   border-radius: 5px;
   outline: none;
@@ -121,7 +127,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   font-family: 'S-CoreDream-3Light';
 }
 .clearBtn {
-  margin: 10px 0 0 1px;
+  margin-left: -9px;
   font-size: 8px;
   width: 20px;
   height: 20px;
