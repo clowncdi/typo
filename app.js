@@ -114,14 +114,14 @@ function resetPosition() {
 }
 
 // 이미지 실시간 드래그로 위치 조정
-function handleMouseDown() {
+selectedImage.addEventListener("mousedown", (e) => {
   transEvent.drag = true;
   transEvent.startX = e.clientX;
   transEvent.startY = e.clientY;
   selectedImage.style.cursor = "grabbing";
-}
+});
 
-function handleMouseMove(e) {
+selectedImage.addEventListener("mousemove", (e) => {
   e.preventDefault();
   if (transEvent.drag) {
     const chooseImg = document.getElementById("chooseImg");
@@ -136,12 +136,12 @@ function handleMouseMove(e) {
     selectedImagePosition.style.display = "block";
     selectedImagePositionReset.style.display = "block";
   }
-}
+});
 
-function handleMouseUp() {
+selectedImage.addEventListener("mouseup", (e) => {
   transEvent.drag = false;
   selectedImage.style.cursor = "grab";
-}
+});
 
 // 날씨 아이콘을 선택하면, 선택된 아이콘의 색을 chartreuse로 변경한다.
 icons.forEach((icon) =>

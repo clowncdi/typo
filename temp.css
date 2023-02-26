@@ -23,7 +23,7 @@
   grid-template-rows: 50px 60px 1fr 100px;
   width: 500px;
   height: 500px;
-  background: #19202c url("/images/logo512.png") no-repeat center center / cover;
+  background: #19202c url("./images/logo512.png") no-repeat center center / cover;
   border-radius: 5px;
 }
 .input-wrap label {
