@@ -1,0 +1,46 @@
+@import "reset.css";
+@import url('https://fonts.googleapis.com/css2?family=Unica+One&display=swap');
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable-dynamic-subset.css");
+
+body {
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  /* background-color: #191A20; */
+  color: #333;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.gnb {
+  width: 100%;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.gnb-wrap {
+  max-width: 800px;
+  margin: auto;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.gnb-logo {
+  font-family: 'Unica One', cursive;
+  font-size: 32px;
+  color: #333;
+}
+
+.gnb-menu ul {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  gap: 2rem;
+}

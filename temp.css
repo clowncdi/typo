@@ -12,7 +12,10 @@
   font-weight: normal;
   font-style: normal;
 }
-.container {
+.temp-container {
+  width: 500px;
+}
+.temp-image {
   position: relative;
   margin: auto;
   display: grid;
@@ -257,8 +260,34 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   overflow: hidden;
   background-repeat: no-repeat;
 }
-/* #selectedImage img {
+#selectedImage img {
   position: relative;
   width: 100%;
   margin: auto;
-} */
+  transition: transform 0.2s ease;
+}
+.selectedImagePosition {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+.selectedImagePosition span {
+  padding: 5px 8px;
+  border-radius: 100px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 13px;
+  z-index: 2;
+  display: none;
+}
+.selectedImagePosition #selectedImagePositionReset {
+  top: 270px;
+  left: 230px;
+  background-color: rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+}
