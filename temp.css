@@ -12,6 +12,11 @@
   font-weight: normal;
   font-style: normal;
 }
+
+:root {
+  --text-b: #0F8EFF;
+}
+
 .temp-container {
   width: 500px;
 }
@@ -86,8 +91,8 @@
   font-family: "S-CoreDream-3Light", sans-serif;
   font-size: 16px;
   text-align: center;
-  color: black;
-  background-color: chartreuse;
+  color: white;
+  background-color: var(--text-b);
   border: none;
   border-radius: 50px;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
@@ -160,7 +165,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   padding: 0;
   width: 80%;
   height: 30px;
-  border: 1px solid chartreuse;
+  border: 1px solid var(--text-b);
   background: rgba(0, 0, 0, 0.5);
   border-radius: 5px;
   outline: none;
@@ -176,12 +181,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   font-family: "S-CoreDream-3Light", sans-serif;
 }
 .clearBtn {
-  margin-left: -9px;
+  margin-left: -10px;
   font-size: 8px;
   width: 20px;
   height: 20px;
-  color: black;
-  background: chartreuse;
+  color: white;
+  background: var(--text-b);
   border: none;
   border-radius: 50%;
   cursor: pointer;
@@ -247,7 +252,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   fill: white;
 }
 .weather-icon-wrap li:hover svg {
-  fill: chartreuse;
+  fill: var(--text-b);
   scale: 1.2;
 }
 #selectedImage {

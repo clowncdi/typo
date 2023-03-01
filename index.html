@@ -3,32 +3,41 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="common.css" />
-    <link rel="stylesheet" href="temp.css" />
+    <link rel="stylesheet" href="./common.css" />
+    <link rel="stylesheet" href="./temp.css" />
     <title>Plus Typo</title>
   </head>
   <body>
     <div class="container">
       <!-- gnb -->
-      <div class="gnb">
+      <header class="gnb">
         <div class="gnb-wrap">
           <div class="gnb-logo">
             <a href="/">
-              <h1>Plus Typo</h1>
+              <h1 class="logo" id="logoPlus">plus</h1>
+              <h1 class="logo" id="logoTypo">TYPO</h1>
             </a>
+            <span class="box"></span>
+            <span class="box"></span>
+            <span class="box"></span>
+            <span class="box"></span>
+            <span class="box"></span>
+            <span class="box"></span>
+            <span id="plus-font"></span>
+            <span id="typo-font"></span>
           </div>
           <div class="gnb-menu">
             <ul>
               <li>
-                <a href="#">About</a>
+                <a href="#" onclick="alert('Coming soon')">About</a>
               </li>
               <li>
-                <a href="#">Contact</a>
+                <a href="#" onclick="alert('Coming soon')">Contact</a>
               </li>
             </ul>
           </div>
         </div>
-      </div>
+      </header>
 
       <!-- main container -->
       <div class="temp-container">
@@ -260,8 +269,14 @@
           </div>
         </div>
       </div>
+      
+      <!-- footer -->
+      <footer>
+        <p>Copyright © 2023 PlusTypo</p>
+      </footer>
     </div>
   </body>
 
-  <script src="app.js" defer></script>
+  <script src="./app.js" defer></script>
+  <script src="./logo.js" defer></script>
 </html>
