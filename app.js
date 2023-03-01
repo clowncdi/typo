@@ -15,8 +15,9 @@ const download = document.getElementById("download");
 const icons = document.querySelectorAll(".weather-icon");
 const inputs = document.querySelectorAll("input");
 const container = document.querySelector(".container");
-const typo = "typo.co.kr";
+const typoUrl = "typo.co.kr";
 const longImgDefaultY = -100;
+const primaryColor = "#0F8EFF";
 let originImg = {
   width: 0,
   height: 0,
@@ -40,7 +41,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   dateInput.value = getToday();
   url.value = "Weaco.co.kr";
   weatherUrl = "/images/sun.svg";
-  document.querySelector(".sun").style.fill = "chartreuse";
+  document.querySelector(".sun").style.fill = primaryColor;
   city.value = "서울";
   country.value = "S.Korea, Seoul";
   addClearIcon();
@@ -64,6 +65,9 @@ function imageValueReset() {
     scale: 1,
     drag: false,
   };
+  if (selectedImage.childNodes.length > 3) {
+    selectedImage.removeChild(selectedImage.childNodes[3]);
+  }
   selectedImage.style.backgroundColor = "";
 }
 
@@ -78,8 +82,8 @@ fileInput.addEventListener("change", () => {
     const img = new Image();
     img.src = reader.result;
 
-    fileInput.previousElementSibling.style.backgroundColor = "chartreuse";
-    fileInput.previousElementSibling.style.color = "black";
+    fileInput.previousElementSibling.style.backgroundColor = primaryColor;
+    fileInput.previousElementSibling.style.color = "white";
     selectedImage.style.backgroundColor = "#19202c";
 
     img.onload = () => {
@@ -146,7 +150,7 @@ selectedImage.addEventListener("mouseup", (e) => {
 // 날씨 아이콘을 선택하면, 선택된 아이콘의 색을 chartreuse로 변경한다.
 icons.forEach((icon) =>
   icon.addEventListener("click", (e) => {
-    if (e.target.style.fill == "chartreuse") {
+    if (e.target.style.fill == primaryColor) {
       e.target.style.fill = "white";
       weatherUrl = "";
       return;
@@ -155,7 +159,7 @@ icons.forEach((icon) =>
       icons.forEach((icon) => {
         icon.children[0].style.fill = "white";
       });
-      e.target.style.fill = "chartreuse";
+      e.target.style.fill = primaryColor;
       weatherUrl = "/images/" + e.target.className.baseVal + ".svg";
     }
   })
@@ -211,9 +215,6 @@ submitBtn.addEventListener("click", async () => {
         
         x = transEvent.moveX;
         y = transEvent.moveY + (longImgDefaultY*2);
-        console.log('img: ', img.width, img.height, ' canvasImg: ', canvasWidth,canvasHeight)
-        // console.log('ratio: ', ratio, ' editY: ', editY, ' originY: ', originY, ' canvasY: ', canvasY, ' canvasWidth: ', canvasWidth, ' canvasHeight: ', canvasHeight)
-        console.log('transEvent: ', transEvent);
         ctx.drawImage(
           img, 
           originX,
@@ -225,8 +226,6 @@ submitBtn.addEventListener("click", async () => {
           canvasWidth, 
           canvasHeight
         );
-        console.log('originX: ', originX, 'x: ', x, ' originY: ', originY, 'y: ', y)
-        console.log('-------------------------------')
       } else {
         // original width : original height = width resize : height resize
         // height resize = (width resize * original height) / original width
@@ -257,7 +256,7 @@ submitBtn.addEventListener("click", async () => {
       url && ctx.fillText(url.value, 950, 42 + height50);
       ctx.font = "24px S-CoreDream-6Bold";
       ctx.textAlign = "center";
-      ctx.fillText(`${typo}`, 500, 980);
+      ctx.fillText(`${typoUrl}`, 500, 980);
 
       // 날씨 아이콘을 추가한다.
       weatherUrl !== "" && ctx.drawImage(iconImg, 50, 160);
@@ -296,8 +295,8 @@ submitBtn.addEventListener("click", async () => {
 function addDownloadButton(canvas) {
   const a = document.createElement("a");
   a.href = canvas.toDataURL("image/jpeg");
-  a.download = `${dateInput.value}_${typo}.jpg`;
-  a.innerHTML = `<p><span>File Name</span>${dateInput.value}_${typo}.jpg</p>`;
+  a.download = `${dateInput.value}_${typoUrl}.jpg`;
+  a.innerHTML = `<p><span>File Name</span>${dateInput.value}_${typoUrl}.jpg</p>`;
   const button = document.createElement("button");
   button.innerText = "Download";
   button.className = "btn btn-dark";
@@ -319,7 +318,7 @@ function getToday() {
 function addClearIcon() {
   inputs.forEach((input) => {
     const deleteButton = document.createElement("button");
-    deleteButton.innerHTML = "✖";
+    deleteButton.innerHTML = "X";
     deleteButton.className = "clearBtn";
     if (input.id == "fileInput" || input.id == "dateInput") return; // fileInput은 삭제버튼을 추가하지 않는다.
     input.insertAdjacentElement("afterend", deleteButton); // input element에 deleteButton을 추가한다.
@@ -343,7 +342,7 @@ function checkValue(input) {
     input.focus();
     input.style.borderColor = "red";
   } else {
-    input.style.borderColor = "chartreuse";
+    input.style.borderColor = primaryColor;
   }
 }
 

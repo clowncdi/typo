@@ -1,6 +1,6 @@
 @import "reset.css";
-@import url('https://fonts.googleapis.com/css2?family=Unica+One&display=swap');
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable-dynamic-subset.css");
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Arima:wght@300;400;700&family=Arizonia&family=Black+Han+Sans&family=Black+Ops+One&family=Blaka+Hollow&family=Bungee&family=Bungee+Shade&family=Carter+One&family=Cinzel+Decorative:wght@400;700&family=Creepster&family=DM+Serif+Display&family=DM+Serif+Text&family=EB+Garamond:wght@400;700&family=Fredericka+the+Great&family=Graduate&family=Gruppo&family=Hammersmith+One&family=Italianno&family=Kelly+Slab&family=Kodchasan:wght@300;400;700&family=Libre+Baskerville:wght@400;700&family=Limelight&family=Lobster+Two:wght@400;700&family=Monoton&family=Montserrat+Alternates:wght@300;400;700&family=Montserrat:wght@300;400;700&family=Nixie+One&family=Oleo+Script&family=Oranienbaum&family=Oswald:wght@300;400;700&family=Padyakke+Expanded+One&family=Pirata+One&family=Poiret+One&family=Press+Start+2P&family=Quicksand:wght@300;400;700&family=Rampart+One&family=Roboto:wght@300;400;700&family=Rubik+Gemstones&family=Rubik+Vinyl&family=Sen:wght@400;700&family=Tenor+Sans&family=Tilt+Prism&family=Yesteryear&display=swap');
 
 body {
   font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
@@ -11,6 +11,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
   height: 100vh;
 }
@@ -22,8 +23,8 @@ body {
 }
 
 .gnb-wrap {
-  max-width: 800px;
-  margin: auto;
+  max-width: 1200px;
+  margin: 30px auto;
   height: 80px;
   display: flex;
   justify-content: space-between;
@@ -31,10 +32,91 @@ body {
   gap: 10px;
 }
 
+:root {
+  --logo-h: 65px;
+  --logo-bp: -4px;
+  --blue: #0F8EFF;
+}
+
 .gnb-logo {
-  font-family: 'Unica One', cursive;
+  position: relative;
+  padding: 0 20px;
+  height: var(--logo-h);
+  border: 1px solid var(--blue);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#logoPlus {
+  color: var(--blue);
   font-size: 32px;
+}
+
+.gnb-logo .box {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background-color: #fff;
+  border: 1px solid var(--blue);
+}
+
+.gnb-logo .box:nth-child(2) {
+  top: var(--logo-bp);
+  left: var(--logo-bp);
+}
+.gnb-logo .box:nth-child(3) {
+  top: var(--logo-bp);
+}
+.gnb-logo .box:nth-child(4) {
+  top: var(--logo-bp);
+  right: var(--logo-bp);
+}
+.gnb-logo .box:nth-child(5) {
+  bottom: var(--logo-bp);
+  left: var(--logo-bp);
+}
+.gnb-logo .box:nth-child(6) {
+  bottom: var(--logo-bp);
+}
+.gnb-logo .box:nth-child(7) {
+  bottom: var(--logo-bp);
+  right: var(--logo-bp);
+}
+#plus-font,
+#typo-font {
+  color: var(--blue);
+  font-size: 8px;
+  position: absolute;
+  left: 0;
   color: #333;
+}
+#plus-font {
+  bottom: -20px;
+}
+#typo-font {
+  bottom: -36px;
+}
+#plus-font:before,
+#typo-font:before {
+  display: inline-block;
+  width: 30px;
+  color: var(--blue);
+}
+#plus-font:before {
+  content: "Plus";
+}
+#typo-font:before {
+  content: "Typo";
+}
+
+.gnb-logo h1.logo {
+  display: inline;
+  font-size: 42px;
+  color: #333;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  transition: .3s;
+  opacity: 1;
 }
 
 .gnb-menu ul {
@@ -43,4 +125,14 @@ body {
   align-items: center;
   width: 100%;
   gap: 2rem;
+}
+
+footer {
+  width: 100%;
+  height: 80px;
+  font-size: 13px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f4f4f4;
 }
