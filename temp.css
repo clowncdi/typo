@@ -17,8 +17,23 @@
   --text-b: #0F8EFF;
 }
 
-.temp-container {
-  width: 500px;
+.main-container {
+  width: 1200px;
+}
+.item-wrap {
+  display: flex;
+  justify-content: space-between;
+}
+.item-title {
+  font-size: 18px;
+  /* width: 120px; */
+}
+.temp-result {
+  width: 498px;
+  height: 498px;
+  background-color: #f7f7f7;
+  border-radius: 5px;
+  border: 1px dashed #d9d9d9;
 }
 .temp-image {
   position: relative;
