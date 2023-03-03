@@ -18,15 +18,15 @@ const container = document.querySelector(".container");
 const typoUrl = "typo.co.kr";
 const longImgDefaultY = -100;
 const primaryColor = "#0F8EFF";
-let originImg = {
+const originImg = {
   width: 0,
   height: 0,
 };
-let editImg = {
+const editImg = {
   width: 500,
   height: 0,
 };
-let transEvent = {
+const transEvent = {
   startX: 0,
   startY: 0,
   moveX: 0,
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   dateInput.value = getToday();
   url.value = "Weaco.co.kr";
   weatherUrl = "/images/sun.svg";
-  document.querySelector(".sun").style.fill = primaryColor;
+  icons.item(0).firstElementChild.style.fill = primaryColor;
   city.value = "서울";
   country.value = "S.Korea, Seoul";
   addClearIcon();
@@ -49,22 +49,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 // 이미지 파일 변경 시 초기화
 function imageValueReset() {
-  originImg = {
-    width: 0,
-    height: 0,
-  };
-  editImg = {
-    width: 500,
-    height: 0,
-  };
-  transEvent = {
-    startX: 0,
-    startY: 0,
-    moveX: 0,
-    moveY: 0,
-    scale: 1,
-    drag: false,
-  };
+  originImg.width = 0;
+  originImg.height = 0;
+  editImg.width = 500;
+  editImg.height = 0;
+  transEvent.startX = 0;
+  transEvent.startY = 0;
+  transEvent.moveX = 0;
+  transEvent.moveY = 0;
+  transEvent.scale = 1;
+  transEvent.drag = false;
   if (selectedImage.childNodes.length > 3) {
     selectedImage.removeChild(selectedImage.childNodes[3]);
   }
@@ -90,7 +84,7 @@ fileInput.addEventListener("change", () => {
       originImg.width = img.width;
       originImg.height = img.height;
       editImg.height = (editImg.width * img.height) / img.width;
-      transEvent.startY = img.width > img.height ? 0 : longImgDefaultY;
+      transEvent.startY = img.width >= img.height ? 0 : longImgDefaultY;
 
       img.style.left = `${transEvent.startX}px`;
       img.style.top = `${transEvent.startY}px`;
@@ -99,7 +93,7 @@ fileInput.addEventListener("change", () => {
 
       fileInput.previousElementSibling.innerText = "↻ Change File";
       fileInput.previousElementSibling.style.position = "absolute";
-      fileInput.previousElementSibling.style.bottom = "-67px";
+      fileInput.previousElementSibling.style.bottom = "-60px";
       fileInput.parentElement.style.zIndex = "0";
 
       submitBtn.style.marginRight = 0;
@@ -147,10 +141,12 @@ selectedImage.addEventListener("mouseup", (e) => {
   selectedImage.style.cursor = "grab";
 });
 
+
 // 날씨 아이콘을 선택하면, 선택된 아이콘의 색을 chartreuse로 변경한다.
-icons.forEach((icon) =>
+icons.forEach((icon) => {
   icon.addEventListener("click", (e) => {
-    if (e.target.style.fill == primaryColor) {
+    console.log(e.target);
+    if (e.target.style.fill === primaryColor || e.target.style.fill === "rgb(15, 142, 255)") {
       e.target.style.fill = "white";
       weatherUrl = "";
       return;
@@ -162,8 +158,8 @@ icons.forEach((icon) =>
       e.target.style.fill = primaryColor;
       weatherUrl = "/images/" + e.target.className.baseVal + ".svg";
     }
-  })
-);
+  });
+});
 
 submitBtn.addEventListener("click", async () => {
   // initialize canvas.
@@ -200,10 +196,9 @@ submitBtn.addEventListener("click", async () => {
       canvas.height = 1000;
       ctx.fillStyle = "#19202C";
       ctx.fillRect(0, 0, 1000, 1000);
-      let longImg = img.width <= img.height;
       let x = 0;
       let y = 0;
-      if (longImg) {
+      if (img.width < img.height) {
         // 변형된 이미지의 가로 세로 비율. 4032 / (3024 / 1000) = 1.333
         let canvasWidth = 1000 * transEvent.scale;
         let canvasHeight = (canvasWidth * img.height) / img.width;
@@ -230,9 +225,7 @@ submitBtn.addEventListener("click", async () => {
         // original width : original height = width resize : height resize
         // height resize = (width resize * original height) / original width
         let canvasHeight = (1000 * img.height) / img.width;
-        console.log('img: ', img.width, img.height, ' canvasImg: ', 1000, canvasHeight)
-        console.log('transEvent: ', transEvent);
-        let startY = (1000 - canvasHeight) / 2
+        let startY = img.width === img.height ? 0 : (1000 - canvasHeight) / 2;
         ctx.drawImage(
           img,
           x,
@@ -246,6 +239,11 @@ submitBtn.addEventListener("click", async () => {
         );
       }
 
+      ctx.font = "24px S-CoreDream-6Bold";
+      ctx.textAlign = "center";
+      ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+      ctx.fillText(`${typoUrl}`, 500, 980);
+
       ctx.font = "50px S-CoreDream-6Bold";
       ctx.fillStyle = "white";
       ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
@@ -254,9 +252,6 @@ submitBtn.addEventListener("click", async () => {
       ctx.shadowOffsetY = 0;
       ctx.textAlign = "right";
       url && ctx.fillText(url.value, 950, 42 + height50);
-      ctx.font = "24px S-CoreDream-6Bold";
-      ctx.textAlign = "center";
-      ctx.fillText(`${typoUrl}`, 500, 980);
 
       // 날씨 아이콘을 추가한다.
       weatherUrl !== "" && ctx.drawImage(iconImg, 50, 160);
