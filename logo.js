@@ -50,8 +50,8 @@ const typo = document.getElementById("logoTypo");
 const plusFont = document.getElementById("plus-font");
 const typoFont = document.getElementById("typo-font");
 const logo = document.querySelector(".gnb-logo");
-const changeLogoTime = 10000;
 const logoText = 'plusTYPO';
+let changeLogoTime = 10000;
 let currentIndex = 0;
 let opacity = 0;
 
@@ -74,14 +74,18 @@ const randomLetterStyle = () => {
 
 const addLogoText = () => {
   const plusLoop = setInterval(() => {
-    plus.innerHTML += logoText[currentIndex];
-    currentIndex++;
+    if (plus.innerText.length < 4) {
+      plus.innerHTML += getLogoText(logoText[currentIndex]);
+      currentIndex++;
+    }
     if (currentIndex === 4) {
       clearInterval(plusLoop);
       
       const typoLoop = setInterval(() => {
-        typo.innerHTML += logoText[currentIndex];
-        currentIndex++;
+        if (typo.innerText.length < 4) {
+          typo.innerHTML += getLogoText(logoText[currentIndex]);
+          currentIndex++;
+        }
         if (currentIndex === 8) {
           currentIndex = 0;
           fadeInLogoFont();
@@ -93,6 +97,10 @@ const addLogoText = () => {
       }, 80);
     }
   }, 50);
+}
+
+const getLogoText = (text) => {
+  return text !== undefined ? text : '';
 }
 
 const deleteLogoText = () => {
@@ -147,5 +155,16 @@ const fadeOutLogoFont = () => {
   }
 }
 
+let visibility;
+
 randomLetterStyle();
-setInterval(randomLetterStyle, changeLogoTime);
+visibility = setInterval(randomLetterStyle, changeLogoTime);
+
+// visibilitychange event
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible") {
+    visibility = setInterval(randomLetterStyle, changeLogoTime);
+  } else {
+    clearInterval(visibility);
+  }
+});
