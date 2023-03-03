@@ -235,12 +235,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   border-bottom-right-radius: 23px;
 }
 .result-wrap #download a p {
-  font-family: "S-CoreDream-6Bold", sans-serif;
+  font-size: 14px;
   margin: 0;
 }
 .result-wrap #download a p span {
   font-family: "S-CoreDream-3Light", sans-serif;
-  font-size: 12px;
+  font-size: 11px;
   color: grey;
   margin-right: 20px;
 }
