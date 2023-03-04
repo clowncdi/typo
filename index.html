@@ -7,7 +7,8 @@
     <meta name="author" content="dalichoi" />
     <link rel="icon" type="image/png" href="./images/favicon.png" />
     <link rel="stylesheet" href="./common.css" />
-    <link rel="stylesheet" href="./temp.css" />
+    <link rel="stylesheet" href="./app1.css" />
+    <link rel="stylesheet" href="./sub.css" />
     <title>Plus Typo</title>
   </head>
   <body>
@@ -44,6 +45,7 @@
 
       <!-- main container -->
       <div class="main-container">
+        <!-- app1 -->
         <div class="item-wrap">
           <div class="item-title">
             <span># 1</span>
@@ -53,8 +55,8 @@
               <img src="./images/app1_sample.webp" alt="Today Weather Sample Image" width="100%" />
             </div>
           </div>
-          <div>
-            <div class="temp-image">
+          <div id="app1">
+            <div class="item-image">
               <div class="temp-wrap">
                 <div class="input-wrap">
                   <label for="lowTemp">Lowest Temperature</label>
@@ -64,6 +66,7 @@
                     placeholder="최저기온"
                     maxlength="3"
                   />
+                  <button class="clearBtn" onclick="clearInput(this)">X</button>
                 </div>
                 <div class="input-wrap">
                   <label for="highTemp">Highest Temperature</label>
@@ -73,11 +76,13 @@
                     placeholder="최고기온"
                     maxlength="2"
                   />
+                  <button class="clearBtn" onclick="clearInput(this)">X</button>
                 </div>
               </div>
               <div class="input-wrap url-wrap">
                 <label for="url">Url</label>
                 <input type="text" id="url" placeholder="Weaco.co.kr" maxlength="30" />
+                <button class="clearBtn" onclick="clearInput(this)">X</button>
               </div>
               <ul class="weather-icon-wrap">
                 <li class="weather-icon">
@@ -242,13 +247,14 @@
                 <label for="icon">Weather Icon</label>
                 <input type="text" id="icon" />
               </div>
-              <div class="input-wrap file-wrap">
+              <div class="file-wrap">
                 <label for="fileInput" class="btn">Choose File</label>
                 <input type="file" id="fileInput" accept="image/*" />
               </div>
               <div class="input-wrap date-wrap">
                 <label for="dateInput">Date</label>
                 <input type="date" id="dateInput" />
+                <button class="clearBtn" onclick="clearInput(this)">X</button>
               </div>
               <div class="city-wrap">
                 <div class="input-wrap">
@@ -259,16 +265,18 @@
                     placeholder="S.Korea, Seoul"
                     maxlength="30"
                   />
+                  <button class="clearBtn" onclick="clearInput(this)">X</button>
                 </div>
                 <div class="input-wrap">
                   <label for="city">City</label>
                   <input type="text" id="city" placeholder="서울" maxlength="20" />
+                  <button class="clearBtn" onclick="clearInput(this)">X</button>
                 </div>
               </div>
-              <div id="selectedImage">
-                <div class="selectedImagePosition">
-                  <span id="selectedImagePosition"></span>
-                  <span id="selectedImagePositionReset" onclick="resetPosition()">↻ Reset</span></span>
+              <div class="selected-image" id="selectedImage">
+                <div class="selected-image-position">
+                  <span></span>
+                  <span class="selected-image-position-reset" onclick="resetPosition(this, transEvent, 'chooseImg')">↻ Reset</span></span>
                 </div>
               </div>
             </div>
@@ -276,14 +284,53 @@
               <button id="submitBtn" class="btn btn-dark">Create</button>
             </div>
           </div>
-          <div class="temp-result">
+          <div class="item-result">
             <div class="result-wrap">
-              <div id="imageContainer"><i></i></div>
-              <div id="download"></div>
+              <div class="image-container" id="imageContainer"><i class="result-temp-bg"></i></div>
+              <div class="download"></div>
             </div>
           </div>
         </div>
         
+        <!-- app2 -->
+        <div class="item-wrap">
+          <div class="item-title">
+            <span># 2</span>
+            <h2>Yellow City</h2>
+            <div class="sample">
+              <p>Sample Output</p>
+              <img src="./images/app2_sample.webp" alt="Yellow city Sample Image" width="100%" />
+            </div>
+          </div>
+          <div id="app2">
+            <div class="item-image">
+              <div class="input-wrap">
+                <label for="app2-title">yellow city</label>
+                <input type="text" name="app2-title" id="app2Title" placeholder="yellow city" maxlength="20" />
+                <button class="clearBtn" onclick="clearInput(this)">X</button>
+              </div>
+              <div class="file-wrap">
+                <label for="chooseFileApp2" class="btn">Choose File</label>
+                <input type="file" name="chooseFileApp2" id="chooseFileApp2" accept="image/*" />
+              </div>
+              <div class="selected-image" id="selectedImageApp2">
+                <div class="selected-image-position">
+                  <span></span>
+                  <span class="selected-image-position-reset" onclick="resetPosition(this, transEvent2, 'chooseImg2')">↻ Reset</span></span>
+                </div>
+              </div>
+            </div>
+            <div class="btn-wrap">
+              <button id="submitBtnApp2" class="btn btn-dark">Create</button>
+            </div>
+          </div>
+          <div class="item-result">
+            <div class="result-wrap">
+              <div class="image-container" id="imageContainerApp2"><i class="result-temp-bg"></i></div>
+              <div class="download"></div>
+            </div>
+          </div>
+        </div>
       </div>
       
       <!-- footer -->
@@ -293,6 +340,8 @@
     </div>
   </body>
 
+  <script src="./common.js" defer></script>
   <script src="./app1.js" defer></script>
+  <script src="./app2.js" defer></script>
   <script src="./logo.js" defer></script>
 </html>

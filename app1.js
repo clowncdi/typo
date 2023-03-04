@@ -13,27 +13,7 @@ const submitBtn = document.getElementById("submitBtn");
 const imageContainer = document.getElementById("imageContainer");
 const download = document.getElementById("download");
 const icons = document.querySelectorAll(".weather-icon");
-const inputs = document.querySelectorAll("input");
-const container = document.querySelector(".container");
-const typoUrl = "typo.co.kr";
-const longImgDefaultY = -100;
-const primaryColor = "#0F8EFF";
-const originImg = {
-  width: 0,
-  height: 0,
-};
-const editImg = {
-  width: 500,
-  height: 0,
-};
-const transEvent = {
-  startX: 0,
-  startY: 0,
-  moveX: 0,
-  moveY: 0,
-  scale: 1,
-  drag: false,
-};
+const inputs = document.querySelectorAll("#app1 input");
 let weatherUrl = "";
 
 // 페이지 초기값 설정
@@ -41,33 +21,17 @@ document.addEventListener("DOMContentLoaded", async () => {
   dateInput.value = getToday();
   url.value = "Weaco.co.kr";
   weatherUrl = "/images/sun.svg";
-  icons.item(0).firstElementChild.style.fill = primaryColor;
+  icons.item(0).firstElementChild.style.fill = PRIMARYCOLOR;
   city.value = "서울";
   country.value = "S.Korea, Seoul";
-  addClearIcon();
 });
 
 // 이미지 파일 변경 시 초기화
-function imageValueReset() {
-  originImg.width = 0;
-  originImg.height = 0;
-  editImg.width = 500;
-  editImg.height = 0;
-  transEvent.startX = 0;
-  transEvent.startY = 0;
-  transEvent.moveX = 0;
-  transEvent.moveY = 0;
-  transEvent.scale = 1;
-  transEvent.drag = false;
-  if (selectedImage.childNodes.length > 3) {
-    selectedImage.removeChild(selectedImage.childNodes[3]);
-  }
-  selectedImage.style.backgroundColor = "";
-}
 
-fileInput.addEventListener("change", () => {
+
+fileInput.addEventListener("change", (e) => {
   // initialize
-  imageValueReset();
+  imageValueReset(selectedImage);
 
   const file = fileInput.files[0];
   const reader = new FileReader();
@@ -76,77 +40,31 @@ fileInput.addEventListener("change", () => {
     const img = new Image();
     img.src = reader.result;
 
-    fileInput.previousElementSibling.style.backgroundColor = primaryColor;
-    fileInput.previousElementSibling.style.color = "white";
     selectedImage.style.backgroundColor = "#19202c";
 
     img.onload = () => {
       originImg.width = img.width;
       originImg.height = img.height;
       editImg.height = (editImg.width * img.height) / img.width;
-      transEvent.startY = img.width >= img.height ? 0 : longImgDefaultY;
+      transEvent.startY = img.width >= img.height ? 0 : LONGIMGDEFAULTY;
 
       img.style.left = `${transEvent.startX}px`;
       img.style.top = `${transEvent.startY}px`;
       img.id = "chooseImg";
       selectedImage.appendChild(img);
-
-      fileInput.previousElementSibling.innerText = "↻ Change File";
-      fileInput.previousElementSibling.style.position = "absolute";
-      fileInput.previousElementSibling.style.bottom = "-60px";
-      fileInput.parentElement.style.zIndex = "0";
+      // 이미지 실시간 드래그로 위치 조정
+      handleMouseDragEvent(selectedImage, transEvent, "chooseImg");
+      changeFileBtn(e.target);
 
       submitBtn.style.marginRight = 0;
     };
   };
 });
 
-
-function resetPosition() {
-  transEvent.moveX = 0;
-  transEvent.moveY = 0;
-  transEvent.scale = 1;
-  const chooseImg = document.getElementById("chooseImg");
-  chooseImg.style.transform = `translate(${transEvent.moveX}px, ${transEvent.moveY}px) scale(${transEvent.scale})`;
-  selectedImagePosition.innerText = `X축: ${transEvent.moveX}px, Y축: ${transEvent.moveY}px`;
-}
-
-// 이미지 실시간 드래그로 위치 조정
-selectedImage.addEventListener("mousedown", (e) => {
-  transEvent.drag = true;
-  transEvent.startX = e.clientX;
-  transEvent.startY = e.clientY;
-  selectedImage.style.cursor = "grabbing";
-});
-
-selectedImage.addEventListener("mousemove", (e) => {
-  e.preventDefault();
-  if (transEvent.drag) {
-    const chooseImg = document.getElementById("chooseImg");
-    let currentX = e.clientX - transEvent.startX;
-    let currentY = e.clientY - transEvent.startY;
-    transEvent.moveX += currentX;
-    transEvent.moveY += currentY;
-    chooseImg.style.transform = `translate(${transEvent.moveX}px, ${transEvent.moveY}px) scale(${transEvent.scale})`;
-    transEvent.startX = e.clientX;
-    transEvent.startY = e.clientY;
-    selectedImagePosition.innerText = `X축: ${transEvent.moveX}px, Y축: ${transEvent.moveY}px`;
-    selectedImagePosition.style.display = "block";
-    selectedImagePositionReset.style.display = "block";
-  }
-});
-
-selectedImage.addEventListener("mouseup", (e) => {
-  transEvent.drag = false;
-  selectedImage.style.cursor = "grab";
-});
-
-
 // 날씨 아이콘을 선택하면, 선택된 아이콘의 색을 chartreuse로 변경한다.
 icons.forEach((icon) => {
   icon.addEventListener("click", (e) => {
-    console.log(e.target);
-    if (e.target.style.fill === primaryColor || e.target.style.fill === "rgb(15, 142, 255)") {
+    if (e.target.style.fill === PRIMARYCOLOR || e.target.style.fill === "rgb(15, 142, 255)") {
       e.target.style.fill = "white";
       weatherUrl = "";
       return;
@@ -155,7 +73,7 @@ icons.forEach((icon) => {
       icons.forEach((icon) => {
         icon.children[0].style.fill = "white";
       });
-      e.target.style.fill = primaryColor;
+      e.target.style.fill = PRIMARYCOLOR;
       weatherUrl = "/images/" + e.target.className.baseVal + ".svg";
     }
   });
@@ -164,8 +82,8 @@ icons.forEach((icon) => {
 submitBtn.addEventListener("click", async () => {
   // initialize canvas.
   imageContainer.innerHTML = "";
-  download.innerHTML = "";
-  inputNullCheck();
+  imageContainer.nextElementSibling.innerHTML = "";
+  inputNullCheck(inputs, fileInput);
 
   const low = lowTemp.value;
   const high = highTemp.value;
@@ -209,7 +127,7 @@ submitBtn.addEventListener("click", async () => {
         let originY = transEvent.moveY * ratio * -1;
         
         x = transEvent.moveX;
-        y = transEvent.moveY + (longImgDefaultY*2);
+        y = transEvent.moveY + (LONGIMGDEFAULTY*2);
         ctx.drawImage(
           img, 
           originX,
@@ -238,11 +156,6 @@ submitBtn.addEventListener("click", async () => {
           canvasHeight * transEvent.scale
         );
       }
-
-      ctx.font = "24px S-CoreDream-6Bold";
-      ctx.textAlign = "center";
-      ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
-      ctx.fillText(`${typoUrl}`, 500, 980);
 
       ctx.font = "50px S-CoreDream-6Bold";
       ctx.fillStyle = "white";
@@ -281,65 +194,18 @@ submitBtn.addEventListener("click", async () => {
       ctx.textAlign = "right";
       city && ctx.fillText(city.value, 950, 846 + height100);
 
+      ctx.font = "24px S-CoreDream-6Bold";
+      ctx.textAlign = "center";
+      ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
+      // ctx.globalCompositeOperation = "overlay";
+      ctx.fillText(`${TYPOURL}`, 500, 980);
+
       imageContainer.appendChild(canvas);
-      addDownloadButton(canvas);
+      addDownloadButton(canvas, imageContainer.nextElementSibling);
     };
   };
 });
 
-function addDownloadButton(canvas) {
-  const a = document.createElement("a");
-  a.href = canvas.toDataURL("image/jpeg");
-  a.download = `${dateInput.value}_${typoUrl}.jpg`;
-  a.innerHTML = `<p><span>File Name</span>${dateInput.value}_${typoUrl}.jpg</p>`;
-  const button = document.createElement("button");
-  button.innerText = "Download";
-  button.className = "btn btn-dark";
-  a.appendChild(button);
-  download.appendChild(a);
-}
-
-// 오늘 날짜를 yyyy-mm-dd 형식으로 반환하는 함수
-function getToday() {
-  const today = new Date();
-  const yyyy = today.getFullYear();
-  const mm =
-    today.getMonth() < 9 ? "0" + (today.getMonth() + 1) : today.getMonth() + 1;
-  const dd = today.getDate() < 10 ? "0" + today.getDate() : today.getDate();
-  return `${yyyy}-${mm}-${dd}`;
-}
-
-// input 요소에 clear 버튼을 추가한다.
-function addClearIcon() {
-  inputs.forEach((input) => {
-    const deleteButton = document.createElement("button");
-    deleteButton.innerHTML = "X";
-    deleteButton.className = "clearBtn";
-    if (input.id == "fileInput" || input.id == "dateInput") return; // fileInput은 삭제버튼을 추가하지 않는다.
-    input.insertAdjacentElement("afterend", deleteButton); // input element에 deleteButton을 추가한다.
-    deleteButton.addEventListener("click", () => {
-      input.value = "";
-    });
-  });
-}
-
-// input null check
-function inputNullCheck() {
-  if (!fileInput.files[0]) {
-    fileInput.previousElementSibling.style.backgroundColor = "red";
-    fileInput.previousElementSibling.style.color = "white";
-  }
-  inputs.forEach((input) => checkValue(input));
-}
-
-function checkValue(input) {
-  if (input.value == "") {
-    input.focus();
-    input.style.borderColor = "red";
-  } else {
-    input.style.borderColor = primaryColor;
-  }
-}
 
 // let scaleMoveX = 0;
 // let scaleMoveY = 0;

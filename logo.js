@@ -43,8 +43,9 @@ const fonts = [
   'Sen',
   'Tenor Sans',
   'Tilt Prism',
+  'Waterfall',
   'Yesteryear',
-]
+];
 const plus = document.getElementById("logoPlus");
 const typo = document.getElementById("logoTypo");
 const plusFont = document.getElementById("plus-font");
