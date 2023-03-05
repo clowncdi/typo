@@ -202,7 +202,7 @@ footer {
   width: 500px;
   height: 500px;
   border-radius: 5px;
-  background: #19202c url("./images/app1_sample.webp") no-repeat center center / cover;
+  background: #19202c url("../images/app1_sample.webp") no-repeat center center / cover;
 }
 .item-image::before {
   content: "";
@@ -213,9 +213,10 @@ footer {
   top: 0;
   left: 0;
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 #app2 .item-image {
-  background-image: url("./images/app2_sample.webp");
+  background-image: url("../images/app2_sample.webp");
 }
 .file-wrap  {
   position: absolute;
@@ -334,7 +335,7 @@ i.result-temp-bg {
   display: block;
   width: 500px;
   height: 500px;
-  background: url(./images/output-bg.svg) no-repeat center;
+  background: url(../images/output-bg.svg) no-repeat center;
 }
 
 .selected-image {
