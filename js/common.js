@@ -17,6 +17,7 @@ const transEvent = {
   scale: 1,
   drag: false,
 };
+let mobile = false;
 
 function imageValueReset(selected, origin, edit, trans) {
   origin.width = 0;
@@ -48,23 +49,23 @@ function handleMouseDragEvent(selected, trans, choose) {
   const chooseImg = document.getElementById(choose);
   let currentX = 0;
   let currentY = 0;
-  let mousedown = isMobile ? 'touchstart' : 'mousedown';
-  let mousemove = isMobile ? 'touchmove' : 'mousemove';
-  let mouseup = isMobile ? 'touchend' : 'mouseup';
+  let mousedown = mobile ? 'touchstart' : 'mousedown';
+  let mousemove = mobile ? 'touchmove' : 'mousemove';
+  let mouseup = mobile ? 'touchend' : 'mouseup';
   let clientX = 0;
   let clientY = 0;
 
   selected.addEventListener(mousedown, (e) => {
     trans.drag = true;
-    trans.startX = isMobile ? e.touches[0].clientX : e.clientX;
-    trans.startY = isMobile ? e.touches[0].clientX : e.clientY;
+    trans.startX = mobile ? e.touches[0].clientX : e.clientX;
+    trans.startY = mobile ? e.touches[0].clientX : e.clientY;
     selected.style.cursor = "grabbing";
   });
 
   selected.addEventListener(mousemove, (e) => {
     e.preventDefault();
-    clientX = isMobile ? e.touches[0].clientX : e.clientX;
-    clientY = isMobile ? e.touches[0].clientY : e.clientY;
+    clientX = mobile ? e.touches[0].clientX : e.clientX;
+    clientY = mobile ? e.touches[0].clientY : e.clientY;
     if (trans.drag) {
       currentX = clientX - trans.startX;
       currentY = clientY - trans.startY;
@@ -138,6 +139,10 @@ function checkValue(input) {
   }
 }
 
-const isMobile = () => {
-	return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+function isMobile() {
+	return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(window.navigator.userAgent);
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  mobile = isMobile();
+});
