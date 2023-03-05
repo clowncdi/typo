@@ -1,0 +1,51 @@
+.gnb-wrap {
+  width: 90%;
+}
+.main-container {
+  width: 100%;
+}
+.item-wrap {
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 100px;
+}
+
+.item-title {
+  width: 90%;
+  height: 100%;
+  padding: 16px 0;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 20px;
+}
+.item-title span {
+  flex-basis: 35px;
+}
+.item-title h2 {
+  margin: 0;
+}
+.sample {
+  align-items: flex-end;
+}
+
+@media screen and (max-width: 520px) {
+  .app-wrap,
+  .item-result {
+    scale: 0.9;
+  }
+}
+
+@media screen and (max-width: 468px) {
+  .app-wrap,
+  .item-result {
+    scale: 0.8;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .app-wrap,
+  .item-result {
+    scale: 0.7;
+  }
+}
