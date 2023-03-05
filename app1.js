@@ -7,8 +7,6 @@ const dateInput = document.getElementById("dateInput");
 const country = document.getElementById("country");
 const city = document.getElementById("city");
 const selectedImage = document.getElementById("selectedImage");
-const selectedImagePosition = document.getElementById("selectedImagePosition");
-const selectedImagePositionReset = document.getElementById("selectedImagePositionReset");
 const submitBtn = document.getElementById("submitBtn");
 const imageContainer = document.getElementById("imageContainer");
 const download = document.getElementById("download");
@@ -31,7 +29,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 fileInput.addEventListener("change", (e) => {
   // initialize
-  imageValueReset(selectedImage);
+  imageValueReset(selectedImage, originImg, editImg, transEvent);
 
   const file = fileInput.files[0];
   const reader = new FileReader();

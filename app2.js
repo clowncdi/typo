@@ -6,12 +6,13 @@ const selectedImageApp2 = document.getElementById('selectedImageApp2');
 const submitBtnApp2 = document.getElementById('submitBtnApp2');
 const imageContainerApp2 = document.getElementById("imageContainerApp2");
 const app2Title = document.getElementById("app2Title");
+const app2TitleColor = document.getElementById("app2TitleColor");
 const app2Inputs = document.querySelectorAll("#app2 input");
 
 
 chooseFileApp2.addEventListener('change', (e) => {
   // initialize
-  imageValueReset(selectedImageApp2);
+  imageValueReset(selectedImageApp2, originImg2, editImg2, transEvent2);
 
   const file = e.target.files[0];
   const reader = new FileReader();
@@ -28,7 +29,6 @@ chooseFileApp2.addEventListener('change', (e) => {
       editImg2.height = (editImg.width * img.height) / img.width;
       transEvent2.startY = img.width >= img.height ? 0 : LONGIMGDEFAULTY;
       
-      console.log(originImg2, editImg2, transEvent2)
       img.style.left = `${transEvent2.startX}px`;
       img.style.top = `${transEvent2.startY}px`;
       img.id = "chooseImg2";
@@ -59,8 +59,6 @@ submitBtnApp2.addEventListener("click", async () => {
     img.src = reader.result;
 
     img.onload = async () => {
-      const height50 = 48;
-      const height100 = 97;
       canvas.width = 1000;
       canvas.height = 1000;
       ctx.fillStyle = "#19202C";
@@ -109,13 +107,13 @@ submitBtnApp2.addEventListener("click", async () => {
       }
 
       ctx.font = "120px Bodoni Moda";
-      ctx.fillStyle = "white";
-      ctx.shadowColor = "rgba(0, 0, 0, 0.3)";
+      ctx.fillStyle = app2TitleColor.value;
+      ctx.shadowColor = "rgba(0, 0, 0, 0.2)";
       ctx.shadowBlur = 16;
       ctx.shadowOffsetX = 0;
       ctx.shadowOffsetY = 0;
       ctx.textAlign = "center";
-      url && ctx.fillText(app2Title.value, 500, 100 + height50);
+      ctx.fillText(app2Title.value, 500, 170);
 
       ctx.font = "24px S-CoreDream-6Bold";
       ctx.textAlign = "center";

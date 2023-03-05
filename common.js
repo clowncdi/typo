@@ -18,17 +18,17 @@ const transEvent = {
   drag: false,
 };
 
-function imageValueReset(selected) {
-  originImg.width = 0;
-  originImg.height = 0;
-  editImg.width = 500;
-  editImg.height = 0;
-  transEvent.startX = 0;
-  transEvent.startY = 0;
-  transEvent.moveX = 0;
-  transEvent.moveY = 0;
-  transEvent.scale = 1;
-  transEvent.drag = false;
+function imageValueReset(selected, origin, edit, trans) {
+  origin.width = 0;
+  origin.height = 0;
+  edit.width = 500;
+  edit.height = 0;
+  trans.startX = 0;
+  trans.startY = 0;
+  trans.moveX = 0;
+  trans.moveY = 0;
+  trans.scale = 1;
+  trans.drag = false;
   if (selected.childNodes.length > 3) {
     selected.removeChild(selected.childNodes[3]);
   }
@@ -83,8 +83,8 @@ function resetPosition(resetBtn, trans, choose) {
   trans.moveY = 0;
   trans.scale = 1;
   const chooseImg = document.getElementById(choose);
-  chooseImg.style.transform = `translate(${transEvent.moveX}px, ${transEvent.moveY}px) scale(${transEvent.scale})`;
-  resetBtn.previousElementSibling.innerText = `X축: ${transEvent.moveX}px, Y축: ${transEvent.moveY}px`;
+  chooseImg.style.transform = `translate(${trans.moveX}px, ${trans.moveY}px) scale(${trans.scale})`;
+  resetBtn.previousElementSibling.innerText = `X축: ${trans.moveX}px, Y축: ${trans.moveY}px`;
 }
 
 function addDownloadButton(canvas, download) {

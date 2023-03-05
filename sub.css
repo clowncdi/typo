@@ -18,3 +18,15 @@
 #app2 .item-image .input-wrap input:focus::placeholder {
   opacity: 0;
 }
+#app2 .item-image .input-wrap.color {
+  padding: 0;
+  margin-top: -20px;
+}
+#app2 .item-image .input-wrap.color label {
+  display: block;
+  z-index: 1;
+}
+#app2 .item-image .input-wrap.color input#app2TitleColor {
+  width: 27px;
+  height: 30px;
+}

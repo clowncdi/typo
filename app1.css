@@ -13,10 +13,6 @@
   font-style: normal;
 }
 
-:root {
-  --blue: #0F8EFF;
-}
-
 .temp-wrap {
   grid-column: 1/2;
   grid-row: 1/2;
