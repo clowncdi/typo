@@ -48,31 +48,38 @@ function handleMouseDragEvent(selected, trans, choose) {
   const chooseImg = document.getElementById(choose);
   let currentX = 0;
   let currentY = 0;
+  let mousedown = isMobile ? 'touchstart' : 'mousedown';
+  let mousemove = isMobile ? 'touchmove' : 'mousemove';
+  let mouseup = isMobile ? 'touchend' : 'mouseup';
+  let clientX = 0;
+  let clientY = 0;
 
-  selected.addEventListener("mousedown", (e) => {
+  selected.addEventListener(mousedown, (e) => {
     trans.drag = true;
-    trans.startX = e.clientX;
-    trans.startY = e.clientY;
+    trans.startX = isMobile ? e.touches[0].clientX : e.clientX;
+    trans.startY = isMobile ? e.touches[0].clientX : e.clientY;
     selected.style.cursor = "grabbing";
   });
 
-  selected.addEventListener("mousemove", (e) => {
+  selected.addEventListener(mousemove, (e) => {
     e.preventDefault();
+    clientX = isMobile ? e.touches[0].clientX : e.clientX;
+    clientY = isMobile ? e.touches[0].clientY : e.clientY;
     if (trans.drag) {
-      currentX = e.clientX - trans.startX;
-      currentY = e.clientY - trans.startY;
+      currentX = clientX - trans.startX;
+      currentY = clientY - trans.startY;
       trans.moveX += currentX;
       trans.moveY += currentY;
       chooseImg.style.transform = `translate(${trans.moveX}px, ${trans.moveY}px) scale(${trans.scale})`;
-      trans.startX = e.clientX;
-      trans.startY = e.clientY;
+      trans.startX = clientX;
+      trans.startY = clientY;
       selected.firstElementChild.firstElementChild.innerText = `X축: ${trans.moveX}px, Y축: ${trans.moveY}px`;
       selected.firstElementChild.firstElementChild.style.display = "block";
       selected.firstElementChild.children[1].style.display = "block";
     }
   });
   
-  selected.addEventListener("mouseup", (e) => {
+  selected.addEventListener(mouseup, (e) => {
     trans.drag = false;
     selected.style.cursor = "grab";
   });
@@ -129,4 +136,8 @@ function checkValue(input) {
   } else {
     input.style.borderColor = PRIMARYCOLOR;
   }
+}
+
+const isMobile = () => {
+	return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 }

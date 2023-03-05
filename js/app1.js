@@ -24,8 +24,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   country.value = "S.Korea, Seoul";
 });
 
-// 이미지 파일 변경 시 초기화
-
 
 fileInput.addEventListener("change", (e) => {
   // initialize
@@ -77,7 +75,10 @@ icons.forEach((icon) => {
   });
 });
 
-submitBtn.addEventListener("click", async () => {
+isMobile && submitBtn.addEventListener("touchstart", makeImageApp1);
+!isMobile && submitBtn.addEventListener("click", makeImageApp1);
+
+async function makeImageApp1() {
   // initialize canvas.
   imageContainer.innerHTML = "";
   imageContainer.nextElementSibling.innerHTML = "";
@@ -202,7 +203,7 @@ submitBtn.addEventListener("click", async () => {
       addDownloadButton(canvas, imageContainer.nextElementSibling);
     };
   };
-});
+};
 
 
 // let scaleMoveX = 0;

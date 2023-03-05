@@ -138,8 +138,10 @@ footer {
   margin-top: 100px;
   font-size: 13px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 10px;
   background-color: #f4f4f4;
 }
 

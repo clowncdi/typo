@@ -42,7 +42,10 @@ chooseFileApp2.addEventListener('change', (e) => {
   }
 });
 
-submitBtnApp2.addEventListener("click", async () => {
+isMobile && submitBtnApp2.addEventListener("touchstart", makeImageApp2);
+!isMobile && submitBtnApp2.addEventListener("click", makeImageApp2);
+
+async function makeImageApp2() {
   // initialize canvas.
   imageContainerApp2.innerHTML = "";
   imageContainerApp2.nextElementSibling.innerHTML = "";
@@ -124,4 +127,4 @@ submitBtnApp2.addEventListener("click", async () => {
       addDownloadButton(canvas, imageContainerApp2.nextElementSibling);
     };
   };
-});
+};
