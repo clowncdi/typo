@@ -52,6 +52,9 @@
 #app1 .input-wrap input {
   font-family: "S-CoreDream-6Bold", sans-serif;
 }
+#app1 .input-wrap input::placeholder {
+  color: rgb(255 255 255 / 0.5);
+}
 #url,
 #city,
 #country {

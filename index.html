@@ -2,15 +2,27 @@
 <html lang="ko">
   <head>
     <meta charset="utf-8" />
+    <title>Plus Typo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Plus Typo" />
-    <meta name="author" content="dalichoi" />
+    <meta name="description" content="Combine photos and text to create an image for Instagram." />
+    <meta name="author" content="clowncdi85@gmail.com" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Plus Typo" />
+    <meta property="og:title" content="Plus Typo" />
+    <meta property="og:description" content="Combine photos and text to create an image for Instagram." />
+    <meta property="og:image" content="./images/plus_typo_logo1.png" />
+    <meta property="og:url" content="https://weaco.co.kr/" />
+    <meta property="twitter:card" content="Plus Typo" />
+    <meta property="twitter:site" content="Plus Typo" />
+    <meta property="twitter:title" content="Plus Typo" />
+    <meta property="twitter:description" content="Combine photos and text to create an image for Instagram." />
+    <meta property="twitter:image" content="./images/plus_typo_logo2.png" />
+    <meta property="twitter:url" content="https://typo.co.kr/" />
     <link rel="icon" type="image/png" href="./images/favicon.png" />
     <link rel="stylesheet" href="./css/common.css" />
     <link rel="stylesheet" href="./css/app1.css" />
     <link rel="stylesheet" href="./css/sub.css" />
     <link rel="stylesheet" media="screen and (max-width: 800px)" href="./css/w800.css" />
-    <title>Plus Typo</title>
   </head>
   <body>
     <div class="container">
@@ -34,7 +46,7 @@
           <div class="gnb-menu">
             <ul>
               <li>
-                <a href="#" onclick="alert('Coming soon')">About</a>
+                <a href="#" onclick="alert('Hello, Coming soon')">About</a>
               </li>
             </ul>
           </div>
@@ -333,6 +345,57 @@
             </div>
           </div>
         </div>
+
+        <!-- app3 -->
+        <div class="item-wrap">
+          <div class="item-title">
+            <span># 3</span>
+            <h2>Bicycle Repair Shop</h2>
+            <div class="sample">
+              <p>Sample Output</p>
+              <img src="./images/app3_sample.webp" alt="Bicycle Repair Shop Sample Image" width="100%" />
+            </div>
+          </div>
+          <div id="app3" class="app-wrap">
+            <div class="item-image">
+              <div class="input-wrap color">
+                <label for="app3-title-color">Title Color Picker</label>
+                <input type="color" name="app3-title-color" id="app3TitleColor" value="#FBF07D" />
+              </div>
+              <div class="input-wrap">
+                <label for="app3-title">bicycle</label>
+                <input type="text" name="app3-title" id="app3Title" placeholder="bicycle" maxlength="20" />
+                <button class="clearBtn" onclick="clearInput(this)">X</button>
+              </div>
+              <div class="input-wrap">
+                <label for="app3-sub">REPAIR SHOP</label>
+                <input type="text" name="app3-sub" id="app3Sub" placeholder="REPAIR SHOP" maxlength="30" />
+                <button class="clearBtn" onclick="clearInput(this)">X</button>
+              </div>
+              <div class="file-wrap">
+                <label for="chooseFileApp3" class="btn">Choose File</label>
+                <input type="file" name="chooseFileApp3" id="chooseFileApp3" accept="image/*" />
+              </div>
+              <div class="selected-image" id="selectedImageApp3">
+                <div class="selected-image-position">
+                  <span></span>
+                  <span class="selected-image-position-reset" onclick="resetPosition(this, transEvent3, 'chooseImg3')">↻ Reset</span></span>
+                </div>
+              </div>
+            </div>
+            <div class="btn-wrap">
+              <button id="submitBtnApp3" class="btn btn-dark">Create</button>
+            </div>
+          </div>
+          <div class="item-result">
+            <div class="result-wrap">
+              <div class="image-container" id="imageContainerApp3"><i class="result-temp-bg"></i></div>
+              <div class="download"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- app4 coming soon -->
       </div>
       
       <!-- footer -->
@@ -348,5 +411,6 @@
   <script src="./js/common.js" defer></script>
   <script src="./js/app1.js" defer></script>
   <script src="./js/app2.js" defer></script>
+  <script src="./js/app3.js" defer></script>
   <script src="./js/logo.js" defer></script>
 </html>

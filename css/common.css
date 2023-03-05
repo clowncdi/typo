@@ -287,35 +287,35 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .input-wrap label {
   display: none;
 }
-.input-wrap input::-webkit-input-placeholder {
+input::-webkit-input-placeholder {
   font-size: 13px;
 }
-.input-wrap input::-moz-placeholder {
+input::-moz-placeholder {
   font-size: 13px;
 }
-.input-wrap input:-ms-input-placeholder {
+input:-ms-input-placeholder {
   font-size: 13px;
 }
-.input-wrap input::-ms-input-placeholder {
+input::-ms-input-placeholder {
   font-size: 13px;
 }
-.input-wrap input::placeholder {
+input::placeholder {
   font-size: 13px;
 }
-.input-wrap input:focus::-webkit-input-placeholder {
-  color: transparent;
+input:focus::-webkit-input-placeholder {
+  opacity: 0;
 }
-.input-wrap input:focus::-moz-placeholder {
-  color: transparent;
+input:focus::-moz-placeholder {
+  opacity: 0;
 }
-.input-wrap input:focus:-ms-input-placeholder {
-  color: transparent;
+input:focus:-ms-input-placeholder {
+  opacity: 0;
 }
-.input-wrap input:focus::-ms-input-placeholder {
-  color: transparent;
+input:focus::-ms-input-placeholder {
+  opacity: 0;
 }
-.input-wrap input:focus::placeholder {
-  color: transparent;
+input:focus::placeholder {
+  opacity: 0;
 }
 .input-wrap input {
   display: inline-block;
