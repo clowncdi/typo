@@ -1,6 +1,13 @@
 .gnb-wrap {
   width: 90%;
 }
+.gnb-logo {
+  padding: 0 10px;
+}
+#logoPlus,
+#logoTypo {
+  font-size: 20px;
+}
 .main-container {
   width: 100%;
 }
@@ -33,6 +40,7 @@
   .app-wrap,
   .item-result {
     scale: 0.9;
+    margin: -5%;
   }
 }
 
@@ -40,6 +48,7 @@
   .app-wrap,
   .item-result {
     scale: 0.8;
+    margin: -10%;
   }
 }
 
@@ -47,5 +56,6 @@
   .app-wrap,
   .item-result {
     scale: 0.7;
+    margin: -15%;
   }
 }
