@@ -52,6 +52,9 @@ async function makeImageApp2() {
   inputNullCheck(app2Inputs, chooseFileApp2);
 
   const file = chooseFileApp2.files[0];
+  if (file) {
+    imageContainerApp2.parentElement.parentElement.style.display = "block";
+  }
   const reader = new FileReader();
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");

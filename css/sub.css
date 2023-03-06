@@ -10,11 +10,15 @@
 #app2 .item-image .input-wrap input {
   height: 70px;
 }
+#app2 .item-image .input-wrap input#app2Title,
 #app2 .item-image .input-wrap input::placeholder {
   font-size: 42px;
   position: relative;
   top: 5px;
   font-family: 'Bodoni Moda', cursive;
+  color: rgb(237, 244, 79);
+}
+#app2 .item-image .input-wrap input::placeholder {
   color: rgb(237, 244, 79, 0.3);
 }
 #app2 .item-image .input-wrap.color {

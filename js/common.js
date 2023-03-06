@@ -58,7 +58,7 @@ function handleMouseDragEvent(selected, trans, choose) {
   selected.addEventListener(mousedown, (e) => {
     trans.drag = true;
     trans.startX = mobile ? e.touches[0].clientX : e.clientX;
-    trans.startY = mobile ? e.touches[0].clientX : e.clientY;
+    trans.startY = mobile ? e.touches[0].clientY : e.clientY;
     selected.style.cursor = "grabbing";
   });
 
@@ -143,6 +143,10 @@ function isMobile() {
 	return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(window.navigator.userAgent);
 }
 
+const items = document.querySelectorAll(".item-wrap");
 document.addEventListener("DOMContentLoaded", () => {
   mobile = isMobile();
+  items.forEach((item) => {
+    item.classList.add("loaded");
+  });
 });

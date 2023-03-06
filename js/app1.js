@@ -83,10 +83,13 @@ async function makeImageApp1() {
   imageContainer.innerHTML = "";
   imageContainer.nextElementSibling.innerHTML = "";
   inputNullCheck(inputs, fileInput);
-
+  
+  const file = fileInput.files[0];
+  if (file) {
+    imageContainer.parentElement.parentElement.style.display = "block";
+  }
   const low = lowTemp.value;
   const high = highTemp.value;
-  const file = fileInput.files[0];
   const date = dateInput.value.replaceAll("-", "");
 
   const reader = new FileReader();
