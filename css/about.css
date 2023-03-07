@@ -29,8 +29,8 @@
   animation-iteration-count: 1;
   animation-direction: alternate;
   transform: rotate(5deg);
-  filter: blur(3px);
-  -webkit-filter: blur(3px);
+  filter: blur(5px);
+  /* -webkit-filter: blur(5px); */
 }
 .text-wrap {
   position: relative;
@@ -70,7 +70,7 @@
 
 @keyframes slidein {
   from {
-    transform: scale(500%);
+    transform: scale(1.2);
     opacity: 0;
   }
 
