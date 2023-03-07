@@ -145,6 +145,10 @@ footer {
   background-color: #f4f4f4;
 }
 
+address {
+  text-align: center;
+}
+
 .item-wrap {
   display: flex;
   margin-bottom: 50px;

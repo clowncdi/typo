@@ -1,0 +1,80 @@
+::selection {
+  background-color: transparent;
+  color: var(--blue);
+}
+::-moz-selection {
+  background-color: transparent;
+  color: var(--blue);
+}
+.main-container {
+  width: 1200px;
+}
+.about-wrap {
+  line-height: 1.3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.about-wrap h2 {
+  position: fixed;
+  margin: auto;
+  font-size: 17rem;
+  line-height: 0.8;
+  color: var(--blue);
+  opacity: 0.1;
+  transition: all 0.5s ease;
+  animation-name: slidein;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-direction: alternate;
+  transform: rotate(5deg);
+  filter: blur(3px);
+  -webkit-filter: blur(3px);
+}
+.text-wrap {
+  position: relative;
+  width: 100%;
+  font-size: 4rem;
+  opacity: 0;
+}
+.text-wrap.loaded {
+  opacity: 1;
+  transition: all 1s ease 1s;
+}
+.text-wrap textarea {
+  font-family: "Roboto", serif;
+  font-weight: 300;
+  width: 100%;
+  height: 500px;
+  border: none;
+  outline: none;
+  caret-color: var(--blue);
+  background-color: transparent;
+  margin-bottom: 3rem;
+}
+.text-wrap textarea::target-text {
+  color: var(--blue);
+}
+.about-wrap p {
+  font-size: 1.3rem;
+  line-height: 2;
+  font-family: "Libre Baskerville", serif;
+  transform: translateY(30px);
+}
+.about-wrap p b,
+.about-wrap p a {
+  color: var(--blue);
+}
+
+
+@keyframes slidein {
+  from {
+    transform: scale(500%);
+    opacity: 0;
+  }
+
+  to {
+    transform: sclae(1);
+  }
+}
