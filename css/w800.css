@@ -16,6 +16,7 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 100px;
+  gap: 0;
 }
 
 .item-title {
@@ -27,12 +28,14 @@
   gap: 20px;
 }
 .item-title span {
-  flex-basis: 35px;
+  flex: 1 1 10%;
 }
 .item-title h2 {
   margin: 0;
+  flex: 1 1 40%;
 }
 .sample {
+  flex: 1 1 50%;
   align-items: flex-end;
 }
 .sample p {
