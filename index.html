@@ -395,8 +395,59 @@
           </div>
         </div>
 
-        <!-- app4 coming soon -->
+        <!-- app4 -->
+        <div class="item-wrap">
+          <div class="item-title">
+            <span># 4</span>
+            <h2>Perilla Leaf</h2>
+            <div class="sample">
+              <p>Sample Output</p>
+              <img src="./images/app4_sample.webp" alt="Bicycle Repair Shop Sample Image" width="100%" />
+            </div>
+          </div>
+          <div id="app4" class="app-wrap">
+            <div class="item-image">
+              <div class="file-wrap">
+                <label for="chooseFileApp4" class="btn">Choose File</label>
+                <input type="file" name="chooseFileApp4" id="chooseFileApp4" accept="image/*" />
+              </div>
+              <div class="input-wrap color">
+                <label for="app4-title-color">Title Color Picker</label>
+                <input type="color" name="app4-title-color" id="app4TitleColor" value="#BBDDA0" />
+              </div>
+              <div class="input-wrap">
+                <label for="app4-title">perilla leaf</label>
+                <input type="text" name="app4-title" id="app4Title" placeholder="perilla leaf" maxlength="15" />
+                <button class="clearBtn" onclick="clearInput(this)">X</button>
+              </div>
+              <div class="input-wrap">
+                <label for="app4-date">Date</label>
+                <input type="date" name="app4-date" id="app4Date" />
+                <button class="clearBtn" onclick="clearInput(this)">X</button>
+              </div>
+              <div class="selected-image" id="selectedImageApp4">
+                <div class="selected-image-position">
+                  <span></span>
+                  <span class="selected-image-position-reset" onclick="resetPosition(this, transEvent4, 'chooseImg4')">↻ Reset</span></span>
+                </div>
+              </div>
+            </div>
+            <div class="btn-wrap">
+              <button id="submitBtnApp4" class="btn btn-dark">Create</button>
+            </div>
+          </div>
+          <div class="item-result">
+            <div class="result-wrap">
+              <div class="image-container" id="imageContainerApp4"><i class="result-temp-bg"></i></div>
+              <div class="download"></div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- app5 coming soon -->
+
       </div>
+
       
       <!-- footer -->
       <footer>
@@ -412,5 +463,6 @@
   <script src="./js/app1.js" defer></script>
   <script src="./js/app2.js" defer></script>
   <script src="./js/app3.js" defer></script>
+  <script src="./js/app4.js" defer></script>
   <script src="./js/logo.js" defer></script>
 </html>

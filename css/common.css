@@ -1,6 +1,6 @@
 @import "reset.css";
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable-dynamic-subset.css");
-@import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Arima:wght@300;400;700&family=Arizonia&family=Black+Han+Sans&family=Black+Ops+One&family=Blaka+Hollow&family=Bodoni+Moda:ital,opsz@1,6..96&family=Bungee&family=Bungee+Shade&family=Carter+One&family=Cinzel+Decorative:wght@400;700&family=Creepster&family=DM+Serif+Display&family=DM+Serif+Text&family=EB+Garamond:wght@400;700&family=Fredericka+the+Great&family=Graduate&family=Gruppo&family=Hammersmith+One&family=Italianno&family=Kelly+Slab&family=Kodchasan:wght@300;400;700&family=Libre+Baskerville:wght@400;700&family=Limelight&family=Lobster+Two:wght@400;700&family=Monoton&family=Montserrat+Alternates:wght@300;400;700&family=Montserrat:wght@300;400;700&family=Nixie+One&family=Oleo+Script&family=Oranienbaum&family=Oswald:wght@300;400;700&family=Padyakke+Expanded+One&family=Pirata+One&family=Poiret+One&family=Press+Start+2P&family=Quicksand:wght@300;400;700&family=Rampart+One&family=Roboto:wght@300;400;700&family=Rubik+Gemstones&family=Rubik+Vinyl&family=Sen:wght@400;700&family=Tenor+Sans&family=Tilt+Prism&family=Waterfall&family=Yesteryear&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Arima:wght@300;400;700&family=Arizonia&family=Black+Han+Sans&family=Black+Ops+One&family=Blaka+Hollow&family=Bodoni+Moda:ital,opsz@1,6..96&family=Bungee&family=Bungee+Shade&family=Carter+One&family=Cinzel+Decorative:wght@400;700&family=Creepster&family=DM+Serif+Display&family=DM+Serif+Text&family=EB+Garamond:wght@400;700&family=Fredericka+the+Great&family=Graduate&family=Gruppo&family=Hammersmith+One&family=Italianno&family=Kelly+Slab&family=Kodchasan:wght@300;400;700&family=Libre+Baskerville:wght@400;700&family=Limelight&family=Lobster+Two:wght@400;700&family=Monoton&family=Montserrat+Alternates:wght@300;400;700&family=Montserrat:wght@300;400;700&family=Nixie+One&family=Oleo+Script&family=Oranienbaum&family=Oswald:wght@300;400;700&family=Pacifico&family=Padyakke+Expanded+One&family=Pirata+One&family=Poiret+One&family=Press+Start+2P&family=Quicksand:wght@300;400;700&family=Rampart+One&family=Roboto:wght@300;400;700&family=Rubik+Gemstones&family=Rubik+Vinyl&family=Sen:wght@400;700&family=Tenor+Sans&family=Tilt+Prism&family=Waterfall&family=Yesteryear&display=swap");
 
 :root {
   --logo-h: 65px;
@@ -234,9 +234,7 @@ address {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
-#app2 .item-image {
-  background-image: url("../images/app2_sample.webp");
-}
+
 .file-wrap {
   position: absolute;
   top: 0;

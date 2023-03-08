@@ -31,6 +31,7 @@ const fonts = [
   "Oleo Script",
   "Oranienbaum",
   "Oswald",
+  "Pacifico",
   "Padyakke Expanded One",
   "Pirata One",
   "Poiret One",
