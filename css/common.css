@@ -1,15 +1,18 @@
 @import "reset.css";
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable-dynamic-subset.css");
-@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Arima:wght@300;400;700&family=Arizonia&family=Black+Han+Sans&family=Black+Ops+One&family=Blaka+Hollow&family=Bodoni+Moda:ital,opsz@1,6..96&family=Bungee&family=Bungee+Shade&family=Carter+One&family=Cinzel+Decorative:wght@400;700&family=Creepster&family=DM+Serif+Display&family=DM+Serif+Text&family=EB+Garamond:wght@400;700&family=Fredericka+the+Great&family=Graduate&family=Gruppo&family=Hammersmith+One&family=Italianno&family=Kelly+Slab&family=Kodchasan:wght@300;400;700&family=Libre+Baskerville:wght@400;700&family=Limelight&family=Lobster+Two:wght@400;700&family=Monoton&family=Montserrat+Alternates:wght@300;400;700&family=Montserrat:wght@300;400;700&family=Nixie+One&family=Oleo+Script&family=Oranienbaum&family=Oswald:wght@300;400;700&family=Padyakke+Expanded+One&family=Pirata+One&family=Poiret+One&family=Press+Start+2P&family=Quicksand:wght@300;400;700&family=Rampart+One&family=Roboto:wght@300;400;700&family=Rubik+Gemstones&family=Rubik+Vinyl&family=Sen:wght@400;700&family=Tenor+Sans&family=Tilt+Prism&family=Waterfall&family=Yesteryear&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Arima:wght@300;400;700&family=Arizonia&family=Black+Han+Sans&family=Black+Ops+One&family=Blaka+Hollow&family=Bodoni+Moda:ital,opsz@1,6..96&family=Bungee&family=Bungee+Shade&family=Carter+One&family=Cinzel+Decorative:wght@400;700&family=Creepster&family=DM+Serif+Display&family=DM+Serif+Text&family=EB+Garamond:wght@400;700&family=Fredericka+the+Great&family=Graduate&family=Gruppo&family=Hammersmith+One&family=Italianno&family=Kelly+Slab&family=Kodchasan:wght@300;400;700&family=Libre+Baskerville:wght@400;700&family=Limelight&family=Lobster+Two:wght@400;700&family=Monoton&family=Montserrat+Alternates:wght@300;400;700&family=Montserrat:wght@300;400;700&family=Nixie+One&family=Oleo+Script&family=Oranienbaum&family=Oswald:wght@300;400;700&family=Padyakke+Expanded+One&family=Pirata+One&family=Poiret+One&family=Press+Start+2P&family=Quicksand:wght@300;400;700&family=Rampart+One&family=Roboto:wght@300;400;700&family=Rubik+Gemstones&family=Rubik+Vinyl&family=Sen:wght@400;700&family=Tenor+Sans&family=Tilt+Prism&family=Waterfall&family=Yesteryear&display=swap");
 
 :root {
   --logo-h: 65px;
   --logo-bp: -4px;
-  --blue: #0F8EFF;
+  --blue: #0f8eff;
 }
 
 body {
-  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-family: "Pretendard Variable", Pretendard, -apple-system,
+    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   color: #333;
 }
 .container {
@@ -50,6 +53,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.gnb-logo a {
+  height: 100%;
 }
 
 #logoPlus {
@@ -119,8 +125,8 @@ body {
   display: inline;
   font-size: 42px;
   color: #333;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  transition: .3s;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  transition: 0.3s;
   opacity: 1;
 }
 
@@ -168,7 +174,7 @@ address {
   font-weight: 100;
   color: #999;
   width: 150px;
-  border-top: 1px solid #0F8EFF;
+  border-top: 1px solid #0f8eff;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -176,7 +182,7 @@ address {
 .item-title span {
   font-size: 16px;
   font-weight: 600;
-  color: #0F8EFF;
+  color: #0f8eff;
 }
 .item-title h2 {
   flex: 1;
@@ -202,7 +208,7 @@ address {
   height: 498px;
   background-color: #f7f7f7;
   border-radius: 5px;
-  border: 1px dashed #0F8EFF;
+  border: 1px dashed #0f8eff;
 }
 .item-image {
   position: relative;
@@ -213,7 +219,8 @@ address {
   width: 500px;
   height: 500px;
   border-radius: 5px;
-  background: #19202c url("../images/app1_sample.webp") no-repeat center center / cover;
+  background: #19202c url("../images/app1_sample.webp") no-repeat center center /
+    cover;
 }
 .item-image::before {
   content: "";
@@ -230,7 +237,7 @@ address {
 #app2 .item-image {
   background-image: url("../images/app2_sample.webp");
 }
-.file-wrap  {
+.file-wrap {
   position: absolute;
   top: 0;
   left: 0;

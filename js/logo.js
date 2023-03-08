@@ -1,65 +1,65 @@
 const fonts = [
-  'Alfa Slab One',
-  'Arima',
-  'Arizonia',
-  'Black Han Sans',
-  'Black Ops One',
-  'Blaka Hollow',
-  'Bodoni Moda',
-  'Bungee',
-  'Bungee Shade',
-  'Carter One',
-  'Cinzel Decorative',
-  'Creepster',
-  'DM Serif Display',
-  'DM Serif Text',
-  'EB Garamond',
-  'Fredericka the Great',
-  'Graduate',
-  'Gruppo',
-  'Hammersmith One',
-  'Italianno',
-  'Kelly Slab',
-  'Kodchasan',
-  'Libre Baskerville',
-  'Limelight',
-  'Lobster Two',
-  'Monoton',
-  'Montserrat',
-  'Montserrat Alternates',
-  'Nixie One',
-  'Oleo Script',
-  'Oranienbaum',
-  'Oswald',
-  'Padyakke Expanded One',
-  'Pirata One',
-  'Poiret One',
-  'Press Start 2P',
-  'Quicksand',
-  'Rampart One',
-  'Roboto',
-  'Rubik Gemstones',
-  'Rubik Vinyl',
-  'Sen',
-  'Tenor Sans',
-  'Tilt Prism',
-  'Waterfall',
-  'Yesteryear',
+  "Alfa Slab One",
+  "Arima",
+  "Arizonia",
+  "Black Han Sans",
+  "Black Ops One",
+  "Blaka Hollow",
+  "Bodoni Moda",
+  "Bungee",
+  "Bungee Shade",
+  "Carter One",
+  "Cinzel Decorative",
+  "Creepster",
+  "DM Serif Display",
+  "DM Serif Text",
+  "EB Garamond",
+  "Fredericka the Great",
+  "Graduate",
+  "Gruppo",
+  "Hammersmith One",
+  "Italianno",
+  "Kelly Slab",
+  "Kodchasan",
+  "Libre Baskerville",
+  "Limelight",
+  "Lobster Two",
+  "Monoton",
+  "Montserrat",
+  "Montserrat Alternates",
+  "Nixie One",
+  "Oleo Script",
+  "Oranienbaum",
+  "Oswald",
+  "Padyakke Expanded One",
+  "Pirata One",
+  "Poiret One",
+  "Press Start 2P",
+  "Quicksand",
+  "Rampart One",
+  "Roboto",
+  "Rubik Gemstones",
+  "Rubik Vinyl",
+  "Sen",
+  "Tenor Sans",
+  "Tilt Prism",
+  "Waterfall",
+  "Yesteryear",
 ];
 const plus = document.getElementById("logoPlus");
 const typo = document.getElementById("logoTypo");
 const plusFont = document.getElementById("plus-font");
 const typoFont = document.getElementById("typo-font");
 const logo = document.querySelector(".gnb-logo");
-const logoText = 'plusTYPO';
-let changeLogoTime = 10000;
+const LOGO_TEXT = "plusTYPO";
+const CHANGE_LOGO_TIME = 10000;
 let currentIndex = 0;
 let opacity = 0;
 
 const randomFont = () => {
   const randomIndex = Math.floor(Math.random() * fonts.length);
   return fonts[randomIndex];
-}
+};
 
 // const randomColor = () => {
 //   const randomColor = Math.floor(Math.random() * 16777215).toString(16);
@@ -70,46 +70,46 @@ const randomLetterStyle = () => {
   addLogoText();
   plus.style.fontFamily = randomFont();
   typo.style.fontFamily = randomFont();
-  setTimeout(deleteLogoText, changeLogoTime - 2000);
-}
+  setTimeout(deleteLogoText, CHANGE_LOGO_TIME - 2000);
+};
 
 const addLogoText = () => {
   const plusLoop = setInterval(() => {
     if (plus.innerText.length < 4) {
-      plus.innerHTML += getLogoText(logoText[currentIndex]);
+      plus.innerHTML += getLogoText(LOGO_TEXT[currentIndex]);
       currentIndex++;
     }
     if (currentIndex === 4) {
       clearInterval(plusLoop);
-      
+
       const typoLoop = setInterval(() => {
         if (typo.innerText.length < 4) {
-          typo.innerHTML += getLogoText(logoText[currentIndex]);
+          typo.innerHTML += getLogoText(LOGO_TEXT[currentIndex]);
           currentIndex++;
         }
         if (currentIndex === 8) {
           currentIndex = 0;
           fadeInLogoFont();
-          plusFont.innerHTML = plus.style.fontFamily.replace(/\"/gi, '');
-          typoFont.innerHTML = typo.style.fontFamily.replace(/\"/gi, '');
-          setTimeout(fadeOutLogoFont, changeLogoTime - 2000);
+          plusFont.innerHTML = plus.style.fontFamily.replace(/\"/gi, "");
+          typoFont.innerHTML = typo.style.fontFamily.replace(/\"/gi, "");
+          setTimeout(fadeOutLogoFont, CHANGE_LOGO_TIME - 2000);
           clearInterval(typoLoop);
         }
       }, 80);
     }
   }, 50);
-}
+};
 
 const getLogoText = (text) => {
-  return text !== undefined ? text : '';
-}
+  return text !== undefined ? text : "";
+};
 
 const deleteLogoText = () => {
   const typoLoop = setInterval(() => {
     typo.innerHTML = typo.innerHTML.slice(0, -1);
     if (typo.innerHTML.length === 0) {
       clearInterval(typoLoop);
-      
+
       const plusLoop = setInterval(() => {
         plus.innerHTML = plus.innerHTML.slice(0, -1);
         if (plus.innerHTML.length === 0) {
@@ -118,7 +118,7 @@ const deleteLogoText = () => {
       }, 80);
     }
   }, 50);
-}
+};
 
 // blinking type cursor
 const fontCursor = document.createElement("span");
@@ -134,38 +134,93 @@ logo.appendChild(fontCursor);
 const cursorBlinkTime = 500;
 const cursorBlink = () => {
   fontCursor.style.opacity = fontCursor.style.opacity === "0" ? "1" : "0";
-}
+};
 setInterval(cursorBlink, cursorBlinkTime);
 
-
 const fadeInLogoFont = () => {
-  opacity += 0.1;  
+  opacity += 0.1;
   plusFont.style.opacity = opacity;
   typoFont.style.opacity = opacity;
   if (opacity < 1) {
     setTimeout(fadeInLogoFont, 50);
   }
-}
+};
 
 const fadeOutLogoFont = () => {
-  opacity -= 0.1;  
+  opacity -= 0.1;
   plusFont.style.opacity = opacity;
   typoFont.style.opacity = opacity;
   if (opacity > 0) {
     setTimeout(fadeOutLogoFont, 50);
   }
+};
+
+class LogoState {
+  isLogoVisible;
+  visibility;
+
+  constructor() {
+    this.isLogoVisible = this.getLogoVisibility();
+    this.visibility = setInterval(randomLetterStyle, CHANGE_LOGO_TIME);
+  }
+
+  getLogoVisibility() {
+    let temp = logo.getBoundingClientRect().top > -100;
+    if (this.visibility > 0 && temp === true) {
+      return null;
+    } else if (
+      temp === true &&
+      (this.visibility === undefined || this.isLogoVisible === null)
+    ) {
+      return temp;
+    } else if (this.visibility > 0 && temp === false) {
+      return temp;
+    }
+  }
+
+  getLogoState() {
+    return this.isLogoVisible;
+  }
+
+  setLogoState() {
+    this.isLogoVisible = this.getLogoVisibility();
+  }
+
+  handleLogoEvent() {
+    if (this.isLogoVisible === null || this.isLogoVisible === undefined) {
+      return;
+    }
+    if (this.isLogoVisible) {
+      this.visibility = setInterval(randomLetterStyle, CHANGE_LOGO_TIME);
+    } else if (!this.isLogoVisible) {
+      clearInterval(this.visibility);
+      this.visibility = undefined;
+    }
+  }
+
+  handleLogoChange() {
+    this.setLogoState();
+    this.handleLogoEvent();
+  }
 }
 
-let visibility;
-
-randomLetterStyle();
-visibility = setInterval(randomLetterStyle, changeLogoTime);
+const logoState = new LogoState();
 
 // visibilitychange event
 document.addEventListener("visibilitychange", () => {
   if (document.visibilityState === "visible") {
-    visibility = setInterval(randomLetterStyle, changeLogoTime);
+    console.log("visible setInterval: ", logo.getBoundingClientRect().top);
+    logoState.handleLogoChange();
   } else {
+    console.log("invisible clearInterval: ", logo.getBoundingClientRect().top);
     clearInterval(visibility);
   }
+});
+
+randomLetterStyle();
+logoState.handleLogoChange();
+
+// scroll event
+document.addEventListener("scroll", () => {
+  logoState.handleLogoChange();
 });
