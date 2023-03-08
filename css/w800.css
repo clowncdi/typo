@@ -48,6 +48,9 @@
     scale: 0.9;
     margin: -5%;
   }
+  .gnb-logo a {
+    height: auto;
+  }
 }
 
 @media screen and (max-width: 468px) {
