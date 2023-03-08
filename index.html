@@ -402,7 +402,7 @@
             <h2>Perilla Leaf</h2>
             <div class="sample">
               <p>Sample Output</p>
-              <img src="./images/app4_sample.webp" alt="Bicycle Repair Shop Sample Image" width="100%" />
+              <img src="./images/app4_sample.webp" alt="Perilla Leaf Sample Image" width="100%" />
             </div>
           </div>
           <div id="app4" class="app-wrap">
@@ -443,8 +443,67 @@
             </div>
           </div>
         </div>
+
+        <!-- app5 -->
+        <div class="item-wrap">
+          <div class="item-title">
+            <span># 5</span>
+            <h2>Summer Vacation</h2>
+            <div class="sample">
+              <p>Sample Output</p>
+              <img src="./images/app5_sample.webp" alt="Summer Vacation Sample Image" width="100%" />
+            </div>
+          </div>
+          <div id="app5" class="app-wrap">
+            <div class="item-image">
+              <div class="file-wrap">
+                <label for="chooseFileApp5" class="btn">Choose File</label>
+                <input type="file" name="chooseFileApp5" id="chooseFileApp5" accept="image/*" />
+              </div>
+              <div class="input-wrap color">
+                <label for="app5-title-color">Title Color Picker</label>
+                <input type="color" name="app5-title-color" id="app5TitleColor" value="#FFFFFF" />
+              </div>
+              <div class="input-wrap">
+                <label for="app5-title">Summer</label>
+                <input type="text" name="app5-title" id="app5Title" placeholder="SUMMER" maxlength="6" />
+                <button class="clearBtn" onclick="clearInput(this)">X</button>
+              </div>
+              <div class="input-wrap">
+                <label for="app5-sub">Vacation</label>
+                <input type="text" name="app5-sub" id="app5Sub" placeholder="VACATION" maxlength="8" />
+                <button class="clearBtn" onclick="clearInput(this)">X</button>
+              </div>
+              <div class="input-wrap">
+                <label for="app5-start-date">Start Date</label>
+                <input type="date" name="app5-start-date" id="app5StartDate" />
+                <button class="clearBtn" onclick="clearInput(this)">X</button>
+              <!-- </div>
+              <div class="input-wrap"> -->
+                <label for="app5-end-date">End Date</label>
+                <input type="date" name="app5-end-date" id="app5EndDate" />
+                <button class="clearBtn" onclick="clearInput(this)">X</button>
+              </div>
+              <div class="selected-image" id="selectedImageApp5">
+                <div class="selected-image-position">
+                  <span></span>
+                  <span class="selected-image-position-reset" onclick="resetPosition(this, transEvent5, 'chooseImg5')">↻ Reset</span></span>
+                </div>
+              </div>
+            </div>
+            <div class="btn-wrap">
+              <button id="submitBtnApp5" class="btn btn-dark">Create</button>
+            </div>
+          </div>
+          <div class="item-result">
+            <div class="result-wrap">
+              <div class="image-container" id="imageContainerApp5"><i class="result-temp-bg"></i></div>
+              <div class="download"></div>
+            </div>
+          </div>
+        </div>
         
-        <!-- app5 coming soon -->
+        <!-- app6 coming soon -->
 
       </div>
 
@@ -464,5 +523,6 @@
   <script src="./js/app2.js" defer></script>
   <script src="./js/app3.js" defer></script>
   <script src="./js/app4.js" defer></script>
+  <script src="./js/app5.js" defer></script>
   <script src="./js/logo.js" defer></script>
 </html>

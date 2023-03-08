@@ -1,17 +1,16 @@
 const originImg3 = JSON.parse(JSON.stringify(originImg));
 const editImg3 = JSON.parse(JSON.stringify(editImg));
 const transEvent3 = JSON.parse(JSON.stringify(transEvent));
-const chooseFileApp3 = document.getElementById('chooseFileApp3');
-const selectedImageApp3 = document.getElementById('selectedImageApp3');
-const submitBtnApp3 = document.getElementById('submitBtnApp3');
+const chooseFileApp3 = document.getElementById("chooseFileApp3");
+const selectedImageApp3 = document.getElementById("selectedImageApp3");
+const submitBtnApp3 = document.getElementById("submitBtnApp3");
 const imageContainerApp3 = document.getElementById("imageContainerApp3");
 const app3TitleColor = document.getElementById("app3TitleColor");
 const app3Title = document.getElementById("app3Title");
 const app3Sub = document.getElementById("app3Sub");
 const app3Inputs = document.querySelectorAll("#app3 input");
 
-
-chooseFileApp3.addEventListener('change', (e) => {
+chooseFileApp3.addEventListener("change", (e) => {
   // initialize
   imageValueReset(selectedImageApp3, originImg3, editImg3, transEvent3);
 
@@ -22,14 +21,14 @@ chooseFileApp3.addEventListener('change', (e) => {
     const img = new Image();
     img.src = reader.result;
 
-    selectedImageApp3.style.backgroundColor = "#19202c";
+    selectedImageApp3.style.backgroundColor = BGCOLOR;
 
     img.onload = () => {
       originImg3.width = img.width;
       originImg3.height = img.height;
       editImg3.height = (editImg.width * img.height) / img.width;
       transEvent3.startY = img.width >= img.height ? 0 : LONGIMGDEFAULTY;
-      
+
       img.style.left = `${transEvent3.startX}px`;
       img.style.top = `${transEvent3.startY}px`;
       img.id = "chooseImg3";
@@ -39,8 +38,8 @@ chooseFileApp3.addEventListener('change', (e) => {
 
       changeFileBtn(e.target);
       submitBtnApp3.style.marginRight = 0;
-    }
-  }
+    };
+  };
 });
 
 mobile && submitBtnApp3.addEventListener("touchstart", makeImageApp3);
@@ -68,7 +67,7 @@ async function makeImageApp3() {
     img.onload = async () => {
       canvas.width = 1000;
       canvas.height = 1000;
-      ctx.fillStyle = "#19202C";
+      ctx.fillStyle = BGCOLOR;
       ctx.filter = "grayscale(100%) contrast(110%) brightness(90%)";
       ctx.fillRect(0, 0, 1000, 1000);
       let x = 0;
@@ -82,18 +81,18 @@ async function makeImageApp3() {
         // 샘플 이미지에서 옮긴 y값만큼 원본 이미지의 비율로 y값 변환.
         let originX = transEvent3.moveX * ratio * -1;
         let originY = transEvent3.moveY * ratio * -1;
-        
+
         x = transEvent3.moveX;
-        y = transEvent3.moveY + (LONGIMGDEFAULTY*2);
+        y = transEvent3.moveY + LONGIMGDEFAULTY * 2;
         ctx.drawImage(
-          img, 
+          img,
           originX,
-          originY, 
-          img.width, 
-          img.height, 
-          x, 
-          y, 
-          canvasWidth, 
+          originY,
+          img.width,
+          img.height,
+          x,
+          y,
+          canvasWidth,
           canvasHeight
         );
       } else {
@@ -140,4 +139,4 @@ async function makeImageApp3() {
       addDownloadButton(canvas, imageContainerApp3.nextElementSibling);
     };
   };
-};
+}

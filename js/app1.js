@@ -24,7 +24,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   country.value = "S.Korea, Seoul";
 });
 
-
 fileInput.addEventListener("change", (e) => {
   // initialize
   imageValueReset(selectedImage, originImg, editImg, transEvent);
@@ -36,7 +35,7 @@ fileInput.addEventListener("change", (e) => {
     const img = new Image();
     img.src = reader.result;
 
-    selectedImage.style.backgroundColor = "#19202c";
+    selectedImage.style.backgroundColor = BGCOLOR;
 
     img.onload = () => {
       originImg.width = img.width;
@@ -60,7 +59,10 @@ fileInput.addEventListener("change", (e) => {
 // 날씨 아이콘을 선택하면, 선택된 아이콘의 색을 chartreuse로 변경한다.
 icons.forEach((icon) => {
   icon.addEventListener("click", (e) => {
-    if (e.target.style.fill === PRIMARYCOLOR || e.target.style.fill === "rgb(15, 142, 255)") {
+    if (
+      e.target.style.fill === PRIMARYCOLOR ||
+      e.target.style.fill === "rgb(15, 142, 255)"
+    ) {
       e.target.style.fill = "white";
       weatherUrl = "";
       return;
@@ -83,7 +85,7 @@ async function makeImageApp1() {
   imageContainer.innerHTML = "";
   imageContainer.nextElementSibling.innerHTML = "";
   inputNullCheck(inputs, fileInput);
-  
+
   const file = fileInput.files[0];
   if (file) {
     imageContainer.parentElement.parentElement.style.display = "block";
@@ -114,7 +116,7 @@ async function makeImageApp1() {
       const height100 = 97;
       canvas.width = 1000;
       canvas.height = 1000;
-      ctx.fillStyle = "#19202C";
+      ctx.fillStyle = BGCOLOR;
       ctx.fillRect(0, 0, 1000, 1000);
       let x = 0;
       let y = 0;
@@ -127,18 +129,18 @@ async function makeImageApp1() {
         // 샘플 이미지에서 옮긴 y값만큼 원본 이미지의 비율로 y값 변환.
         let originX = transEvent.moveX * ratio * -1;
         let originY = transEvent.moveY * ratio * -1;
-        
+
         x = transEvent.moveX;
-        y = transEvent.moveY + (LONGIMGDEFAULTY*2);
+        y = transEvent.moveY + LONGIMGDEFAULTY * 2;
         ctx.drawImage(
-          img, 
+          img,
           originX,
-          originY, 
-          img.width, 
-          img.height, 
-          x, 
-          y, 
-          canvasWidth, 
+          originY,
+          img.width,
+          img.height,
+          x,
+          y,
+          canvasWidth,
           canvasHeight
         );
       } else {
@@ -206,8 +208,7 @@ async function makeImageApp1() {
       addDownloadButton(canvas, imageContainer.nextElementSibling);
     };
   };
-};
-
+}
 
 // let scaleMoveX = 0;
 // let scaleMoveY = 0;

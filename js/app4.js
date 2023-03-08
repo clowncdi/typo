@@ -25,7 +25,7 @@ chooseFileApp4.addEventListener("change", (e) => {
     const img = new Image();
     img.src = reader.result;
 
-    selectedImageApp4.style.backgroundColor = "#19202c";
+    selectedImageApp4.style.backgroundColor = BGCOLOR;
 
     img.onload = () => {
       originImg4.width = img.width;
@@ -71,7 +71,7 @@ async function makeImageApp4() {
     img.onload = async () => {
       canvas.width = 1000;
       canvas.height = 1000;
-      ctx.fillStyle = "#19202C";
+      ctx.fillStyle = BGCOLOR;
       ctx.filter = "contrast(110%) brightness(110%)";
       ctx.fillRect(0, 0, 1000, 1000);
       let x = 0;

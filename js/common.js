@@ -1,4 +1,5 @@
 const PRIMARYCOLOR = "#0F8EFF";
+const BGCOLOR = "#19202c";
 const TYPOURL = "typo.co.kr";
 const LONGIMGDEFAULTY = -100;
 const originImg = {
@@ -49,9 +50,9 @@ function handleMouseDragEvent(selected, trans, choose) {
   const chooseImg = document.getElementById(choose);
   let currentX = 0;
   let currentY = 0;
-  let mousedown = mobile ? 'touchstart' : 'mousedown';
-  let mousemove = mobile ? 'touchmove' : 'mousemove';
-  let mouseup = mobile ? 'touchend' : 'mouseup';
+  let mousedown = mobile ? "touchstart" : "mousedown";
+  let mousemove = mobile ? "touchmove" : "mousemove";
+  let mouseup = mobile ? "touchend" : "mouseup";
   let clientX = 0;
   let clientY = 0;
 
@@ -79,7 +80,7 @@ function handleMouseDragEvent(selected, trans, choose) {
       selected.firstElementChild.children[1].style.display = "block";
     }
   });
-  
+
   selected.addEventListener(mouseup, (e) => {
     trans.drag = false;
     selected.style.cursor = "grab";
@@ -140,7 +141,9 @@ function checkValue(input) {
 }
 
 function isMobile() {
-	return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(window.navigator.userAgent);
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    window.navigator.userAgent
+  );
 }
 
 const items = document.querySelectorAll(".item-wrap");

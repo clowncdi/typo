@@ -1,7 +1,8 @@
 /* common */
 #app2 .item-image,
 #app3 .item-image,
-#app4 .item-image {
+#app4 .item-image,
+#app5 .item-image {
   display: block;
 }
 .item-image .input-wrap.color label {
@@ -126,6 +127,61 @@
   bottom: 100px;
 }
 #app4 .selected-image-position {
+  justify-content: flex-start;
+  padding-top: 20px;
+}
+
+/* app5 */
+#app5 .item-image {
+  background-image: url("../images/app5_sample.webp");
+}
+#app5 .item-image .input-wrap {
+  justify-content: center;
+  align-items: center;
+}
+#app5 .item-image .input-wrap.color {
+  padding-top: 160px;
+}
+#app5 .item-image .input-wrap input#app5Title {
+  width: 95%;
+  height: 100px;
+}
+#app5 .item-image .input-wrap input#app5Title,
+#app5 .item-image .input-wrap input#app5Title::placeholder {
+  font-size: 90px;
+  position: relative;
+  font-family: "Monoton", sans-serif;
+  color: rgb(255, 255, 255);
+}
+#app5 .item-image .input-wrap input#app5Title::placeholder {
+  color: rgb(255, 255, 255, 0.5);
+}
+#app5 .item-image .input-wrap input#app5Sub {
+  width: 95%;
+  height: 60px;
+}
+#app5 .item-image .input-wrap input#app5Sub,
+#app5 .item-image .input-wrap input#app5Sub::placeholder {
+  margin-top: 1px;
+  font-size: 48px;
+  font-weight: 300;
+  letter-spacing: 27px;
+  text-indent: 1.2rem;
+  font-family: "Montserrat", sans-serif;
+  color: rgba(255, 255, 255);
+}
+#app5 .item-image .input-wrap input#app5Sub::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+#app5 .item-image .input-wrap input[type="date"] {
+  width: 40%;
+  margin-top: 40px;
+  color: rgba(255, 255, 255, 0.9);
+}
+#app5 .file-wrap label {
+  bottom: 180px;
+}
+#app5 .selected-image-position {
   justify-content: flex-start;
   padding-top: 20px;
 }
