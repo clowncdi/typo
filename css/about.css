@@ -51,7 +51,6 @@
   outline: none;
   caret-color: var(--blue);
   background-color: transparent;
-  margin-bottom: 3rem;
 }
 .text-wrap textarea::target-text {
   color: var(--blue);
@@ -66,7 +65,6 @@
 .about-wrap p a {
   color: var(--blue);
 }
-
 
 @keyframes slidein {
   from {

@@ -15,8 +15,6 @@ const app5Inputs = document.querySelectorAll("#app5 input");
 document.addEventListener("DOMContentLoaded", () => {
   app5StartDate.value = getToday();
   app5EndDate.value = getToday();
-  app5Title.value = "SUMMER";
-  app5Sub.value = "VACATION";
 });
 
 chooseFileApp5.addEventListener("change", (e) => {
@@ -129,13 +127,13 @@ async function makeImageApp5() {
       ctx.shadowOffsetX = 0;
       ctx.shadowOffsetY = 0;
       ctx.textAlign = "center";
-      ctx.fillText(app5Title.value, 500, 550);
+      ctx.fillText(app5Title.value.toUpperCase(), 500, 550);
 
       ctx.font = "300 130px Montserrat";
       ctx.letterSpacing = "35px";
       ctx.shadowColor = "rgba(0, 0, 0, 0.8)";
       ctx.shadowBlur = 10;
-      ctx.fillText(app5Sub.value, 525, 680);
+      ctx.fillText(app5Sub.value.toUpperCase(), 525, 680);
 
       ctx.font = "400 38px Oswald";
       ctx.letterSpacing = "3px";

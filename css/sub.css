@@ -151,6 +151,7 @@
   font-size: 90px;
   position: relative;
   font-family: "Monoton", sans-serif;
+  text-transform: uppercase;
   color: rgb(255, 255, 255);
 }
 #app5 .item-image .input-wrap input#app5Title::placeholder {
@@ -167,6 +168,7 @@
   font-weight: 300;
   letter-spacing: 27px;
   text-indent: 1.2rem;
+  text-transform: uppercase;
   font-family: "Montserrat", sans-serif;
   color: rgba(255, 255, 255);
 }
