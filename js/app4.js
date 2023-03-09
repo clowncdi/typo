@@ -30,8 +30,8 @@ chooseFileApp4.addEventListener("change", (e) => {
     img.onload = () => {
       originImg4.width = img.width;
       originImg4.height = img.height;
-      editImg4.height = (editImg.width * img.height) / img.width;
-      transEvent4.startY = img.width >= img.height ? 0 : LONGIMGDEFAULTY;
+      editImg4.height = (editImg4.width * img.height) / img.width;
+      transEvent4.startY = img.width >= img.height ? 0 : getLongImageStartPositionY(editImg4);
 
       img.style.left = `${transEvent4.startX}px`;
       img.style.top = `${transEvent4.startY}px`;
@@ -87,7 +87,7 @@ async function makeImageApp4() {
         let originY = transEvent4.moveY * ratio * -1;
 
         x = transEvent4.moveX;
-        y = transEvent4.moveY + LONGIMGDEFAULTY * 2;
+        y = transEvent4.moveY + getLongImageStartPositionY(editImg4) * 2;
         ctx.drawImage(
           img,
           originX,

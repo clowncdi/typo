@@ -478,8 +478,6 @@
                 <label for="app5-start-date">Start Date</label>
                 <input type="date" name="app5-start-date" id="app5StartDate" />
                 <button class="clearBtn" onclick="clearInput(this)">X</button>
-              <!-- </div>
-              <div class="input-wrap"> -->
                 <label for="app5-end-date">End Date</label>
                 <input type="date" name="app5-end-date" id="app5EndDate" />
                 <button class="clearBtn" onclick="clearInput(this)">X</button>
@@ -502,8 +500,52 @@
             </div>
           </div>
         </div>
+
+        <!-- app6 -->
+        <div class="item-wrap">
+          <div class="item-title">
+            <span># 6</span>
+            <h2>Go Home</h2>
+            <div class="sample">
+              <p>Sample Output</p>
+              <img src="./images/app6_sample.webp" alt="Go Home Sample Image" width="100%" />
+            </div>
+          </div>
+          <div id="app6" class="app-wrap">
+            <div class="item-image">
+              <div class="file-wrap">
+                <label for="chooseFileApp6" class="btn">Choose File</label>
+                <input type="file" name="chooseFileApp6" id="chooseFileApp6" accept="image/*" />
+              </div>
+              <div class="input-wrap color">
+                <label for="app6-title-color">Title Color Picker</label>
+                <input type="color" name="app6-title-color" id="app6TitleColor" value="#F9EEE2" />
+              </div>
+              <div class="input-wrap">
+                <label for="app6-title">Summer</label>
+                <input type="text" name="app6-title" id="app6Title" placeholder="GOHOME" maxlength="6" />
+                <button class="clearBtn" onclick="clearInput(this)">X</button>
+              </div>
+              <div class="selected-image" id="selectedImageApp6">
+                <div class="selected-image-position">
+                  <span></span>
+                  <span class="selected-image-position-reset" onclick="resetPosition(this, transEvent6, 'chooseImg6')">↻ Reset</span></span>
+                </div>
+              </div>
+            </div>
+            <div class="btn-wrap">
+              <button id="submitBtnApp6" class="btn btn-dark">Create</button>
+            </div>
+          </div>
+          <div class="item-result">
+            <div class="result-wrap">
+              <div class="image-container" id="imageContainerApp6"><i class="result-temp-bg"></i></div>
+              <div class="download"></div>
+            </div>
+          </div>
+        </div>
         
-        <!-- app6 coming soon -->
+        <!-- app7 coming soon -->
 
       </div>
 
@@ -524,5 +566,6 @@
   <script src="./js/app3.js" defer></script>
   <script src="./js/app4.js" defer></script>
   <script src="./js/app5.js" defer></script>
+  <script src="./js/app6.js" defer></script>
   <script src="./js/logo.js" defer></script>
 </html>

@@ -1,10 +1,4 @@
 /* common */
-#app2 .item-image,
-#app3 .item-image,
-#app4 .item-image,
-#app5 .item-image {
-  display: block;
-}
 .item-image .input-wrap.color label {
   display: block;
   z-index: 1;
@@ -83,8 +77,7 @@
   bottom: -140px;
 }
 #app3 .selected-image-position {
-  justify-content: flex-start;
-  padding-top: 20px;
+  bottom: 160px;
 }
 
 /* app4 */
@@ -127,8 +120,7 @@
   bottom: 100px;
 }
 #app4 .selected-image-position {
-  justify-content: flex-start;
-  padding-top: 20px;
+  bottom: 100px;
 }
 
 /* app5 */
@@ -184,6 +176,45 @@
   bottom: 180px;
 }
 #app5 .selected-image-position {
-  justify-content: flex-start;
-  padding-top: 20px;
+  bottom: 180px;
+}
+
+/* app6 */
+#app6 .item-image {
+  background-image: url("../images/app6_sample.webp");
+}
+#app6 .item-image .input-wrap {
+  justify-content: center;
+  align-items: center;
+}
+#app6 .item-image .input-wrap.color {
+  padding-top: 160px;
+}
+#app6 .item-image .input-wrap input#app6Title {
+  width: 90%;
+  height: 100px;
+}
+#app6 .item-image .input-wrap input#app6Title,
+#app6 .item-image .input-wrap input#app6Title::placeholder {
+  font-size: 90px;
+  position: relative;
+  font-family: "Montserrat Subrayada", "Alfa Slab One", sans-serif;
+  text-transform: uppercase;
+  color: rgb(255, 255, 255);
+}
+#app6 .item-image .input-wrap input#app6Title::placeholder {
+  color: rgb(255, 255, 255, 0.5);
+}
+#app6 .file-wrap label {
+  bottom: 180px;
+}
+#app6 .selected-image-position {
+  bottom: 180px;
+}
+#app6 .item-image .input-wrap.color label {
+  color: #ccc;
+}
+#app6 .item-image .input-wrap.color label::before {
+  content: '';
+  font-family: "Alfa Slab One", sans-serif;
 }

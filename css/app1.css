@@ -1,14 +1,14 @@
 @font-face {
   font-family: "S-CoreDream-3Light";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff")
-    format("woff");
+  src: url("../fonts/S-CoreDream-3Light.woff2")
+    format("woff2");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: "S-CoreDream-6Bold";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff")
-    format("woff");
+  src: url("../fonts/S-CoreDream-6Bold.woff2")
+    format("woff2");
   font-weight: normal;
   font-style: normal;
 }
@@ -49,6 +49,11 @@
   row-gap: 10px;
   margin-bottom: 5%;
 }
+#app1 .item-image {
+  display: grid;
+  grid-template-columns: 250px 250px;
+  grid-template-rows: 50px 60px 1fr 100px;
+}
 #app1 .input-wrap input {
   font-family: "S-CoreDream-6Bold", sans-serif;
 }
@@ -61,7 +66,7 @@
   text-align: right;
   padding-right: 1rem;
 }
-#country {
+#app1 #country {
   font-family: "S-CoreDream-3Light", sans-serif;
 }
 

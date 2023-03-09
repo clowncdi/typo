@@ -33,8 +33,8 @@ chooseFileApp5.addEventListener("change", (e) => {
     img.onload = () => {
       originImg5.width = img.width;
       originImg5.height = img.height;
-      editImg5.height = (editImg.width * img.height) / img.width;
-      transEvent5.startY = img.width >= img.height ? 0 : LONGIMGDEFAULTY;
+      editImg5.height = (editImg5.width * img.height) / img.width;
+      transEvent5.startY = img.width >= img.height ? 0 : getLongImageStartPositionY(editImg5);
 
       img.style.left = `${transEvent5.startX}px`;
       img.style.top = `${transEvent5.startY}px`;
@@ -90,7 +90,7 @@ async function makeImageApp5() {
         let originY = transEvent5.moveY * ratio * -1;
 
         x = transEvent5.moveX;
-        y = transEvent5.moveY + LONGIMGDEFAULTY * 2;
+        y = transEvent5.moveY + getLongImageStartPositionY(editImg5) * 2;
         ctx.drawImage(
           img,
           originX,

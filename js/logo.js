@@ -27,6 +27,7 @@ const fonts = [
   "Monoton",
   "Montserrat",
   "Montserrat Alternates",
+  "Montserrat Subrayada",
   "Nixie One",
   "Oleo Script",
   "Oranienbaum",
@@ -165,16 +166,19 @@ class LogoState {
     this.visibility = setInterval(randomLetterStyle, CHANGE_LOGO_TIME);
   }
 
-  getLogoVisibility() {
+  getLogoVisibility(visible) {
     let temp = logo.getBoundingClientRect().top > -100;
-    if (this.visibility > 0 && temp === true) {
+    if (visible === 'visible' && temp === true) {  // visiblityState event
+      return true;
+    }
+    if (this.visibility > 0 && temp === true) { // 이미 진행중인 경우
       return null;
     } else if (
       temp === true &&
       (this.visibility === undefined || this.isLogoVisible === null)
     ) {
       return temp;
-    } else if (this.visibility > 0 && temp === false) {
+    } else if (this.visibility > 0 && temp === false) { // 로고가 지정영역을 벗어난 경우
       return temp;
     }
   }
@@ -183,8 +187,12 @@ class LogoState {
     return this.isLogoVisible;
   }
 
-  setLogoState() {
-    this.isLogoVisible = this.getLogoVisibility();
+  setLogoState(visible) {
+    this.isLogoVisible = this.getLogoVisibility(visible);
+  }
+
+  getVisibility() {
+    return this.visibility;
   }
 
   handleLogoEvent() {
@@ -199,8 +207,8 @@ class LogoState {
     }
   }
 
-  handleLogoChange() {
-    this.setLogoState();
+  handleLogoChange(visible) {
+    this.setLogoState(visible);
     this.handleLogoEvent();
   }
 }
@@ -210,11 +218,9 @@ const logoState = new LogoState();
 // visibilitychange event
 document.addEventListener("visibilitychange", () => {
   if (document.visibilityState === "visible") {
-    console.log("visible setInterval: ", logo.getBoundingClientRect().top);
-    logoState.handleLogoChange();
+    logoState.handleLogoChange('visible');
   } else {
-    console.log("invisible clearInterval: ", logo.getBoundingClientRect().top);
-    clearInterval(visibility);
+    clearInterval(logoState.getVisibility());
   }
 });
 

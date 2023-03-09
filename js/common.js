@@ -1,7 +1,6 @@
 const PRIMARYCOLOR = "#0F8EFF";
 const BGCOLOR = "#19202c";
 const TYPOURL = "typo.co.kr";
-const LONGIMGDEFAULTY = -100;
 const originImg = {
   width: 0,
   height: 0,
@@ -153,3 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
     item.classList.add("loaded");
   });
 });
+
+function getLongImageStartPositionY(edit) {
+  return (edit.width - edit.height) / 2;
+}

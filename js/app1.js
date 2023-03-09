@@ -41,7 +41,7 @@ fileInput.addEventListener("change", (e) => {
       originImg.width = img.width;
       originImg.height = img.height;
       editImg.height = (editImg.width * img.height) / img.width;
-      transEvent.startY = img.width >= img.height ? 0 : LONGIMGDEFAULTY;
+      transEvent.startY = img.width >= img.height ? 0 : getLongImageStartPositionY(editImg);
 
       img.style.left = `${transEvent.startX}px`;
       img.style.top = `${transEvent.startY}px`;
@@ -131,7 +131,7 @@ async function makeImageApp1() {
         let originY = transEvent.moveY * ratio * -1;
 
         x = transEvent.moveX;
-        y = transEvent.moveY + LONGIMGDEFAULTY * 2;
+        y = transEvent.moveY + getLongImageStartPositionY(editImg) * 2;
         ctx.drawImage(
           img,
           originX,
