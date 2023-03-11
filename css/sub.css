@@ -218,3 +218,55 @@
   content: '';
   font-family: "Alfa Slab One", sans-serif;
 }
+
+/* app7 */
+#app7 .item-image {
+  background-image: url("../images/app7_sample.webp");
+}
+#app7 .item-image .input-wrap {
+  justify-content: left;
+  align-items: center;
+  margin-left: 12%;
+}
+#app7 .item-image .input-wrap.color {
+  padding-top: 320px;
+}
+#app7 .item-image .input-wrap input {
+  width: 47%;
+  text-align: left;
+  padding-left: 6px;
+}
+#app7 .item-image .input-wrap input#app7Title,
+#app7 .item-image .input-wrap input#app7Title::placeholder {
+  font-size: 34px;
+  position: relative;
+  font-family: "Oswald", sans-serif;
+  color: rgb(255, 255, 255, 0.5);
+  text-transform: uppercase;
+}
+#app7 .item-image .input-wrap input#app7Title {
+  height: 46px;
+  color: rgb(255, 255, 255, 0.9);
+}
+#app7 .item-image .input-wrap input#app7Date,
+#app7 .item-image .input-wrap input#app7Date::placeholder {
+  margin-top: 10px;
+  font-size: 16px;
+  letter-spacing: 7px;
+  font-family: "Oswald", sans-serif;
+  color: rgba(255, 255, 255, 0.9);
+}
+#app7 .file-wrap label {
+  bottom: 100px;
+}
+#app7 .selected-image-position {
+  bottom: 100px;
+}
+#app7 .item-image .input-wrap.color label {
+  color: #ccc;
+  margin-left: 10px;
+}
+#app7 .item-image .input-wrap.color input {
+  width: 27px;
+  padding: 0;
+}

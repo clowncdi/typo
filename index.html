@@ -544,8 +544,57 @@
             </div>
           </div>
         </div>
+
+        <!-- app7 -->
+        <div class="item-wrap">
+          <div class="item-title">
+            <span># 7</span>
+            <h2>Night Duty</h2>
+            <div class="sample">
+              <p>Sample Output</p>
+              <img src="./images/app7_sample.webp" alt="Night Duty Sample Image" width="100%" />
+            </div>
+          </div>
+          <div id="app7" class="app-wrap">
+            <div class="item-image">
+              <div class="file-wrap">
+                <label for="chooseFileApp7" class="btn">Choose File</label>
+                <input type="file" name="chooseFileApp7" id="chooseFileApp7" accept="image/*" />
+              </div>
+              <div class="input-wrap color">
+                <label for="app7-title-color">Color Picker</label>
+                <input type="color" name="app7-title-color" id="app7TitleColor" value="#EEEEEE" />
+              </div>
+              <div class="input-wrap">
+                <label for="app7-date">Date</label>
+                <input type="date" name="app7-date" id="app7Date" />
+                <button class="clearBtn" onclick="clearInput(this)">X</button>
+              </div>
+              <div class="input-wrap">
+                <label for="app7-title">Night Duty</label>
+                <input type="text" name="app7-title" id="app7Title" placeholder="NIGHT DUTY" maxlength="12" />
+                <button class="clearBtn" onclick="clearInput(this)">X</button>
+              </div>
+              <div class="selected-image" id="selectedImageApp7">
+                <div class="selected-image-position">
+                  <span></span>
+                  <span class="selected-image-position-reset" onclick="resetPosition(this, transEvent7, 'chooseImg7')">↻ Reset</span></span>
+                </div>
+              </div>
+            </div>
+            <div class="btn-wrap">
+              <button id="submitBtnApp7" class="btn btn-dark">Create</button>
+            </div>
+          </div>
+          <div class="item-result">
+            <div class="result-wrap">
+              <div class="image-container" id="imageContainerApp7"><i class="result-temp-bg"></i></div>
+              <div class="download"></div>
+            </div>
+          </div>
+        </div>
         
-        <!-- app7 coming soon -->
+        <!-- app8 coming soon -->
 
       </div>
 
@@ -567,5 +616,6 @@
   <script src="./js/app4.js" defer></script>
   <script src="./js/app5.js" defer></script>
   <script src="./js/app6.js" defer></script>
+  <script src="./js/app7.js" defer></script>
   <script src="./js/logo.js" defer></script>
 </html>
