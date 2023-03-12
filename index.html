@@ -518,7 +518,7 @@
                 <input type="file" name="chooseFileApp6" id="chooseFileApp6" accept="image/*" />
               </div>
               <div class="input-wrap color">
-                <label for="app6-title-color">Title Color Picker</label>
+                <label for="app6-title-color">Color Picker</label>
                 <input type="color" name="app6-title-color" id="app6TitleColor" value="#F9EEE2" />
               </div>
               <div class="input-wrap">
@@ -594,7 +594,61 @@
           </div>
         </div>
         
-        <!-- app8 coming soon -->
+        <!-- app8 -->
+        <div class="item-wrap">
+          <div class="item-title">
+            <span># 8</span>
+            <h2>IKEA</h2>
+            <div class="sample">
+              <p>IKEA</p>
+              <img src="./images/app8_sample.webp" alt="IKEA Sample Image" width="100%" />
+            </div>
+          </div>
+          <div id="app8" class="app-wrap">
+            <div class="item-image">
+              <div class="file-wrap">
+                <label for="chooseFileApp8" class="btn">Choose File</label>
+                <input type="file" name="chooseFileApp8" id="chooseFileApp8" accept="image/*" />
+              </div>
+              <div class="input-wrap color">
+                <label for="app8-title-color">Color Picker</label>
+                <input type="color" name="app8-title-color" id="app8TitleColor" value="#FFFFFF" />
+              </div>
+              <div class="input-wrap">
+                <label for="app8-title">IKEA</label>
+                <input type="text" name="app8-title" id="app8Title" placeholder="IKEA" maxlength="5" />
+                <button class="clearBtn" onclick="clearInput(this)">X</button>
+              </div>
+              <div class="input-wrap">
+                <label for="app8-sub">KOREA</label>
+                <input type="text" name="app8-sub" id="app8Sub" placeholder="KOREA" maxlength="15" />
+                <button class="clearBtn" onclick="clearInput(this)">X</button>
+              </div>
+              <div class="input-wrap">
+                <label for="app8-date">Date</label>
+                <input type="date" name="app8-date" id="app8Date" />
+                <button class="clearBtn" onclick="clearInput(this)">X</button>
+              </div>
+              <div class="selected-image" id="selectedImageApp8">
+                <div class="selected-image-position">
+                  <span></span>
+                  <span class="selected-image-position-reset" onclick="resetPosition(this, transEvent5, 'chooseImg5')">↻ Reset</span></span>
+                </div>
+              </div>
+            </div>
+            <div class="btn-wrap">
+              <button id="submitBtnApp8" class="btn btn-dark">Create</button>
+            </div>
+          </div>
+          <div class="item-result">
+            <div class="result-wrap">
+              <div class="image-container" id="imageContainerApp8"><i class="result-temp-bg"></i></div>
+              <div class="download"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- app9 coming soon -->
 
       </div>
 
@@ -617,5 +671,6 @@
   <script src="./js/app5.js" defer></script>
   <script src="./js/app6.js" defer></script>
   <script src="./js/app7.js" defer></script>
+  <script src="./js/app8.js" defer></script>
   <script src="./js/logo.js" defer></script>
 </html>

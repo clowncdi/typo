@@ -188,7 +188,12 @@
   align-items: center;
 }
 #app6 .item-image .input-wrap.color {
+  color: #ccc;
   padding-top: 160px;
+}
+#app6 .item-image .input-wrap.color label::before {
+  content: '';
+  font-family: "Alfa Slab One", sans-serif;
 }
 #app6 .item-image .input-wrap input#app6Title {
   width: 90%;
@@ -211,13 +216,6 @@
 #app6 .selected-image-position {
   bottom: 180px;
 }
-#app6 .item-image .input-wrap.color label {
-  color: #ccc;
-}
-#app6 .item-image .input-wrap.color label::before {
-  content: '';
-  font-family: "Alfa Slab One", sans-serif;
-}
 
 /* app7 */
 #app7 .item-image {
@@ -229,7 +227,9 @@
   margin-left: 12%;
 }
 #app7 .item-image .input-wrap.color {
+  color: #ccc;
   padding-top: 320px;
+  padding-left: 10px;
 }
 #app7 .item-image .input-wrap input {
   width: 47%;
@@ -262,11 +262,65 @@
 #app7 .selected-image-position {
   bottom: 100px;
 }
-#app7 .item-image .input-wrap.color label {
-  color: #ccc;
-  margin-left: 10px;
-}
 #app7 .item-image .input-wrap.color input {
   width: 27px;
   padding: 0;
+}
+
+/* app5 */
+#app8 .item-image {
+  background-image: url("../images/app8_sample.webp");
+}
+#app8 .item-image .input-wrap {
+  justify-content: center;
+  align-items: center;
+  font-family: "Montserrat", sans-serif;
+  font-stretch: 1% 500%; /* Required by Chrome */
+}
+#app8 .item-image .input-wrap.color {
+  color: #ccc;
+  padding-top: 165px;
+}
+#app8 .item-image .input-wrap input#app8Title {
+  width: 95%;
+  height: 100px;
+}
+#app8 .item-image .input-wrap input#app8Title,
+#app8 .item-image .input-wrap input#app8Title::placeholder {
+  font-size: 120px;
+  position: relative;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: rgb(255, 255, 255);
+}
+#app8 .item-image .input-wrap input#app8Title::placeholder {
+  color: rgb(255, 255, 255, 0.5);
+}
+#app8 .item-image .input-wrap input#app8Sub {
+  width: 95%;
+  height: 30px;
+  margin-top: 18px;
+}
+#app8 .item-image .input-wrap input#app8Sub,
+#app8 .item-image .input-wrap input#app8Sub::placeholder {
+  font-size: 20px;
+  font-weight: 100;
+  letter-spacing: 22px;
+  text-indent: 1.2rem;
+  font-stretch: ultra-condensed;
+  color: rgba(255, 255, 255);
+}
+#app8 .item-image .input-wrap input#app8Sub::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+#app8 .item-image .input-wrap input[type="date"] {
+  width: 40%;
+  margin-top: 40px;
+  color: rgba(255, 255, 255, 0.9);
+}
+#app8 .file-wrap label {
+  bottom: 180px;
+}
+#app8 .selected-image-position {
+  bottom: 180px;
 }

@@ -156,3 +156,10 @@ document.addEventListener("DOMContentLoaded", () => {
 function getLongImageStartPositionY(edit) {
   return (edit.width - edit.height) / 2;
 }
+
+function setFormattingDate(value) {
+  let date = value.split("-");
+  date[1] = date[1].replace(/^0+/, "");
+  date[2] = date[2].replace(/^0+/, "");
+  return `${date[0]}.${date[1]}.${date[2]}`;
+}
