@@ -11,6 +11,7 @@ const app8Sub = document.getElementById("app8Sub");
 const app8StartDate = document.getElementById("app8StartDate");
 const app8EndDate = document.getElementById("app8EndDate");
 const app8Inputs = document.querySelectorAll("#app8 input");
+const chooseImg8 = "chooseImg8";
 
 document.addEventListener("DOMContentLoaded", () => {
   app8Date.value = getToday();
@@ -37,10 +38,10 @@ chooseFileApp8.addEventListener("change", (e) => {
 
       img.style.left = `${transEvent8.startX}px`;
       img.style.top = `${transEvent8.startY}px`;
-      img.id = "chooseImg8";
+      img.id = chooseImg8;
       selectedImageApp8.appendChild(img);
       // 이미지 실시간 드래그로 위치 조정
-      handleMouseDragEvent(selectedImageApp8, transEvent8, "chooseImg8");
+      handleMouseDragEvent(selectedImageApp8, transEvent8, chooseImg8);
 
       changeFileBtn(e.target);
       submitBtnApp8.style.marginRight = 0;

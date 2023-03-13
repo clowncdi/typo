@@ -25,7 +25,7 @@ chooseFileApp6.addEventListener("change", (e) => {
     img.onload = () => {
       originImg6.width = img.width;
       originImg6.height = img.height;
-      editImg6.height = (editImg.width * img.height) / img.width;
+      editImg6.height = (editImg6.width * img.height) / img.width;
       transEvent6.startY = img.width >= img.height ? 0 : editImg6.getLongImageStartPositionY();
 
       img.style.left = `${transEvent6.startX}px`;

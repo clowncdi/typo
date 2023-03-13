@@ -43,6 +43,7 @@ const fonts = [
   "Rubik Gemstones",
   "Rubik Vinyl",
   "Sen",
+  "Stalemate",
   "Tenor Sans",
   "Tilt Prism",
   "Waterfall",

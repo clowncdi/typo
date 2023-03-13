@@ -26,6 +26,10 @@ class Img {
     this.height = height;
   }
 
+  getLongImageStartPositionX() {
+    return (this.height - this.width) / 2;
+  }
+
   getLongImageStartPositionY() {
     return (this.width - this.height) / 2;
   }

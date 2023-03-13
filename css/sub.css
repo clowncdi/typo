@@ -324,3 +324,35 @@
 #app8 .selected-image-position {
   bottom: 180px;
 }
+
+/* app9 */
+#app9 .item-image {
+  background-image: url("../images/app9_sample.webp");
+}
+#app9 .item-image .input-wrap {
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 30px;
+}
+#app9 .item-image .input-wrap.color {
+  color: #fff;
+  padding-top: 20px;
+}
+#app9 .item-image .input-wrap input#app9Title {
+  width: 36%;
+  height: 100px;
+  margin-left: 0;
+}
+#app9 .item-image .input-wrap input#app9Title,
+#app9 .item-image .input-wrap input#app9Title::placeholder {
+  font-size: 60px;
+  position: relative;
+  font-family: "Stalemate", sans-serif;
+  color: rgb(255, 255, 255);
+}
+#app9 .item-image .input-wrap input#app9Title::placeholder {
+  color: rgb(255, 255, 255, 0.5);
+}
+#app9 .selected-image-position {
+  top: 200px;
+}
