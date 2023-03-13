@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 chooseFileApp7.addEventListener("change", (e) => {
   // initialize
-  imageValueReset(selectedImageApp7, editImg7);
+  imageValueReset(selectedImageApp7, originImg7, editImg7, transEvent7);
 
   const file = e.target.files[0];
   const reader = new FileReader();

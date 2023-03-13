@@ -12,7 +12,7 @@ const chooseImg9 = "chooseImg9";
 
 chooseFileApp9.addEventListener("change", (e) => {
   // initialize
-  imageValueReset(selectedImageApp9, editImg9);
+  imageValueReset(selectedImageApp9, originImg9, editImg9, transEvent9);
 
   const file = e.target.files[0];
   const reader = new FileReader();
@@ -28,7 +28,19 @@ chooseFileApp9.addEventListener("change", (e) => {
       originImg9.height = img.height;
       editImg9.height = (editImg9.width * img.height) / img.width;
       transEvent9.startY = img.width >= img.height ? 0 : editImg9.getLongImageStartPositionY();
+      // if (img.width <= img.height) {
+      //   editImg9.width = 500;
+      //   editImg9.height = (editImg9.width * img.height) / img.width;
+      //   transEvent9.startY = img.width >= img.height ? 0 : editImg9.getLongImageStartPositionY();
+      // } else {
+      //   editImg9.height = 500;
+      //   editImg9.width = (editImg9.height * img.width) / img.height;
+      //   transEvent9.startX = img.width <= img.height ? 0 : editImg9.getLongImageStartPositionX();
+      // }
+      // console.log(img, originImg9, editImg9, transEvent9);
 
+      // img.width = editImg9.width;
+      // img.height = editImg9.height;
       img.style.left = `${transEvent9.startX}px`;
       img.style.top = `${transEvent9.startY}px`;
       img.id = chooseImg9;

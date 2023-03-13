@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 fileInput.addEventListener("change", (e) => {
   // initialize
-  imageValueReset(selectedImage, editImg);
+  imageValueReset(selectedImage, originImg, editImg, transEvent);
 
   const file = fileInput.files[0];
   const reader = new FileReader();

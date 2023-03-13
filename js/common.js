@@ -33,6 +33,11 @@ class Img {
   getLongImageStartPositionY() {
     return (this.width - this.height) / 2;
   }
+
+  reset() {
+    this.width = 0;
+    this.height = 0;
+  }
 }
 
 class TransEvent {
@@ -112,10 +117,14 @@ class TransEvent {
 
 let mobile = false;
 
-function imageValueReset(selected, edit) {
+function imageValueReset(selected, origin, edit, trans) {
+  origin.reset();
+  edit.reset();
+  trans.reset();
   edit.width = 500;
   if (selected.childNodes.length > 3) {
     selected.removeChild(selected.childNodes[3]);
+    selected.firstElementChild.firstElementChild.innerText = `X축: 0px, Y축: 0px`;
   }
   selected.style.backgroundColor = "";
 }

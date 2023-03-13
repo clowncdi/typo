@@ -12,7 +12,7 @@ const app3Inputs = document.querySelectorAll("#app3 input");
 
 chooseFileApp3.addEventListener("change", (e) => {
   // initialize
-  imageValueReset(selectedImageApp3, editImg3);
+  imageValueReset(selectedImageApp3, originImg3, editImg3, transEvent3);
 
   const file = e.target.files[0];
   const reader = new FileReader();

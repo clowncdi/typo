@@ -11,7 +11,7 @@ const app2Inputs = document.querySelectorAll("#app2 input");
 
 chooseFileApp2.addEventListener("change", (e) => {
   // initialize
-  imageValueReset(selectedImageApp2, editImg2);
+  imageValueReset(selectedImageApp2, originImg2, editImg2, transEvent2);
 
   const file = e.target.files[0];
   const reader = new FileReader();

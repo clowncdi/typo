@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 chooseFileApp5.addEventListener("change", (e) => {
   // initialize
-  imageValueReset(selectedImageApp5, editImg5);
+  imageValueReset(selectedImageApp5, originImg5, editImg5, transEvent5);
 
   const file = e.target.files[0];
   const reader = new FileReader();
