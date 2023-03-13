@@ -1,6 +1,6 @@
-const originImg2 = JSON.parse(JSON.stringify(originImg));
-const editImg2 = JSON.parse(JSON.stringify(editImg));
-const transEvent2 = JSON.parse(JSON.stringify(transEvent));
+const originImg2 = new Img();
+const editImg2 = new Img();
+const transEvent2 = new TransEvent();
 const chooseFileApp2 = document.getElementById("chooseFileApp2");
 const selectedImageApp2 = document.getElementById("selectedImageApp2");
 const submitBtnApp2 = document.getElementById("submitBtnApp2");
@@ -11,7 +11,7 @@ const app2Inputs = document.querySelectorAll("#app2 input");
 
 chooseFileApp2.addEventListener("change", (e) => {
   // initialize
-  imageValueReset(selectedImageApp2, originImg2, editImg2, transEvent2);
+  imageValueReset(selectedImageApp2, editImg2);
 
   const file = e.target.files[0];
   const reader = new FileReader();
@@ -26,7 +26,7 @@ chooseFileApp2.addEventListener("change", (e) => {
       originImg2.width = img.width;
       originImg2.height = img.height;
       editImg2.height = (editImg2.width * img.height) / img.width;
-      transEvent2.startY = img.width >= img.height ? 0 : getLongImageStartPositionY(editImg2);
+      transEvent2.startY = img.width >= img.height ? 0 : editImg2.getLongImageStartPositionY();
 
       img.style.left = `${transEvent2.startX}px`;
       img.style.top = `${transEvent2.startY}px`;
@@ -81,7 +81,7 @@ async function makeImageApp2() {
         let originY = transEvent2.moveY * ratio * -1;
 
         x = transEvent2.moveX;
-        y = transEvent2.moveY + getLongImageStartPositionY(editImg2) * 2;
+        y = transEvent2.moveY + editImg2.getLongImageStartPositionY() * 2;
         ctx.drawImage(
           img,
           originX,

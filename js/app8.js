@@ -1,6 +1,6 @@
-const originImg8 = JSON.parse(JSON.stringify(originImg));
-const editImg8 = JSON.parse(JSON.stringify(editImg));
-const transEvent8 = JSON.parse(JSON.stringify(transEvent));
+const originImg8 = new Img();
+const editImg8 = new Img();
+const transEvent8 = new TransEvent();
 const chooseFileApp8 = document.getElementById("chooseFileApp8");
 const selectedImageApp8 = document.getElementById("selectedImageApp8");
 const submitBtnApp8 = document.getElementById("submitBtnApp8");
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 chooseFileApp8.addEventListener("change", (e) => {
   // initialize
-  imageValueReset(selectedImageApp8, originImg8, editImg8, transEvent8);
+  imageValueReset(selectedImageApp8, editImg8);
 
   const file = e.target.files[0];
   const reader = new FileReader();
@@ -33,7 +33,7 @@ chooseFileApp8.addEventListener("change", (e) => {
       originImg8.width = img.width;
       originImg8.height = img.height;
       editImg8.height = (editImg8.width * img.height) / img.width;
-      transEvent8.startY = img.width >= img.height ? 0 : getLongImageStartPositionY(editImg8);
+      transEvent8.startY = img.width >= img.height ? 0 : editImg8.getLongImageStartPositionY();
 
       img.style.left = `${transEvent8.startX}px`;
       img.style.top = `${transEvent8.startY}px`;
@@ -48,10 +48,10 @@ chooseFileApp8.addEventListener("change", (e) => {
   };
 });
 
-mobile && submitBtnApp8.addEventListener("touchstart", makeImageApp5);
-!mobile && submitBtnApp8.addEventListener("click", makeImageApp5);
+mobile && submitBtnApp8.addEventListener("touchstart", makeImageApp8);
+!mobile && submitBtnApp8.addEventListener("click", makeImageApp8);
 
-async function makeImageApp5() {
+async function makeImageApp8() {
   // initialize canvas.
   imageContainerApp8.innerHTML = "";
   imageContainerApp8.nextElementSibling.innerHTML = "";
@@ -88,7 +88,7 @@ async function makeImageApp5() {
         let originY = transEvent8.moveY * ratio * -1;
 
         x = transEvent8.moveX;
-        y = transEvent8.moveY + getLongImageStartPositionY(editImg8) * 2;
+        y = transEvent8.moveY + editImg8.getLongImageStartPositionY() * 2;
         ctx.drawImage(
           img,
           originX,

@@ -1,6 +1,6 @@
-const originImg7 = JSON.parse(JSON.stringify(originImg));
-const editImg7 = JSON.parse(JSON.stringify(editImg));
-const transEvent7 = JSON.parse(JSON.stringify(transEvent));
+const originImg7 = new Img();
+const editImg7 = new Img();
+const transEvent7 = new TransEvent();
 const chooseFileApp7 = document.getElementById("chooseFileApp7");
 const selectedImageApp7 = document.getElementById("selectedImageApp7");
 const submitBtnApp7 = document.getElementById("submitBtnApp7");
@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 chooseFileApp7.addEventListener("change", (e) => {
   // initialize
-  imageValueReset(selectedImageApp7, originImg7, editImg7, transEvent7);
+  imageValueReset(selectedImageApp7, editImg7);
 
   const file = e.target.files[0];
   const reader = new FileReader();
@@ -31,7 +31,7 @@ chooseFileApp7.addEventListener("change", (e) => {
       originImg7.width = img.width;
       originImg7.height = img.height;
       editImg7.height = (editImg7.width * img.height) / img.width;
-      transEvent7.startY = img.width >= img.height ? 0 : getLongImageStartPositionY(editImg7);
+      transEvent7.startY = img.width >= img.height ? 0 : editImg7.getLongImageStartPositionY();
 
       img.style.left = `${transEvent7.startX}px`;
       img.style.top = `${transEvent7.startY}px`;
@@ -87,7 +87,7 @@ async function makeImageApp7() {
         let originY = transEvent7.moveY * ratio * -1;
 
         x = transEvent7.moveX;
-        y = transEvent7.moveY + getLongImageStartPositionY(editImg7) * 2;
+        y = transEvent7.moveY + editImg7.getLongImageStartPositionY() * 2;
         ctx.drawImage(
           img,
           originX,

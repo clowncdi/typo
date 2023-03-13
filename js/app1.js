@@ -1,3 +1,6 @@
+const originImg = new Img();
+const editImg = new Img();
+const transEvent = new TransEvent();
 const fileInput = document.getElementById("fileInput");
 const url = document.getElementById("url");
 const lowTemp = document.getElementById("lowTemp");
@@ -26,7 +29,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 fileInput.addEventListener("change", (e) => {
   // initialize
-  imageValueReset(selectedImage, originImg, editImg, transEvent);
+  imageValueReset(selectedImage, editImg);
 
   const file = fileInput.files[0];
   const reader = new FileReader();
@@ -41,7 +44,7 @@ fileInput.addEventListener("change", (e) => {
       originImg.width = img.width;
       originImg.height = img.height;
       editImg.height = (editImg.width * img.height) / img.width;
-      transEvent.startY = img.width >= img.height ? 0 : getLongImageStartPositionY(editImg);
+      transEvent.startY = img.width >= img.height ? 0 : editImg.getLongImageStartPositionY();
 
       img.style.left = `${transEvent.startX}px`;
       img.style.top = `${transEvent.startY}px`;
@@ -131,7 +134,7 @@ async function makeImageApp1() {
         let originY = transEvent.moveY * ratio * -1;
 
         x = transEvent.moveX;
-        y = transEvent.moveY + getLongImageStartPositionY(editImg) * 2;
+        y = transEvent.moveY + editImg.getLongImageStartPositionY() * 2;
         ctx.drawImage(
           img,
           originX,

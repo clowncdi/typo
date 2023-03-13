@@ -1,6 +1,6 @@
-const originImg5 = JSON.parse(JSON.stringify(originImg));
-const editImg5 = JSON.parse(JSON.stringify(editImg));
-const transEvent5 = JSON.parse(JSON.stringify(transEvent));
+const originImg5 = new Img();
+const editImg5 = new Img();
+const transEvent5 = new TransEvent();
 const chooseFileApp5 = document.getElementById("chooseFileApp5");
 const selectedImageApp5 = document.getElementById("selectedImageApp5");
 const submitBtnApp5 = document.getElementById("submitBtnApp5");
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 chooseFileApp5.addEventListener("change", (e) => {
   // initialize
-  imageValueReset(selectedImageApp5, originImg5, editImg5, transEvent5);
+  imageValueReset(selectedImageApp5, editImg5);
 
   const file = e.target.files[0];
   const reader = new FileReader();
@@ -34,7 +34,7 @@ chooseFileApp5.addEventListener("change", (e) => {
       originImg5.width = img.width;
       originImg5.height = img.height;
       editImg5.height = (editImg5.width * img.height) / img.width;
-      transEvent5.startY = img.width >= img.height ? 0 : getLongImageStartPositionY(editImg5);
+      transEvent5.startY = img.width >= img.height ? 0 : editImg5.getLongImageStartPositionY();
 
       img.style.left = `${transEvent5.startX}px`;
       img.style.top = `${transEvent5.startY}px`;
@@ -90,7 +90,7 @@ async function makeImageApp5() {
         let originY = transEvent5.moveY * ratio * -1;
 
         x = transEvent5.moveX;
-        y = transEvent5.moveY + getLongImageStartPositionY(editImg5) * 2;
+        y = transEvent5.moveY + editImg5.getLongImageStartPositionY() * 2;
         ctx.drawImage(
           img,
           originX,

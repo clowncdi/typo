@@ -1,35 +1,115 @@
 const PRIMARYCOLOR = "#0F8EFF";
 const BGCOLOR = "#19202c";
 const TYPOURL = "typo.co.kr";
-const originImg = {
-  width: 0,
-  height: 0,
-};
-const editImg = {
-  width: 500,
-  height: 0,
-};
-const transEvent = {
-  startX: 0,
-  startY: 0,
-  moveX: 0,
-  moveY: 0,
-  scale: 1,
-  drag: false,
-};
+class Img {
+  width;
+  height;
+
+  constructor() {
+    this.width = 0;
+    this.height = 0;
+  }
+
+  get width() {
+    return this.width;
+  }
+
+  get height() {
+    return this.height;
+  }
+
+  set width(width) {
+    this.width = width;
+  }
+
+  set height(height) {
+    this.height = height;
+  }
+
+  getLongImageStartPositionY() {
+    return (this.width - this.height) / 2;
+  }
+}
+
+class TransEvent {
+  startX;
+  startY;
+  moveX;
+  moveY;
+  scale;
+  drag;
+
+  constructor() {
+    this.startX = 0;
+    this.startY = 0;
+    this.moveX = 0;
+    this.moveY = 0;
+    this.scale = 1;
+    this.drag = false;
+  }
+
+  get startX() {
+    return this.startX;
+  }
+
+  get startY() {
+    return this.startY;
+  }
+
+  get moveX() {
+    return this.moveX;
+  }
+
+  get moveY() {
+    return this.moveY;
+  }
+
+  get scale() {
+    return this.scale;
+  }
+
+  get drag() {
+    return this.drag;
+  }
+
+  set startX(startX) {
+    this.startX = startX;
+  }
+
+  set startY(startY) {
+    this.startY = startY;
+  }
+
+  set moveX(moveX) {
+    this.moveX = moveX;
+  }
+
+  set moveY(moveY) {
+    this.moveY = moveY;
+  }
+
+  set scale(scale) {
+    this.scale = scale;
+  }
+
+  set drag(drag) {
+    this.drag = drag;
+  }
+
+  reset() {
+    this.startX = 0;
+    this.startY = 0;
+    this.moveX = 0;
+    this.moveY = 0;
+    this.scale = 1;
+    this.drag = false;
+  }
+}
+
 let mobile = false;
 
-function imageValueReset(selected, origin, edit, trans) {
-  origin.width = 0;
-  origin.height = 0;
+function imageValueReset(selected, edit) {
   edit.width = 500;
-  edit.height = 0;
-  trans.startX = 0;
-  trans.startY = 0;
-  trans.moveX = 0;
-  trans.moveY = 0;
-  trans.scale = 1;
-  trans.drag = false;
   if (selected.childNodes.length > 3) {
     selected.removeChild(selected.childNodes[3]);
   }
@@ -87,9 +167,7 @@ function handleMouseDragEvent(selected, trans, choose) {
 }
 
 function resetPosition(resetBtn, trans, choose) {
-  trans.moveX = 0;
-  trans.moveY = 0;
-  trans.scale = 1;
+  trans.reset();
   const chooseImg = document.getElementById(choose);
   chooseImg.style.transform = `translate(${trans.moveX}px, ${trans.moveY}px) scale(${trans.scale})`;
   resetBtn.previousElementSibling.innerText = `X축: ${trans.moveX}px, Y축: ${trans.moveY}px`;
