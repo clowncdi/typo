@@ -692,7 +692,43 @@
           </div>
         </div>
 
-        <!-- app10 coming soon -->
+        <!-- app9 -->
+        <div class="item-wrap">
+          <div class="item-title">
+            <span># 10</span>
+            <h2>Thumbnail Note</h2>
+            <div class="sample">
+              <p>Sample Output</p>
+              <img src="./images/app10_sample.webp" alt="Thumbnail Note Sample Image" width="100%" />
+            </div>
+          </div>
+          <div id="app10" class="app-wrap">
+            <div class="item-image">
+              <div class="input-wrap color">
+                <label for="app10-title-color">Color Picker</label>
+                <input type="color" name="app10-title-color" id="app10TitleColor" value="#FFFFFF" />
+              </div>
+              <div class="input-wrap">
+                <label for="app10-title">Spring</label>
+                <input type="text" name="app10-title" id="app10Title" placeholder="Spring" maxlength="15" />
+                <button class="clearBtn" onclick="clearInput(this)">X</button>
+              </div>
+              <div class="bg">
+                <i class="long"></i><i class="long long2"></i>
+                <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              </div>
+            </div>
+            <div class="btn-wrap">
+              <button id="submitBtnApp10" class="btn btn-dark">Create</button>
+            </div>
+          </div>
+          <div class="item-result">
+            <div class="result-wrap">
+              <div class="image-container" id="imageContainerApp10"><i class="result-temp-bg"></i></div>
+              <div class="download"></div>
+            </div>
+          </div>
+        </div>
 
       </div>
 
@@ -717,5 +753,6 @@
   <script src="./js/app7.js" defer></script>
   <script src="./js/app8.js" defer></script>
   <script src="./js/app9.js" defer></script>
+  <script src="./js/app10.js" defer></script>
   <script src="./js/logo.js" defer></script>
 </html>

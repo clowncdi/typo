@@ -142,6 +142,7 @@ async function makeImageApp9() {
       ctx.fillText(`${TYPOURL}`, 910, 980);
 
       imageContainerApp9.appendChild(canvas);
+      console.log(imageContainerApp9);
       addDownloadButton(canvas, imageContainerApp9.nextElementSibling);
     };
   };
