@@ -48,21 +48,18 @@ async function makeImageApp10() {
   ctx.textAlign = "left";
   ctx.font = "120px PyeongChangPeace-Bold";
   ctx.filter = "opacity(0.95)";
-  // const title = app10Title.value.split("\n");
-  const title = "우리 같이 천천히\n말라 죽어 보자,\n연진아.".split("\n");
+  const title = app10Title.value.split("\n");
   ctx.fillText(title[0], 90, 200);
   ctx.fillText(title[1], 90, 330);
   ctx.fillText(title[2], 90, 460);
 
   ctx.fillStyle = app10SubColor.value;
   ctx.font = "90px S-CoreDream-3Light";
-  // const sub = app10Sub.value.split("\n");
-  const sub = "어떡해?\n너네 주님 개빡쳤어.\n너 지옥행이래.".split("\n");
+  const sub = app10Sub.value.split("\n");
   ctx.fillText(sub[0], 90, 660);
   ctx.fillText(sub[1], 90, 770);
   ctx.fillText(sub[2], 90, 880);
 
-  // ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
   ctx.font = "28px S-CoreDream-6Bold";
   ctx.fillText(app10Writer.value, 95, 960);
 
