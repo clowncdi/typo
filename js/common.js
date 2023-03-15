@@ -133,7 +133,7 @@ function imageValueReset(selected, origin, edit, trans) {
 }
 
 function changeFileBtn(input) {
-  input.previousElementSibling.innerText = "↻ Change File";
+  input.previousElementSibling.innerText = "Change";
   input.previousElementSibling.style.position = "absolute";
   input.previousElementSibling.style.left = "0";
   input.previousElementSibling.style.bottom = "-60px";

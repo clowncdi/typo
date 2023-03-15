@@ -66,6 +66,7 @@ nav ul li:last-child {
 nav ul li a {
   font-size: 0;
   color: transparent;
+  line-height: 0;
 }
 
 @media screen and (max-width: 520px) {
