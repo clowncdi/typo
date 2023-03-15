@@ -21,8 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 langs.forEach((lang) => {
-  lang.addEventListener("click", () => setLang(lang));
-  lang.addEventListener("touchstart", () => setLang(lang));
+  mobile && lang.addEventListener("touchstart", () => setLang(lang));
+  !mobile && lang.addEventListener("click", () => setLang(lang));
 });
 
 function setLang(lang) {
