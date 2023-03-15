@@ -192,7 +192,7 @@
   padding-top: 160px;
 }
 #app6 .item-image .input-wrap.color label::before {
-  content: '';
+  content: "";
   font-family: "Alfa Slab One", sans-serif;
 }
 #app6 .item-image .input-wrap input#app6Title {
@@ -360,7 +360,7 @@
 /* app10 */
 #app10 .item-image {
   position: relative;
-  background-color: #FFFBD8;
+  background-color: #fffbd8;
   background-image: none;
 }
 #app10 .item-image .bg {
@@ -400,21 +400,50 @@
   margin-left: 30px;
 }
 #app10 .item-image .input-wrap.color {
-  color: #fff;
-  padding-top: 20px;
+  color: #363636;
+  padding-top: 10px;
+  margin-bottom: 5px;
 }
-#app10 .item-image .input-wrap input#app10Title {
-  width: 36%;
-  height: 100px;
-  margin-left: 0;
+#app10 .item-image .input-wrap.color input {
+  margin-right: 20px;
 }
-#app10 .item-image .input-wrap input#app10Title,
-#app10 .item-image .input-wrap input#app10Title::placeholder {
-  font-size: 60px;
+#app10 .item-image .input-wrap #app10Title,
+#app10 .item-image .input-wrap #app10Sub,
+#app10 .item-image .input-wrap #app10Writer {
+  z-index: 2;
   position: relative;
-  font-family: "Stalemate", sans-serif;
+  width: 96%;
+  height: 213px;
+  margin-left: 0;
+  text-align: left;
+  padding: 5px;
   color: rgb(255, 255, 255);
+  line-height: 106%;
 }
-#app10 .item-image .input-wrap input#app10Title::placeholder {
+#app10 .item-image .input-wrap #app10Title,
+#app10 .item-image .input-wrap #app10Title::placeholder {
+  font-size: 60px;
+  font-family: "PyeongChangPeace-Bold", sans-serif;
+}
+#app10 .item-image .input-wrap #app10Sub {
+  height: 160px;
+}
+#app10 .item-image .input-wrap #app10Sub,
+#app10 .item-image .input-wrap #app10Sub::placeholder {
+  font-size: 44px;
+  font-family: "S-CoreDream-3Light", sans-serif;
+  line-height: 115%;
+}
+#app10 .item-image .input-wrap #app10Writer {
+  height: 30px;
+}
+#app10 .item-image .input-wrap #app10Writer,
+#app10 .item-image .input-wrap #app10Writer::placeholder {
+  font-size: 13px;
+  font-family: "S-CoreDream-3Light", sans-serif;
+}
+#app10 .item-image .input-wrap #app10Title::placeholder,
+#app10 .item-image .input-wrap #app10Sub::placeholder,
+#app10 .item-image .input-wrap #app10Writer::placeholder {
   color: rgb(255, 255, 255, 0.5);
 }

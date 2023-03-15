@@ -27,7 +27,8 @@ chooseFileApp9.addEventListener("change", (e) => {
       originImg9.width = img.width;
       originImg9.height = img.height;
       editImg9.height = (editImg9.width * img.height) / img.width;
-      transEvent9.startY = img.width >= img.height ? 0 : editImg9.getLongImageStartPositionY();
+      transEvent9.startY =
+        img.width >= img.height ? 0 : editImg9.getLongImageStartPositionY();
       // if (img.width <= img.height) {
       //   editImg9.width = 500;
       //   editImg9.height = (editImg9.width * img.height) / img.width;
@@ -134,7 +135,7 @@ async function makeImageApp9() {
       ctx.font = "110px Stalemate";
       ctx.filter = "opacity(0.95)";
       ctx.fillText(app9Title.value, 150, 215);
-      
+
       ctx.font = "24px S-CoreDream-6Bold";
       ctx.textAlign = "center";
       ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
@@ -142,7 +143,6 @@ async function makeImageApp9() {
       ctx.fillText(`${TYPOURL}`, 910, 980);
 
       imageContainerApp9.appendChild(canvas);
-      console.log(imageContainerApp9);
       addDownloadButton(canvas, imageContainerApp9.nextElementSibling);
     };
   };

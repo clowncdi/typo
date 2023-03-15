@@ -1,6 +1,13 @@
 @import "reset.css";
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable-dynamic-subset.css");
 @import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Arima:wght@300;400;700&family=Arizonia&family=Black+Han+Sans&family=Black+Ops+One&family=Blaka+Hollow&family=Bodoni+Moda:ital,opsz@1,6..96&family=Bungee&family=Bungee+Shade&family=Carter+One&family=Cinzel+Decorative:wght@400;700&family=Creepster&family=DM+Serif+Display&family=DM+Serif+Text&family=EB+Garamond:wght@400;700&family=Fredericka+the+Great&family=Graduate&family=Gruppo&family=Hammersmith+One&family=Italianno&family=Kelly+Slab&family=Kodchasan:wght@300;400;700&family=Libre+Baskerville:wght@400;700&family=Limelight&family=Lobster+Two:wght@400;700&family=Monoton&family=Montserrat+Alternates:wght@300;400;700&family=Montserrat+Subrayada&family=Montserrat:wght@300;400;700;900&family=Nixie+One&family=Oleo+Script&family=Oranienbaum&family=Oswald:wght@300;400;700&family=Pacifico&family=Padyakke+Expanded+One&family=Pirata+One&family=Poiret+One&family=Press+Start+2P&family=Quicksand:wght@300;400;700&family=Rampart+One&family=Roboto:wght@300;400;700&family=Rubik+Gemstones&family=Rubik+Vinyl&family=Sen:wght@400;700&family=Stalemate&family=Tenor+Sans&family=Tilt+Prism&family=Waterfall&family=Yesteryear&display=swap");
+@font-face {
+  font-family: "PyeongChangPeace-Bold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Bold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
 
 :root {
   --logo-h: 65px;
@@ -21,7 +28,6 @@ body {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  /* height: 100vh; */
 }
 
 .gnb {
@@ -96,7 +102,6 @@ body {
 #plus-font,
 #typo-font {
   width: 200px;
-  color: var(--blue);
   font-size: 8px;
   position: absolute;
   left: 0;
@@ -315,21 +320,27 @@ input::-ms-input-placeholder {
 input::placeholder {
   font-size: 13px;
 }
+textarea:focus::-webkit-input-placeholder,
 input:focus::-webkit-input-placeholder {
   opacity: 0;
 }
+textarea:focus::-moz-placeholder,
 input:focus::-moz-placeholder {
   opacity: 0;
 }
+textarea:focus:-ms-input-placeholder,
 input:focus:-ms-input-placeholder {
   opacity: 0;
 }
+textarea:focus::-ms-input-placeholder,
 input:focus::-ms-input-placeholder {
   opacity: 0;
 }
+textarea:focus::placeholder,
 input:focus::placeholder {
   opacity: 0;
 }
+.input-wrap textarea,
 .input-wrap input {
   display: inline-block;
   font-size: 20px;

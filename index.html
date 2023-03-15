@@ -705,12 +705,28 @@
           <div id="app10" class="app-wrap">
             <div class="item-image">
               <div class="input-wrap color">
-                <label for="app10-title-color">Color Picker</label>
-                <input type="color" name="app10-title-color" id="app10TitleColor" value="#FFFFFF" />
+                <label for="app10-title-color">Title Color Picker</label>
+                <input type="color" name="app10-title-color" id="app10TitleColor" value="#363636" />
+                <label for="app10-bg-color">BG Color Picker</label>
+                <input type="color" name="app10-bg-color" id="app10BgColor" value="#FFFBD8" />
               </div>
               <div class="input-wrap">
-                <label for="app10-title">Spring</label>
-                <input type="text" name="app10-title" id="app10Title" placeholder="Spring" maxlength="15" />
+                <label for="app10-title">Title</label>
+                <textarea name="app10-title" id="app10Title" cols="30" rows="3" placeholder="우리 같이 천천히&#13;&#10;말라 죽어 보자,&#13;&#10;연진아."></textarea>
+                <button class="clearBtn" onclick="clearInput(this)">X</button>
+              </div>
+              <div class="input-wrap color">
+                <label for="app10-sub-color">Sub Color Picker</label>
+                <input type="color" name="app10-sub-color" id="app10SubColor" value="#454545" />
+              </div>
+              <div class="input-wrap">
+                <label for="app10-sub">Sub Text</label>
+                <textarea name="app10-sub" id="app10Sub" cols="30" rows="3" placeholder="어떡해?&#13;&#10;너네 주님 개빡쳤어.&#13;&#10;너 지옥행이래."></textarea>
+                <button class="clearBtn" onclick="clearInput(this)">X</button>
+              </div>
+              <div class="input-wrap">
+                <label for="app10-writer">Writer</label>
+                <input type="text" name="app10-writer" id="app10Writer" placeholder="@더 글로리" value="@더 글로리" />
                 <button class="clearBtn" onclick="clearInput(this)">X</button>
               </div>
               <div class="bg">
