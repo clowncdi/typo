@@ -332,6 +332,22 @@ address {
   color: white;
   background-color: #19202c;
 }
+.lang {
+  position: relative;
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  z-index: 10;
+}
+.btn-lang {
+  color: #999;
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+}
+.btn-lang.active {
+  color: var(--blue);
+}
 input[type="date"] {
   -webkit-appearance: none;
   -moz-appearance: none;
