@@ -173,7 +173,9 @@ nav ul {
   gap: 1rem;
 }
 nav ul li a {
+  display: block;
   font-size: 8px;
+  line-height: 20px;
 }
 nav ul li a img {
   width: 40px;
@@ -289,6 +291,17 @@ address {
 }
 .file-wrap input {
   display: none;
+}
+.file-wrap label::before {
+  content: "";
+  position: relative;
+  top: 3px;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+  opacity: 0.5;
+  background: url("../images/image.svg") no-repeat center center / cover;
 }
 .btn {
   position: relative;

@@ -78,6 +78,5 @@ async function makeImageApp10() {
   ctx.fillText(`${TYPOURL}`, 980, 980);
 
   imageContainerApp10.appendChild(canvas);
-  console.log(imageContainerApp10);
   addDownloadButton(canvas, imageContainerApp10.nextElementSibling);
 }
