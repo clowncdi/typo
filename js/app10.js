@@ -12,7 +12,6 @@ mobile && submitBtnApp10.addEventListener("touchstart", makeImageApp10);
 !mobile && submitBtnApp10.addEventListener("click", makeImageApp10);
 
 async function makeImageApp10() {
-  console.log(app10Title.value);
   // initialize canvas.
   imageContainerApp10.innerHTML = "";
   imageContainerApp10.nextElementSibling.innerHTML = "";
@@ -48,20 +47,27 @@ async function makeImageApp10() {
   ctx.textAlign = "left";
   ctx.font = "120px PyeongChangPeace-Bold";
   ctx.filter = "opacity(0.95)";
-  const title = app10Title.value.split("\n");
-  ctx.fillText(title[0], 90, 200);
-  ctx.fillText(title[1], 90, 330);
-  ctx.fillText(title[2], 90, 460);
+  const title =
+    app10Title.value === ""
+      ? "Hello,\nStranger.".split("\n")
+      : app10Title.value.split("\n");
+  for (let i = 0; i < title.length; i++) {
+    ctx.fillText(title[i], 90, 200 + i * 130);
+  }
 
   ctx.fillStyle = app10SubColor.value;
   ctx.font = "90px S-CoreDream-3Light";
-  const sub = app10Sub.value.split("\n");
-  ctx.fillText(sub[0], 90, 660);
-  ctx.fillText(sub[1], 90, 770);
-  ctx.fillText(sub[2], 90, 880);
+  const sub =
+    app10Sub.value === ""
+      ? "For sale:\nBaby shoes.\nNever worn.".split("\n")
+      : app10Sub.value.split("\n");
+  for (let i = 0; i < sub.length; i++) {
+    ctx.fillText(sub[i], 90, 660 + i * 110);
+  }
 
   ctx.font = "28px S-CoreDream-6Bold";
-  ctx.fillText(app10Writer.value, 95, 960);
+  const writer = app10Writer.value === "" ? "@plus.typo" : app10Writer.value;
+  ctx.fillText(writer, 95, 960);
 
   ctx.font = "24px S-CoreDream-6Bold";
   ctx.textAlign = "right";
