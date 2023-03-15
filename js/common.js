@@ -1,117 +1,120 @@
+const nav = document.getElementById("nav");
+const links = document.querySelectorAll("a[href^='#']");
 const PRIMARYCOLOR = "#0F8EFF";
 const BGCOLOR = "#19202c";
 const TYPOURL = "typo.co.kr";
+
 class Img {
-  width;
-  height;
+  _width;
+  _height;
 
   constructor() {
-    this.width = 0;
-    this.height = 0;
+    this._width = 0;
+    this._height = 0;
   }
 
   get width() {
-    return this.width;
+    return this._width;
   }
 
   get height() {
-    return this.height;
+    return this._height;
   }
 
   set width(width) {
-    this.width = width;
+    this._width = width;
   }
 
   set height(height) {
-    this.height = height;
+    this._height = height;
   }
 
   getLongImageStartPositionX() {
-    return (this.height - this.width) / 2;
+    return (this._height - this._width) / 2;
   }
 
   getLongImageStartPositionY() {
-    return (this.width - this.height) / 2;
+    return (this._width - this._height) / 2;
   }
 
   reset() {
-    this.width = 0;
-    this.height = 0;
+    this._width = 0;
+    this._height = 0;
   }
 }
 
 class TransEvent {
-  startX;
-  startY;
-  moveX;
-  moveY;
-  scale;
-  drag;
+  _startX;
+  _startY;
+  _moveX;
+  _moveY;
+  _scale;
+  _drag;
 
   constructor() {
-    this.startX = 0;
-    this.startY = 0;
-    this.moveX = 0;
-    this.moveY = 0;
-    this.scale = 1;
-    this.drag = false;
+    this._startX = 0;
+    this._startY = 0;
+    this._moveX = 0;
+    this._moveY = 0;
+    this._scale = 1;
+    this._drag = false;
   }
 
   get startX() {
-    return this.startX;
+    return this._startX;
   }
 
   get startY() {
-    return this.startY;
+    return this._startY;
   }
 
   get moveX() {
-    return this.moveX;
+    return this._moveX;
   }
 
   get moveY() {
-    return this.moveY;
+    return this._moveY;
   }
 
   get scale() {
-    return this.scale;
+    return this._scale;
   }
 
   get drag() {
-    return this.drag;
+    return this._drag;
   }
 
   set startX(startX) {
-    this.startX = startX;
+    this._startX = startX;
   }
 
   set startY(startY) {
-    this.startY = startY;
+    this._startY = startY;
   }
 
   set moveX(moveX) {
-    this.moveX = moveX;
+    this._moveX = moveX;
   }
 
   set moveY(moveY) {
-    this.moveY = moveY;
+    this._moveY = moveY;
   }
 
   set scale(scale) {
-    this.scale = scale;
+    this._scale = scale;
   }
 
   set drag(drag) {
-    this.drag = drag;
+    this._drag = drag;
   }
 
   reset() {
-    this.startX = 0;
-    this.startY = 0;
-    this.moveX = 0;
-    this.moveY = 0;
-    this.scale = 1;
-    this.drag = false;
+    this._startX = 0;
+    this._startY = 0;
+    this._moveX = 0;
+    this._moveY = 0;
+    this._scale = 1;
+    this._drag = false;
   }
 }
 
@@ -254,3 +257,27 @@ function setFormattingDate(value) {
   date[2] = date[2].replace(/^0+/, "");
   return `${date[0]}.${date[1]}.${date[2]}`;
 }
+
+// nav bar scroll event
+document.addEventListener("scroll", () => {
+  if (window.scrollY > 150) {
+    nav.classList.add("show");
+  } else {
+    nav.classList.remove("show");
+  }
+});
+
+links.forEach((link) => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    let target = document.querySelector(link.hash);
+    let targetPosition = target.getBoundingClientRect().top;
+
+    window.scrollBy({
+      top: targetPosition - 150,
+      left: 0,
+      behavior: "smooth",
+    });
+  });
+});

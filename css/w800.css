@@ -42,6 +42,32 @@
   display: none;
 }
 
+nav {
+  width: 100vw;
+  height: 60px;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+nav ul {
+  width: 90%;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+nav ul li {
+  display: flex;
+}
+nav ul li:last-child {
+  padding-right: 20px;
+}
+nav ul li a {
+  font-size: 0;
+  color: transparent;
+}
+
 @media screen and (max-width: 520px) {
   .app-wrap,
   .item-result {

@@ -7,6 +7,7 @@ const app10Title = document.getElementById("app10Title");
 const app10Sub = document.getElementById("app10Sub");
 const app10Writer = document.getElementById("app10Writer");
 const app10Inputs = document.querySelectorAll("#app10 input");
+const app10Textarea = document.querySelectorAll("#app10 textarea");
 
 mobile && submitBtnApp10.addEventListener("touchstart", makeImageApp10);
 !mobile && submitBtnApp10.addEventListener("click", makeImageApp10);
@@ -16,6 +17,7 @@ async function makeImageApp10() {
   imageContainerApp10.innerHTML = "";
   imageContainerApp10.nextElementSibling.innerHTML = "";
   app10Inputs.forEach((input) => checkValue(input));
+  app10Textarea.forEach((textarea) => checkValue(textarea));
 
   imageContainerApp10.parentElement.parentElement.style.display = "block";
 

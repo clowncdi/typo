@@ -143,6 +143,44 @@ body {
   gap: 2rem;
 }
 
+nav {
+  width: 120px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+  opacity: 0;
+  background: rgba(255, 255, 255, 0.5);
+  -webkit-backdrop-filter: saturate(180%) blur(15px);
+  -moz-backdrop-filter: saturate(180%) blur(15px);
+  -o-backdrop-filter: saturate(180%) blur(15px);
+  backdrop-filter: saturate(180%) blur(15px);
+}
+nav.show {
+  opacity: 1;
+}
+nav ul {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+}
+nav ul li a {
+  font-size: 8px;
+}
+nav ul li a img {
+  width: 40px;
+  height: 40px;
+  border-radius: 10%;
+}
+
 footer {
   flex: 1 0 80px;
   width: 100%;
