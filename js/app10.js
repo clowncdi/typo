@@ -9,8 +9,8 @@ const app10Writer = document.getElementById("app10Writer");
 const app10Inputs = document.querySelectorAll("#app10 input");
 const app10Textarea = document.querySelectorAll("#app10 textarea");
 
-mobile && submitBtnApp10.addEventListener("touchstart", makeImageApp10);
-!mobile && submitBtnApp10.addEventListener("click", makeImageApp10);
+isMobile() && submitBtnApp10.addEventListener("touchstart", makeImageApp10);
+!isMobile() && submitBtnApp10.addEventListener("click", makeImageApp10);
 
 async function makeImageApp10() {
   // initialize canvas.

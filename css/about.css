@@ -65,6 +65,10 @@
 .about-wrap p a {
   color: var(--blue);
 }
+.about-wrap.kor textarea,
+.about-wrap.kor p {
+  font-family: "Pretendard", sans-serif;
+}
 
 @keyframes slidein {
   from {

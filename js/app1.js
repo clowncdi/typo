@@ -80,8 +80,8 @@ icons.forEach((icon) => {
   });
 });
 
-mobile && submitBtn.addEventListener("touchstart", makeImageApp1);
-!mobile && submitBtn.addEventListener("click", makeImageApp1);
+isMobile() && submitBtn.addEventListener("touchstart", makeImageApp1);
+!isMobile() && submitBtn.addEventListener("click", makeImageApp1);
 
 async function makeImageApp1() {
   // initialize canvas.

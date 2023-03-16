@@ -55,8 +55,8 @@ chooseFileApp9.addEventListener("change", (e) => {
   };
 });
 
-mobile && submitBtnApp9.addEventListener("touchstart", makeImageApp9);
-!mobile && submitBtnApp9.addEventListener("click", makeImageApp9);
+isMobile() && submitBtnApp9.addEventListener("touchstart", makeImageApp9);
+!isMobile() && submitBtnApp9.addEventListener("click", makeImageApp9);
 
 async function makeImageApp9() {
   // initialize canvas.
