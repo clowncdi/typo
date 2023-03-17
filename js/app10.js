@@ -13,6 +13,10 @@ isMobile() && submitBtnApp10.addEventListener("touchstart", makeImageApp10);
 !isMobile() && submitBtnApp10.addEventListener("click", makeImageApp10);
 
 async function makeImageApp10() {
+  gtag('event', 'app10_create', {
+    'app_name': 'Thumbnail Note',
+    'event_date': new Date().toLocaleString(),
+  });
   // initialize canvas.
   imageContainerApp10.innerHTML = "";
   imageContainerApp10.nextElementSibling.innerHTML = "";

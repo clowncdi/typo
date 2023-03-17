@@ -85,7 +85,7 @@ isMobile() && submitBtn.addEventListener("touchstart", makeImageApp1);
 
 async function makeImageApp1() {
   gtag('event', 'app1_create', {
-    'event_app': 'app1',
+    'app_name': 'Today Weather',
     'event_date': new Date().toLocaleString(),
   });
   // initialize canvas.

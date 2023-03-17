@@ -199,6 +199,13 @@ function addDownloadButton(canvas, download) {
   download.appendChild(a);
 }
 
+function downloadCountGA(app, name) {
+  gtag("event", `download_${app}`, {
+    'app_name': name,
+    'event_date': new Date().toLocaleString(),
+  });
+}
+
 // 오늘 날짜를 yyyy-mm-dd 형식으로 반환하는 함수
 function getToday() {
   const today = new Date();

@@ -50,6 +50,10 @@ isMobile() && submitBtnApp4.addEventListener("touchstart", makeImageApp4);
 !isMobile() && submitBtnApp4.addEventListener("click", makeImageApp4);
 
 async function makeImageApp4() {
+  gtag('event', 'app4_create', {
+    'app_name': 'Perilla Leaf',
+    'event_date': new Date().toLocaleString(),
+  });
   // initialize canvas.
   imageContainerApp4.innerHTML = "";
   imageContainerApp4.nextElementSibling.innerHTML = "";

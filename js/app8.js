@@ -53,6 +53,10 @@ isMobile() && submitBtnApp8.addEventListener("touchstart", makeImageApp8);
 !isMobile() && submitBtnApp8.addEventListener("click", makeImageApp8);
 
 async function makeImageApp8() {
+  gtag('event', 'app8_create', {
+    'app_name': 'IKEA',
+    'event_date': new Date().toLocaleString(),
+  });
   // initialize canvas.
   imageContainerApp8.innerHTML = "";
   imageContainerApp8.nextElementSibling.innerHTML = "";

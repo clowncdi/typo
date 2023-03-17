@@ -45,6 +45,10 @@ isMobile() && submitBtnApp6.addEventListener("touchstart", makeImageApp6);
 !isMobile() && submitBtnApp6.addEventListener("click", makeImageApp6);
 
 async function makeImageApp6() {
+  gtag('event', 'app6_create', {
+    'app_name': 'Go Home',
+    'event_date': new Date().toLocaleString(),
+  });
   // initialize canvas.
   imageContainerApp6.innerHTML = "";
   imageContainerApp6.nextElementSibling.innerHTML = "";
