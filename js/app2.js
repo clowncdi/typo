@@ -45,6 +45,10 @@ isMobile() && submitBtnApp2.addEventListener("touchstart", makeImageApp2);
 !isMobile() && submitBtnApp2.addEventListener("click", makeImageApp2);
 
 async function makeImageApp2() {
+  gtag('event', 'app2_create', {
+    'event_app': 'app2',
+    'event_date': new Date().toLocaleString(),
+  });
   // initialize canvas.
   imageContainerApp2.innerHTML = "";
   imageContainerApp2.nextElementSibling.innerHTML = "";
