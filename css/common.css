@@ -192,12 +192,35 @@ footer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 3px;
   background-color: #f4f4f4;
 }
 
 address {
   text-align: center;
+}
+
+footer p a {
+  text-decoration: underline;
+}
+
+.privacy-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 20px;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.privacy-container h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.privacy-container p {
+  margin-bottom: 20px;
+}
+.privacy-container strong {
+  font-weight: 600;
 }
 
 .item-wrap {
