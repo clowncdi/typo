@@ -118,6 +118,70 @@ class TransEvent {
   }
 }
 
+class MoveText {
+  _isDrag;
+  _startX;
+  _startY; 
+  _newX;
+  _newY;
+
+  constructor() {
+    this._isDrag = false;
+    this._startX = 0;
+    this._startY = 0;
+    this._newX = 0;
+    this._newY = 0;
+  }
+
+  get isDrag() {
+    return this._isDrag;
+  }
+
+  get startX() {
+    return this._startX;
+  }
+
+  get startY() {
+    return this._startY;
+  }
+
+  get newX() {
+    return this._newX;
+  }
+
+  get newY() {
+    return this._newY;
+  }
+
+  set isDrag(isDrag) {
+    this._isDrag = isDrag;
+  }
+
+  set startX(startX) {
+    this._startX = startX;
+  }
+
+  set startY(startY) {
+    this._startY = startY;
+  }
+
+  set newX(newX) {
+    this._newX = newX;
+  }
+
+  set newY(newY) {
+    this._newY = newY;
+  }
+
+  reset() {
+    this._isDrag = false;
+    this._startX = 0;
+    this._startY = 0;
+    this._newX = 0;
+    this._newY = 0;
+  }
+}
+
 function imageValueReset(selected, origin, edit, trans) {
   origin.reset();
   edit.reset();
@@ -164,7 +228,7 @@ function handleMouseDragEvent(selected, trans, choose) {
     e.preventDefault();
     clientX = isMobile() ? e.touches[0].clientX : e.clientX;
     clientY = isMobile() ? e.touches[0].clientY : e.clientY;
-    if (trans.drag) { 
+    if (trans.drag) {
       currentX = shift ? 0 : clientX - trans.startX;
       currentY = clientY - trans.startY;
       trans.moveX += currentX;
@@ -195,6 +259,36 @@ function handleMouseDragEvent(selected, trans, choose) {
       shift = false;
     }
   });
+}
+
+function handleMoveText(app, moveText) {
+  app.addEventListener("mousedown", (e) => {
+    moveText.isDrag = true;
+    moveText.startX = e.clientX; // 시작 위치
+    moveText.startY = e.clientY;
+  });
+
+  app.addEventListener("mousemove", (e) => {
+    e.preventDefault();
+    if (moveText.isDrag) {
+      let moveX = e.clientX - moveText.startX;
+      let moveY = e.clientY - moveText.startY;
+      moveText.newX += moveX; // 이동 거리 누적
+      moveText.newY += moveY;
+      moveText.startX = e.clientX; // 시작 위치 갱신
+      moveText.startY = e.clientY;
+      app.parentElement.style.left = `${moveText.newX}px`;
+      app.parentElement.style.top = `${moveText.newY}px`;
+    }
+  });
+
+  app.addEventListener("mouseup", (e) => {
+    moveText.isDrag = false;
+  });
+}
+
+function makeDouble(value, origin) {
+  return value === 0 ? origin : origin + (value * 2);
 }
 
 function resetPosition(resetBtn, trans, choose) {

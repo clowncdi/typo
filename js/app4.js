@@ -1,6 +1,8 @@
 const originImg4 = new Img();
 const editImg4 = new Img();
 const transEvent4 = new TransEvent();
+const moveTitle4 = new MoveText();
+const moveSub4 = new MoveText();
 const chooseFileApp4 = document.getElementById("chooseFileApp4");
 const selectedImageApp4 = document.getElementById("selectedImageApp4");
 const submitBtnApp4 = document.getElementById("submitBtnApp4");
@@ -9,6 +11,10 @@ const app4TitleColor = document.getElementById("app4TitleColor");
 const app4Title = document.getElementById("app4Title");
 const app4Date = document.getElementById("app4Date");
 const app4Inputs = document.querySelectorAll("#app4 input");
+const appMove4 = document.querySelectorAll("#app4 .app-move");
+
+handleMoveText(appMove4[0], moveTitle4);
+handleMoveText(appMove4[1], moveSub4);
 
 document.addEventListener("DOMContentLoaded", () => {
   app4Date.value = getToday();
@@ -132,7 +138,7 @@ async function makeImageApp4() {
       let words = app4Title.value.split(" ");
       let topPosition = 730;
       for (let word of words) {
-        ctx.fillText(word, 500, topPosition);
+        ctx.fillText(word, makeDouble(moveTitle4.newX, 500), makeDouble(moveTitle4.newY, topPosition));
         topPosition += 90;
       }
 
@@ -141,7 +147,7 @@ async function makeImageApp4() {
       ctx.shadowColor = "rgba(0, 0, 0, 0.9)";
       ctx.shadowBlur = 10;
       ctx.fillStyle = "rgba(255, 255, 255, 0.95)";
-      ctx.fillText(app4Date.value.replaceAll("-", ". "), 500, 935);
+      ctx.fillText(app4Date.value.replaceAll("-", ". "), makeDouble(moveSub4.newX, 500), makeDouble(moveSub4.newY, 935));
 
       addWatermarkRightTop(ctx, 'white');
       imageContainerApp4.appendChild(canvas);

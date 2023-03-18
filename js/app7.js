@@ -1,6 +1,8 @@
 const originImg7 = new Img();
 const editImg7 = new Img();
 const transEvent7 = new TransEvent();
+const moveTitle7 = new MoveText();
+const moveDate7 = new MoveText();
 const chooseFileApp7 = document.getElementById("chooseFileApp7");
 const selectedImageApp7 = document.getElementById("selectedImageApp7");
 const submitBtnApp7 = document.getElementById("submitBtnApp7");
@@ -9,6 +11,10 @@ const app7TitleColor = document.getElementById("app7TitleColor");
 const app7Title = document.getElementById("app7Title");
 const app7Date = document.getElementById("app7Date");
 const app7Inputs = document.querySelectorAll("#app7 input");
+const app7Move = document.querySelectorAll("#app7 .app-move");
+
+handleMoveText(app7Move[0], moveDate7);
+handleMoveText(app7Move[1], moveTitle7);
 
 document.addEventListener("DOMContentLoaded", () => {
   app7Date.value = getToday();
@@ -125,11 +131,11 @@ async function makeImageApp7() {
       ctx.fillStyle = app7TitleColor.value;
       ctx.textAlign = "left";
       ctx.letterSpacing = "-1px";
-      ctx.fillText(app7Title.value.toUpperCase(), 146, 860);
+      ctx.fillText(app7Title.value.toUpperCase(), makeDouble(moveTitle7.newX, 146), makeDouble(moveTitle7.newY, 860));
 
       ctx.font = "44px Oswald";
       ctx.letterSpacing = "12px";
-      ctx.fillText(app7Date.value.replaceAll("-", ". "), 146, 775);
+      ctx.fillText(app7Date.value.replaceAll("-", ". "), makeDouble(moveDate7.newX, 146), makeDouble(moveDate7.newY, 775));
 
       addWatermarkRightTop(ctx, 'white');
       imageContainerApp7.appendChild(canvas);

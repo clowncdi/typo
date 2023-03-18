@@ -1,6 +1,8 @@
 const originImg3 = new Img();
 const editImg3 = new Img();
 const transEvent3 = new TransEvent();
+const moveTitle3 = new MoveText();
+const moveSub3 = new MoveText();
 const chooseFileApp3 = document.getElementById("chooseFileApp3");
 const selectedImageApp3 = document.getElementById("selectedImageApp3");
 const submitBtnApp3 = document.getElementById("submitBtnApp3");
@@ -9,6 +11,10 @@ const app3TitleColor = document.getElementById("app3TitleColor");
 const app3Title = document.getElementById("app3Title");
 const app3Sub = document.getElementById("app3Sub");
 const app3Inputs = document.querySelectorAll("#app3 input");
+const appMove3 = document.querySelectorAll("#app3 .app-move");
+
+handleMoveText(appMove3[0], moveTitle3);
+handleMoveText(appMove3[1], moveSub3);
 
 chooseFileApp3.addEventListener("change", (e) => {
   // initialize
@@ -125,14 +131,14 @@ async function makeImageApp3() {
       ctx.shadowOffsetX = 0;
       ctx.shadowOffsetY = 0;
       ctx.textAlign = "center";
-      ctx.fillText(app3Title.value, 500, 520);
+      ctx.fillText(app3Title.value, makeDouble(moveTitle3.newX, 500), makeDouble(moveTitle3.newY, 520));
 
       ctx.font = "300 40px Roboto";
       ctx.letterSpacing = "16px";
       ctx.shadowColor = "rgba(0, 0, 0, 0.9)";
       ctx.shadowBlur = 10;
       ctx.fillStyle = "rgba(255, 255, 255, 0.95)";
-      ctx.fillText(app3Sub.value, 500, 600);
+      ctx.fillText(app3Sub.value, makeDouble(moveSub3.newX, 500), makeDouble(moveSub3.newY, 600));
 
       addWatermarkCenterBottom(ctx, 'white');
       imageContainerApp3.appendChild(canvas);

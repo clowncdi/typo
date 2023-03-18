@@ -1,4 +1,7 @@
 /* common */
+.item-image .input-wrap {
+  position: relative;
+}
 .item-image .input-wrap.color label {
   display: block;
   z-index: 1;
@@ -54,7 +57,6 @@
 #app3 .item-image .input-wrap input#app3Title::placeholder {
   font-size: 80px;
   position: relative;
-  top: 5px;
   font-family: "Bodoni Moda", cursive;
   color: rgb(251, 240, 125);
 }
@@ -66,7 +68,6 @@
 }
 #app3 .item-image .input-wrap input#app3Sub,
 #app3 .item-image .input-wrap input#app3Sub::placeholder {
-  margin-top: 5px;
   font-size: 20px;
   font-family: "Roboto", sans-serif;
   font-weight: 300;
@@ -98,12 +99,14 @@
 #app4 .item-image .input-wrap input#app4Title::placeholder {
   font-size: 40px;
   position: relative;
-  top: 5px;
   font-family: "Pacifico", cursive;
   color: rgb(187, 221, 160);
 }
 #app4 .item-image .input-wrap input#app4Title::placeholder {
   color: rgb(187, 221, 160, 0.5);
+}
+#app4 .item-image .input-wrap.date {
+  padding-top: 65px;
 }
 #app4 .item-image .input-wrap input#app4Date {
   font-family: "Montserrat Alternates", sans-serif;
@@ -111,14 +114,12 @@
 }
 #app4 .item-image .input-wrap input#app4Date,
 #app4 .item-image .input-wrap input#app4Date::placeholder {
-  margin-top: 65px;
   font-size: 13px;
   font-weight: 300;
   color: rgba(255, 255, 255, 0.5);
 }
 #app4 .item-image .input-wrap input#app4Date + .clearBtn {
   position: relative;
-  top: 30px;
 }
 #app4 .file-wrap label {
   bottom: 100px;
@@ -171,9 +172,11 @@
 #app5 .item-image .input-wrap input#app5Sub::placeholder {
   color: rgba(255, 255, 255, 0.5);
 }
+#app5 .item-image .input-wrap.date {
+  padding-top: 43px;
+}
 #app5 .item-image .input-wrap input[type="date"] {
   width: 40%;
-  margin-top: 43px;
   font-family: 'Oswald', sans-serif;
   color: rgba(255, 255, 255, 0.9);
 }
@@ -233,7 +236,7 @@
 }
 #app7 .item-image .input-wrap.color {
   color: #ccc;
-  padding-top: 320px;
+  padding-top: 330px;
   padding-left: 10px;
 }
 #app7 .item-image .input-wrap input {
@@ -255,7 +258,6 @@
 }
 #app7 .item-image .input-wrap input#app7Date,
 #app7 .item-image .input-wrap input#app7Date::placeholder {
-  margin-top: 10px;
   font-size: 22px;
   letter-spacing: 6px;
   font-family: "Oswald", sans-serif;
@@ -301,10 +303,12 @@
 #app8 .item-image .input-wrap input#app8Title::placeholder {
   color: rgb(255, 255, 255, 0.3);
 }
+#app8 .item-image .input-wrap.sub {
+  padding-top: 18px;
+}
 #app8 .item-image .input-wrap input#app8Sub {
   width: 95%;
   height: 30px;
-  margin-top: 18px;
 }
 #app8 .item-image .input-wrap input#app8Sub,
 #app8 .item-image .input-wrap input#app8Sub::placeholder {
@@ -318,17 +322,15 @@
 #app8 .item-image .input-wrap input#app8Sub::placeholder {
   color: rgba(255, 255, 255, 0.5);
 }
+#app8 .item-image .input-wrap.date {
+  padding-top: 98px;
+}
 #app8 .item-image .input-wrap input[type="date"] {
   width: 40%;
-  top: 98px;
   color: rgba(255, 255, 255, 0.9);
   font-family: "Montserrat", sans-serif;
   font-size: 16px;
   letter-spacing: 7px;
-}
-#app8 .item-image .input-wrap input[type="date"] + .clearBtn {
-  position: relative;
-  top: 98px;
 }
 #app8 .file-wrap label {
   bottom: 180px;
@@ -344,16 +346,16 @@
 #app9 .item-image .input-wrap {
   justify-content: flex-start;
   align-items: center;
-  margin-left: 30px;
+  margin-left: 10px;
 }
 #app9 .item-image .input-wrap.color {
   color: #fff;
   padding-top: 24px;
+  padding-left: 26px;
 }
 #app9 .item-image .input-wrap input#app9Title {
   width: 36%;
   height: 90px;
-  margin-left: 0;
 }
 #app9 .item-image .input-wrap input#app9Title,
 #app9 .item-image .input-wrap input#app9Title::placeholder {

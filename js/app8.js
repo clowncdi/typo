@@ -1,6 +1,9 @@
 const originImg8 = new Img();
 const editImg8 = new Img();
 const transEvent8 = new TransEvent();
+const moveTitle8 = new MoveText();
+const moveSub8 = new MoveText();
+const moveDate8 = new MoveText();
 const chooseFileApp8 = document.getElementById("chooseFileApp8");
 const selectedImageApp8 = document.getElementById("selectedImageApp8");
 const submitBtnApp8 = document.getElementById("submitBtnApp8");
@@ -11,7 +14,12 @@ const app8Sub = document.getElementById("app8Sub");
 const app8StartDate = document.getElementById("app8StartDate");
 const app8EndDate = document.getElementById("app8EndDate");
 const app8Inputs = document.querySelectorAll("#app8 input");
+const app8Move = document.querySelectorAll('#app8 .app-move');
 const chooseImg8 = "chooseImg8";
+
+handleMoveText(app8Move[0], moveTitle8);
+handleMoveText(app8Move[1], moveSub8);
+handleMoveText(app8Move[2], moveDate8);
 
 document.addEventListener("DOMContentLoaded", () => {
   app8Date.value = getToday();
@@ -132,7 +140,7 @@ async function makeImageApp8() {
       ctx.filter = "opacity(0.6)";
       ctx.globalCompositeOperation = "screen";
       ctx.textAlign = "center";
-      ctx.fillText(app8Title.value.toUpperCase(), 500, 580);
+      ctx.fillText(app8Title.value.toUpperCase(), makeDouble(moveTitle8.newX, 500), makeDouble(moveTitle8.newY, 580));
       ctx.save();
 
       ctx.scale(0.9, 1);
@@ -142,12 +150,12 @@ async function makeImageApp8() {
       ctx.letterSpacing = "35px";
       ctx.shadowBlur = 10;
       ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
-      ctx.fillText(app8Sub.value, 560, 675);
+      ctx.fillText(app8Sub.value, makeDouble(moveSub8.newX, 560), makeDouble(moveSub8.newY, 675));
 
       ctx.font = "100 32px Montserrat";
       ctx.letterSpacing = "15px";
       ctx.wordSpacing = "6px";
-      ctx.fillText(setFormattingDate(app8Date.value), 550, 926);
+      ctx.fillText(setFormattingDate(app8Date.value), makeDouble(moveDate8.newX, 550), makeDouble(moveDate8.newY, 926));
 
       addWatermarkRightBottom(ctx, 'white');
       imageContainerApp8.appendChild(canvas);

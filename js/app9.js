@@ -1,6 +1,7 @@
 const originImg9 = new Img();
 const editImg9 = new Img();
 const transEvent9 = new TransEvent();
+const moveTitle9 = new MoveText();
 const chooseFileApp9 = document.getElementById("chooseFileApp9");
 const selectedImageApp9 = document.getElementById("selectedImageApp9");
 const submitBtnApp9 = document.getElementById("submitBtnApp9");
@@ -8,7 +9,10 @@ const imageContainerApp9 = document.getElementById("imageContainerApp9");
 const app9TitleColor = document.getElementById("app9TitleColor");
 const app9Title = document.getElementById("app9Title");
 const app9Inputs = document.querySelectorAll("#app9 input");
+const app9Move = document.querySelectorAll("#app9 .app-move");
 const chooseImg9 = "chooseImg9";
+
+handleMoveText(app9Move[0], moveTitle9);
 
 chooseFileApp9.addEventListener("change", (e) => {
   // initialize
@@ -138,7 +142,7 @@ async function makeImageApp9() {
       ctx.textAlign = "left";
       ctx.font = "110px Stalemate";
       ctx.filter = "opacity(0.95)";
-      ctx.fillText(app9Title.value, 150, 215);
+      ctx.fillText(app9Title.value, makeDouble(moveTitle9.newX, 150), makeDouble(moveTitle9.newY, 215));
 
       addWatermarkRightBottom(ctx, 'white');
       imageContainerApp9.appendChild(canvas);

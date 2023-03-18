@@ -1,6 +1,9 @@
 const originImg5 = new Img();
 const editImg5 = new Img();
 const transEvent5 = new TransEvent();
+const moveTitle5 = new MoveText();
+const moveSub5 = new MoveText();
+const moveDate5 = new MoveText();
 const chooseFileApp5 = document.getElementById("chooseFileApp5");
 const selectedImageApp5 = document.getElementById("selectedImageApp5");
 const submitBtnApp5 = document.getElementById("submitBtnApp5");
@@ -11,6 +14,11 @@ const app5Sub = document.getElementById("app5Sub");
 const app5StartDate = document.getElementById("app5StartDate");
 const app5EndDate = document.getElementById("app5EndDate");
 const app5Inputs = document.querySelectorAll("#app5 input");
+const appMove5 = document.querySelectorAll('#app5 .app-move');
+
+handleMoveText(appMove5[0], moveTitle5);
+handleMoveText(appMove5[1], moveSub5);
+handleMoveText(appMove5[2], moveDate5);
 
 document.addEventListener("DOMContentLoaded", () => {
   app5StartDate.value = getToday();
@@ -131,13 +139,13 @@ async function makeImageApp5() {
       ctx.shadowOffsetX = 0;
       ctx.shadowOffsetY = 0;
       ctx.textAlign = "center";
-      ctx.fillText(app5Title.value.toUpperCase(), 500, 550);
+      ctx.fillText(app5Title.value.toUpperCase(), makeDouble(moveTitle5.newX, 500), makeDouble(moveTitle5.newY, 550));
 
       ctx.font = "300 130px Montserrat";
       ctx.letterSpacing = "35px";
       ctx.shadowColor = "rgba(0, 0, 0, 0.8)";
       ctx.shadowBlur = 10;
-      ctx.fillText(app5Sub.value.toUpperCase(), 525, 680);
+      ctx.fillText(app5Sub.value.toUpperCase(), makeDouble(moveSub5.newX, 525), makeDouble(moveSub5.newY, 680));
 
       ctx.font = "400 38px Oswald";
       ctx.letterSpacing = "3px";
@@ -146,11 +154,11 @@ async function makeImageApp5() {
       ctx.shadowBlur = 10;
       ctx.fillText(
         app5StartDate.value.substring(5).replace("-", "."),
-        420,
-        830
+        makeDouble(moveDate5.newX, 420),
+        makeDouble(moveDate5.newY, 830)
       );
-      ctx.fillText("~", 500, 830);
-      ctx.fillText(app5EndDate.value.substring(5).replace("-", "."), 590, 830);
+      ctx.fillText("~", makeDouble(moveDate5.newX, 500), makeDouble(moveDate5.newY, 830));
+      ctx.fillText(app5EndDate.value.substring(5).replace("-", "."), makeDouble(moveDate5.newX, 590), makeDouble(moveDate5.newY, 830));
 
       addWatermarkRightBottom(ctx, 'white');
       imageContainerApp5.appendChild(canvas);

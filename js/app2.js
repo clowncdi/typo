@@ -1,6 +1,7 @@
 const originImg2 = new Img();
 const editImg2 = new Img();
 const transEvent2 = new TransEvent();
+const moveText2 = new MoveText();
 const chooseFileApp2 = document.getElementById("chooseFileApp2");
 const selectedImageApp2 = document.getElementById("selectedImageApp2");
 const submitBtnApp2 = document.getElementById("submitBtnApp2");
@@ -8,6 +9,9 @@ const imageContainerApp2 = document.getElementById("imageContainerApp2");
 const app2Title = document.getElementById("app2Title");
 const app2TitleColor = document.getElementById("app2TitleColor");
 const app2Inputs = document.querySelectorAll("#app2 input");
+const appMove2 = document.querySelector("#app2 .app-move");
+
+handleMoveText(appMove2, moveText2);
 
 chooseFileApp2.addEventListener("change", (e) => {
   // initialize
@@ -122,7 +126,7 @@ async function makeImageApp2() {
       ctx.shadowOffsetX = 0;
       ctx.shadowOffsetY = 0;
       ctx.textAlign = "center";
-      ctx.fillText(app2Title.value, 500, 170);
+      ctx.fillText(app2Title.value, makeDouble(moveText2.newX, 500), makeDouble(moveText2.newY, 170));
 
       addWatermarkCenterBottom(ctx, 'white');
       imageContainerApp2.appendChild(canvas);

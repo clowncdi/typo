@@ -1,6 +1,7 @@
 const originImg6 = new Img();
 const editImg6 = new Img();
 const transEvent6 = new TransEvent();
+const moveTitle6 = new MoveText();
 const chooseFileApp6 = document.getElementById("chooseFileApp6");
 const selectedImageApp6 = document.getElementById("selectedImageApp6");
 const submitBtnApp6 = document.getElementById("submitBtnApp6");
@@ -8,6 +9,9 @@ const imageContainerApp6 = document.getElementById("imageContainerApp6");
 const app6TitleColor = document.getElementById("app6TitleColor");
 const app6Title = document.getElementById("app6Title");
 const app6Inputs = document.querySelectorAll("#app6 input");
+const app6Move = document.querySelectorAll("#app6 .app-move");
+
+handleMoveText(app6Move[0], moveTitle6);
 
 chooseFileApp6.addEventListener("change", (e) => {
   // initialize
@@ -126,22 +130,22 @@ async function makeImageApp6() {
       ctx.textAlign = "center";
       ctx.font = "56px Montserrat Subrayada";
       ctx.filter = "opacity(0.77) blur(2px)";
-      ctx.fillText(title.charAt(5), 525, 189);
+      ctx.fillText(title.charAt(5), makeDouble(moveTitle6.newX, 525), makeDouble(moveTitle6.newY, 189));
       ctx.font = "70px Montserrat Subrayada";
       ctx.filter = "opacity(0.8) blur(1.8px)";
-      ctx.fillText(title.charAt(4), 583, 265);
+      ctx.fillText(title.charAt(4), makeDouble(moveTitle6.newX, 583), makeDouble(moveTitle6.newY, 265));
       ctx.font = "110px Montserrat Subrayada";
       ctx.filter = "opacity(0.85) blur(1.5px)";
-      ctx.fillText(title.charAt(3), 500, 330);
+      ctx.fillText(title.charAt(3), makeDouble(moveTitle6.newX, 500), makeDouble(moveTitle6.newY, 330));
       ctx.font = "150px Montserrat Subrayada";
       ctx.filter = "opacity(0.89) blur(1.3px)";
-      ctx.fillText(title.charAt(2), 450, 425);
+      ctx.fillText(title.charAt(2), makeDouble(moveTitle6.newX, 450), makeDouble(moveTitle6.newY, 425));
       ctx.font = "280px Monoton";
       ctx.filter = "opacity(0.92) blur(0.9px)";
-      ctx.fillText(title.charAt(1), 550, 695);
+      ctx.fillText(title.charAt(1), makeDouble(moveTitle6.newX, 550), makeDouble(moveTitle6.newY, 695));
       ctx.font = "360px Alfa Slab One";
       ctx.filter = "opacity(0.98) blur(0.8px)";
-      ctx.fillText(title.charAt(0), 410, 900);
+      ctx.fillText(title.charAt(0), makeDouble(moveTitle6.newX, 410), makeDouble(moveTitle6.newY, 900));
       
       let gradient = ctx.createRadialGradient(500, 0, 0, 500, 100, 800);
       gradient.addColorStop(0, "rgba(9, 12, 82, 0.5)");
