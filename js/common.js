@@ -123,9 +123,11 @@ function imageValueReset(selected, origin, edit, trans) {
   edit.reset();
   trans.reset();
   edit.width = 500;
-  if (selected.childNodes.length > 3) {
-    selected.removeChild(selected.childNodes[3]);
-    selected.firstElementChild.firstElementChild.innerText = `X축: 0px, Y축: 0px`;
+  if (selected.getElementsByTagName('img').length > 0) {
+    selected.removeChild(selected.getElementsByTagName('img')[0]);
+    selected.getElementsByTagName('span')[0].innerText = `X축: 0px, Y축: 0px`;
+  } else {
+    selected.insertAdjacentHTML('afterBegin', '<div class="grid"><i></i><i></i><i></i><i></i></div>');
   }
   selected.style.backgroundColor = "";
 }
@@ -148,35 +150,50 @@ function handleMouseDragEvent(selected, trans, choose) {
   let mouseup = isMobile() ? "touchend" : "mouseup";
   let clientX = 0;
   let clientY = 0;
+  let shift = false;
 
   selected.addEventListener(mousedown, (e) => {
     trans.drag = true;
     trans.startX = isMobile() ? e.touches[0].clientX : e.clientX;
     trans.startY = isMobile() ? e.touches[0].clientY : e.clientY;
     selected.style.cursor = "grabbing";
+    selected.getElementsByClassName('grid')[0].style.display = "block";
   });
 
   selected.addEventListener(mousemove, (e) => {
     e.preventDefault();
     clientX = isMobile() ? e.touches[0].clientX : e.clientX;
     clientY = isMobile() ? e.touches[0].clientY : e.clientY;
-    if (trans.drag) {
-      currentX = clientX - trans.startX;
+    if (trans.drag) { 
+      currentX = shift ? 0 : clientX - trans.startX;
       currentY = clientY - trans.startY;
       trans.moveX += currentX;
       trans.moveY += currentY;
-      chooseImg.style.transform = `translate(${trans.moveX}px, ${trans.moveY}px) scale(${trans.scale})`;
       trans.startX = clientX;
       trans.startY = clientY;
-      selected.firstElementChild.firstElementChild.innerText = `X축: ${trans.moveX}px, Y축: ${trans.moveY}px`;
-      selected.firstElementChild.firstElementChild.style.display = "block";
-      selected.firstElementChild.children[1].style.display = "block";
+      chooseImg.style.transform = `translate(${trans.moveX}px, ${trans.moveY}px) scale(${trans.scale})`;
+      selected.getElementsByTagName('span')[0].innerText = `X축: ${trans.moveX}px, Y축: ${trans.moveY}px`;
+      selected.getElementsByTagName('span')[0].style.display = "block";
+      selected.getElementsByTagName('span')[1].style.display = "block";
     }
   });
 
   selected.addEventListener(mouseup, (e) => {
     trans.drag = false;
     selected.style.cursor = "grab";
+    selected.getElementsByClassName('grid')[0].style.display = "none";
+  });
+
+  // keydown event - shift key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Shift" || e.repeat === true) {
+      shift = true;
+    }
+  });
+  document.addEventListener("keyup", (e) => {
+    if (e.key === "Shift") {
+      shift = false;
+    }
   });
 }
 

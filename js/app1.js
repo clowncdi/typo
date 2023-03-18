@@ -32,6 +32,7 @@ fileInput.addEventListener("change", (e) => {
   imageValueReset(selectedImage, originImg, editImg, transEvent);
 
   const file = fileInput.files[0];
+  if (!file) return;
   const reader = new FileReader();
   reader.readAsDataURL(file);
   reader.onload = () => {
