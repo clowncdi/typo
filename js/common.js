@@ -200,7 +200,7 @@ function addDownloadButton(canvas, download) {
 }
 
 function downloadCountGA(app, name) {
-  gtag("event", `download_${app}`, {
+  gtag("event", `${app}_download`, {
     'app_name': name,
     'event_date': new Date().toLocaleString(),
   });
