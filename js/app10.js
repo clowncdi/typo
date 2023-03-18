@@ -74,13 +74,8 @@ async function makeImageApp10() {
   ctx.font = "28px S-CoreDream-6Bold";
   const writer = app10Writer.value === "" ? "@plus.typo" : app10Writer.value;
   ctx.fillText(writer, 95, 960);
-
-  ctx.font = "24px S-CoreDream-6Bold";
-  ctx.textAlign = "right";
-  ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
-  ctx.letterSpacing = "0px";
-  ctx.fillText(`${TYPOURL}`, 980, 980);
-
+  
+  addWatermarkRightBottom(ctx, 'black');
   imageContainerApp10.appendChild(canvas);
   addDownloadButton(canvas, imageContainerApp10.nextElementSibling);
 }

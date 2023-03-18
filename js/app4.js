@@ -143,10 +143,7 @@ async function makeImageApp4() {
       ctx.fillStyle = "rgba(255, 255, 255, 0.95)";
       ctx.fillText(app4Date.value.replaceAll("-", ". "), 500, 935);
 
-      ctx.font = "24px S-CoreDream-6Bold";
-      ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
-      ctx.fillText(`${TYPOURL}`, 910, 50);
-
+      addWatermarkRightTop(ctx, 'white');
       imageContainerApp4.appendChild(canvas);
       addDownloadButton(canvas, imageContainerApp4.nextElementSibling);
     };

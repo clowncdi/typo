@@ -134,11 +134,7 @@ async function makeImageApp3() {
       ctx.fillStyle = "rgba(255, 255, 255, 0.95)";
       ctx.fillText(app3Sub.value, 500, 600);
 
-      ctx.font = "24px S-CoreDream-6Bold";
-      ctx.letterSpacing = "0px";
-      ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
-      ctx.fillText(`${TYPOURL}`, 500, 980);
-
+      addWatermarkCenterBottom(ctx, 'white');
       imageContainerApp3.appendChild(canvas);
       addDownloadButton(canvas, imageContainerApp3.nextElementSibling);
     };

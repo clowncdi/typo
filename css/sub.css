@@ -15,16 +15,16 @@
 }
 #app2 .item-image .input-wrap {
   justify-content: center;
-  padding: 30px 0;
+  padding: 20px 0;
 }
 #app2 .item-image .input-wrap input {
-  height: 70px;
+  height: 88px;
+  vertical-align: baseline;
 }
 #app2 .item-image .input-wrap input#app2Title,
 #app2 .item-image .input-wrap input::placeholder {
-  font-size: 42px;
+  font-size: 60px;
   position: relative;
-  top: 5px;
   font-family: "Bodoni Moda", cursive;
   color: rgb(237, 244, 79);
 }
@@ -45,14 +45,14 @@
   align-items: center;
 }
 #app3 .item-image .input-wrap.color {
-  padding-top: 160px;
+  padding-top: 140px;
 }
 #app3 .item-image .input-wrap input#app3Title {
-  height: 90px;
+  height: 110px;
 }
 #app3 .item-image .input-wrap input#app3Title,
 #app3 .item-image .input-wrap input#app3Title::placeholder {
-  font-size: 68px;
+  font-size: 80px;
   position: relative;
   top: 5px;
   font-family: "Bodoni Moda", cursive;
@@ -66,8 +66,8 @@
 }
 #app3 .item-image .input-wrap input#app3Sub,
 #app3 .item-image .input-wrap input#app3Sub::placeholder {
-  margin-top: 10px;
-  font-size: 19px;
+  margin-top: 5px;
+  font-size: 20px;
   font-family: "Roboto", sans-serif;
   font-weight: 300;
   letter-spacing: 5px;
@@ -89,14 +89,14 @@
   align-items: center;
 }
 #app4 .item-image .input-wrap.color {
-  padding-top: 280px;
+  padding-top: 271px;
 }
 #app4 .item-image .input-wrap input#app4Title {
-  height: 90px;
+  height: 80px;
 }
 #app4 .item-image .input-wrap input#app4Title,
 #app4 .item-image .input-wrap input#app4Title::placeholder {
-  font-size: 32px;
+  font-size: 40px;
   position: relative;
   top: 5px;
   font-family: "Pacifico", cursive;
@@ -111,10 +111,14 @@
 }
 #app4 .item-image .input-wrap input#app4Date,
 #app4 .item-image .input-wrap input#app4Date::placeholder {
-  margin-top: 10px;
+  margin-top: 65px;
   font-size: 13px;
   font-weight: 300;
   color: rgba(255, 255, 255, 0.5);
+}
+#app4 .item-image .input-wrap input#app4Date + .clearBtn {
+  position: relative;
+  top: 30px;
 }
 #app4 .file-wrap label {
   bottom: 100px;
@@ -132,15 +136,15 @@
   align-items: center;
 }
 #app5 .item-image .input-wrap.color {
-  padding-top: 160px;
+  padding-top: 165px;
 }
 #app5 .item-image .input-wrap input#app5Title {
   width: 95%;
-  height: 100px;
+  height: 90px;
 }
 #app5 .item-image .input-wrap input#app5Title,
 #app5 .item-image .input-wrap input#app5Title::placeholder {
-  font-size: 90px;
+  font-size: 93px;
   position: relative;
   font-family: "Monoton", sans-serif;
   text-transform: uppercase;
@@ -156,9 +160,9 @@
 #app5 .item-image .input-wrap input#app5Sub,
 #app5 .item-image .input-wrap input#app5Sub::placeholder {
   margin-top: 1px;
-  font-size: 48px;
+  font-size: 65px;
   font-weight: 300;
-  letter-spacing: 27px;
+  letter-spacing: 15px;
   text-indent: 1.2rem;
   text-transform: uppercase;
   font-family: "Montserrat", sans-serif;
@@ -169,7 +173,8 @@
 }
 #app5 .item-image .input-wrap input[type="date"] {
   width: 40%;
-  margin-top: 40px;
+  margin-top: 43px;
+  font-family: 'Oswald', sans-serif;
   color: rgba(255, 255, 255, 0.9);
 }
 #app5 .file-wrap label {
@@ -238,7 +243,7 @@
 }
 #app7 .item-image .input-wrap input#app7Title,
 #app7 .item-image .input-wrap input#app7Title::placeholder {
-  font-size: 34px;
+  font-size: 38px;
   position: relative;
   font-family: "Oswald", sans-serif;
   color: rgb(255, 255, 255, 0.5);
@@ -251,8 +256,8 @@
 #app7 .item-image .input-wrap input#app7Date,
 #app7 .item-image .input-wrap input#app7Date::placeholder {
   margin-top: 10px;
-  font-size: 16px;
-  letter-spacing: 7px;
+  font-size: 22px;
+  letter-spacing: 6px;
   font-family: "Oswald", sans-serif;
   color: rgba(255, 255, 255, 0.9);
 }
@@ -291,10 +296,10 @@
   position: relative;
   font-weight: 900;
   text-transform: uppercase;
-  color: rgb(255, 255, 255);
+  color: rgb(255, 255, 255, 0.6);
 }
 #app8 .item-image .input-wrap input#app8Title::placeholder {
-  color: rgb(255, 255, 255, 0.5);
+  color: rgb(255, 255, 255, 0.3);
 }
 #app8 .item-image .input-wrap input#app8Sub {
   width: 95%;
@@ -303,9 +308,9 @@
 }
 #app8 .item-image .input-wrap input#app8Sub,
 #app8 .item-image .input-wrap input#app8Sub::placeholder {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 100;
-  letter-spacing: 22px;
+  letter-spacing: 17px;
   text-indent: 1.2rem;
   font-stretch: ultra-condensed;
   color: rgba(255, 255, 255);
@@ -315,8 +320,15 @@
 }
 #app8 .item-image .input-wrap input[type="date"] {
   width: 40%;
-  margin-top: 40px;
+  top: 98px;
   color: rgba(255, 255, 255, 0.9);
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  letter-spacing: 7px;
+}
+#app8 .item-image .input-wrap input[type="date"] + .clearBtn {
+  position: relative;
+  top: 98px;
 }
 #app8 .file-wrap label {
   bottom: 180px;
@@ -336,16 +348,16 @@
 }
 #app9 .item-image .input-wrap.color {
   color: #fff;
-  padding-top: 20px;
+  padding-top: 24px;
 }
 #app9 .item-image .input-wrap input#app9Title {
   width: 36%;
-  height: 100px;
+  height: 90px;
   margin-left: 0;
 }
 #app9 .item-image .input-wrap input#app9Title,
 #app9 .item-image .input-wrap input#app9Title::placeholder {
-  font-size: 60px;
+  font-size: 55px;
   position: relative;
   font-family: "Stalemate", sans-serif;
   color: rgb(255, 255, 255);
@@ -430,16 +442,14 @@
 }
 #app10 .item-image .input-wrap #app10Sub,
 #app10 .item-image .input-wrap #app10Sub::placeholder {
-  font-size: 44px;
+  font-size: 42px;
   font-family: "S-CoreDream-3Light", sans-serif;
   line-height: 115%;
 }
-#app10 .item-image .input-wrap #app10Writer {
-  height: 30px;
-}
 #app10 .item-image .input-wrap #app10Writer,
 #app10 .item-image .input-wrap #app10Writer::placeholder {
-  font-size: 13px;
+  height: 30px;
+  font-size: 14px;
   font-family: "S-CoreDream-3Light", sans-serif;
 }
 #app10 .item-image .input-wrap #app10Title::placeholder,

@@ -140,12 +140,7 @@ async function makeImageApp9() {
       ctx.filter = "opacity(0.95)";
       ctx.fillText(app9Title.value, 150, 215);
 
-      ctx.font = "24px S-CoreDream-6Bold";
-      ctx.textAlign = "center";
-      ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
-      ctx.letterSpacing = "0px";
-      ctx.fillText(`${TYPOURL}`, 910, 980);
-
+      addWatermarkRightBottom(ctx, 'white');
       imageContainerApp9.appendChild(canvas);
       addDownloadButton(canvas, imageContainerApp9.nextElementSibling);
     };

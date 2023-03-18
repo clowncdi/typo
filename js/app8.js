@@ -133,6 +133,7 @@ async function makeImageApp8() {
       ctx.globalCompositeOperation = "screen";
       ctx.textAlign = "center";
       ctx.fillText(app8Title.value.toUpperCase(), 500, 580);
+      ctx.save();
 
       ctx.scale(0.9, 1);
       ctx.filter = "opacity(1)";
@@ -148,12 +149,7 @@ async function makeImageApp8() {
       ctx.wordSpacing = "6px";
       ctx.fillText(setFormattingDate(app8Date.value), 550, 926);
 
-      ctx.scale(1.1, 1);
-      ctx.font = "24px S-CoreDream-6Bold";
-      ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
-      ctx.letterSpacing = "0px";
-      ctx.fillText(`${TYPOURL}`, 920, 980);
-
+      addWatermarkRightBottom(ctx, 'white');
       imageContainerApp8.appendChild(canvas);
       addDownloadButton(canvas, imageContainerApp8.nextElementSibling);
     };

@@ -152,11 +152,7 @@ async function makeImageApp5() {
       ctx.fillText("~", 500, 830);
       ctx.fillText(app5EndDate.value.substring(5).replace("-", "."), 590, 830);
 
-      ctx.font = "24px S-CoreDream-6Bold";
-      ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
-      ctx.letterSpacing = "0px";
-      ctx.fillText(`${TYPOURL}`, 910, 980);
-
+      addWatermarkRightBottom(ctx, 'white');
       imageContainerApp5.appendChild(canvas);
       addDownloadButton(canvas, imageContainerApp5.nextElementSibling);
     };

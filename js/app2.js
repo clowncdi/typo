@@ -124,11 +124,7 @@ async function makeImageApp2() {
       ctx.textAlign = "center";
       ctx.fillText(app2Title.value, 500, 170);
 
-      ctx.font = "24px S-CoreDream-6Bold";
-      ctx.textAlign = "center";
-      ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
-      ctx.fillText(`${TYPOURL}`, 500, 980);
-
+      addWatermarkCenterBottom(ctx, 'white');
       imageContainerApp2.appendChild(canvas);
       addDownloadButton(canvas, imageContainerApp2.nextElementSibling);
     };

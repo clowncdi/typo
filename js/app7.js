@@ -131,12 +131,7 @@ async function makeImageApp7() {
       ctx.letterSpacing = "12px";
       ctx.fillText(app7Date.value.replaceAll("-", ". "), 146, 775);
 
-      ctx.font = "24px S-CoreDream-6Bold";
-      ctx.letterSpacing = "0px";
-      ctx.textAlign = "right";
-      ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
-      ctx.fillText(`${TYPOURL}`, 970, 50);
-
+      addWatermarkRightTop(ctx, 'white');
       imageContainerApp7.appendChild(canvas);
       addDownloadButton(canvas, imageContainerApp7.nextElementSibling);
     };

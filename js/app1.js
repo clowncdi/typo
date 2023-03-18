@@ -205,12 +205,7 @@ async function makeImageApp1() {
       ctx.textAlign = "right";
       city && ctx.fillText(city.value, 950, 846 + height100);
 
-      ctx.font = "24px S-CoreDream-6Bold";
-      ctx.textAlign = "center";
-      ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
-      // ctx.globalCompositeOperation = "overlay";
-      ctx.fillText(`${TYPOURL}`, 500, 980);
-
+      addWatermarkCenterBottom(ctx, 'white');
       imageContainer.appendChild(canvas);
       addDownloadButton(canvas, imageContainer.nextElementSibling);
     };

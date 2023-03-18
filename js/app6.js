@@ -143,11 +143,6 @@ async function makeImageApp6() {
       ctx.filter = "opacity(0.98) blur(0.8px)";
       ctx.fillText(title.charAt(0), 410, 900);
       
-      ctx.font = "24px S-CoreDream-6Bold";
-      ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
-      ctx.letterSpacing = "0px";
-      ctx.fillText(`${TYPOURL}`, 910, 980);
-
       let gradient = ctx.createRadialGradient(500, 0, 0, 500, 100, 800);
       gradient.addColorStop(0, "rgba(9, 12, 82, 0.5)");
       gradient.addColorStop(0.5, "rgba(9, 12, 82, 0)");
@@ -158,7 +153,7 @@ async function makeImageApp6() {
       ctx.filter = "blur(1px)";
       ctx.fillRect(0, 0, 1000, 1000);
 
-
+      addWatermarkRightBottom(ctx, 'white');
       imageContainerApp6.appendChild(canvas);
       addDownloadButton(canvas, imageContainerApp6.nextElementSibling);
     };

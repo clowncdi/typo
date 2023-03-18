@@ -285,3 +285,34 @@ links.forEach((link) => {
     });
   });
 });
+
+// watermark
+function addWatermarkRightBottom(ctx, color) {
+  ctx.restore();
+  ctx.font = "24px S-CoreDream-6Bold";
+  ctx.letterSpacing = "0px";
+  ctx.textAlign = "right";
+  ctx.fillStyle = color;
+  ctx.filter = "opacity(0.5)";
+  ctx.fillText(`${TYPOURL}`, 980, 980);
+}
+
+function addWatermarkCenterBottom(ctx, color) {
+  ctx.restore();
+  ctx.font = "24px S-CoreDream-6Bold";
+  ctx.letterSpacing = "0px";
+  ctx.textAlign = "center";
+  ctx.fillStyle = color;
+  ctx.filter = "opacity(0.5)";
+  ctx.fillText(`${TYPOURL}`, 500, 980);
+}
+
+function addWatermarkRightTop(ctx, color) {
+  ctx.restore();
+  ctx.font = "24px S-CoreDream-6Bold";
+  ctx.letterSpacing = "0px";
+  ctx.textAlign = "right";
+  ctx.fillStyle = color;
+  ctx.filter = "opacity(0.5)";
+  ctx.fillText(`${TYPOURL}`, 980, 40);
+}
