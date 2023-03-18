@@ -1,4 +1,3 @@
-const originImg = new Img();
 const editImg = new Img();
 const transEvent = new TransEvent();
 const fileInput = document.getElementById("fileInput");
@@ -29,7 +28,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 fileInput.addEventListener("change", (e) => {
   // initialize
-  imageValueReset(selectedImage, originImg, editImg, transEvent);
+  imageValueReset(selectedImage, editImg, transEvent);
 
   const file = fileInput.files[0];
   if (!file) return;
@@ -42,8 +41,6 @@ fileInput.addEventListener("change", (e) => {
     selectedImage.style.backgroundColor = BGCOLOR;
 
     img.onload = () => {
-      originImg.width = img.width;
-      originImg.height = img.height;
       editImg.height = (editImg.width * img.height) / img.width;
       transEvent.startY = img.width >= img.height ? 0 : editImg.getLongImageStartPositionY();
 

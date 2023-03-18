@@ -1,4 +1,3 @@
-const originImg3 = new Img();
 const editImg3 = new Img();
 const transEvent3 = new TransEvent();
 const moveTitle3 = new MoveText();
@@ -11,14 +10,14 @@ const app3TitleColor = document.getElementById("app3TitleColor");
 const app3Title = document.getElementById("app3Title");
 const app3Sub = document.getElementById("app3Sub");
 const app3Inputs = document.querySelectorAll("#app3 input");
-const appMove3 = document.querySelectorAll("#app3 .app-move");
+const app3Move = document.querySelectorAll("#app3 .app-move");
 
-handleMoveText(appMove3[0], moveTitle3);
-handleMoveText(appMove3[1], moveSub3);
+handleMoveText(app3Move[0], moveTitle3);
+handleMoveText(app3Move[1], moveSub3);
 
 chooseFileApp3.addEventListener("change", (e) => {
   // initialize
-  imageValueReset(selectedImageApp3, originImg3, editImg3, transEvent3);
+  imageValueReset(selectedImageApp3, editImg3, transEvent3);
 
   const file = e.target.files[0];
   const reader = new FileReader();
@@ -30,8 +29,6 @@ chooseFileApp3.addEventListener("change", (e) => {
     selectedImageApp3.style.backgroundColor = BGCOLOR;
 
     img.onload = () => {
-      originImg3.width = img.width;
-      originImg3.height = img.height;
       editImg3.height = (editImg3.width * img.height) / img.width;
       transEvent3.startY = img.width >= img.height ? 0 : editImg3.getLongImageStartPositionY();
 

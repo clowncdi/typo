@@ -1,4 +1,3 @@
-const originImg2 = new Img();
 const editImg2 = new Img();
 const transEvent2 = new TransEvent();
 const moveText2 = new MoveText();
@@ -9,13 +8,13 @@ const imageContainerApp2 = document.getElementById("imageContainerApp2");
 const app2Title = document.getElementById("app2Title");
 const app2TitleColor = document.getElementById("app2TitleColor");
 const app2Inputs = document.querySelectorAll("#app2 input");
-const appMove2 = document.querySelector("#app2 .app-move");
+const app2Move = document.querySelector("#app2 .app-move");
 
-handleMoveText(appMove2, moveText2);
+handleMoveText(app2Move, moveText2);
 
 chooseFileApp2.addEventListener("change", (e) => {
   // initialize
-  imageValueReset(selectedImageApp2, originImg2, editImg2, transEvent2);
+  imageValueReset(selectedImageApp2, editImg2, transEvent2);
 
   const file = e.target.files[0];
   const reader = new FileReader();
@@ -27,8 +26,6 @@ chooseFileApp2.addEventListener("change", (e) => {
     selectedImageApp2.style.backgroundColor = BGCOLOR;
 
     img.onload = () => {
-      originImg2.width = img.width;
-      originImg2.height = img.height;
       editImg2.height = (editImg2.width * img.height) / img.width;
       transEvent2.startY = img.width >= img.height ? 0 : editImg2.getLongImageStartPositionY();
 

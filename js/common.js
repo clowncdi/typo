@@ -182,8 +182,7 @@ class MoveText {
   }
 }
 
-function imageValueReset(selected, origin, edit, trans) {
-  origin.reset();
+function imageValueReset(selected, edit, trans) {
   edit.reset();
   trans.reset();
   edit.width = 500;
@@ -214,7 +213,7 @@ function handleMouseDragEvent(selected, trans, choose) {
   let mouseup = isMobile() ? "touchend" : "mouseup";
   let clientX = 0;
   let clientY = 0;
-  let shift = false;
+  let isMoveX = false;
 
   selected.addEventListener(mousedown, (e) => {
     trans.drag = true;
@@ -229,7 +228,7 @@ function handleMouseDragEvent(selected, trans, choose) {
     clientX = isMobile() ? e.touches[0].clientX : e.clientX;
     clientY = isMobile() ? e.touches[0].clientY : e.clientY;
     if (trans.drag) {
-      currentX = shift ? 0 : clientX - trans.startX;
+      currentX = isMoveX ? 0 : clientX - trans.startX;
       currentY = clientY - trans.startY;
       trans.moveX += currentX;
       trans.moveY += currentY;
@@ -248,20 +247,21 @@ function handleMouseDragEvent(selected, trans, choose) {
     selected.getElementsByClassName('grid')[0].style.display = "none";
   });
 
-  // keydown event - shift key
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Shift" || e.repeat === true) {
-      shift = true;
+    if (e.key === 'Shift' || e.repeat === true) {
+      isMoveX = true;
     }
   });
   document.addEventListener("keyup", (e) => {
-    if (e.key === "Shift") {
-      shift = false;
+    if (e.key === 'Shift') {
+      isMoveX = false;
     }
   });
 }
 
 function handleMoveText(app, moveText) {
+  let isMoveX = false;
+
   app.addEventListener("mousedown", (e) => {
     moveText.isDrag = true;
     moveText.startX = e.clientX; // 시작 위치
@@ -271,7 +271,7 @@ function handleMoveText(app, moveText) {
   app.addEventListener("mousemove", (e) => {
     e.preventDefault();
     if (moveText.isDrag) {
-      let moveX = e.clientX - moveText.startX;
+      let moveX = isMoveX ? 0 : e.clientX - moveText.startX;
       let moveY = e.clientY - moveText.startY;
       moveText.newX += moveX; // 이동 거리 누적
       moveText.newY += moveY;
@@ -284,6 +284,17 @@ function handleMoveText(app, moveText) {
 
   app.addEventListener("mouseup", (e) => {
     moveText.isDrag = false;
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === 'Shift' || e.repeat === true) {
+      isMoveX = true;
+    }
+  });
+  document.addEventListener("keyup", (e) => {
+    if (e.key === 'Shift') {
+      isMoveX = false;
+    }
   });
 }
 

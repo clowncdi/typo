@@ -1,4 +1,3 @@
-const originImg6 = new Img();
 const editImg6 = new Img();
 const transEvent6 = new TransEvent();
 const moveTitle6 = new MoveText();
@@ -15,7 +14,7 @@ handleMoveText(app6Move[0], moveTitle6);
 
 chooseFileApp6.addEventListener("change", (e) => {
   // initialize
-  imageValueReset(selectedImageApp6, originImg6, editImg6, transEvent6);
+  imageValueReset(selectedImageApp6, editImg6, transEvent6);
 
   const file = e.target.files[0];
   const reader = new FileReader();
@@ -27,8 +26,6 @@ chooseFileApp6.addEventListener("change", (e) => {
     selectedImageApp6.style.backgroundColor = BGCOLOR;
 
     img.onload = () => {
-      originImg6.width = img.width;
-      originImg6.height = img.height;
       editImg6.height = (editImg6.width * img.height) / img.width;
       transEvent6.startY = img.width >= img.height ? 0 : editImg6.getLongImageStartPositionY();
 

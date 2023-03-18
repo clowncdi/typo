@@ -1,4 +1,3 @@
-const originImg4 = new Img();
 const editImg4 = new Img();
 const transEvent4 = new TransEvent();
 const moveTitle4 = new MoveText();
@@ -11,10 +10,10 @@ const app4TitleColor = document.getElementById("app4TitleColor");
 const app4Title = document.getElementById("app4Title");
 const app4Date = document.getElementById("app4Date");
 const app4Inputs = document.querySelectorAll("#app4 input");
-const appMove4 = document.querySelectorAll("#app4 .app-move");
+const app4Move = document.querySelectorAll("#app4 .app-move");
 
-handleMoveText(appMove4[0], moveTitle4);
-handleMoveText(appMove4[1], moveSub4);
+handleMoveText(app4Move[0], moveTitle4);
+handleMoveText(app4Move[1], moveSub4);
 
 document.addEventListener("DOMContentLoaded", () => {
   app4Date.value = getToday();
@@ -22,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 chooseFileApp4.addEventListener("change", (e) => {
   // initialize
-  imageValueReset(selectedImageApp4, originImg4, editImg4, transEvent4);
+  imageValueReset(selectedImageApp4, editImg4, transEvent4);
 
   const file = e.target.files[0];
   const reader = new FileReader();
@@ -34,8 +33,6 @@ chooseFileApp4.addEventListener("change", (e) => {
     selectedImageApp4.style.backgroundColor = BGCOLOR;
 
     img.onload = () => {
-      originImg4.width = img.width;
-      originImg4.height = img.height;
       editImg4.height = (editImg4.width * img.height) / img.width;
       transEvent4.startY = img.width >= img.height ? 0 : editImg4.getLongImageStartPositionY();
 

@@ -1,4 +1,3 @@
-const originImg9 = new Img();
 const editImg9 = new Img();
 const transEvent9 = new TransEvent();
 const moveTitle9 = new MoveText();
@@ -16,7 +15,7 @@ handleMoveText(app9Move[0], moveTitle9);
 
 chooseFileApp9.addEventListener("change", (e) => {
   // initialize
-  imageValueReset(selectedImageApp9, originImg9, editImg9, transEvent9);
+  imageValueReset(selectedImageApp9, editImg9, transEvent9);
 
   const file = e.target.files[0];
   const reader = new FileReader();
@@ -28,8 +27,6 @@ chooseFileApp9.addEventListener("change", (e) => {
     selectedImageApp9.style.backgroundColor = BGCOLOR;
 
     img.onload = () => {
-      originImg9.width = img.width;
-      originImg9.height = img.height;
       editImg9.height = (editImg9.width * img.height) / img.width;
       transEvent9.startY =
         img.width >= img.height ? 0 : editImg9.getLongImageStartPositionY();
@@ -42,7 +39,7 @@ chooseFileApp9.addEventListener("change", (e) => {
       //   editImg9.width = (editImg9.height * img.width) / img.height;
       //   transEvent9.startX = img.width <= img.height ? 0 : editImg9.getLongImageStartPositionX();
       // }
-      // console.log(img, originImg9, editImg9, transEvent9);
+      // console.log(img, editImg9, transEvent9);
 
       // img.width = editImg9.width;
       // img.height = editImg9.height;

@@ -1,4 +1,3 @@
-const originImg7 = new Img();
 const editImg7 = new Img();
 const transEvent7 = new TransEvent();
 const moveTitle7 = new MoveText();
@@ -22,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 chooseFileApp7.addEventListener("change", (e) => {
   // initialize
-  imageValueReset(selectedImageApp7, originImg7, editImg7, transEvent7);
+  imageValueReset(selectedImageApp7, editImg7, transEvent7);
 
   const file = e.target.files[0];
   const reader = new FileReader();
@@ -34,8 +33,6 @@ chooseFileApp7.addEventListener("change", (e) => {
     selectedImageApp7.style.backgroundColor = BGCOLOR;
 
     img.onload = () => {
-      originImg7.width = img.width;
-      originImg7.height = img.height;
       editImg7.height = (editImg7.width * img.height) / img.width;
       transEvent7.startY = img.width >= img.height ? 0 : editImg7.getLongImageStartPositionY();
 

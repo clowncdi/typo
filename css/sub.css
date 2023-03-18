@@ -32,7 +32,7 @@
   color: rgb(237, 244, 79);
 }
 #app2 .item-image .input-wrap input::placeholder {
-  color: rgb(237, 244, 79, 0.3);
+  color: rgb(237, 244, 79, 0.1);
 }
 #app2 .item-image .input-wrap.color {
   padding: 0;
@@ -61,7 +61,7 @@
   color: rgb(251, 240, 125);
 }
 #app3 .item-image .input-wrap input#app3Title::placeholder {
-  color: rgb(251, 240, 125, 0.5);
+  color: rgb(251, 240, 125, 0.1);
 }
 #app3 .item-image .input-wrap input#app3Sub {
   color: rgba(255, 255, 255, 0.9);
@@ -72,7 +72,10 @@
   font-family: "Roboto", sans-serif;
   font-weight: 300;
   letter-spacing: 5px;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.1);
+}
+#app3 .item-image .input-wrap input#app3Sub {
+  color: rgba(255, 255, 255, 0.9);
 }
 #app3 .file-wrap label {
   bottom: -140px;
@@ -103,7 +106,7 @@
   color: rgb(187, 221, 160);
 }
 #app4 .item-image .input-wrap input#app4Title::placeholder {
-  color: rgb(187, 221, 160, 0.5);
+  color: rgb(187, 221, 160, 0.1);
 }
 #app4 .item-image .input-wrap.date {
   padding-top: 65px;
@@ -152,7 +155,7 @@
   color: rgb(255, 255, 255);
 }
 #app5 .item-image .input-wrap input#app5Title::placeholder {
-  color: rgb(255, 255, 255, 0.5);
+  color: rgb(255, 255, 255, 0.1);
 }
 #app5 .item-image .input-wrap input#app5Sub {
   width: 95%;
@@ -170,7 +173,7 @@
   color: rgba(255, 255, 255);
 }
 #app5 .item-image .input-wrap input#app5Sub::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.1);
 }
 #app5 .item-image .input-wrap.date {
   padding-top: 43px;
@@ -216,7 +219,7 @@
   color: rgb(255, 255, 255);
 }
 #app6 .item-image .input-wrap input#app6Title::placeholder {
-  color: rgb(255, 255, 255, 0.5);
+  color: rgb(255, 255, 255, 0.1);
 }
 #app6 .file-wrap label {
   bottom: 180px;
@@ -249,7 +252,7 @@
   font-size: 38px;
   position: relative;
   font-family: "Oswald", sans-serif;
-  color: rgb(255, 255, 255, 0.5);
+  color: rgb(255, 255, 255, 0.1);
   text-transform: uppercase;
 }
 #app7 .item-image .input-wrap input#app7Title {
@@ -301,7 +304,7 @@
   color: rgb(255, 255, 255, 0.6);
 }
 #app8 .item-image .input-wrap input#app8Title::placeholder {
-  color: rgb(255, 255, 255, 0.3);
+  color: rgb(255, 255, 255, 0.1);
 }
 #app8 .item-image .input-wrap.sub {
   padding-top: 18px;
@@ -320,7 +323,7 @@
   color: rgba(255, 255, 255);
 }
 #app8 .item-image .input-wrap input#app8Sub::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.1);
 }
 #app8 .item-image .input-wrap.date {
   padding-top: 98px;
@@ -365,7 +368,7 @@
   color: rgb(255, 255, 255);
 }
 #app9 .item-image .input-wrap input#app9Title::placeholder {
-  color: rgb(255, 255, 255, 0.5);
+  color: rgb(255, 255, 255, 0.1);
 }
 #app9 .selected-image-position {
   top: 200px;
@@ -457,5 +460,5 @@
 #app10 .item-image .input-wrap #app10Title::placeholder,
 #app10 .item-image .input-wrap #app10Sub::placeholder,
 #app10 .item-image .input-wrap #app10Writer::placeholder {
-  color: rgb(255, 255, 255, 0.5);
+  color: rgb(255, 255, 255, 0.1);
 }

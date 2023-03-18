@@ -1,4 +1,3 @@
-const originImg5 = new Img();
 const editImg5 = new Img();
 const transEvent5 = new TransEvent();
 const moveTitle5 = new MoveText();
@@ -14,11 +13,11 @@ const app5Sub = document.getElementById("app5Sub");
 const app5StartDate = document.getElementById("app5StartDate");
 const app5EndDate = document.getElementById("app5EndDate");
 const app5Inputs = document.querySelectorAll("#app5 input");
-const appMove5 = document.querySelectorAll('#app5 .app-move');
+const app5Move = document.querySelectorAll('#app5 .app-move');
 
-handleMoveText(appMove5[0], moveTitle5);
-handleMoveText(appMove5[1], moveSub5);
-handleMoveText(appMove5[2], moveDate5);
+handleMoveText(app5Move[0], moveTitle5);
+handleMoveText(app5Move[1], moveSub5);
+handleMoveText(app5Move[2], moveDate5);
 
 document.addEventListener("DOMContentLoaded", () => {
   app5StartDate.value = getToday();
@@ -27,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 chooseFileApp5.addEventListener("change", (e) => {
   // initialize
-  imageValueReset(selectedImageApp5, originImg5, editImg5, transEvent5);
+  imageValueReset(selectedImageApp5, editImg5, transEvent5);
 
   const file = e.target.files[0];
   const reader = new FileReader();
@@ -39,8 +38,6 @@ chooseFileApp5.addEventListener("change", (e) => {
     selectedImageApp5.style.backgroundColor = BGCOLOR;
 
     img.onload = () => {
-      originImg5.width = img.width;
-      originImg5.height = img.height;
       editImg5.height = (editImg5.width * img.height) / img.width;
       transEvent5.startY = img.width >= img.height ? 0 : editImg5.getLongImageStartPositionY();
 
