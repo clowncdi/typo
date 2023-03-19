@@ -11,50 +11,8 @@ const app9Inputs = document.querySelectorAll("#app9 input");
 const app9Move = document.querySelectorAll("#app9 .app-move");
 const chooseImg9 = "chooseImg9";
 
+handleChangeImage(chooseFileApp9, selectedImageApp9, editImg9, transEvent9, chooseImg9, submitBtnApp9);
 handleMoveText(app9Move[0], moveTitle9);
-
-chooseFileApp9.addEventListener("change", (e) => {
-  // initialize
-  imageValueReset(selectedImageApp9, editImg9, transEvent9);
-
-  const file = e.target.files[0];
-  const reader = new FileReader();
-  reader.readAsDataURL(file);
-  reader.onload = () => {
-    const img = new Image();
-    img.src = reader.result;
-
-    selectedImageApp9.style.backgroundColor = BGCOLOR;
-
-    img.onload = () => {
-      editImg9.height = (editImg9.width * img.height) / img.width;
-      transEvent9.startY =
-        img.width >= img.height ? 0 : editImg9.getLongImageStartPositionY();
-      // if (img.width <= img.height) {
-      //   editImg9.width = 500;
-      //   editImg9.height = (editImg9.width * img.height) / img.width;
-      //   transEvent9.startY = img.width >= img.height ? 0 : editImg9.getLongImageStartPositionY();
-      // } else {
-      //   editImg9.height = 500;
-      //   editImg9.width = (editImg9.height * img.width) / img.height;
-      //   transEvent9.startX = img.width <= img.height ? 0 : editImg9.getLongImageStartPositionX();
-      // }
-      // console.log(img, editImg9, transEvent9);
-
-      // img.width = editImg9.width;
-      // img.height = editImg9.height;
-      img.style.left = `${transEvent9.startX}px`;
-      img.style.top = `${transEvent9.startY}px`;
-      img.id = chooseImg9;
-      selectedImageApp9.appendChild(img);
-      // 이미지 실시간 드래그로 위치 조정
-      handleMouseDragEvent(selectedImageApp9, transEvent9, chooseImg9);
-
-      changeFileBtn(e.target);
-      submitBtnApp9.style.marginRight = 0;
-    };
-  };
-});
 
 isMobile() && submitBtnApp9.addEventListener("touchstart", makeImageApp9);
 !isMobile() && submitBtnApp9.addEventListener("click", makeImageApp9);
@@ -88,48 +46,11 @@ async function makeImageApp9() {
       ctx.fillStyle = BGCOLOR;
       ctx.fillRect(0, 0, 1000, 1000);
       ctx.filter = "brightness(103%)";
-      let x = 0;
-      let y = 0;
-      if (img.width < img.height) {
-        // 변형된 이미지의 가로 세로 비율. 4032 / (3024 / 1000) = 1.333
-        let canvasWidth = 1000 * transEvent9.scale;
-        let canvasHeight = (canvasWidth * img.height) / img.width;
-        // 원본 이미지 높이를 변형된 이미지 높이로 나눈 비율.
-        let ratio = img.height / canvasHeight;
-        // 샘플 이미지에서 옮긴 y값만큼 원본 이미지의 비율로 y값 변환.
-        let originX = transEvent9.moveX * ratio * -1;
-        let originY = transEvent9.moveY * ratio * -1;
-
-        x = transEvent9.moveX;
-        y = transEvent9.moveY + editImg9.getLongImageStartPositionY() * 2;
-        ctx.drawImage(
-          img,
-          originX,
-          originY,
-          img.width,
-          img.height,
-          x,
-          y,
-          canvasWidth,
-          canvasHeight
-        );
-      } else {
-        // original width : original height = width resize : height resize
-        // height resize = (width resize * original height) / original width
-        let canvasHeight = (1000 * img.height) / img.width;
-        let startY = img.width === img.height ? 0 : (1000 - canvasHeight) / 2;
-        ctx.drawImage(
-          img,
-          x,
-          y,
-          img.width,
-          img.height,
-          transEvent9.moveX * 2,
-          transEvent9.moveY * 2 + startY,
-          1000 * transEvent9.scale,
-          canvasHeight * transEvent9.scale
-        );
-      }
+      let canvasWidth = 1000 * transEvent9.scale;
+      let canvasHeight = (canvasWidth * img.height) / img.width;
+      let x = transEvent9.moveX * 2;
+      let y = transEvent9.moveY * 2 + editImg9.getLongImageStartPositionY() * 2;
+      ctx.drawImage(img, x, y, canvasWidth, canvasHeight);
 
       ctx.fillStyle = app9TitleColor.value;
       ctx.shadowColor = "rgba(255, 110, 138, 0.5)";

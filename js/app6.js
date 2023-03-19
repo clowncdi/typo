@@ -9,38 +9,10 @@ const app6TitleColor = document.getElementById("app6TitleColor");
 const app6Title = document.getElementById("app6Title");
 const app6Inputs = document.querySelectorAll("#app6 input");
 const app6Move = document.querySelectorAll("#app6 .app-move");
+const chooseImg6 = "chooseImg6";
 
+handleChangeImage(chooseFileApp6, selectedImageApp6, editImg6, transEvent6, chooseImg6, submitBtnApp6);
 handleMoveText(app6Move[0], moveTitle6);
-
-chooseFileApp6.addEventListener("change", (e) => {
-  // initialize
-  imageValueReset(selectedImageApp6, editImg6, transEvent6);
-
-  const file = e.target.files[0];
-  const reader = new FileReader();
-  reader.readAsDataURL(file);
-  reader.onload = () => {
-    const img = new Image();
-    img.src = reader.result;
-
-    selectedImageApp6.style.backgroundColor = BGCOLOR;
-
-    img.onload = () => {
-      editImg6.height = (editImg6.width * img.height) / img.width;
-      transEvent6.startY = img.width >= img.height ? 0 : editImg6.getLongImageStartPositionY();
-
-      img.style.left = `${transEvent6.startX}px`;
-      img.style.top = `${transEvent6.startY}px`;
-      img.id = "chooseImg6";
-      selectedImageApp6.appendChild(img);
-      // 이미지 실시간 드래그로 위치 조정
-      handleMouseDragEvent(selectedImageApp6, transEvent6, "chooseImg6");
-
-      changeFileBtn(e.target);
-      submitBtnApp6.style.marginRight = 0;
-    };
-  };
-});
 
 isMobile() && submitBtnApp6.addEventListener("touchstart", makeImageApp6);
 !isMobile() && submitBtnApp6.addEventListener("click", makeImageApp6);
@@ -74,48 +46,11 @@ async function makeImageApp6() {
       ctx.fillStyle = BGCOLOR;
       ctx.fillRect(0, 0, 1000, 1000);
       ctx.filter = "contrast(120%) brightness(90%) sepia(30%) hue-rotate(-30deg) blur(2px)";
-      let x = 0;
-      let y = 0;
-      if (img.width < img.height) {
-        // 변형된 이미지의 가로 세로 비율. 4032 / (3024 / 1000) = 1.333
-        let canvasWidth = 1000 * transEvent6.scale;
-        let canvasHeight = (canvasWidth * img.height) / img.width;
-        // 원본 이미지 높이를 변형된 이미지 높이로 나눈 비율.
-        let ratio = img.height / canvasHeight;
-        // 샘플 이미지에서 옮긴 y값만큼 원본 이미지의 비율로 y값 변환.
-        let originX = transEvent6.moveX * ratio * -1;
-        let originY = transEvent6.moveY * ratio * -1;
-
-        x = transEvent6.moveX;
-        y = transEvent6.moveY + editImg6.getLongImageStartPositionY() * 2;
-        ctx.drawImage(
-          img,
-          originX,
-          originY,
-          img.width,
-          img.height,
-          x,
-          y,
-          canvasWidth,
-          canvasHeight
-        );
-      } else {
-        // original width : original height = width resize : height resize
-        // height resize = (width resize * original height) / original width
-        let canvasHeight = (1000 * img.height) / img.width;
-        let startY = img.width === img.height ? 0 : (1000 - canvasHeight) / 2;
-        ctx.drawImage(
-          img,
-          x,
-          y,
-          img.width,
-          img.height,
-          transEvent6.moveX * 2,
-          transEvent6.moveY * 2 + startY,
-          1000 * transEvent6.scale,
-          canvasHeight * transEvent6.scale
-        );
-      }
+      let canvasWidth = 1000 * transEvent6.scale;
+      let canvasHeight = (canvasWidth * img.height) / img.width;
+      let x = transEvent6.moveX * 2;
+      let y = transEvent6.moveY * 2 + editImg6.getLongImageStartPositionY() * 2;
+      ctx.drawImage(img, x, y, canvasWidth, canvasHeight);
 
       const title = app6Title.value.trim().toUpperCase();
 

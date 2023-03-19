@@ -14,7 +14,9 @@ const app5StartDate = document.getElementById("app5StartDate");
 const app5EndDate = document.getElementById("app5EndDate");
 const app5Inputs = document.querySelectorAll("#app5 input");
 const app5Move = document.querySelectorAll('#app5 .app-move');
+const chooseImg5 = "chooseImg5";
 
+handleChangeImage(chooseFileApp5, selectedImageApp5, editImg5, transEvent5, chooseImg5, submitBtnApp5);
 handleMoveText(app5Move[0], moveTitle5);
 handleMoveText(app5Move[1], moveSub5);
 handleMoveText(app5Move[2], moveDate5);
@@ -22,36 +24,6 @@ handleMoveText(app5Move[2], moveDate5);
 document.addEventListener("DOMContentLoaded", () => {
   app5StartDate.value = getToday();
   app5EndDate.value = getToday();
-});
-
-chooseFileApp5.addEventListener("change", (e) => {
-  // initialize
-  imageValueReset(selectedImageApp5, editImg5, transEvent5);
-
-  const file = e.target.files[0];
-  const reader = new FileReader();
-  reader.readAsDataURL(file);
-  reader.onload = () => {
-    const img = new Image();
-    img.src = reader.result;
-
-    selectedImageApp5.style.backgroundColor = BGCOLOR;
-
-    img.onload = () => {
-      editImg5.height = (editImg5.width * img.height) / img.width;
-      transEvent5.startY = img.width >= img.height ? 0 : editImg5.getLongImageStartPositionY();
-
-      img.style.left = `${transEvent5.startX}px`;
-      img.style.top = `${transEvent5.startY}px`;
-      img.id = "chooseImg5";
-      selectedImageApp5.appendChild(img);
-      // 이미지 실시간 드래그로 위치 조정
-      handleMouseDragEvent(selectedImageApp5, transEvent5, "chooseImg5");
-
-      changeFileBtn(e.target);
-      submitBtnApp5.style.marginRight = 0;
-    };
-  };
 });
 
 isMobile() && submitBtnApp5.addEventListener("touchstart", makeImageApp5);
@@ -86,48 +58,11 @@ async function makeImageApp5() {
       ctx.fillStyle = BGCOLOR;
       ctx.filter = "contrast(110%) brightness(110%)";
       ctx.fillRect(0, 0, 1000, 1000);
-      let x = 0;
-      let y = 0;
-      if (img.width < img.height) {
-        // 변형된 이미지의 가로 세로 비율. 4032 / (3024 / 1000) = 1.333
-        let canvasWidth = 1000 * transEvent5.scale;
-        let canvasHeight = (canvasWidth * img.height) / img.width;
-        // 원본 이미지 높이를 변형된 이미지 높이로 나눈 비율.
-        let ratio = img.height / canvasHeight;
-        // 샘플 이미지에서 옮긴 y값만큼 원본 이미지의 비율로 y값 변환.
-        let originX = transEvent5.moveX * ratio * -1;
-        let originY = transEvent5.moveY * ratio * -1;
-
-        x = transEvent5.moveX;
-        y = transEvent5.moveY + editImg5.getLongImageStartPositionY() * 2;
-        ctx.drawImage(
-          img,
-          originX,
-          originY,
-          img.width,
-          img.height,
-          x,
-          y,
-          canvasWidth,
-          canvasHeight
-        );
-      } else {
-        // original width : original height = width resize : height resize
-        // height resize = (width resize * original height) / original width
-        let canvasHeight = (1000 * img.height) / img.width;
-        let startY = img.width === img.height ? 0 : (1000 - canvasHeight) / 2;
-        ctx.drawImage(
-          img,
-          x,
-          y,
-          img.width,
-          img.height,
-          transEvent5.moveX * 2,
-          transEvent5.moveY * 2 + startY,
-          1000 * transEvent5.scale,
-          canvasHeight * transEvent5.scale
-        );
-      }
+      let canvasWidth = 1000 * transEvent5.scale;
+      let canvasHeight = (canvasWidth * img.height) / img.width;
+      let x = transEvent5.moveX * 2;
+      let y = transEvent5.moveY * 2 + editImg5.getLongImageStartPositionY() * 2;
+      ctx.drawImage(img, x, y, canvasWidth, canvasHeight);
 
       ctx.font = "186px Monoton";
       ctx.fillStyle = app5TitleColor.value;

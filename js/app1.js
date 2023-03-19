@@ -15,6 +15,9 @@ const download = document.getElementById("download");
 const icons = document.querySelectorAll(".weather-icon");
 const inputs = document.querySelectorAll("#app1 input");
 let weatherUrl = "";
+const chooseImg = "chooseImg";
+
+handleChangeImage(fileInput, selectedImage, editImg, transEvent, chooseImg, submitBtn);
 
 // 페이지 초기값 설정
 document.addEventListener("DOMContentLoaded", async () => {
@@ -24,37 +27,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   icons.item(0).firstElementChild.style.fill = PRIMARYCOLOR;
   city.value = "서울";
   country.value = "S.Korea, Seoul";
-});
-
-fileInput.addEventListener("change", (e) => {
-  // initialize
-  imageValueReset(selectedImage, editImg, transEvent);
-
-  const file = fileInput.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.readAsDataURL(file);
-  reader.onload = () => {
-    const img = new Image();
-    img.src = reader.result;
-
-    selectedImage.style.backgroundColor = BGCOLOR;
-
-    img.onload = () => {
-      editImg.height = (editImg.width * img.height) / img.width;
-      transEvent.startY = img.width >= img.height ? 0 : editImg.getLongImageStartPositionY();
-
-      img.style.left = `${transEvent.startX}px`;
-      img.style.top = `${transEvent.startY}px`;
-      img.id = "chooseImg";
-      selectedImage.appendChild(img);
-      // 이미지 실시간 드래그로 위치 조정
-      handleMouseDragEvent(selectedImage, transEvent, "chooseImg");
-      changeFileBtn(e.target);
-
-      submitBtn.style.marginRight = 0;
-    };
-  };
 });
 
 // 날씨 아이콘을 선택하면, 선택된 아이콘의 색을 chartreuse로 변경한다.
@@ -123,48 +95,11 @@ async function makeImageApp1() {
       canvas.height = 1000;
       ctx.fillStyle = BGCOLOR;
       ctx.fillRect(0, 0, 1000, 1000);
-      let x = 0;
-      let y = 0;
-      if (img.width < img.height) {
-        // 변형된 이미지의 가로 세로 비율. 4032 / (3024 / 1000) = 1.333
-        let canvasWidth = 1000 * transEvent.scale;
-        let canvasHeight = (canvasWidth * img.height) / img.width;
-        // 원본 이미지 높이를 변형된 이미지 높이로 나눈 비율.
-        let ratio = img.height / canvasHeight;
-        // 샘플 이미지에서 옮긴 y값만큼 원본 이미지의 비율로 y값 변환.
-        let originX = transEvent.moveX * ratio * -1;
-        let originY = transEvent.moveY * ratio * -1;
-
-        x = transEvent.moveX;
-        y = transEvent.moveY + editImg.getLongImageStartPositionY() * 2;
-        ctx.drawImage(
-          img,
-          originX,
-          originY,
-          img.width,
-          img.height,
-          x,
-          y,
-          canvasWidth,
-          canvasHeight
-        );
-      } else {
-        // original width : original height = width resize : height resize
-        // height resize = (width resize * original height) / original width
-        let canvasHeight = (1000 * img.height) / img.width;
-        let startY = img.width === img.height ? 0 : (1000 - canvasHeight) / 2;
-        ctx.drawImage(
-          img,
-          x,
-          y,
-          img.width,
-          img.height,
-          transEvent.moveX * 2,
-          transEvent.moveY * 2 + startY,
-          1000 * transEvent.scale,
-          canvasHeight * transEvent.scale
-        );
-      }
+      let canvasWidth = 1000 * transEvent.scale;
+      let canvasHeight = (canvasWidth * img.height) / img.width;
+      let x = transEvent.moveX * 2;
+      let y = transEvent.moveY * 2 + editImg.getLongImageStartPositionY() * 2;
+      ctx.drawImage(img, x, y, canvasWidth, canvasHeight);
 
       ctx.font = "50px S-CoreDream-6Bold";
       ctx.fillStyle = "white";
@@ -209,21 +144,3 @@ async function makeImageApp1() {
     };
   };
 }
-
-// let scaleMoveX = 0;
-// let scaleMoveY = 0;
-// selectedImage.addEventListener("wheel", (e) => {
-//   const delta = e.deltaY > 0 ? 0.1 : -0.1;
-//   console.log('delta: ', delta)
-//   transEvent.scale += delta;
-//   scaleMoveX += (editImg.width * delta) / 2;
-//   scaleMoveY += (editImg.height * delta) / 2;
-//   console.log('transEvent.scale: ', transEvent.scale)
-//   console.log('scaleMoveX: ', scaleMoveX, ' scaleMoveY: ',scaleMoveY)
-//   transEvent.scale = Math.max(0.1, Math.min(transEvent.scale, 3));
-//   console.log('transEvent: ', transEvent);
-//   selectedImage.firstChild.style.top = scaleMoveY;
-//   selectedImage.firstChild.style.left = scaleMoveX;
-//   selectedImage.firstChild.style.transform = `scale(${transEvent.scale})`;
-//   console.log('left: ',selectedImage.firstChild.getBoundingClientRect().left, 'top: ', selectedImage.firstChild.getBoundingClientRect().top);
-// });

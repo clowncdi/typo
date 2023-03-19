@@ -11,42 +11,14 @@ const app4Title = document.getElementById("app4Title");
 const app4Date = document.getElementById("app4Date");
 const app4Inputs = document.querySelectorAll("#app4 input");
 const app4Move = document.querySelectorAll("#app4 .app-move");
+const chooseImg4 = "chooseImg4";
 
+handleChangeImage(chooseFileApp4, selectedImageApp4, editImg4, transEvent4, chooseImg4, submitBtnApp4);
 handleMoveText(app4Move[0], moveTitle4);
 handleMoveText(app4Move[1], moveSub4);
 
 document.addEventListener("DOMContentLoaded", () => {
   app4Date.value = getToday();
-});
-
-chooseFileApp4.addEventListener("change", (e) => {
-  // initialize
-  imageValueReset(selectedImageApp4, editImg4, transEvent4);
-
-  const file = e.target.files[0];
-  const reader = new FileReader();
-  reader.readAsDataURL(file);
-  reader.onload = () => {
-    const img = new Image();
-    img.src = reader.result;
-
-    selectedImageApp4.style.backgroundColor = BGCOLOR;
-
-    img.onload = () => {
-      editImg4.height = (editImg4.width * img.height) / img.width;
-      transEvent4.startY = img.width >= img.height ? 0 : editImg4.getLongImageStartPositionY();
-
-      img.style.left = `${transEvent4.startX}px`;
-      img.style.top = `${transEvent4.startY}px`;
-      img.id = "chooseImg4";
-      selectedImageApp4.appendChild(img);
-      // 이미지 실시간 드래그로 위치 조정
-      handleMouseDragEvent(selectedImageApp4, transEvent4, "chooseImg4");
-
-      changeFileBtn(e.target);
-      submitBtnApp4.style.marginRight = 0;
-    };
-  };
 });
 
 isMobile() && submitBtnApp4.addEventListener("touchstart", makeImageApp4);
@@ -81,48 +53,11 @@ async function makeImageApp4() {
       ctx.fillStyle = BGCOLOR;
       ctx.filter = "contrast(110%) brightness(110%)";
       ctx.fillRect(0, 0, 1000, 1000);
-      let x = 0;
-      let y = 0;
-      if (img.width < img.height) {
-        // 변형된 이미지의 가로 세로 비율. 4032 / (3024 / 1000) = 1.333
-        let canvasWidth = 1000 * transEvent4.scale;
-        let canvasHeight = (canvasWidth * img.height) / img.width;
-        // 원본 이미지 높이를 변형된 이미지 높이로 나눈 비율.
-        let ratio = img.height / canvasHeight;
-        // 샘플 이미지에서 옮긴 y값만큼 원본 이미지의 비율로 y값 변환.
-        let originX = transEvent4.moveX * ratio * -1;
-        let originY = transEvent4.moveY * ratio * -1;
-
-        x = transEvent4.moveX;
-        y = transEvent4.moveY + editImg4.getLongImageStartPositionY() * 2;
-        ctx.drawImage(
-          img,
-          originX,
-          originY,
-          img.width,
-          img.height,
-          x,
-          y,
-          canvasWidth,
-          canvasHeight
-        );
-      } else {
-        // original width : original height = width resize : height resize
-        // height resize = (width resize * original height) / original width
-        let canvasHeight = (1000 * img.height) / img.width;
-        let startY = img.width === img.height ? 0 : (1000 - canvasHeight) / 2;
-        ctx.drawImage(
-          img,
-          x,
-          y,
-          img.width,
-          img.height,
-          transEvent4.moveX * 2,
-          transEvent4.moveY * 2 + startY,
-          1000 * transEvent4.scale,
-          canvasHeight * transEvent4.scale
-        );
-      }
+      let canvasWidth = 1000 * transEvent4.scale;
+      let canvasHeight = (canvasWidth * img.height) / img.width;
+      let x = transEvent4.moveX * 2;
+      let y = transEvent4.moveY * 2 + editImg4.getLongImageStartPositionY() * 2;
+      ctx.drawImage(img, x, y, canvasWidth, canvasHeight);
 
       ctx.font = "80px Pacifico";
       ctx.fillStyle = app4TitleColor.value;
