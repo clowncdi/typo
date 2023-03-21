@@ -10,16 +10,18 @@ const imageContainerApp8 = document.getElementById("imageContainerApp8");
 const app8TitleColor = document.getElementById("app8TitleColor");
 const app8Title = document.getElementById("app8Title");
 const app8Sub = document.getElementById("app8Sub");
-const app8StartDate = document.getElementById("app8StartDate");
-const app8EndDate = document.getElementById("app8EndDate");
+const app8Date = document.getElementById("app8Date");
 const app8Inputs = document.querySelectorAll("#app8 input");
-const app8Move = document.querySelectorAll('#app8 .app-move');
+const app8Move = document.querySelectorAll('#app8 .move-edit');
 const chooseImg8 = "chooseImg8";
 
 handleChangeImage(chooseFileApp8, selectedImageApp8, editImg8, transEvent8, chooseImg8, submitBtnApp8);
 handleMoveText(app8Move[0], moveTitle8);
 handleMoveText(app8Move[1], moveSub8);
 handleMoveText(app8Move[2], moveDate8);
+changeColor(app8TitleColor, app8Title);
+changeColor(app8TitleColor, app8Sub);
+changeColor(app8TitleColor, app8Date);
 
 document.addEventListener("DOMContentLoaded", () => {
   app8Date.value = getToday();

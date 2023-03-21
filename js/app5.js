@@ -13,13 +13,15 @@ const app5Sub = document.getElementById("app5Sub");
 const app5StartDate = document.getElementById("app5StartDate");
 const app5EndDate = document.getElementById("app5EndDate");
 const app5Inputs = document.querySelectorAll("#app5 input");
-const app5Move = document.querySelectorAll('#app5 .app-move');
+const app5Move = document.querySelectorAll('#app5 .move-edit');
 const chooseImg5 = "chooseImg5";
 
 handleChangeImage(chooseFileApp5, selectedImageApp5, editImg5, transEvent5, chooseImg5, submitBtnApp5);
 handleMoveText(app5Move[0], moveTitle5);
 handleMoveText(app5Move[1], moveSub5);
 handleMoveText(app5Move[2], moveDate5);
+changeColor(app5TitleColor, app5Title);
+changeColor(app5TitleColor, app5Sub);
 
 document.addEventListener("DOMContentLoaded", () => {
   app5StartDate.value = getToday();

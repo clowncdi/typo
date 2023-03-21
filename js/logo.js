@@ -168,19 +168,19 @@ class LogoState {
   }
 
   getLogoVisibility(visible) {
-    let temp = logo.getBoundingClientRect().top > -100;
-    if (visible === 'visible' && temp === true) {  // visiblityState event
+    let boundary = logo.getBoundingClientRect().top > -100;
+    if (visible === 'visible' && boundary === true) {  // visiblityState event
       return true;
     }
-    if (this.visibility > 0 && temp === true) { // 이미 진행중인 경우
+    if (this.visibility > 0 && boundary === true) { // 이미 진행중인 경우
       return null;
     } else if (
-      temp === true &&
+      boundary === true &&
       (this.visibility === undefined || this.isLogoVisible === null)
     ) {
-      return temp;
-    } else if (this.visibility > 0 && temp === false) { // 로고가 지정영역을 벗어난 경우
-      return temp;
+      return boundary;
+    } else if (this.visibility > 0 && boundary === false) { // 로고가 지정영역을 벗어난 경우
+      return boundary;
     }
   }
 

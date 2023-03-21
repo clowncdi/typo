@@ -8,11 +8,12 @@ const imageContainerApp9 = document.getElementById("imageContainerApp9");
 const app9TitleColor = document.getElementById("app9TitleColor");
 const app9Title = document.getElementById("app9Title");
 const app9Inputs = document.querySelectorAll("#app9 input");
-const app9Move = document.querySelectorAll("#app9 .app-move");
+const app9Move = document.querySelectorAll("#app9 .move-edit");
 const chooseImg9 = "chooseImg9";
 
 handleChangeImage(chooseFileApp9, selectedImageApp9, editImg9, transEvent9, chooseImg9, submitBtnApp9);
 handleMoveText(app9Move[0], moveTitle9);
+changeColor(app9TitleColor, app9Title);
 
 isMobile() && submitBtnApp9.addEventListener("touchstart", makeImageApp9);
 !isMobile() && submitBtnApp9.addEventListener("click", makeImageApp9);

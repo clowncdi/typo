@@ -10,12 +10,14 @@ const app7TitleColor = document.getElementById("app7TitleColor");
 const app7Title = document.getElementById("app7Title");
 const app7Date = document.getElementById("app7Date");
 const app7Inputs = document.querySelectorAll("#app7 input");
-const app7Move = document.querySelectorAll("#app7 .app-move");
+const app7Move = document.querySelectorAll("#app7 .move-edit");
 const chooseImg7 = "chooseImg7";
 
 handleChangeImage(chooseFileApp7, selectedImageApp7, editImg7, transEvent7, chooseImg7, submitBtnApp7);
 handleMoveText(app7Move[0], moveDate7);
 handleMoveText(app7Move[1], moveTitle7);
+changeColor(app7TitleColor, app7Title);
+changeColor(app7TitleColor, app7Date);
 
 document.addEventListener("DOMContentLoaded", () => {
   app7Date.value = getToday();

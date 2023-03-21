@@ -10,12 +10,13 @@ const app3TitleColor = document.getElementById("app3TitleColor");
 const app3Title = document.getElementById("app3Title");
 const app3Sub = document.getElementById("app3Sub");
 const app3Inputs = document.querySelectorAll("#app3 input");
-const app3Move = document.querySelectorAll("#app3 .app-move");
+const app3Move = document.querySelectorAll("#app3 .move-edit");
 const chooseImg3 = "chooseImg3";
 
 handleChangeImage(chooseFileApp3, selectedImageApp3, editImg3, transEvent3, chooseImg3, submitBtnApp3);
 handleMoveText(app3Move[0], moveTitle3);
 handleMoveText(app3Move[1], moveSub3);
+changeColor(app3TitleColor, app3Title)
 
 isMobile() && submitBtnApp3.addEventListener("touchstart", makeImageApp3);
 !isMobile() && submitBtnApp3.addEventListener("click", makeImageApp3);

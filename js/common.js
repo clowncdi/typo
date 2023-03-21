@@ -1,5 +1,6 @@
 const nav = document.getElementById("nav");
 const links = document.querySelectorAll("a[href^='#']");
+const moveList = document.querySelectorAll(".move");
 const PRIMARYCOLOR = "#0F8EFF";
 const BGCOLOR = "#19202c";
 const TYPOURL = "typo.co.kr";
@@ -282,6 +283,38 @@ function handleMouseDragEvent(selected, trans, choose) {
   });
 }
 
+function handleTargetMove(moveList) {
+  moveList.forEach((move) => {
+    let x = 0;
+    let y = 0;
+    let moveX = 0;
+    let moveY = 0;
+    function onDrag(e) {
+      console.log('onDrag', e.clientX - x, e.clientY - y);
+      moveX += e.clientX - x;
+      moveY += e.clientY - y;
+      x = e.clientX;
+      y = e.clientY;
+      move.style.transform = `translate(${moveX}px, ${moveY}px)`;
+      move.style.zIndex = "100";
+    }
+  
+    function onLetGo(e) {
+      document.removeEventListener("mousemove", onDrag);
+      document.removeEventListener("mouseup", onLetGo);
+    }
+  
+    function onGrab(e) {
+      x = e.clientX;
+      y = e.clientY;
+      document.addEventListener("mousemove", onDrag);
+      document.addEventListener("mouseup", onLetGo);
+    }
+  
+    move.addEventListener("mousedown", onGrab);
+  });
+}
+
 function handleMoveText(app, moveText) {
   let isMoveX = false;
 
@@ -300,8 +333,8 @@ function handleMoveText(app, moveText) {
       moveText.newY += moveY;
       moveText.startX = e.clientX; // 시작 위치 갱신
       moveText.startY = e.clientY;
-      app.parentElement.style.left = `${moveText.newX}px`;
-      app.parentElement.style.top = `${moveText.newY}px`;
+      app.style.translate = `${moveText.newX}px ${moveText.newY}px`;
+      app.style.zIndex = "10";
     }
   });
 
@@ -318,6 +351,12 @@ function handleMoveText(app, moveText) {
     if (e.key === 'Shift') {
       isMoveX = false;
     }
+  });
+}
+
+function changeColor(color, target) {
+  color.addEventListener("change", () => {
+    target.style.color = color.value;
   });
 }
 
@@ -452,6 +491,7 @@ document.addEventListener("DOMContentLoaded", () => {
   items.forEach((item) => {
     item.classList.add("loaded");
   });
+  handleTargetMove(moveList);
 });
 
 function getLongImageStartPositionY(edit) {
