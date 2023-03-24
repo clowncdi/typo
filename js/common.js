@@ -144,7 +144,7 @@ class TransEvent {
 class MoveText {
   _isDrag;
   _startX;
-  _startY; 
+  _startY;
   _newX;
   _newY;
 
@@ -209,11 +209,14 @@ function imageValueReset(selected, edit, trans) {
   edit.reset();
   trans.reset();
   edit.width = 500;
-  if (selected.getElementsByTagName('img').length > 0) {
-    selected.removeChild(selected.getElementsByTagName('img')[0]);
-    selected.getElementsByTagName('span')[0].innerText = `X축: 0px, Y축: 0px`;
+  if (selected.getElementsByTagName("img").length > 0) {
+    selected.removeChild(selected.getElementsByTagName("img")[0]);
+    selected.getElementsByTagName("span")[0].innerText = `X축: 0px, Y축: 0px`;
   } else {
-    selected.insertAdjacentHTML('afterBegin', '<div class="grid"><i></i><i></i><i></i><i></i></div>');
+    selected.insertAdjacentHTML(
+      "afterBegin",
+      '<div class="grid"><i></i><i></i><i></i><i></i></div>'
+    );
   }
   selected.style.backgroundColor = "";
 }
@@ -243,7 +246,7 @@ function handleMouseDragEvent(selected, trans, choose) {
     trans.startX = isMobile() ? e.touches[0].clientX : e.clientX;
     trans.startY = isMobile() ? e.touches[0].clientY : e.clientY;
     selected.style.cursor = "grabbing";
-    selected.getElementsByClassName('grid')[0].style.display = "block";
+    selected.getElementsByClassName("grid")[0].style.display = "block";
   });
 
   selected.addEventListener(mousemove, (e) => {
@@ -258,26 +261,30 @@ function handleMouseDragEvent(selected, trans, choose) {
       trans.startX = clientX;
       trans.startY = clientY;
       chooseImg.style.scale = trans.scale;
-      chooseImg.style.translate = `${trans.moveX + trans.scaleMoveX}px ${trans.moveY + trans.scaleMoveY}px`;
-      selected.getElementsByTagName('span')[0].innerText = `X축: ${trans.moveX}px, Y축: ${trans.moveY}px, 비율: ${parseInt(trans.scale * 100)}%`;
-      selected.getElementsByTagName('span')[0].style.display = "block";
-      selected.getElementsByTagName('span')[1].style.display = "block";
+      chooseImg.style.translate = `${trans.moveX + trans.scaleMoveX}px ${
+        trans.moveY + trans.scaleMoveY
+      }px`;
+      selected.getElementsByTagName("span")[0].innerText = `X축: ${
+        trans.moveX
+      }px, Y축: ${trans.moveY}px, 비율: ${parseInt(trans.scale * 100)}%`;
+      selected.getElementsByTagName("span")[0].style.display = "block";
+      selected.getElementsByTagName("span")[1].style.display = "block";
     }
   });
 
   selected.addEventListener(mouseup, (e) => {
     trans.drag = false;
     selected.style.cursor = "grab";
-    selected.getElementsByClassName('grid')[0].style.display = "none";
+    selected.getElementsByClassName("grid")[0].style.display = "none";
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === 'Shift' || e.repeat === true) {
+    if (e.key === "Shift" || e.repeat === true) {
       isMoveX = true;
     }
   });
   document.addEventListener("keyup", (e) => {
-    if (e.key === 'Shift') {
+    if (e.key === "Shift") {
       isMoveX = false;
     }
   });
@@ -290,7 +297,7 @@ function handleTargetMove(moveList) {
     let moveX = 0;
     let moveY = 0;
     function onDrag(e) {
-      console.log('onDrag', e.clientX - x, e.clientY - y);
+      console.log("onDrag", e.clientX - x, e.clientY - y);
       moveX += e.clientX - x;
       moveY += e.clientY - y;
       x = e.clientX;
@@ -298,19 +305,19 @@ function handleTargetMove(moveList) {
       move.style.transform = `translate(${moveX}px, ${moveY}px)`;
       move.style.zIndex = "100";
     }
-  
+
     function onLetGo(e) {
       document.removeEventListener("mousemove", onDrag);
       document.removeEventListener("mouseup", onLetGo);
     }
-  
+
     function onGrab(e) {
       x = e.clientX;
       y = e.clientY;
       document.addEventListener("mousemove", onDrag);
       document.addEventListener("mouseup", onLetGo);
     }
-  
+
     move.addEventListener("mousedown", onGrab);
   });
 }
@@ -343,12 +350,12 @@ function handleMoveText(app, moveText) {
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === 'Shift' || e.repeat === true) {
+    if (e.key === "Shift" || e.repeat === true) {
       isMoveX = true;
     }
   });
   document.addEventListener("keyup", (e) => {
-    if (e.key === 'Shift') {
+    if (e.key === "Shift") {
       isMoveX = false;
     }
   });
@@ -360,11 +367,18 @@ function changeColor(color, target) {
   });
 }
 
-function handleChangeImage(choose, selected, edit, trans, chooseImg, submitBtn) {
+function handleChangeImage(
+  choose,
+  selected,
+  edit,
+  trans,
+  chooseImg,
+  submitBtn
+) {
   choose.addEventListener("change", (e) => {
     // initialize
     imageValueReset(selected, edit, trans);
-  
+
     const file = e.target.files[0];
     if (!file) return;
     const reader = new FileReader();
@@ -372,20 +386,21 @@ function handleChangeImage(choose, selected, edit, trans, chooseImg, submitBtn) 
     reader.onload = () => {
       const img = new Image();
       img.src = reader.result;
-  
+
       selected.style.backgroundColor = BGCOLOR;
-  
+
       img.onload = () => {
         edit.height = (edit.width * img.height) / img.width; // 이미지 비율 유지
-        trans.startY = img.width >= img.height ? 0 : edit.getLongImageStartPositionY(); // 이미지 세로일 경우 센터 정렬
+        trans.startY =
+          img.width >= img.height ? 0 : edit.getLongImageStartPositionY(); // 이미지 세로일 경우 센터 정렬
         img.style.left = `${trans.startX}px`;
         img.style.top = `${trans.startY}px`;
         img.id = chooseImg;
         selected.appendChild(img);
-        
+
         handleMouseDragEvent(selected, trans, chooseImg); // 이미지 실시간 드래그로 위치 조정
         resizeImage(selected, edit, trans); // 이미지 리사이즈
-  
+
         changeFileBtn(e.target); // 파일버튼 위치 변경
         submitBtn.style.marginRight = 0;
       };
@@ -400,33 +415,42 @@ function resizeImage(imgApp, edit, trans) {
     trans.scale += delta;
     trans.scale = Math.max(0.1, Math.min(trans.scale, 3));
     if (trans.scale <= 0.1 || trans.scale >= 3) return;
-    trans.scaleMoveX += edit.width * delta / 2;
-    trans.scaleMoveY += edit.height * delta / 2;
+    trans.scaleMoveX += (edit.width * delta) / 2;
+    trans.scaleMoveY += (edit.height * delta) / 2;
     trans.moveX = 0;
     trans.moveY = 0;
-    imgApp.getElementsByTagName('img')[0].style.scale = trans.scale; 
-    imgApp.getElementsByTagName('img')[0].style.translate = `${trans.scaleMoveX}px ${trans.scaleMoveY}px`;
-    imgApp.getElementsByTagName('span')[0].innerText = `X축: ${trans.moveX}px, Y축: ${trans.moveY}px, 비율: ${parseInt(trans.scale * 100)}%`;
-    imgApp.getElementsByTagName('span')[0].style.display = "block";
-    imgApp.getElementsByTagName('span')[1].style.display = "block";
+    imgApp.getElementsByTagName("img")[0].style.scale = trans.scale;
+    imgApp.getElementsByTagName(
+      "img"
+    )[0].style.translate = `${trans.scaleMoveX}px ${trans.scaleMoveY}px`;
+    imgApp.getElementsByTagName("span")[0].innerText = `X축: ${
+      trans.moveX
+    }px, Y축: ${trans.moveY}px, 비율: ${parseInt(trans.scale * 100)}%`;
+    imgApp.getElementsByTagName("span")[0].style.display = "block";
+    imgApp.getElementsByTagName("span")[1].style.display = "block";
   });
 }
 
 function makeDouble(value, origin) {
-  return value === 0 ? origin : origin + (value * 2);
+  return value === 0 ? origin : origin + value * 2;
 }
 
 function resetPosition(resetBtn, trans, choose) {
   trans.reset();
   const chooseImg = document.getElementById(choose);
   chooseImg.style.scale = trans.scale;
-  const y = chooseImg.height > chooseImg.width ? (chooseImg.height - chooseImg.width) / -2  : 0;
+  const y =
+    chooseImg.height > chooseImg.width
+      ? (chooseImg.height - chooseImg.width) / -2
+      : 0;
   chooseImg.style.translate = `0px ${y}px`;
   chooseImg.style.left = 0;
   chooseImg.style.top = 0;
   trans.scaleMoveX = 0;
   trans.scaleMoveY = y;
-  resetBtn.previousElementSibling.innerText = `X축: ${trans.moveX}px, Y축: ${trans.moveY}px, 비율: ${parseInt(trans.scale * 100)}%`;
+  resetBtn.previousElementSibling.innerText = `X축: ${trans.moveX}px, Y축: ${
+    trans.moveY
+  }px, 비율: ${parseInt(trans.scale * 100)}%`;
 }
 
 function addDownloadButton(canvas, download) {
@@ -443,8 +467,8 @@ function addDownloadButton(canvas, download) {
 
 function downloadCountGA(app, name) {
   gtag("event", `${app}_download`, {
-    'app_name': name,
-    'event_date': new Date().toLocaleString(),
+    app_name: name,
+    event_date: new Date().toLocaleString(),
   });
 }
 

@@ -13,9 +13,9 @@ isMobile() && submitBtnApp10.addEventListener("touchstart", makeImageApp10);
 !isMobile() && submitBtnApp10.addEventListener("click", makeImageApp10);
 
 async function makeImageApp10() {
-  gtag('event', 'app10_create', {
-    'app_name': 'Thumbnail Note',
-    'event_date': new Date().toLocaleString(),
+  gtag("event", "app10_create", {
+    app_name: "Thumbnail Note",
+    event_date: new Date().toLocaleString(),
   });
   // initialize canvas.
   imageContainerApp10.innerHTML = "";
@@ -74,8 +74,8 @@ async function makeImageApp10() {
   ctx.font = "28px S-CoreDream-6Bold";
   const writer = app10Writer.value === "" ? "@plus.typo" : app10Writer.value;
   ctx.fillText(writer, 95, 960);
-  
-  addWatermarkRightBottom(ctx, 'black');
+
+  addWatermarkRightBottom(ctx, "black");
   imageContainerApp10.appendChild(canvas);
   addDownloadButton(canvas, imageContainerApp10.nextElementSibling);
 }

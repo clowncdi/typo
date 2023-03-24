@@ -17,7 +17,14 @@ const inputs = document.querySelectorAll("#app1 input");
 let weatherUrl = "";
 const chooseImg = "chooseImg";
 
-handleChangeImage(fileInput, selectedImage, editImg, transEvent, chooseImg, submitBtn);
+handleChangeImage(
+  fileInput,
+  selectedImage,
+  editImg,
+  transEvent,
+  chooseImg,
+  submitBtn
+);
 
 // 페이지 초기값 설정
 document.addEventListener("DOMContentLoaded", async () => {
@@ -54,9 +61,9 @@ isMobile() && submitBtn.addEventListener("touchstart", makeImageApp1);
 !isMobile() && submitBtn.addEventListener("click", makeImageApp1);
 
 async function makeImageApp1() {
-  gtag('event', 'app1_create', {
-    'app_name': 'Today Weather',
-    'event_date': new Date().toLocaleString(),
+  gtag("event", "app1_create", {
+    app_name: "Today Weather",
+    event_date: new Date().toLocaleString(),
   });
   // initialize canvas.
   imageContainer.innerHTML = "";
@@ -138,7 +145,7 @@ async function makeImageApp1() {
       ctx.textAlign = "right";
       city && ctx.fillText(city.value, 950, 846 + height100);
 
-      addWatermarkCenterBottom(ctx, 'white');
+      addWatermarkCenterBottom(ctx, "white");
       imageContainer.appendChild(canvas);
       addDownloadButton(canvas, imageContainer.nextElementSibling);
     };

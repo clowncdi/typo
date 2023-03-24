@@ -11,7 +11,14 @@ const app9Inputs = document.querySelectorAll("#app9 input");
 const app9Move = document.querySelectorAll("#app9 .move-edit");
 const chooseImg9 = "chooseImg9";
 
-handleChangeImage(chooseFileApp9, selectedImageApp9, editImg9, transEvent9, chooseImg9, submitBtnApp9);
+handleChangeImage(
+  chooseFileApp9,
+  selectedImageApp9,
+  editImg9,
+  transEvent9,
+  chooseImg9,
+  submitBtnApp9
+);
 handleMoveText(app9Move[0], moveTitle9);
 changeColor(app9TitleColor, app9Title);
 
@@ -19,9 +26,9 @@ isMobile() && submitBtnApp9.addEventListener("touchstart", makeImageApp9);
 !isMobile() && submitBtnApp9.addEventListener("click", makeImageApp9);
 
 async function makeImageApp9() {
-  gtag('event', 'app9_create', {
-    'app_name': 'Spring',
-    'event_date': new Date().toLocaleString(),
+  gtag("event", "app9_create", {
+    app_name: "Spring",
+    event_date: new Date().toLocaleString(),
   });
   // initialize canvas.
   imageContainerApp9.innerHTML = "";
@@ -61,9 +68,13 @@ async function makeImageApp9() {
       ctx.textAlign = "left";
       ctx.font = "110px Stalemate";
       ctx.filter = "opacity(0.95)";
-      ctx.fillText(app9Title.value, makeDouble(moveTitle9.newX, 150), makeDouble(moveTitle9.newY, 215));
+      ctx.fillText(
+        app9Title.value,
+        makeDouble(moveTitle9.newX, 150),
+        makeDouble(moveTitle9.newY, 215)
+      );
 
-      addWatermarkRightBottom(ctx, 'white');
+      addWatermarkRightBottom(ctx, "white");
       imageContainerApp9.appendChild(canvas);
       addDownloadButton(canvas, imageContainerApp9.nextElementSibling);
     };

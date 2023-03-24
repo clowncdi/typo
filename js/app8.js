@@ -12,10 +12,17 @@ const app8Title = document.getElementById("app8Title");
 const app8Sub = document.getElementById("app8Sub");
 const app8Date = document.getElementById("app8Date");
 const app8Inputs = document.querySelectorAll("#app8 input");
-const app8Move = document.querySelectorAll('#app8 .move-edit');
+const app8Move = document.querySelectorAll("#app8 .move-edit");
 const chooseImg8 = "chooseImg8";
 
-handleChangeImage(chooseFileApp8, selectedImageApp8, editImg8, transEvent8, chooseImg8, submitBtnApp8);
+handleChangeImage(
+  chooseFileApp8,
+  selectedImageApp8,
+  editImg8,
+  transEvent8,
+  chooseImg8,
+  submitBtnApp8
+);
 handleMoveText(app8Move[0], moveTitle8);
 handleMoveText(app8Move[1], moveSub8);
 handleMoveText(app8Move[2], moveDate8);
@@ -31,9 +38,9 @@ isMobile() && submitBtnApp8.addEventListener("touchstart", makeImageApp8);
 !isMobile() && submitBtnApp8.addEventListener("click", makeImageApp8);
 
 async function makeImageApp8() {
-  gtag('event', 'app8_create', {
-    'app_name': 'IKEA',
-    'event_date': new Date().toLocaleString(),
+  gtag("event", "app8_create", {
+    app_name: "IKEA",
+    event_date: new Date().toLocaleString(),
   });
   // initialize canvas.
   imageContainerApp8.innerHTML = "";
@@ -73,7 +80,11 @@ async function makeImageApp8() {
       ctx.filter = "opacity(0.6)";
       ctx.globalCompositeOperation = "screen";
       ctx.textAlign = "center";
-      ctx.fillText(app8Title.value.toUpperCase(), makeDouble(moveTitle8.newX, 500), makeDouble(moveTitle8.newY, 580));
+      ctx.fillText(
+        app8Title.value.toUpperCase(),
+        makeDouble(moveTitle8.newX, 500),
+        makeDouble(moveTitle8.newY, 580)
+      );
       ctx.save();
 
       ctx.scale(0.9, 1);
@@ -83,14 +94,22 @@ async function makeImageApp8() {
       ctx.letterSpacing = "35px";
       ctx.shadowBlur = 10;
       ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
-      ctx.fillText(app8Sub.value, makeDouble(moveSub8.newX, 560), makeDouble(moveSub8.newY, 675));
+      ctx.fillText(
+        app8Sub.value,
+        makeDouble(moveSub8.newX, 560),
+        makeDouble(moveSub8.newY, 675)
+      );
 
       ctx.font = "100 32px Montserrat";
       ctx.letterSpacing = "15px";
       ctx.wordSpacing = "6px";
-      ctx.fillText(setFormattingDate(app8Date.value), makeDouble(moveDate8.newX, 550), makeDouble(moveDate8.newY, 926));
+      ctx.fillText(
+        setFormattingDate(app8Date.value),
+        makeDouble(moveDate8.newX, 550),
+        makeDouble(moveDate8.newY, 926)
+      );
 
-      addWatermarkRightBottom(ctx, 'white');
+      addWatermarkRightBottom(ctx, "white");
       imageContainerApp8.appendChild(canvas);
       addDownloadButton(canvas, imageContainerApp8.nextElementSibling);
     };

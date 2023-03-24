@@ -29,7 +29,7 @@ langs.forEach((lang) => {
 function setLang(lang) {
   langs.forEach((lang) => lang.classList.remove("active"));
   lang.classList.add("active");
-  aboutWrap.classList.toggle("kor", lang.id === "kor")
+  aboutWrap.classList.toggle("kor", lang.id === "kor");
   if (lang.id === "kor") {
     textFront.classList.add("kor");
     textFront.value = KOR.text;

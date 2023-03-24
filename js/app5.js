@@ -13,10 +13,17 @@ const app5Sub = document.getElementById("app5Sub");
 const app5StartDate = document.getElementById("app5StartDate");
 const app5EndDate = document.getElementById("app5EndDate");
 const app5Inputs = document.querySelectorAll("#app5 input");
-const app5Move = document.querySelectorAll('#app5 .move-edit');
+const app5Move = document.querySelectorAll("#app5 .move-edit");
 const chooseImg5 = "chooseImg5";
 
-handleChangeImage(chooseFileApp5, selectedImageApp5, editImg5, transEvent5, chooseImg5, submitBtnApp5);
+handleChangeImage(
+  chooseFileApp5,
+  selectedImageApp5,
+  editImg5,
+  transEvent5,
+  chooseImg5,
+  submitBtnApp5
+);
 handleMoveText(app5Move[0], moveTitle5);
 handleMoveText(app5Move[1], moveSub5);
 handleMoveText(app5Move[2], moveDate5);
@@ -32,9 +39,9 @@ isMobile() && submitBtnApp5.addEventListener("touchstart", makeImageApp5);
 !isMobile() && submitBtnApp5.addEventListener("click", makeImageApp5);
 
 async function makeImageApp5() {
-  gtag('event', 'app5_create', {
-    'app_name': 'Summer Vacation',
-    'event_date': new Date().toLocaleString(),
+  gtag("event", "app5_create", {
+    app_name: "Summer Vacation",
+    event_date: new Date().toLocaleString(),
   });
   // initialize canvas.
   imageContainerApp5.innerHTML = "";
@@ -73,13 +80,21 @@ async function makeImageApp5() {
       ctx.shadowOffsetX = 0;
       ctx.shadowOffsetY = 0;
       ctx.textAlign = "center";
-      ctx.fillText(app5Title.value.toUpperCase(), makeDouble(moveTitle5.newX, 500), makeDouble(moveTitle5.newY, 550));
+      ctx.fillText(
+        app5Title.value.toUpperCase(),
+        makeDouble(moveTitle5.newX, 500),
+        makeDouble(moveTitle5.newY, 550)
+      );
 
       ctx.font = "300 130px Montserrat";
       ctx.letterSpacing = "35px";
       ctx.shadowColor = "rgba(0, 0, 0, 0.8)";
       ctx.shadowBlur = 10;
-      ctx.fillText(app5Sub.value.toUpperCase(), makeDouble(moveSub5.newX, 525), makeDouble(moveSub5.newY, 680));
+      ctx.fillText(
+        app5Sub.value.toUpperCase(),
+        makeDouble(moveSub5.newX, 525),
+        makeDouble(moveSub5.newY, 680)
+      );
 
       ctx.font = "400 38px Oswald";
       ctx.letterSpacing = "3px";
@@ -91,10 +106,18 @@ async function makeImageApp5() {
         makeDouble(moveDate5.newX, 420),
         makeDouble(moveDate5.newY, 830)
       );
-      ctx.fillText("~", makeDouble(moveDate5.newX, 500), makeDouble(moveDate5.newY, 830));
-      ctx.fillText(app5EndDate.value.substring(5).replace("-", "."), makeDouble(moveDate5.newX, 590), makeDouble(moveDate5.newY, 830));
+      ctx.fillText(
+        "~",
+        makeDouble(moveDate5.newX, 500),
+        makeDouble(moveDate5.newY, 830)
+      );
+      ctx.fillText(
+        app5EndDate.value.substring(5).replace("-", "."),
+        makeDouble(moveDate5.newX, 590),
+        makeDouble(moveDate5.newY, 830)
+      );
 
-      addWatermarkRightBottom(ctx, 'white');
+      addWatermarkRightBottom(ctx, "white");
       imageContainerApp5.appendChild(canvas);
       addDownloadButton(canvas, imageContainerApp5.nextElementSibling);
     };

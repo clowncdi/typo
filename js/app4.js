@@ -13,7 +13,14 @@ const app4Inputs = document.querySelectorAll("#app4 input");
 const app4Move = document.querySelectorAll("#app4 .move-edit");
 const chooseImg4 = "chooseImg4";
 
-handleChangeImage(chooseFileApp4, selectedImageApp4, editImg4, transEvent4, chooseImg4, submitBtnApp4);
+handleChangeImage(
+  chooseFileApp4,
+  selectedImageApp4,
+  editImg4,
+  transEvent4,
+  chooseImg4,
+  submitBtnApp4
+);
 handleMoveText(app4Move[0], moveTitle4);
 handleMoveText(app4Move[1], moveSub4);
 changeColor(app4TitleColor, app4Title);
@@ -26,9 +33,9 @@ isMobile() && submitBtnApp4.addEventListener("touchstart", makeImageApp4);
 !isMobile() && submitBtnApp4.addEventListener("click", makeImageApp4);
 
 async function makeImageApp4() {
-  gtag('event', 'app4_create', {
-    'app_name': 'Perilla Leaf',
-    'event_date': new Date().toLocaleString(),
+  gtag("event", "app4_create", {
+    app_name: "Perilla Leaf",
+    event_date: new Date().toLocaleString(),
   });
   // initialize canvas.
   imageContainerApp4.innerHTML = "";
@@ -71,7 +78,11 @@ async function makeImageApp4() {
       let words = app4Title.value.split(" ");
       let topPosition = 730;
       for (let word of words) {
-        ctx.fillText(word, makeDouble(moveTitle4.newX, 500), makeDouble(moveTitle4.newY, topPosition));
+        ctx.fillText(
+          word,
+          makeDouble(moveTitle4.newX, 500),
+          makeDouble(moveTitle4.newY, topPosition)
+        );
         topPosition += 90;
       }
 
@@ -80,9 +91,13 @@ async function makeImageApp4() {
       ctx.shadowColor = "rgba(0, 0, 0, 0.9)";
       ctx.shadowBlur = 10;
       ctx.fillStyle = "rgba(255, 255, 255, 0.95)";
-      ctx.fillText(app4Date.value.replaceAll("-", ". "), makeDouble(moveSub4.newX, 500), makeDouble(moveSub4.newY, 935));
+      ctx.fillText(
+        app4Date.value.replaceAll("-", ". "),
+        makeDouble(moveSub4.newX, 500),
+        makeDouble(moveSub4.newY, 935)
+      );
 
-      addWatermarkRightTop(ctx, 'white');
+      addWatermarkRightTop(ctx, "white");
       imageContainerApp4.appendChild(canvas);
       addDownloadButton(canvas, imageContainerApp4.nextElementSibling);
     };

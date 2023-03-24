@@ -11,7 +11,14 @@ const app2Inputs = document.querySelectorAll("#app2 input");
 const app2Move = document.querySelectorAll("#app2 .move-edit");
 const chooseImg2 = "chooseImg2";
 
-handleChangeImage(chooseFileApp2, selectedImageApp2, editImg2, transEvent2, chooseImg2, submitBtnApp2);
+handleChangeImage(
+  chooseFileApp2,
+  selectedImageApp2,
+  editImg2,
+  transEvent2,
+  chooseImg2,
+  submitBtnApp2
+);
 handleMoveText(app2Move[0], moveText2);
 changeColor(app2TitleColor, app2Title);
 
@@ -19,9 +26,9 @@ isMobile() && submitBtnApp2.addEventListener("touchstart", makeImageApp2);
 !isMobile() && submitBtnApp2.addEventListener("click", makeImageApp2);
 
 async function makeImageApp2() {
-  gtag('event', 'app2_create', {
-    'app_name': 'Yellow City',
-    'event_date': new Date().toLocaleString(),
+  gtag("event", "app2_create", {
+    app_name: "Yellow City",
+    event_date: new Date().toLocaleString(),
   });
   // initialize canvas.
   imageContainerApp2.innerHTML = "";
@@ -59,9 +66,13 @@ async function makeImageApp2() {
       ctx.shadowOffsetX = 0;
       ctx.shadowOffsetY = 0;
       ctx.textAlign = "center";
-      ctx.fillText(app2Title.value, makeDouble(moveText2.newX, 500), makeDouble(moveText2.newY, 170));
+      ctx.fillText(
+        app2Title.value,
+        makeDouble(moveText2.newX, 500),
+        makeDouble(moveText2.newY, 170)
+      );
 
-      addWatermarkCenterBottom(ctx, 'white');
+      addWatermarkCenterBottom(ctx, "white");
       imageContainerApp2.appendChild(canvas);
       addDownloadButton(canvas, imageContainerApp2.nextElementSibling);
     };

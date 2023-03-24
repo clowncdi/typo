@@ -57,6 +57,18 @@
 #app1 .input-wrap input {
   font-family: "S-CoreDream-6Bold", sans-serif;
 }
+#app1 .input-wrap input::-webkit-input-placeholder {
+  color: rgb(255 255 255 / 0.5);
+}
+#app1 .input-wrap input::-moz-placeholder {
+  color: rgb(255 255 255 / 0.5);
+}
+#app1 .input-wrap input:-ms-input-placeholder {
+  color: rgb(255 255 255 / 0.5);
+}
+#app1 .input-wrap input::-ms-input-placeholder {
+  color: rgb(255 255 255 / 0.5);
+}
 #app1 .input-wrap input::placeholder {
   color: rgb(255 255 255 / 0.5);
 }
@@ -93,7 +105,8 @@
   width: 100%;
   height: 100%;
   fill: white;
-  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.4));
+  -webkit-filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.4));
+          filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.4));
 }
 .weather-icon-wrap li:hover svg {
   fill: var(--blue);

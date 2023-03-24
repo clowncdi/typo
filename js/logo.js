@@ -169,17 +169,20 @@ class LogoState {
 
   getLogoVisibility(visible) {
     let boundary = logo.getBoundingClientRect().top > -100;
-    if (visible === 'visible' && boundary === true) {  // visiblityState event
+    if (visible === "visible" && boundary === true) {
+      // visiblityState event
       return true;
     }
-    if (this.visibility > 0 && boundary === true) { // 이미 진행중인 경우
+    if (this.visibility > 0 && boundary === true) {
+      // 이미 진행중인 경우
       return null;
     } else if (
       boundary === true &&
       (this.visibility === undefined || this.isLogoVisible === null)
     ) {
       return boundary;
-    } else if (this.visibility > 0 && boundary === false) { // 로고가 지정영역을 벗어난 경우
+    } else if (this.visibility > 0 && boundary === false) {
+      // 로고가 지정영역을 벗어난 경우
       return boundary;
     }
   }
@@ -219,7 +222,7 @@ const logoState = new LogoState();
 // visibilitychange event
 document.addEventListener("visibilitychange", () => {
   if (document.visibilityState === "visible") {
-    logoState.handleLogoChange('visible');
+    logoState.handleLogoChange("visible");
   } else {
     clearInterval(logoState.getVisibility());
   }

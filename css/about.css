@@ -1,3 +1,7 @@
+::-moz-selection {
+  background-color: transparent;
+  color: var(--blue);
+}
 ::selection {
   background-color: transparent;
   color: var(--blue);
@@ -24,13 +28,17 @@
   color: var(--blue);
   opacity: 0.1;
   transition: all 0.5s ease;
-  animation-name: slidein;
-  animation-duration: 1s;
-  animation-iteration-count: 1;
-  animation-direction: alternate;
+  -webkit-animation-name: slidein;
+          animation-name: slidein;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-iteration-count: 1;
+          animation-iteration-count: 1;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
   transform: rotate(5deg);
-  filter: blur(5px);
-  /* -webkit-filter: blur(5px); */
+  -webkit-filter: blur(5px);
+          filter: blur(5px);
 }
 .text-wrap {
   position: relative;
@@ -68,6 +76,17 @@
 .about-wrap.kor textarea,
 .about-wrap.kor p {
   font-family: "Pretendard", sans-serif;
+}
+
+@-webkit-keyframes slidein {
+  from {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+
+  to {
+    transform: sclae(1);
+  }
 }
 
 @keyframes slidein {

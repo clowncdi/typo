@@ -13,7 +13,14 @@ const app7Inputs = document.querySelectorAll("#app7 input");
 const app7Move = document.querySelectorAll("#app7 .move-edit");
 const chooseImg7 = "chooseImg7";
 
-handleChangeImage(chooseFileApp7, selectedImageApp7, editImg7, transEvent7, chooseImg7, submitBtnApp7);
+handleChangeImage(
+  chooseFileApp7,
+  selectedImageApp7,
+  editImg7,
+  transEvent7,
+  chooseImg7,
+  submitBtnApp7
+);
 handleMoveText(app7Move[0], moveDate7);
 handleMoveText(app7Move[1], moveTitle7);
 changeColor(app7TitleColor, app7Title);
@@ -27,9 +34,9 @@ isMobile() && submitBtnApp7.addEventListener("touchstart", makeImageApp7);
 !isMobile() && submitBtnApp7.addEventListener("click", makeImageApp7);
 
 async function makeImageApp7() {
-  gtag('event', 'app7_create', {
-    'app_name': 'Night Duty',
-    'event_date': new Date().toLocaleString(),
+  gtag("event", "app7_create", {
+    app_name: "Night Duty",
+    event_date: new Date().toLocaleString(),
   });
   // initialize canvas.
   imageContainerApp7.innerHTML = "";
@@ -65,13 +72,21 @@ async function makeImageApp7() {
       ctx.fillStyle = app7TitleColor.value;
       ctx.textAlign = "left";
       ctx.letterSpacing = "-1px";
-      ctx.fillText(app7Title.value.toUpperCase(), makeDouble(moveTitle7.newX, 146), makeDouble(moveTitle7.newY, 860));
+      ctx.fillText(
+        app7Title.value.toUpperCase(),
+        makeDouble(moveTitle7.newX, 146),
+        makeDouble(moveTitle7.newY, 860)
+      );
 
       ctx.font = "44px Oswald";
       ctx.letterSpacing = "12px";
-      ctx.fillText(app7Date.value.replaceAll("-", ". "), makeDouble(moveDate7.newX, 146), makeDouble(moveDate7.newY, 775));
+      ctx.fillText(
+        app7Date.value.replaceAll("-", ". "),
+        makeDouble(moveDate7.newX, 146),
+        makeDouble(moveDate7.newY, 775)
+      );
 
-      addWatermarkRightTop(ctx, 'white');
+      addWatermarkRightTop(ctx, "white");
       imageContainerApp7.appendChild(canvas);
       addDownloadButton(canvas, imageContainerApp7.nextElementSibling);
     };

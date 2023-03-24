@@ -13,18 +13,25 @@ const app3Inputs = document.querySelectorAll("#app3 input");
 const app3Move = document.querySelectorAll("#app3 .move-edit");
 const chooseImg3 = "chooseImg3";
 
-handleChangeImage(chooseFileApp3, selectedImageApp3, editImg3, transEvent3, chooseImg3, submitBtnApp3);
+handleChangeImage(
+  chooseFileApp3,
+  selectedImageApp3,
+  editImg3,
+  transEvent3,
+  chooseImg3,
+  submitBtnApp3
+);
 handleMoveText(app3Move[0], moveTitle3);
 handleMoveText(app3Move[1], moveSub3);
-changeColor(app3TitleColor, app3Title)
+changeColor(app3TitleColor, app3Title);
 
 isMobile() && submitBtnApp3.addEventListener("touchstart", makeImageApp3);
 !isMobile() && submitBtnApp3.addEventListener("click", makeImageApp3);
 
 async function makeImageApp3() {
-  gtag('event', 'app3_create', {
-    'app_name': 'Bicycle Repair Shop',
-    'event_date': new Date().toLocaleString(),
+  gtag("event", "app3_create", {
+    app_name: "Bicycle Repair Shop",
+    event_date: new Date().toLocaleString(),
   });
   // initialize canvas.
   imageContainerApp3.innerHTML = "";
@@ -64,16 +71,24 @@ async function makeImageApp3() {
       ctx.shadowOffsetX = 0;
       ctx.shadowOffsetY = 0;
       ctx.textAlign = "center";
-      ctx.fillText(app3Title.value, makeDouble(moveTitle3.newX, 500), makeDouble(moveTitle3.newY, 520));
+      ctx.fillText(
+        app3Title.value,
+        makeDouble(moveTitle3.newX, 500),
+        makeDouble(moveTitle3.newY, 520)
+      );
 
       ctx.font = "300 40px Roboto";
       ctx.letterSpacing = "16px";
       ctx.shadowColor = "rgba(0, 0, 0, 0.9)";
       ctx.shadowBlur = 10;
       ctx.fillStyle = "rgba(255, 255, 255, 0.95)";
-      ctx.fillText(app3Sub.value, makeDouble(moveSub3.newX, 500), makeDouble(moveSub3.newY, 600));
+      ctx.fillText(
+        app3Sub.value,
+        makeDouble(moveSub3.newX, 500),
+        makeDouble(moveSub3.newY, 600)
+      );
 
-      addWatermarkCenterBottom(ctx, 'white');
+      addWatermarkCenterBottom(ctx, "white");
       imageContainerApp3.appendChild(canvas);
       addDownloadButton(canvas, imageContainerApp3.nextElementSibling);
     };
