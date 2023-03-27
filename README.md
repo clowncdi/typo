@@ -1,5 +1,5 @@
 # Plus Typo 
-### Link : [Plus Typo](typo.co.kr)
+### Link : [Plus Typo](https://typo.co.kr)
 
 |Eng|Kor|
 |---|---|
