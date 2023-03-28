@@ -281,7 +281,7 @@ footer p a {
 .item-image {
   position: relative;
   margin: auto;
-  display: blcok;
+  display: block;
   width: 500px;
   height: 500px;
   border-radius: 5px;
@@ -393,7 +393,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   align-items: center;
 }
 .input-wrap label {
-  display: none;
+  font-size: 0;
+}
+.input-wrap.color label {
+  font-size: 14px;
 }
 input::-webkit-input-placeholder {
   font-size: 13px;

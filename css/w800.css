@@ -72,7 +72,7 @@ nav ul li a {
 @media screen and (max-width: 520px) {
   .app-wrap,
   .item-result {
-    scale: 0.9;
+    transform: scale(0.9);
     margin: -5%;
   }
   .gnb-logo a {
@@ -83,7 +83,7 @@ nav ul li a {
 @media screen and (max-width: 468px) {
   .app-wrap,
   .item-result {
-    scale: 0.8;
+    transform: scale(0.8);
     margin: -10%;
   }
 }
@@ -91,7 +91,7 @@ nav ul li a {
 @media screen and (max-width: 420px) {
   .app-wrap,
   .item-result {
-    scale: 0.7;
+    transform: scale(0.7);
     margin: -15%;
   }
 }
