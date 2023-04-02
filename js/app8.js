@@ -1,3 +1,20 @@
+import {
+  addDownloadButton,
+  handleChangeImage,
+  Img,
+  inputNullCheck,
+  TransEvent,
+  isMobile,
+  resetPosition,
+  MoveText,
+  handleMoveText,
+  changeColor,
+  makeDouble,
+  getToday,
+  setFormattingDate,
+  addWatermarkRightBottom
+} from './common';
+
 const editImg8 = new Img();
 const transEvent8 = new TransEvent();
 const moveTitle8 = new MoveText();
@@ -13,6 +30,7 @@ const app8Sub = document.getElementById("app8Sub");
 const app8Date = document.getElementById("app8Date");
 const app8Inputs = document.querySelectorAll("#app8 input");
 const app8Move = document.querySelectorAll("#app8 .move-edit");
+const reset = document.querySelector('#app8 .selected-image-position-reset');
 const chooseImg8 = "chooseImg8";
 
 handleChangeImage(
@@ -29,6 +47,9 @@ handleMoveText(app8Move[2], moveDate8);
 changeColor(app8TitleColor, app8Title);
 changeColor(app8TitleColor, app8Sub);
 changeColor(app8TitleColor, app8Date);
+
+reset.addEventListener('click', (e) =>
+    resetPosition(e.target, transEvent8, chooseImg8));
 
 document.addEventListener("DOMContentLoaded", () => {
   app8Date.value = getToday();

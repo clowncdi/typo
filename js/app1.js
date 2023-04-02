@@ -1,19 +1,30 @@
+import {
+  addDownloadButton,
+  addWatermarkCenterBottom,
+  BGCOLOR, getToday, handleChangeImage,
+  Img,
+  inputNullCheck,
+  PRIMARYCOLOR,
+  TransEvent,
+  isMobile,
+  resetPosition
+} from './common';
+
 const editImg = new Img();
 const transEvent = new TransEvent();
 const fileInput = document.getElementById("fileInput");
 const url = document.getElementById("url");
 const lowTemp = document.getElementById("lowTemp");
 const highTemp = document.getElementById("highTemp");
-const icon = document.getElementById("icon");
 const dateInput = document.getElementById("dateInput");
 const country = document.getElementById("country");
 const city = document.getElementById("city");
 const selectedImage = document.getElementById("selectedImage");
 const submitBtn = document.getElementById("submitBtn");
 const imageContainer = document.getElementById("imageContainer");
-const download = document.getElementById("download");
 const icons = document.querySelectorAll(".weather-icon");
 const inputs = document.querySelectorAll("#app1 input");
+const reset = document.querySelector('#app1 .selected-image-position-reset');
 let weatherUrl = "";
 const chooseImg = "chooseImg";
 
@@ -25,6 +36,9 @@ handleChangeImage(
   chooseImg,
   submitBtn
 );
+
+reset.addEventListener('click', (e) =>
+    resetPosition(e.target, transEvent, chooseImg));
 
 // 페이지 초기값 설정
 document.addEventListener("DOMContentLoaded", async () => {

@@ -1,3 +1,15 @@
+import {
+  addDownloadButton,
+  addWatermarkCenterBottom,
+  BGCOLOR, handleChangeImage,
+  Img,
+  inputNullCheck,
+  TransEvent,
+  isMobile,
+  resetPosition,
+  MoveText, handleMoveText, changeColor, makeDouble
+} from './common';
+
 const editImg3 = new Img();
 const transEvent3 = new TransEvent();
 const moveTitle3 = new MoveText();
@@ -11,6 +23,7 @@ const app3Title = document.getElementById("app3Title");
 const app3Sub = document.getElementById("app3Sub");
 const app3Inputs = document.querySelectorAll("#app3 input");
 const app3Move = document.querySelectorAll("#app3 .move-edit");
+const reset = document.querySelector('#app3 .selected-image-position-reset');
 const chooseImg3 = "chooseImg3";
 
 handleChangeImage(
@@ -24,6 +37,9 @@ handleChangeImage(
 handleMoveText(app3Move[0], moveTitle3);
 handleMoveText(app3Move[1], moveSub3);
 changeColor(app3TitleColor, app3Title);
+
+reset.addEventListener('click', (e) =>
+    resetPosition(e.target, transEvent3, chooseImg3));
 
 isMobile() && submitBtnApp3.addEventListener("touchstart", makeImageApp3);
 !isMobile() && submitBtnApp3.addEventListener("click", makeImageApp3);

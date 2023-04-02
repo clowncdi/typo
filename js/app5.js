@@ -1,3 +1,14 @@
+import {
+  addDownloadButton,
+  BGCOLOR, handleChangeImage,
+  Img,
+  inputNullCheck,
+  TransEvent,
+  isMobile,
+  resetPosition,
+  MoveText, handleMoveText, changeColor, makeDouble, getToday, addWatermarkRightBottom
+} from './common';
+
 const editImg5 = new Img();
 const transEvent5 = new TransEvent();
 const moveTitle5 = new MoveText();
@@ -14,6 +25,7 @@ const app5StartDate = document.getElementById("app5StartDate");
 const app5EndDate = document.getElementById("app5EndDate");
 const app5Inputs = document.querySelectorAll("#app5 input");
 const app5Move = document.querySelectorAll("#app5 .move-edit");
+const reset = document.querySelector('#app5 .selected-image-position-reset');
 const chooseImg5 = "chooseImg5";
 
 handleChangeImage(
@@ -29,6 +41,9 @@ handleMoveText(app5Move[1], moveSub5);
 handleMoveText(app5Move[2], moveDate5);
 changeColor(app5TitleColor, app5Title);
 changeColor(app5TitleColor, app5Sub);
+
+reset.addEventListener('click', (e) =>
+    resetPosition(e.target, transEvent5, chooseImg5));
 
 document.addEventListener("DOMContentLoaded", () => {
   app5StartDate.value = getToday();

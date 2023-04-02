@@ -1,11 +1,11 @@
 const nav = document.getElementById("nav");
 const links = document.querySelectorAll("a[href^='#']");
 const moveList = document.querySelectorAll(".move");
-const PRIMARYCOLOR = "#0F8EFF";
-const BGCOLOR = "#19202c";
-const TYPOURL = "typo.co.kr";
+export const PRIMARYCOLOR = "#0F8EFF";
+export const BGCOLOR = "#19202c";
+export const TYPOURL = "typo.co.kr";
 
-class Img {
+export class Img {
   _width;
   _height;
 
@@ -44,7 +44,7 @@ class Img {
   }
 }
 
-class TransEvent {
+export class TransEvent {
   _startX;
   _startY;
   _moveX;
@@ -141,7 +141,7 @@ class TransEvent {
   }
 }
 
-class MoveText {
+export class MoveText {
   _isDrag;
   _startX;
   _startY;
@@ -205,7 +205,7 @@ class MoveText {
   }
 }
 
-function imageValueReset(selected, edit, trans) {
+export function imageValueReset(selected, edit, trans) {
   edit.reset();
   trans.reset();
   edit.width = 500;
@@ -221,7 +221,7 @@ function imageValueReset(selected, edit, trans) {
   selected.style.backgroundColor = "";
 }
 
-function changeFileBtn(input) {
+export function changeFileBtn(input) {
   input.previousElementSibling.innerText = "Change";
   input.previousElementSibling.style.position = "absolute";
   input.previousElementSibling.style.left = "0";
@@ -230,7 +230,7 @@ function changeFileBtn(input) {
 }
 
 // 이미지 실시간 드래그로 위치 조정
-function handleMouseDragEvent(selected, trans, choose) {
+export function handleMouseDragEvent(selected, trans, choose) {
   const chooseImg = document.getElementById(choose);
   let currentX = 0;
   let currentY = 0;
@@ -272,7 +272,7 @@ function handleMouseDragEvent(selected, trans, choose) {
     }
   });
 
-  selected.addEventListener(mouseup, (e) => {
+  selected.addEventListener(mouseup, () => {
     trans.drag = false;
     selected.style.cursor = "grab";
     selected.getElementsByClassName("grid")[0].style.display = "none";
@@ -290,14 +290,13 @@ function handleMouseDragEvent(selected, trans, choose) {
   });
 }
 
-function handleTargetMove(moveList) {
+export function handleTargetMove(moveList) {
   moveList.forEach((move) => {
     let x = 0;
     let y = 0;
     let moveX = 0;
     let moveY = 0;
     function onDrag(e) {
-      console.log("onDrag", e.clientX - x, e.clientY - y);
       moveX += e.clientX - x;
       moveY += e.clientY - y;
       x = e.clientX;
@@ -306,7 +305,7 @@ function handleTargetMove(moveList) {
       move.style.zIndex = "100";
     }
 
-    function onLetGo(e) {
+    function onLetGo() {
       document.removeEventListener("mousemove", onDrag);
       document.removeEventListener("mouseup", onLetGo);
     }
@@ -322,7 +321,7 @@ function handleTargetMove(moveList) {
   });
 }
 
-function handleMoveText(app, moveText) {
+export function handleMoveText(app, moveText) {
   let isMoveX = false;
 
   app.addEventListener("mousedown", (e) => {
@@ -345,7 +344,7 @@ function handleMoveText(app, moveText) {
     }
   });
 
-  app.addEventListener("mouseup", (e) => {
+  app.addEventListener("mouseup", () => {
     moveText.isDrag = false;
   });
 
@@ -361,13 +360,13 @@ function handleMoveText(app, moveText) {
   });
 }
 
-function changeColor(color, target) {
+export function changeColor(color, target) {
   color.addEventListener("change", () => {
     target.style.color = color.value;
   });
 }
 
-function handleChangeImage(
+export function handleChangeImage(
   choose,
   selected,
   edit,
@@ -408,7 +407,7 @@ function handleChangeImage(
   });
 }
 
-function resizeImage(imgApp, edit, trans) {
+export function resizeImage(imgApp, edit, trans) {
   imgApp.addEventListener("wheel", (e) => {
     e.preventDefault();
     const delta = e.deltaY > 0 ? 0.1 : -0.1;
@@ -431,11 +430,11 @@ function resizeImage(imgApp, edit, trans) {
   });
 }
 
-function makeDouble(value, origin) {
+export function makeDouble(value, origin) {
   return value === 0 ? origin : origin + value * 2;
 }
 
-function resetPosition(resetBtn, trans, choose) {
+export function resetPosition(resetBtn, trans, choose) {
   trans.reset();
   const chooseImg = document.getElementById(choose);
   chooseImg.style.scale = trans.scale;
@@ -448,16 +447,17 @@ function resetPosition(resetBtn, trans, choose) {
   chooseImg.style.top = 0;
   trans.scaleMoveX = 0;
   trans.scaleMoveY = y;
+  console.log(resetBtn)
   resetBtn.previousElementSibling.innerText = `X축: ${trans.moveX}px, Y축: ${
     trans.moveY
   }px, 비율: ${parseInt(trans.scale * 100)}%`;
 }
 
-function addDownloadButton(canvas, download) {
+export function addDownloadButton(canvas, download) {
   const a = document.createElement("a");
   a.href = canvas.toDataURL("image/jpeg");
-  a.download = `${getToday()}_${TYPOURL}.jpg`;
-  a.innerHTML = `<p><span>File Name</span>${getToday()}_${TYPOURL}.jpg</p>`;
+  a.download = `${this.getToday()}_${TYPOURL}.jpg`;
+  a.innerHTML = `<p><span>File Name</span>${this.getToday()}_${TYPOURL}.jpg</p>`;
   const button = document.createElement("button");
   button.innerText = "Download";
   button.className = "btn btn-dark";
@@ -465,7 +465,7 @@ function addDownloadButton(canvas, download) {
   download.appendChild(a);
 }
 
-function downloadCountGA(app, name) {
+export function downloadCountGA(app, name) {
   gtag("event", `${app}_download`, {
     app_name: name,
     event_date: new Date().toLocaleString(),
@@ -473,7 +473,7 @@ function downloadCountGA(app, name) {
 }
 
 // 오늘 날짜를 yyyy-mm-dd 형식으로 반환하는 함수
-function getToday() {
+export function getToday() {
   const today = new Date();
   const yyyy = today.getFullYear();
   const mm =
@@ -482,12 +482,12 @@ function getToday() {
   return `${yyyy}-${mm}-${dd}`;
 }
 
-function clearInput(btn) {
+export function clearInput(btn) {
   btn.previousElementSibling.value = "";
 }
 
 // input null check
-function inputNullCheck(inputList, inputFile) {
+export function inputNullCheck(inputList, inputFile) {
   if (!inputFile.files[0]) {
     inputFile.previousElementSibling.style.backgroundColor = "red";
     inputFile.previousElementSibling.style.color = "white";
@@ -495,7 +495,7 @@ function inputNullCheck(inputList, inputFile) {
   inputList.forEach((input) => checkValue(input));
 }
 
-function checkValue(input) {
+export function checkValue(input) {
   if (input.value == "") {
     input.focus();
     input.style.borderColor = "red";
@@ -504,7 +504,7 @@ function checkValue(input) {
   }
 }
 
-function isMobile() {
+export function isMobile() {
   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
     window.navigator.userAgent
   );
@@ -518,11 +518,11 @@ document.addEventListener("DOMContentLoaded", () => {
   handleTargetMove(moveList);
 });
 
-function getLongImageStartPositionY(edit) {
+export function getLongImageStartPositionY(edit) {
   return (edit.width - edit.height) / 2;
 }
 
-function setFormattingDate(value) {
+export function setFormattingDate(value) {
   let date = value.split("-");
   date[1] = date[1].replace(/^0+/, "");
   date[2] = date[2].replace(/^0+/, "");
@@ -554,7 +554,7 @@ links.forEach((link) => {
 });
 
 // watermark
-function addWatermarkRightBottom(ctx, color) {
+export function addWatermarkRightBottom(ctx, color) {
   ctx.restore();
   ctx.font = "24px S-CoreDream-6Bold";
   ctx.letterSpacing = "0px";
@@ -564,7 +564,7 @@ function addWatermarkRightBottom(ctx, color) {
   ctx.fillText(`${TYPOURL}`, 980, 980);
 }
 
-function addWatermarkCenterBottom(ctx, color) {
+export function addWatermarkCenterBottom(ctx, color) {
   ctx.restore();
   ctx.font = "24px S-CoreDream-6Bold";
   ctx.letterSpacing = "0px";
@@ -574,7 +574,7 @@ function addWatermarkCenterBottom(ctx, color) {
   ctx.fillText(`${TYPOURL}`, 500, 980);
 }
 
-function addWatermarkRightTop(ctx, color) {
+export function addWatermarkRightTop(ctx, color) {
   ctx.restore();
   ctx.font = "24px S-CoreDream-6Bold";
   ctx.letterSpacing = "0px";

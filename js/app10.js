@@ -1,3 +1,5 @@
+import {addDownloadButton, addWatermarkRightBottom, checkValue, isMobile} from "./common";
+
 const submitBtnApp10 = document.getElementById("submitBtnApp10");
 const imageContainerApp10 = document.getElementById("imageContainerApp10");
 const app10BgColor = document.getElementById("app10BgColor");
