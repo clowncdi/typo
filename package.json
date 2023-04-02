@@ -1,9 +1,12 @@
 {
-  "dependencies": {},
   "name": "typo-image",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://clowncdi@github.com/clowncdi/typo-image.git",
   "author": "clowncdi <clowncdi85@gmail.com>",
-  "license": "Apache"
+  "license": "Apache",
+  "devDependencies": {
+    "@types/gtag.js": "^0.0.12",
+    "typescript": "^5.0.3"
+  }
 }

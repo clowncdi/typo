@@ -33,7 +33,7 @@ handleChangeImage(
   submitBtnApp2
 );
 handleMoveText(app2Move[0], moveText2);
-changeColor(app2TitleColor, app2Title);
+changeColor(app2TitleColor as HTMLInputElement, app2Title as HTMLInputElement);
 
 reset.addEventListener('click', (e) =>
     resetPosition(e.target, transEvent2, chooseImg2));

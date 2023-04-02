@@ -7,26 +7,27 @@ import {
   PRIMARYCOLOR,
   TransEvent,
   isMobile,
-  resetPosition
+  resetPosition,
+  isEmpty
 } from './common';
 
-const editImg = new Img();
-const transEvent = new TransEvent();
-const fileInput = document.getElementById("fileInput");
-const url = document.getElementById("url");
-const lowTemp = document.getElementById("lowTemp");
-const highTemp = document.getElementById("highTemp");
-const dateInput = document.getElementById("dateInput");
-const country = document.getElementById("country");
-const city = document.getElementById("city");
-const selectedImage = document.getElementById("selectedImage");
-const submitBtn = document.getElementById("submitBtn");
-const imageContainer = document.getElementById("imageContainer");
-const icons = document.querySelectorAll(".weather-icon");
-const inputs = document.querySelectorAll("#app1 input");
-const reset = document.querySelector('#app1 .selected-image-position-reset');
-let weatherUrl = "";
-const chooseImg = "chooseImg";
+const editImg: Img = new Img();
+const transEvent: TransEvent = new TransEvent();
+const fileInput: HTMLInputElement = isEmpty(document.getElementById("fileInput") as HTMLInputElement);
+const url: HTMLInputElement = isEmpty(document.getElementById("url") as HTMLInputElement);
+const lowTemp: HTMLInputElement = isEmpty(document.getElementById("lowTemp") as HTMLInputElement);
+const highTemp: HTMLInputElement = isEmpty(document.getElementById("highTemp") as HTMLInputElement);
+const dateInput: HTMLInputElement = isEmpty(document.getElementById("dateInput") as HTMLInputElement);
+const country: HTMLInputElement = isEmpty(document.getElementById("country") as HTMLInputElement);
+const city: HTMLInputElement = isEmpty(document.getElementById("city") as HTMLInputElement);
+const selectedImage: HTMLElement = isEmpty(document.getElementById("selectedImage"));
+const submitBtn: HTMLElement = isEmpty(document.getElementById("submitBtn"));
+const imageContainer: HTMLElement = isEmpty(document.getElementById("imageContainer"));
+const icons: NodeListOf<HTMLElement> = document.querySelectorAll(".weather-icon");
+const inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll("#app1 input");
+const reset: HTMLElement = isEmpty(document.querySelector('#app1 .selected-image-position-reset') as HTMLElement);
+let weatherUrl: string = "";
+const chooseImg: string = "chooseImg";
 
 handleChangeImage(
   fileInput,
@@ -38,14 +39,15 @@ handleChangeImage(
 );
 
 reset.addEventListener('click', (e) =>
-    resetPosition(e.target, transEvent, chooseImg));
+    resetPosition(isEmpty(e.target as HTMLElement), transEvent, chooseImg));
 
 // 페이지 초기값 설정
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded", () => {
   dateInput.value = getToday();
   url.value = "Weaco.co.kr";
   weatherUrl = "/images/sun.svg";
-  icons.item(0).firstElementChild.style.fill = PRIMARYCOLOR;
+  const icon = isEmpty(icons.item(0) as HTMLElement);
+  isEmpty(icon.firstElementChild as SVGImageElement).style.fill = PRIMARYCOLOR;
   city.value = "서울";
   country.value = "S.Korea, Seoul";
 });
@@ -53,20 +55,21 @@ document.addEventListener("DOMContentLoaded", async () => {
 // 날씨 아이콘을 선택하면, 선택된 아이콘의 색을 chartreuse로 변경한다.
 icons.forEach((icon) => {
   icon.addEventListener("click", (e) => {
+    const target = isEmpty(e.target as HTMLOrSVGImageElement);
     if (
-      e.target.style.fill === PRIMARYCOLOR ||
-      e.target.style.fill === "rgb(15, 142, 255)"
+      target.style.fill === PRIMARYCOLOR ||
+      target.style.fill === "rgb(15, 142, 255)"
     ) {
-      e.target.style.fill = "white";
+      target.style.fill = "white";
       weatherUrl = "";
       return;
     }
-    if (e.target.tagName == "IMG" || e.target.tagName == "svg") {
+    if (target.tagName == "IMG" || target.tagName == "svg") {
       icons.forEach((icon) => {
-        icon.children[0].style.fill = "white";
+        (icon.children[0] as SVGAElement).style.fill = "white";
       });
-      e.target.style.fill = PRIMARYCOLOR;
-      weatherUrl = "/images/" + e.target.className.baseVal + ".svg";
+      target.style.fill = PRIMARYCOLOR;
+      weatherUrl = "/images/" + target.className.baseVal + ".svg";
     }
   });
 });
@@ -74,19 +77,19 @@ icons.forEach((icon) => {
 isMobile() && submitBtn.addEventListener("touchstart", makeImageApp1);
 !isMobile() && submitBtn.addEventListener("click", makeImageApp1);
 
-async function makeImageApp1() {
+function makeImageApp1(): void {
   gtag("event", "app1_create", {
     app_name: "Today Weather",
     event_date: new Date().toLocaleString(),
   });
   // initialize canvas.
   imageContainer.innerHTML = "";
-  imageContainer.nextElementSibling.innerHTML = "";
+  isEmpty(imageContainer.nextElementSibling).innerHTML = "";
   inputNullCheck(inputs, fileInput);
 
-  const file = fileInput.files[0];
+  const file = isEmpty(fileInput.files)[0];
   if (file) {
-    imageContainer.parentElement.parentElement.style.display = "block";
+    isEmpty(isEmpty(imageContainer.parentElement).parentElement).style.display = "block";
   }
   const low = lowTemp.value;
   const high = highTemp.value;

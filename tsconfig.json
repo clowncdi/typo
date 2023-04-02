@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "module": "CommonJS",
+    "sourceMap": true,
+    "types": ["@types/gtag.js"],
+    "lib": [
+      "ES6",
+      "DOM"
+    ]
+  }
+}

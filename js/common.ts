@@ -1,13 +1,13 @@
-const nav = document.getElementById("nav");
-const links = document.querySelectorAll("a[href^='#']");
-const moveList = document.querySelectorAll(".move");
-export const PRIMARYCOLOR = "#0F8EFF";
-export const BGCOLOR = "#19202c";
-export const TYPOURL = "typo.co.kr";
+const nav: HTMLElement | null = document.getElementById("nav");
+const links: NodeListOf<HTMLAnchorElement> = document.querySelectorAll("a[href^='#']");
+const moveList: NodeListOf<HTMLElement> = document.querySelectorAll(".move");
+export const PRIMARYCOLOR: string = "#0F8EFF";
+export const BGCOLOR: string = "#19202c";
+export const TYPOURL: string = "typo.co.kr";
 
 export class Img {
-  _width;
-  _height;
+  private _width: number;
+  private _height: number;
 
   constructor() {
     this._width = 0;
@@ -45,14 +45,14 @@ export class Img {
 }
 
 export class TransEvent {
-  _startX;
-  _startY;
-  _moveX;
-  _moveY;
-  _scale;
-  _scaleMoveX;
-  _scaleMoveY;
-  _drag;
+  private _startX: number;
+  private _startY: number;
+  private _moveX: number;
+  private _moveY: number;
+  private _scale: number;
+  private _scaleMoveX: number;
+  private _scaleMoveY: number;
+  private _drag: boolean;
 
   constructor() {
     this._startX = 0;
@@ -142,11 +142,11 @@ export class TransEvent {
 }
 
 export class MoveText {
-  _isDrag;
-  _startX;
-  _startY;
-  _newX;
-  _newY;
+  private _isDrag: boolean;
+  private _startX: number;
+  private _startY: number;
+  private _newX: number;
+  private _newY: number;
 
   constructor() {
     this._isDrag = false;
@@ -205,33 +205,45 @@ export class MoveText {
   }
 }
 
-export function imageValueReset(selected, edit, trans) {
+export function isEmpty<T>(el: T | null | undefined): T {
+  if (el) {
+    return el;
+  } else {
+    throw new Error("Element is null");
+  }
+}
+
+export function imageValueReset(container: HTMLElement, edit: Img, trans: TransEvent): void {
   edit.reset();
   trans.reset();
   edit.width = 500;
-  if (selected.getElementsByTagName("img").length > 0) {
-    selected.removeChild(selected.getElementsByTagName("img")[0]);
-    selected.getElementsByTagName("span")[0].innerText = `X축: 0px, Y축: 0px`;
+  if (container.getElementsByTagName("img").length > 0) {
+    container.removeChild(container.getElementsByTagName("img")[0]);
+    container.getElementsByTagName("span")[0].innerText = `X축: 0px, Y축: 0px`;
   } else {
-    selected.insertAdjacentHTML(
-      "afterBegin",
+    container.insertAdjacentHTML(
+      "afterbegin",
       '<div class="grid"><i></i><i></i><i></i><i></i></div>'
     );
   }
-  selected.style.backgroundColor = "";
+  container.style.backgroundColor = "";
 }
 
-export function changeFileBtn(input) {
-  input.previousElementSibling.innerText = "Change";
-  input.previousElementSibling.style.position = "absolute";
-  input.previousElementSibling.style.left = "0";
-  input.previousElementSibling.style.bottom = "-60px";
-  input.parentElement.style.zIndex = "0";
+export function changeFileBtn(target: HTMLElement | null): void {
+  const input = isEmpty<HTMLElement>(target);
+  const prevEl = isEmpty<HTMLElement>(input.previousElementSibling as HTMLElement);
+  prevEl.innerText = "Change";
+  prevEl.style.position = "absolute";
+  prevEl.style.left = "0";
+  prevEl.style.bottom = "-60px";
+  const parentEl = isEmpty<HTMLElement>(input.parentElement as HTMLElement);
+  parentEl.style.zIndex = "0";
 }
 
 // 이미지 실시간 드래그로 위치 조정
-export function handleMouseDragEvent(selected, trans, choose) {
-  const chooseImg = document.getElementById(choose);
+export function handleMouseDragEvent(container: HTMLElement | null, trans: TransEvent, choose: string): void {
+  const selected = isEmpty<HTMLElement>(container);
+  const chooseImg = isEmpty<HTMLElement>(document.getElementById(choose));
   let currentX = 0;
   let currentY = 0;
   let mousedown = isMobile() ? "touchstart" : "mousedown";
@@ -243,16 +255,17 @@ export function handleMouseDragEvent(selected, trans, choose) {
 
   selected.addEventListener(mousedown, (e) => {
     trans.drag = true;
-    trans.startX = isMobile() ? e.touches[0].clientX : e.clientX;
-    trans.startY = isMobile() ? e.touches[0].clientY : e.clientY;
+    trans.startX = isMobile() ? (e as TouchEvent).touches[0].clientX : (e as MouseEvent).clientX;
+    trans.startY = isMobile() ? (e as TouchEvent).touches[0].clientY : (e as MouseEvent).clientY;
     selected.style.cursor = "grabbing";
-    selected.getElementsByClassName("grid")[0].style.display = "block";
+    const grid = isEmpty<HTMLElement>(selected.getElementsByClassName("grid")[0] as HTMLElement);
+    grid.style.display = "block";
   });
 
   selected.addEventListener(mousemove, (e) => {
     e.preventDefault();
-    clientX = isMobile() ? e.touches[0].clientX : e.clientX;
-    clientY = isMobile() ? e.touches[0].clientY : e.clientY;
+    clientX = isMobile() ? (e as TouchEvent).touches[0].clientX : (e as MouseEvent).clientX;
+    clientY = isMobile() ? (e as TouchEvent).touches[0].clientY : (e as MouseEvent).clientY;
     if (trans.drag) {
       currentX = isMoveX ? 0 : clientX - trans.startX;
       currentY = clientY - trans.startY;
@@ -260,13 +273,13 @@ export function handleMouseDragEvent(selected, trans, choose) {
       trans.moveY += currentY;
       trans.startX = clientX;
       trans.startY = clientY;
-      chooseImg.style.scale = trans.scale;
+      chooseImg.style.scale = String(trans.scale);
       chooseImg.style.translate = `${trans.moveX + trans.scaleMoveX}px ${
         trans.moveY + trans.scaleMoveY
       }px`;
       selected.getElementsByTagName("span")[0].innerText = `X축: ${
         trans.moveX
-      }px, Y축: ${trans.moveY}px, 비율: ${parseInt(trans.scale * 100)}%`;
+      }px, Y축: ${trans.moveY}px, 비율: ${trans.scale * 100}%`;
       selected.getElementsByTagName("span")[0].style.display = "block";
       selected.getElementsByTagName("span")[1].style.display = "block";
     }
@@ -275,7 +288,8 @@ export function handleMouseDragEvent(selected, trans, choose) {
   selected.addEventListener(mouseup, () => {
     trans.drag = false;
     selected.style.cursor = "grab";
-    selected.getElementsByClassName("grid")[0].style.display = "none";
+    const grid = isEmpty(selected.getElementsByClassName("grid")[0] as HTMLElement);
+    grid.style.display = "none";
   });
 
   document.addEventListener("keydown", (e) => {
@@ -290,13 +304,13 @@ export function handleMouseDragEvent(selected, trans, choose) {
   });
 }
 
-export function handleTargetMove(moveList) {
+export function handleTargetMove(moveList: NodeListOf<HTMLElement>): void {
   moveList.forEach((move) => {
     let x = 0;
     let y = 0;
     let moveX = 0;
     let moveY = 0;
-    function onDrag(e) {
+    function onDrag(e: MouseEvent) {
       moveX += e.clientX - x;
       moveY += e.clientY - y;
       x = e.clientX;
@@ -310,7 +324,7 @@ export function handleTargetMove(moveList) {
       document.removeEventListener("mouseup", onLetGo);
     }
 
-    function onGrab(e) {
+    function onGrab(e: MouseEvent) {
       x = e.clientX;
       y = e.clientY;
       document.addEventListener("mousemove", onDrag);
@@ -321,7 +335,7 @@ export function handleTargetMove(moveList) {
   });
 }
 
-export function handleMoveText(app, moveText) {
+export function handleMoveText(app: HTMLElement, moveText: MoveText): void {
   let isMoveX = false;
 
   app.addEventListener("mousedown", (e) => {
@@ -360,33 +374,39 @@ export function handleMoveText(app, moveText) {
   });
 }
 
-export function changeColor(color, target) {
+export function changeColor(colorInput: HTMLInputElement | null, target: HTMLInputElement | null): void {
+  const color = isEmpty<HTMLInputElement>(colorInput);
+  const text = isEmpty<HTMLInputElement>(target);
   color.addEventListener("change", () => {
-    target.style.color = color.value;
+    text.style.color = color.value;
   });
 }
 
 export function handleChangeImage(
-  choose,
-  selected,
-  edit,
-  trans,
-  chooseImg,
-  submitBtn
-) {
-  choose.addEventListener("change", (e) => {
+  choose: HTMLElement | null,
+  selected: HTMLElement | null,
+  edit: Img,
+  trans: TransEvent,
+  chooseImg: string,
+  submitBtn: HTMLElement | null
+): void {
+  
+  isEmpty<HTMLElement>(choose).addEventListener("change", (e) => {
     // initialize
-    imageValueReset(selected, edit, trans);
+    const container = isEmpty<HTMLElement>(selected);
+    const submit = isEmpty<HTMLElement>(submitBtn);
+    imageValueReset(container, edit, trans);
 
-    const file = e.target.files[0];
+    const target = isEmpty<HTMLInputElement>(e.target as HTMLInputElement);
+    const file = target.files != null && target.files[0];
     if (!file) return;
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
       const img = new Image();
-      img.src = reader.result;
+      img.src = reader.result as string;
 
-      selected.style.backgroundColor = BGCOLOR;
+      container.style.backgroundColor = BGCOLOR;
 
       img.onload = () => {
         edit.height = (edit.width * img.height) / img.width; // 이미지 비율 유지
@@ -395,19 +415,19 @@ export function handleChangeImage(
         img.style.left = `${trans.startX}px`;
         img.style.top = `${trans.startY}px`;
         img.id = chooseImg;
-        selected.appendChild(img);
+        container.appendChild(img);
 
-        handleMouseDragEvent(selected, trans, chooseImg); // 이미지 실시간 드래그로 위치 조정
-        resizeImage(selected, edit, trans); // 이미지 리사이즈
+        handleMouseDragEvent(container, trans, chooseImg); // 이미지 실시간 드래그로 위치 조정
+        resizeImage(container, edit, trans); // 이미지 리사이즈
 
-        changeFileBtn(e.target); // 파일버튼 위치 변경
-        submitBtn.style.marginRight = 0;
+        changeFileBtn(e.target as HTMLElement); // 파일버튼 위치 변경
+        submit.style.marginRight = '0';
       };
     };
   });
 }
 
-export function resizeImage(imgApp, edit, trans) {
+export function resizeImage(imgApp: HTMLElement, edit: Img, trans: TransEvent): void {
   imgApp.addEventListener("wheel", (e) => {
     e.preventDefault();
     const delta = e.deltaY > 0 ? 0.1 : -0.1;
@@ -418,46 +438,47 @@ export function resizeImage(imgApp, edit, trans) {
     trans.scaleMoveY += (edit.height * delta) / 2;
     trans.moveX = 0;
     trans.moveY = 0;
-    imgApp.getElementsByTagName("img")[0].style.scale = trans.scale;
+    const firstImage = isEmpty<HTMLElement>(imgApp.getElementsByTagName("img")[0]);
+    firstImage.style.scale = String(trans.scale);
     imgApp.getElementsByTagName(
       "img"
     )[0].style.translate = `${trans.scaleMoveX}px ${trans.scaleMoveY}px`;
     imgApp.getElementsByTagName("span")[0].innerText = `X축: ${
       trans.moveX
-    }px, Y축: ${trans.moveY}px, 비율: ${parseInt(trans.scale * 100)}%`;
+    }px, Y축: ${trans.moveY}px, 비율: ${trans.scale * 100}%`;
     imgApp.getElementsByTagName("span")[0].style.display = "block";
     imgApp.getElementsByTagName("span")[1].style.display = "block";
   });
 }
 
-export function makeDouble(value, origin) {
+export function makeDouble(value: number, origin: number): number {
   return value === 0 ? origin : origin + value * 2;
 }
 
-export function resetPosition(resetBtn, trans, choose) {
+export function resetPosition(resetBtn: HTMLElement, trans: TransEvent, choose: string): void {
   trans.reset();
-  const chooseImg = document.getElementById(choose);
-  chooseImg.style.scale = trans.scale;
+  const chooseImg = isEmpty<HTMLImageElement>(document.getElementById(choose) as HTMLImageElement);
+  chooseImg.style.scale = String(trans.scale);
   const y =
     chooseImg.height > chooseImg.width
       ? (chooseImg.height - chooseImg.width) / -2
       : 0;
   chooseImg.style.translate = `0px ${y}px`;
-  chooseImg.style.left = 0;
-  chooseImg.style.top = 0;
+  chooseImg.style.left = '0';
+  chooseImg.style.top = '0';
   trans.scaleMoveX = 0;
   trans.scaleMoveY = y;
-  console.log(resetBtn)
-  resetBtn.previousElementSibling.innerText = `X축: ${trans.moveX}px, Y축: ${
+  const prevEl = isEmpty<HTMLElement>(resetBtn.previousElementSibling as HTMLElement);
+  prevEl.innerText = `X축: ${trans.moveX}px, Y축: ${
     trans.moveY
-  }px, 비율: ${parseInt(trans.scale * 100)}%`;
+  }px, 비율: ${trans.scale * 100}%`;
 }
 
-export function addDownloadButton(canvas, download) {
+export function addDownloadButton(canvas: HTMLCanvasElement, download: HTMLElement): void {
   const a = document.createElement("a");
   a.href = canvas.toDataURL("image/jpeg");
-  a.download = `${this.getToday()}_${TYPOURL}.jpg`;
-  a.innerHTML = `<p><span>File Name</span>${this.getToday()}_${TYPOURL}.jpg</p>`;
+  a.download = `${getToday()}_${TYPOURL}.jpg`;
+  a.innerHTML = `<p><span>File Name</span>${getToday()}_${TYPOURL}.jpg</p>`;
   const button = document.createElement("button");
   button.innerText = "Download";
   button.className = "btn btn-dark";
@@ -465,7 +486,7 @@ export function addDownloadButton(canvas, download) {
   download.appendChild(a);
 }
 
-export function downloadCountGA(app, name) {
+export function downloadCountGA(app: string, name: string): void {
   gtag("event", `${app}_download`, {
     app_name: name,
     event_date: new Date().toLocaleString(),
@@ -473,7 +494,7 @@ export function downloadCountGA(app, name) {
 }
 
 // 오늘 날짜를 yyyy-mm-dd 형식으로 반환하는 함수
-export function getToday() {
+export function getToday(): string {
   const today = new Date();
   const yyyy = today.getFullYear();
   const mm =
@@ -482,20 +503,20 @@ export function getToday() {
   return `${yyyy}-${mm}-${dd}`;
 }
 
-export function clearInput(btn) {
-  btn.previousElementSibling.value = "";
+export function clearInput(btn: HTMLElement): void {
+  isEmpty<HTMLInputElement>(btn.previousElementSibling as HTMLInputElement).value = "";
 }
 
 // input null check
-export function inputNullCheck(inputList, inputFile) {
-  if (!inputFile.files[0]) {
-    inputFile.previousElementSibling.style.backgroundColor = "red";
-    inputFile.previousElementSibling.style.color = "white";
+export function inputNullCheck(inputList: NodeListOf<HTMLInputElement>, inputFile: HTMLInputElement): void {
+  if (!inputFile.files) {
+    isEmpty<HTMLElement>(inputFile.previousElementSibling as HTMLElement).style.backgroundColor = "red";
+    isEmpty<HTMLElement>(inputFile.previousElementSibling as HTMLElement).style.color = "white";
   }
   inputList.forEach((input) => checkValue(input));
 }
 
-export function checkValue(input) {
+export function checkValue(input: HTMLInputElement): void {
   if (input.value == "") {
     input.focus();
     input.style.borderColor = "red";
@@ -504,7 +525,7 @@ export function checkValue(input) {
   }
 }
 
-export function isMobile() {
+export function isMobile(): boolean {
   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
     window.navigator.userAgent
   );
@@ -518,11 +539,11 @@ document.addEventListener("DOMContentLoaded", () => {
   handleTargetMove(moveList);
 });
 
-export function getLongImageStartPositionY(edit) {
+export function getLongImageStartPositionY(edit: Img): number {
   return (edit.width - edit.height) / 2;
 }
 
-export function setFormattingDate(value) {
+export function setFormattingDate(value: string): string {
   let date = value.split("-");
   date[1] = date[1].replace(/^0+/, "");
   date[2] = date[2].replace(/^0+/, "");
@@ -531,10 +552,11 @@ export function setFormattingDate(value) {
 
 // nav bar scroll event
 document.addEventListener("scroll", () => {
+  const navEl = isEmpty<HTMLElement>(nav);
   if (window.scrollY > 150) {
-    nav.classList.add("show");
+    navEl.classList.add("show");
   } else {
-    nav.classList.remove("show");
+    navEl.classList.remove("show");
   }
 });
 
@@ -542,7 +564,7 @@ links.forEach((link) => {
   link.addEventListener("click", (e) => {
     e.preventDefault();
 
-    let target = document.querySelector(link.hash);
+    let target = isEmpty(document.querySelector(link.hash));
     let targetPosition = target.getBoundingClientRect().top;
 
     window.scrollBy({
@@ -554,7 +576,7 @@ links.forEach((link) => {
 });
 
 // watermark
-export function addWatermarkRightBottom(ctx, color) {
+export function addWatermarkRightBottom(ctx: CanvasRenderingContext2D, color: string): void {
   ctx.restore();
   ctx.font = "24px S-CoreDream-6Bold";
   ctx.letterSpacing = "0px";
@@ -564,7 +586,7 @@ export function addWatermarkRightBottom(ctx, color) {
   ctx.fillText(`${TYPOURL}`, 980, 980);
 }
 
-export function addWatermarkCenterBottom(ctx, color) {
+export function addWatermarkCenterBottom(ctx: CanvasRenderingContext2D, color: string): void {
   ctx.restore();
   ctx.font = "24px S-CoreDream-6Bold";
   ctx.letterSpacing = "0px";
@@ -574,7 +596,7 @@ export function addWatermarkCenterBottom(ctx, color) {
   ctx.fillText(`${TYPOURL}`, 500, 980);
 }
 
-export function addWatermarkRightTop(ctx, color) {
+export function addWatermarkRightTop(ctx: CanvasRenderingContext2D, color: string): void {
   ctx.restore();
   ctx.font = "24px S-CoreDream-6Bold";
   ctx.letterSpacing = "0px";
