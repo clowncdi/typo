@@ -13,19 +13,19 @@ import {
 
 const editImg: Img = new Img();
 const transEvent: TransEvent = new TransEvent();
-const fileInput: HTMLInputElement = isEmpty(document.getElementById("fileInput") as HTMLInputElement);
-const url: HTMLInputElement = isEmpty(document.getElementById("url") as HTMLInputElement);
-const lowTemp: HTMLInputElement = isEmpty(document.getElementById("lowTemp") as HTMLInputElement);
-const highTemp: HTMLInputElement = isEmpty(document.getElementById("highTemp") as HTMLInputElement);
-const dateInput: HTMLInputElement = isEmpty(document.getElementById("dateInput") as HTMLInputElement);
-const country: HTMLInputElement = isEmpty(document.getElementById("country") as HTMLInputElement);
-const city: HTMLInputElement = isEmpty(document.getElementById("city") as HTMLInputElement);
-const selectedImage: HTMLElement = isEmpty(document.getElementById("selectedImage"));
-const submitBtn: HTMLElement = isEmpty(document.getElementById("submitBtn"));
-const imageContainer: HTMLElement = isEmpty(document.getElementById("imageContainer"));
-const icons: NodeListOf<HTMLElement> = document.querySelectorAll(".weather-icon");
-const inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll("#app1 input");
-const reset: HTMLElement = isEmpty(document.querySelector('#app1 .selected-image-position-reset') as HTMLElement);
+const fileInput = document.getElementById("fileInput") as HTMLInputElement;
+const url = document.getElementById("url") as HTMLInputElement;
+const lowTemp = document.getElementById("lowTemp") as HTMLInputElement;
+const highTemp = document.getElementById("highTemp") as HTMLInputElement;
+const dateInput = document.getElementById("dateInput") as HTMLInputElement;
+const country = document.getElementById("country") as HTMLInputElement;
+const city = document.getElementById("city") as HTMLInputElement;
+const selectedImage = document.getElementById("selectedImage") as HTMLImageElement;
+const submitBtn = document.getElementById("submitBtn") as HTMLElement;
+const imageContainer = document.getElementById("imageContainer") as HTMLElement;
+const icons = document.querySelectorAll(".weather-icon") as NodeListOf<HTMLElement>;
+const inputs = document.querySelectorAll("#app1 input") as NodeListOf<HTMLInputElement>;
+const reset = document.querySelector('#app1 .selected-image-position-reset') as HTMLElement;
 let weatherUrl: string = "";
 const chooseImg: string = "chooseImg";
 
@@ -77,7 +77,7 @@ icons.forEach((icon) => {
 isMobile() && submitBtn.addEventListener("touchstart", makeImageApp1);
 !isMobile() && submitBtn.addEventListener("click", makeImageApp1);
 
-function makeImageApp1(): void {
+async function makeImageApp1(): Promise<void> {
   gtag("event", "app1_create", {
     app_name: "Today Weather",
     event_date: new Date().toLocaleString(),
@@ -89,7 +89,7 @@ function makeImageApp1(): void {
 
   const file = isEmpty(fileInput.files)[0];
   if (file) {
-    isEmpty(isEmpty(imageContainer.parentElement).parentElement).style.display = "block";
+    imageContainer.parentElement!.parentElement!.style.display = "block";
   }
   const low = lowTemp.value;
   const high = highTemp.value;
@@ -97,8 +97,8 @@ function makeImageApp1(): void {
 
   const reader = new FileReader();
   const reader2 = new FileReader();
-  const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d");
+  const canvas = document.createElement("canvas") as HTMLCanvasElement;
+  const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
   const weatherIcon = await fetch(weatherUrl).then((response) =>
     response.blob()
   );
@@ -108,11 +108,11 @@ function makeImageApp1(): void {
 
   reader.onload = () => {
     const img = new Image();
-    img.src = reader.result;
+    img.src = reader.result as string;
     const iconImg = new Image();
-    iconImg.src = reader2.result;
+    iconImg.src = reader2.result as string;
 
-    img.onload = async () => {
+    img.onload = () => {
       const height50 = 48;
       const height100 = 97;
       canvas.width = 1000;
@@ -135,7 +135,9 @@ function makeImageApp1(): void {
       url && ctx.fillText(url.value, 950, 42 + height50);
 
       // 날씨 아이콘을 추가한다.
-      weatherUrl !== "" && ctx.drawImage(iconImg, 50, 160);
+      iconImg.onload = () => {
+        weatherUrl !== "" && ctx.drawImage(iconImg, 50, 160);
+      }
 
       ctx.font = "50px S-CoreDream-3Light";
       ctx.textAlign = "left";
@@ -164,7 +166,7 @@ function makeImageApp1(): void {
 
       addWatermarkCenterBottom(ctx, "white");
       imageContainer.appendChild(canvas);
-      addDownloadButton(canvas, imageContainer.nextElementSibling);
+      addDownloadButton(canvas, imageContainer.nextElementSibling as HTMLElement);
     };
   };
 }

@@ -6,22 +6,22 @@ import {
   TransEvent,
   isMobile,
   resetPosition,
-  MoveText, handleMoveText, changeColor, makeDouble, addWatermarkRightBottom
+  MoveText, handleMoveText, changeColor, makeDouble, addWatermarkRightBottom, isEmpty
 } from './common';
 
-const editImg6 = new Img();
-const transEvent6 = new TransEvent();
-const moveTitle6 = new MoveText();
-const chooseFileApp6 = document.getElementById("chooseFileApp6");
-const selectedImageApp6 = document.getElementById("selectedImageApp6");
-const submitBtnApp6 = document.getElementById("submitBtnApp6");
-const imageContainerApp6 = document.getElementById("imageContainerApp6");
-const app6TitleColor = document.getElementById("app6TitleColor");
-const app6Title = document.getElementById("app6Title");
-const app6Inputs = document.querySelectorAll("#app6 input");
-const app6Move = document.querySelectorAll("#app6 .move-edit");
-const reset = document.querySelector('#app6 .selected-image-position-reset');
-const chooseImg6 = "chooseImg6";
+const editImg6: Img = new Img();
+const transEvent6: TransEvent = new TransEvent();
+const moveTitle6: MoveText = new MoveText();
+const chooseFileApp6 = document.getElementById("chooseFileApp6") as HTMLInputElement;
+const selectedImageApp6 = document.getElementById("selectedImageApp6") as HTMLImageElement;
+const submitBtnApp6 = document.getElementById("submitBtnApp6") as HTMLButtonElement;
+const imageContainerApp6 = document.getElementById("imageContainerApp6") as HTMLDivElement;
+const app6TitleColor = document.getElementById("app6TitleColor") as HTMLInputElement;
+const app6Title = document.getElementById("app6Title") as HTMLInputElement;
+const app6Inputs = document.querySelectorAll("#app6 input") as NodeListOf<HTMLInputElement>;
+const app6Move = document.querySelectorAll("#app6 .move-edit") as NodeListOf<HTMLDivElement>;
+const reset = document.querySelector('#app6 .selected-image-position-reset') as HTMLDivElement;
+const chooseImg6: string = "chooseImg6";
 
 handleChangeImage(
   chooseFileApp6,
@@ -35,7 +35,7 @@ handleMoveText(app6Move[0], moveTitle6);
 changeColor(app6TitleColor, app6Title);
 
 reset.addEventListener('click', (e) =>
-    resetPosition(e.target, transEvent6, chooseImg6));
+    resetPosition(e.target as HTMLElement, transEvent6, chooseImg6));
 
 isMobile() && submitBtnApp6.addEventListener("touchstart", makeImageApp6);
 !isMobile() && submitBtnApp6.addEventListener("click", makeImageApp6);
@@ -47,21 +47,21 @@ async function makeImageApp6() {
   });
   // initialize canvas.
   imageContainerApp6.innerHTML = "";
-  imageContainerApp6.nextElementSibling.innerHTML = "";
+  isEmpty(imageContainerApp6.nextElementSibling).innerHTML = "";
   inputNullCheck(app6Inputs, chooseFileApp6);
 
-  const file = chooseFileApp6.files[0];
+  const file = isEmpty(chooseFileApp6.files)[0];
   if (file) {
-    imageContainerApp6.parentElement.parentElement.style.display = "block";
+    imageContainerApp6.parentElement!.parentElement!.style.display = "block";
   }
   const reader = new FileReader();
-  const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d");
+  const canvas = document.createElement("canvas") as HTMLCanvasElement;
+  const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 
   reader.readAsDataURL(file);
   reader.onload = () => {
     const img = new Image();
-    img.src = reader.result;
+    img.src = reader.result as string;
 
     img.onload = async () => {
       canvas.width = 1000;
@@ -82,7 +82,7 @@ async function makeImageApp6() {
       ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
       ctx.shadowBlur = 20;
       ctx.shadowOffsetX = 0;
-      ctx.shadowOffsetY = "5px";
+      ctx.shadowOffsetY = 5;
       ctx.textAlign = "center";
       ctx.font = "56px Montserrat Subrayada";
       ctx.filter = "opacity(0.77) blur(2px)";
@@ -139,7 +139,7 @@ async function makeImageApp6() {
 
       addWatermarkRightBottom(ctx, "white");
       imageContainerApp6.appendChild(canvas);
-      addDownloadButton(canvas, imageContainerApp6.nextElementSibling);
+      addDownloadButton(canvas, imageContainerApp6.nextElementSibling as HTMLDivElement);
     };
   };
 }

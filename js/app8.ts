@@ -12,26 +12,27 @@ import {
   makeDouble,
   getToday,
   setFormattingDate,
-  addWatermarkRightBottom
+  addWatermarkRightBottom,
+  isEmpty
 } from './common';
 
-const editImg8 = new Img();
-const transEvent8 = new TransEvent();
-const moveTitle8 = new MoveText();
-const moveSub8 = new MoveText();
-const moveDate8 = new MoveText();
-const chooseFileApp8 = document.getElementById("chooseFileApp8");
-const selectedImageApp8 = document.getElementById("selectedImageApp8");
-const submitBtnApp8 = document.getElementById("submitBtnApp8");
-const imageContainerApp8 = document.getElementById("imageContainerApp8");
-const app8TitleColor = document.getElementById("app8TitleColor");
-const app8Title = document.getElementById("app8Title");
-const app8Sub = document.getElementById("app8Sub");
-const app8Date = document.getElementById("app8Date");
-const app8Inputs = document.querySelectorAll("#app8 input");
-const app8Move = document.querySelectorAll("#app8 .move-edit");
-const reset = document.querySelector('#app8 .selected-image-position-reset');
-const chooseImg8 = "chooseImg8";
+const editImg8: Img = new Img();
+const transEvent8: TransEvent = new TransEvent();
+const moveTitle8: MoveText = new MoveText();
+const moveSub8: MoveText = new MoveText();
+const moveDate8: MoveText = new MoveText();
+const chooseFileApp8 = document.getElementById("chooseFileApp8") as HTMLInputElement;
+const selectedImageApp8 = document.getElementById("selectedImageApp8") as HTMLImageElement;
+const submitBtnApp8 = document.getElementById("submitBtnApp8") as HTMLButtonElement;
+const imageContainerApp8 = document.getElementById("imageContainerApp8") as HTMLDivElement;
+const app8TitleColor = document.getElementById("app8TitleColor") as HTMLInputElement;
+const app8Title = document.getElementById("app8Title") as HTMLInputElement;
+const app8Sub = document.getElementById("app8Sub") as HTMLInputElement;
+const app8Date = document.getElementById("app8Date") as HTMLInputElement;
+const app8Inputs = document.querySelectorAll("#app8 input") as NodeListOf<HTMLInputElement>;
+const app8Move = document.querySelectorAll("#app8 .move-edit") as NodeListOf<HTMLDivElement>;
+const reset = document.querySelector('#app8 .selected-image-position-reset') as HTMLDivElement;
+const chooseImg8: string = "chooseImg8";
 
 handleChangeImage(
   chooseFileApp8,
@@ -49,7 +50,7 @@ changeColor(app8TitleColor, app8Sub);
 changeColor(app8TitleColor, app8Date);
 
 reset.addEventListener('click', (e) =>
-    resetPosition(e.target, transEvent8, chooseImg8));
+    resetPosition(e.target as HTMLElement, transEvent8, chooseImg8));
 
 document.addEventListener("DOMContentLoaded", () => {
   app8Date.value = getToday();
@@ -65,21 +66,21 @@ async function makeImageApp8() {
   });
   // initialize canvas.
   imageContainerApp8.innerHTML = "";
-  imageContainerApp8.nextElementSibling.innerHTML = "";
+  isEmpty(imageContainerApp8.nextElementSibling).innerHTML = "";
   inputNullCheck(app8Inputs, chooseFileApp8);
 
-  const file = chooseFileApp8.files[0];
+  const file = isEmpty(chooseFileApp8.files)[0];
   if (file) {
-    imageContainerApp8.parentElement.parentElement.style.display = "block";
+    imageContainerApp8.parentElement!.parentElement!.style.display = "block";
   }
   const reader = new FileReader();
-  const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d");
+  const canvas = document.createElement("canvas") as HTMLCanvasElement;
+  const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 
   reader.readAsDataURL(file);
   reader.onload = () => {
     const img = new Image();
-    img.src = reader.result;
+    img.src = reader.result as string;
 
     img.onload = async () => {
       canvas.width = 1000;
@@ -110,7 +111,7 @@ async function makeImageApp8() {
 
       ctx.scale(0.9, 1);
       ctx.filter = "opacity(1)";
-      ctx.globalCompositeOperation = "normal";
+      // ctx.globalCompositeOperation = "normal";
       ctx.font = "100 48px Montserrat";
       ctx.letterSpacing = "35px";
       ctx.shadowBlur = 10;
@@ -132,7 +133,7 @@ async function makeImageApp8() {
 
       addWatermarkRightBottom(ctx, "white");
       imageContainerApp8.appendChild(canvas);
-      addDownloadButton(canvas, imageContainerApp8.nextElementSibling);
+      addDownloadButton(canvas, imageContainerApp8.nextElementSibling as HTMLDivElement);
     };
   };
 }

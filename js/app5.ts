@@ -6,27 +6,27 @@ import {
   TransEvent,
   isMobile,
   resetPosition,
-  MoveText, handleMoveText, changeColor, makeDouble, getToday, addWatermarkRightBottom
+  MoveText, handleMoveText, changeColor, makeDouble, getToday, addWatermarkRightBottom, isEmpty
 } from './common';
 
-const editImg5 = new Img();
-const transEvent5 = new TransEvent();
-const moveTitle5 = new MoveText();
-const moveSub5 = new MoveText();
-const moveDate5 = new MoveText();
-const chooseFileApp5 = document.getElementById("chooseFileApp5");
-const selectedImageApp5 = document.getElementById("selectedImageApp5");
-const submitBtnApp5 = document.getElementById("submitBtnApp5");
-const imageContainerApp5 = document.getElementById("imageContainerApp5");
-const app5TitleColor = document.getElementById("app5TitleColor");
-const app5Title = document.getElementById("app5Title");
-const app5Sub = document.getElementById("app5Sub");
-const app5StartDate = document.getElementById("app5StartDate");
-const app5EndDate = document.getElementById("app5EndDate");
-const app5Inputs = document.querySelectorAll("#app5 input");
-const app5Move = document.querySelectorAll("#app5 .move-edit");
-const reset = document.querySelector('#app5 .selected-image-position-reset');
-const chooseImg5 = "chooseImg5";
+const editImg5: Img = new Img();
+const transEvent5: TransEvent = new TransEvent();
+const moveTitle5: MoveText = new MoveText();
+const moveSub5: MoveText = new MoveText();
+const moveDate5: MoveText = new MoveText();
+const chooseFileApp5 = document.getElementById("chooseFileApp5") as HTMLInputElement;
+const selectedImageApp5 = document.getElementById("selectedImageApp5") as HTMLImageElement;
+const submitBtnApp5 = document.getElementById("submitBtnApp5") as HTMLButtonElement;
+const imageContainerApp5 = document.getElementById("imageContainerApp5") as HTMLDivElement;
+const app5TitleColor = document.getElementById("app5TitleColor") as HTMLInputElement;
+const app5Title = document.getElementById("app5Title") as HTMLInputElement;
+const app5Sub = document.getElementById("app5Sub") as HTMLInputElement;
+const app5StartDate = document.getElementById("app5StartDate") as HTMLInputElement;
+const app5EndDate = document.getElementById("app5EndDate") as HTMLInputElement;
+const app5Inputs = document.querySelectorAll("#app5 input") as NodeListOf<HTMLInputElement>;
+const app5Move = document.querySelectorAll("#app5 .move-edit") as NodeListOf<HTMLDivElement>;
+const reset = document.querySelector('#app5 .selected-image-position-reset') as HTMLDivElement;
+const chooseImg5: string = "chooseImg5";
 
 handleChangeImage(
   chooseFileApp5,
@@ -43,7 +43,7 @@ changeColor(app5TitleColor, app5Title);
 changeColor(app5TitleColor, app5Sub);
 
 reset.addEventListener('click', (e) =>
-    resetPosition(e.target, transEvent5, chooseImg5));
+    resetPosition(e.target as HTMLElement, transEvent5, chooseImg5));
 
 document.addEventListener("DOMContentLoaded", () => {
   app5StartDate.value = getToday();
@@ -60,21 +60,21 @@ async function makeImageApp5() {
   });
   // initialize canvas.
   imageContainerApp5.innerHTML = "";
-  imageContainerApp5.nextElementSibling.innerHTML = "";
+  isEmpty(imageContainerApp5.nextElementSibling).innerHTML = "";
   inputNullCheck(app5Inputs, chooseFileApp5);
 
-  const file = chooseFileApp5.files[0];
+  const file = isEmpty(chooseFileApp5.files)[0];
   if (file) {
-    imageContainerApp5.parentElement.parentElement.style.display = "block";
+    imageContainerApp5.parentElement!.parentElement!.style.display = "block";
   }
   const reader = new FileReader();
-  const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d");
+  const canvas = document.createElement("canvas") as HTMLCanvasElement;
+  const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 
   reader.readAsDataURL(file);
   reader.onload = () => {
     const img = new Image();
-    img.src = reader.result;
+    img.src = reader.result as string;
 
     img.onload = async () => {
       canvas.width = 1000;
@@ -134,7 +134,7 @@ async function makeImageApp5() {
 
       addWatermarkRightBottom(ctx, "white");
       imageContainerApp5.appendChild(canvas);
-      addDownloadButton(canvas, imageContainerApp5.nextElementSibling);
+      addDownloadButton(canvas, imageContainerApp5.nextElementSibling as HTMLElement);
     };
   };
 }

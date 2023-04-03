@@ -1,15 +1,15 @@
-import {addDownloadButton, addWatermarkRightBottom, checkValue, isMobile} from "./common";
+import {addDownloadButton, addWatermarkRightBottom, checkValue, isEmpty, isMobile} from "./common";
 
-const submitBtnApp10 = document.getElementById("submitBtnApp10");
-const imageContainerApp10 = document.getElementById("imageContainerApp10");
-const app10BgColor = document.getElementById("app10BgColor");
-const app10TitleColor = document.getElementById("app10TitleColor");
-const app10SubColor = document.getElementById("app10SubColor");
-const app10Title = document.getElementById("app10Title");
-const app10Sub = document.getElementById("app10Sub");
-const app10Writer = document.getElementById("app10Writer");
-const app10Inputs = document.querySelectorAll("#app10 input");
-const app10Textarea = document.querySelectorAll("#app10 textarea");
+const submitBtnApp10 = document.getElementById("submitBtnApp10") as HTMLButtonElement;
+const imageContainerApp10 = document.getElementById("imageContainerApp10") as HTMLDivElement;
+const app10BgColor = document.getElementById("app10BgColor") as HTMLInputElement;
+const app10TitleColor = document.getElementById("app10TitleColor") as HTMLInputElement;
+const app10SubColor = document.getElementById("app10SubColor") as HTMLInputElement;
+const app10Title = document.getElementById("app10Title") as HTMLInputElement;
+const app10Sub = document.getElementById("app10Sub") as HTMLInputElement;
+const app10Writer = document.getElementById("app10Writer") as HTMLInputElement;
+const app10Inputs = document.querySelectorAll("#app10 input") as NodeListOf<HTMLInputElement>;
+const app10Textarea = document.querySelectorAll("#app10 textarea") as NodeListOf<HTMLTextAreaElement>;
 
 isMobile() && submitBtnApp10.addEventListener("touchstart", makeImageApp10);
 !isMobile() && submitBtnApp10.addEventListener("click", makeImageApp10);
@@ -21,14 +21,14 @@ async function makeImageApp10() {
   });
   // initialize canvas.
   imageContainerApp10.innerHTML = "";
-  imageContainerApp10.nextElementSibling.innerHTML = "";
+  isEmpty(imageContainerApp10.nextElementSibling).innerHTML = "";
   app10Inputs.forEach((input) => checkValue(input));
   app10Textarea.forEach((textarea) => checkValue(textarea));
 
-  imageContainerApp10.parentElement.parentElement.style.display = "block";
+  imageContainerApp10.parentElement!.parentElement!.style.display = "block";
 
-  const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d");
+  const canvas = document.createElement("canvas") as HTMLCanvasElement;
+  const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
   canvas.width = 1000;
   canvas.height = 1000;
   ctx.fillStyle = app10BgColor.value;
@@ -79,5 +79,5 @@ async function makeImageApp10() {
 
   addWatermarkRightBottom(ctx, "black");
   imageContainerApp10.appendChild(canvas);
-  addDownloadButton(canvas, imageContainerApp10.nextElementSibling);
+  addDownloadButton(canvas, imageContainerApp10.nextElementSibling as HTMLDivElement);
 }

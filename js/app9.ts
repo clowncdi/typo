@@ -6,22 +6,22 @@ import {
   TransEvent,
   isMobile,
   resetPosition,
-  MoveText, handleMoveText, changeColor, makeDouble, addWatermarkRightBottom,
+  MoveText, handleMoveText, changeColor, makeDouble, addWatermarkRightBottom, isEmpty,
 } from './common';
 
-const editImg9 = new Img();
-const transEvent9 = new TransEvent();
-const moveTitle9 = new MoveText();
-const chooseFileApp9 = document.getElementById("chooseFileApp9");
-const selectedImageApp9 = document.getElementById("selectedImageApp9");
-const submitBtnApp9 = document.getElementById("submitBtnApp9");
-const imageContainerApp9 = document.getElementById("imageContainerApp9");
-const app9TitleColor = document.getElementById("app9TitleColor");
-const app9Title = document.getElementById("app9Title");
-const app9Inputs = document.querySelectorAll("#app9 input");
-const app9Move = document.querySelectorAll("#app9 .move-edit");
-const reset = document.querySelector('#app9 .selected-image-position-reset');
-const chooseImg9 = "chooseImg9";
+const editImg9: Img = new Img();
+const transEvent9: TransEvent = new TransEvent();
+const moveTitle9: MoveText = new MoveText();
+const chooseFileApp9 = document.getElementById("chooseFileApp9") as HTMLInputElement;
+const selectedImageApp9 = document.getElementById("selectedImageApp9") as HTMLImageElement;
+const submitBtnApp9 = document.getElementById("submitBtnApp9") as HTMLButtonElement;
+const imageContainerApp9 = document.getElementById("imageContainerApp9") as HTMLDivElement;
+const app9TitleColor = document.getElementById("app9TitleColor") as HTMLInputElement;
+const app9Title = document.getElementById("app9Title") as HTMLInputElement;
+const app9Inputs = document.querySelectorAll("#app9 input") as NodeListOf<HTMLInputElement>;
+const app9Move = document.querySelectorAll("#app9 .move-edit") as NodeListOf<HTMLDivElement>;
+const reset = document.querySelector('#app9 .selected-image-position-reset') as HTMLDivElement;
+const chooseImg9: string = "chooseImg9";
 
 handleChangeImage(
   chooseFileApp9,
@@ -35,7 +35,7 @@ handleMoveText(app9Move[0], moveTitle9);
 changeColor(app9TitleColor, app9Title);
 
 reset.addEventListener('click', (e) =>
-    resetPosition(e.target, transEvent9, chooseImg9));
+    resetPosition(e.target as HTMLElement, transEvent9, chooseImg9));
 
 isMobile() && submitBtnApp9.addEventListener("touchstart", makeImageApp9);
 !isMobile() && submitBtnApp9.addEventListener("click", makeImageApp9);
@@ -47,21 +47,21 @@ async function makeImageApp9() {
   });
   // initialize canvas.
   imageContainerApp9.innerHTML = "";
-  imageContainerApp9.nextElementSibling.innerHTML = "";
+  isEmpty(imageContainerApp9.nextElementSibling).innerHTML = "";
   inputNullCheck(app9Inputs, chooseFileApp9);
 
-  const file = chooseFileApp9.files[0];
+  const file = isEmpty(chooseFileApp9.files)[0];
   if (file) {
-    imageContainerApp9.parentElement.parentElement.style.display = "block";
+    imageContainerApp9.parentElement!.parentElement!.style.display = "block";
   }
   const reader = new FileReader();
-  const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d");
+  const canvas = document.createElement("canvas") as HTMLCanvasElement;
+  const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 
   reader.readAsDataURL(file);
   reader.onload = () => {
     const img = new Image();
-    img.src = reader.result;
+    img.src = reader.result as string;
 
     img.onload = async () => {
       canvas.width = 1000;
@@ -91,7 +91,7 @@ async function makeImageApp9() {
 
       addWatermarkRightBottom(ctx, "white");
       imageContainerApp9.appendChild(canvas);
-      addDownloadButton(canvas, imageContainerApp9.nextElementSibling);
+      addDownloadButton(canvas, imageContainerApp9.nextElementSibling as HTMLDivElement);
     };
   };
 }

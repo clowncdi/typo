@@ -1,12 +1,17 @@
-import {isMobile} from "./common";
+import {isEmpty, isMobile} from "./common";
 
-const lang_list = document.querySelectorAll(".btn-lang");
-const sub1 = document.querySelector(".about-sub-text1");
-const sub2 = document.querySelector(".about-sub-text2");
-const sub3 = document.querySelector(".about-sub-text3");
-const aboutWrap = document.querySelector(".about-wrap");
-const textFront = document.getElementById('textFront');
-const message = {
+const lang_list = document.querySelectorAll(".btn-lang") as NodeListOf<HTMLElement>;
+const sub1 = document.querySelector(".about-sub-text1") as HTMLElement;
+const sub2 = document.querySelector(".about-sub-text2") as HTMLElement;
+const sub3 = document.querySelector(".about-sub-text3") as HTMLElement;
+const aboutWrap = document.querySelector(".about-wrap") as HTMLElement;
+const textFront = document.getElementById('textFront') as HTMLTextAreaElement;
+type Message = {
+  [key: string]: {
+    [key: string]: string
+  }
+}
+const message: Message = {
   kor: {
     text: `'Plus Typo'는 단순한 더하기가 아니라, 글자와 이미지의 조화로운 결합을 의미합니다. 글자와 사진을 쉽게 합성하여 인스그램이나 블로그 등 썸네일 이미지를 만들 수 있도록 도와줍니다. 'Plus Typo'로 다양한 가능성과 창의력을 보여주세요.`,
     sub1: `<b>PlusTypo</b> 는 디자이너이자 개발자인 <a href="https://github.com/clowncdi" target="_blank">최대일</a>의 개인 프로젝트입니다.`,
@@ -22,7 +27,7 @@ const message = {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  textFront.parentElement.classList.add("loaded");
+  isEmpty(textFront.parentElement).classList.add("loaded");
   textFront.value = message['eng'].text;
 });
 
@@ -31,7 +36,7 @@ lang_list.forEach((lang) => {
   !isMobile() && lang.addEventListener("click", () => setLang(lang));
 });
 
-function setLang(lang) {
+function setLang(lang: HTMLElement) {
   lang_list.forEach((el) => el.classList.remove("active"));
   lang.classList.add("active");
   aboutWrap.classList.toggle("kor", lang.id === "kor");

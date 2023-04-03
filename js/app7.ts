@@ -6,24 +6,24 @@ import {
   TransEvent,
   isMobile,
   resetPosition,
-  MoveText, handleMoveText, changeColor, makeDouble, getToday, addWatermarkRightTop
+  MoveText, handleMoveText, changeColor, makeDouble, getToday, addWatermarkRightTop, isEmpty
 } from './common';
 
-const editImg7 = new Img();
-const transEvent7 = new TransEvent();
-const moveTitle7 = new MoveText();
-const moveDate7 = new MoveText();
-const chooseFileApp7 = document.getElementById("chooseFileApp7");
-const selectedImageApp7 = document.getElementById("selectedImageApp7");
-const submitBtnApp7 = document.getElementById("submitBtnApp7");
-const imageContainerApp7 = document.getElementById("imageContainerApp7");
-const app7TitleColor = document.getElementById("app7TitleColor");
-const app7Title = document.getElementById("app7Title");
-const app7Date = document.getElementById("app7Date");
-const app7Inputs = document.querySelectorAll("#app7 input");
-const app7Move = document.querySelectorAll("#app7 .move-edit");
-const reset = document.querySelector('#app7 .selected-image-position-reset');
-const chooseImg7 = "chooseImg7";
+const editImg7: Img = new Img();
+const transEvent7: TransEvent = new TransEvent();
+const moveTitle7: MoveText = new MoveText();
+const moveDate7: MoveText = new MoveText();
+const chooseFileApp7 = document.getElementById("chooseFileApp7") as HTMLInputElement;
+const selectedImageApp7 = document.getElementById("selectedImageApp7") as HTMLImageElement;
+const submitBtnApp7 = document.getElementById("submitBtnApp7") as HTMLButtonElement;
+const imageContainerApp7 = document.getElementById("imageContainerApp7") as HTMLDivElement;
+const app7TitleColor = document.getElementById("app7TitleColor") as HTMLInputElement;
+const app7Title = document.getElementById("app7Title") as HTMLInputElement;
+const app7Date = document.getElementById("app7Date") as HTMLInputElement;
+const app7Inputs = document.querySelectorAll("#app7 input") as NodeListOf<HTMLInputElement>;
+const app7Move = document.querySelectorAll("#app7 .move-edit") as NodeListOf<HTMLDivElement>;
+const reset = document.querySelector('#app7 .selected-image-position-reset') as HTMLDivElement;
+const chooseImg7: string = "chooseImg7";
 
 handleChangeImage(
   chooseFileApp7,
@@ -55,21 +55,21 @@ async function makeImageApp7() {
   });
   // initialize canvas.
   imageContainerApp7.innerHTML = "";
-  imageContainerApp7.nextElementSibling.innerHTML = "";
+  isEmpty(imageContainerApp7.nextElementSibling).innerHTML = "";
   inputNullCheck(app7Inputs, chooseFileApp7);
 
-  const file = chooseFileApp7.files[0];
+  const file = isEmpty(chooseFileApp7.files)[0];
   if (file) {
-    imageContainerApp7.parentElement.parentElement.style.display = "block";
+    imageContainerApp7.parentElement!.parentElement!.style.display = "block";
   }
   const reader = new FileReader();
-  const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d");
+  const canvas = document.createElement("canvas") as HTMLCanvasElement;
+  const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 
   reader.readAsDataURL(file);
   reader.onload = () => {
     const img = new Image();
-    img.src = reader.result;
+    img.src = reader.result as string;
 
     img.onload = async () => {
       canvas.width = 1000;
@@ -103,7 +103,7 @@ async function makeImageApp7() {
 
       addWatermarkRightTop(ctx, "white");
       imageContainerApp7.appendChild(canvas);
-      addDownloadButton(canvas, imageContainerApp7.nextElementSibling);
+      addDownloadButton(canvas, imageContainerApp7.nextElementSibling as HTMLDivElement);
     };
   };
 }

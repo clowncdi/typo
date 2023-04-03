@@ -51,11 +51,11 @@ const fonts: string[] = [
   "Waterfall",
   "Yesteryear",
 ];
-const plus: HTMLElement = isEmpty(document.getElementById("logoPlus"));
-const typo: HTMLElement = isEmpty(document.getElementById("logoTypo"));
-const plusFont: HTMLElement = isEmpty(document.getElementById("plus-font"));
-const typoFont: HTMLElement = isEmpty(document.getElementById("typo-font"));
-const logo: HTMLElement = isEmpty(document.querySelector(".gnb-logo") as HTMLElement);
+const plus = document.getElementById("logoPlus") as HTMLElement;
+const typo = document.getElementById("logoTypo") as HTMLElement;
+const plusFont = document.getElementById("plus-font") as HTMLElement;
+const typoFont = document.getElementById("typo-font") as HTMLElement;
+const logo = document.querySelector(".gnb-logo") as HTMLElement;
 const LOGO_TEXT: string = "plusTYPO";
 const CHANGE_LOGO_TIME: number = 10000;
 let currentIndex: number = 0;

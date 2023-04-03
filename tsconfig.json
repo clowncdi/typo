@@ -6,7 +6,8 @@
     "types": ["@types/gtag.js"],
     "lib": [
       "ES6",
-      "DOM"
+      "DOM",
+      "ES2021.String"
     ]
   }
 }

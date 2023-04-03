@@ -6,24 +6,24 @@ import {
   TransEvent,
   isMobile,
   resetPosition,
-  MoveText, handleMoveText, changeColor, makeDouble, addWatermarkRightTop, getToday
+  MoveText, handleMoveText, changeColor, makeDouble, addWatermarkRightTop, getToday, isEmpty
 } from './common';
 
-const editImg4 = new Img();
-const transEvent4 = new TransEvent();
-const moveTitle4 = new MoveText();
-const moveSub4 = new MoveText();
-const chooseFileApp4 = document.getElementById("chooseFileApp4");
-const selectedImageApp4 = document.getElementById("selectedImageApp4");
-const submitBtnApp4 = document.getElementById("submitBtnApp4");
-const imageContainerApp4 = document.getElementById("imageContainerApp4");
-const app4TitleColor = document.getElementById("app4TitleColor");
-const app4Title = document.getElementById("app4Title");
-const app4Date = document.getElementById("app4Date");
-const app4Inputs = document.querySelectorAll("#app4 input");
-const app4Move = document.querySelectorAll("#app4 .move-edit");
-const reset = document.querySelector('#app4 .selected-image-position-reset');
-const chooseImg4 = "chooseImg4";
+const editImg4: Img = new Img();
+const transEvent4: TransEvent = new TransEvent();
+const moveTitle4: MoveText = new MoveText();
+const moveSub4: MoveText = new MoveText();
+const chooseFileApp4 = document.getElementById("chooseFileApp4") as HTMLInputElement;
+const selectedImageApp4 = document.getElementById("selectedImageApp4") as HTMLImageElement;
+const submitBtnApp4 = document.getElementById("submitBtnApp4") as HTMLButtonElement;
+const imageContainerApp4 = document.getElementById("imageContainerApp4") as HTMLDivElement;
+const app4TitleColor = document.getElementById("app4TitleColor") as HTMLInputElement;
+const app4Title = document.getElementById("app4Title") as HTMLInputElement;
+const app4Date = document.getElementById("app4Date") as HTMLInputElement;
+const app4Inputs = document.querySelectorAll("#app4 input") as NodeListOf<HTMLInputElement>;
+const app4Move = document.querySelectorAll("#app4 .move-edit") as NodeListOf<HTMLDivElement>;
+const reset = document.querySelector('#app4 .selected-image-position-reset') as HTMLDivElement;
+const chooseImg4: string = "chooseImg4";
 
 handleChangeImage(
   chooseFileApp4,
@@ -38,7 +38,7 @@ handleMoveText(app4Move[1], moveSub4);
 changeColor(app4TitleColor, app4Title);
 
 reset.addEventListener('click', (e) =>
-    resetPosition(e.target, transEvent4, chooseImg4));
+    resetPosition(e.target as HTMLElement, transEvent4, chooseImg4));
 
 document.addEventListener("DOMContentLoaded", () => {
   app4Date.value = getToday();
@@ -54,21 +54,21 @@ async function makeImageApp4() {
   });
   // initialize canvas.
   imageContainerApp4.innerHTML = "";
-  imageContainerApp4.nextElementSibling.innerHTML = "";
+  isEmpty(imageContainerApp4.nextElementSibling).innerHTML = "";
   inputNullCheck(app4Inputs, chooseFileApp4);
 
-  const file = chooseFileApp4.files[0];
+  const file = isEmpty(chooseFileApp4.files)[0];
   if (file) {
-    imageContainerApp4.parentElement.parentElement.style.display = "block";
+    imageContainerApp4.parentElement!.parentElement!.style.display = "block";
   }
   const reader = new FileReader();
-  const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d");
+  const canvas = document.createElement("canvas") as HTMLCanvasElement;
+  const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 
   reader.readAsDataURL(file);
   reader.onload = () => {
     const img = new Image();
-    img.src = reader.result;
+    img.src = reader.result as string;
 
     img.onload = async () => {
       canvas.width = 1000;
@@ -114,7 +114,7 @@ async function makeImageApp4() {
 
       addWatermarkRightTop(ctx, "white");
       imageContainerApp4.appendChild(canvas);
-      addDownloadButton(canvas, imageContainerApp4.nextElementSibling);
+      addDownloadButton(canvas, imageContainerApp4.nextElementSibling as HTMLDivElement);
     };
   };
 }

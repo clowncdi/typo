@@ -516,7 +516,7 @@ export function inputNullCheck(inputList: NodeListOf<HTMLInputElement>, inputFil
   inputList.forEach((input) => checkValue(input));
 }
 
-export function checkValue(input: HTMLInputElement): void {
+export function checkValue(input: HTMLInputElement | HTMLTextAreaElement): void {
   if (input.value == "") {
     input.focus();
     input.style.borderColor = "red";

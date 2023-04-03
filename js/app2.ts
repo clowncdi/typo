@@ -7,22 +7,22 @@ import {
   TransEvent,
   isMobile,
   resetPosition,
-  MoveText, handleMoveText, changeColor, makeDouble
+  MoveText, handleMoveText, changeColor, makeDouble, isEmpty
 } from './common';
 
-const editImg2 = new Img();
-const transEvent2 = new TransEvent();
-const moveText2 = new MoveText();
-const chooseFileApp2 = document.getElementById("chooseFileApp2");
-const selectedImageApp2 = document.getElementById("selectedImageApp2");
-const submitBtnApp2 = document.getElementById("submitBtnApp2");
-const imageContainerApp2 = document.getElementById("imageContainerApp2");
-const app2Title = document.getElementById("app2Title");
-const app2TitleColor = document.getElementById("app2TitleColor");
-const app2Inputs = document.querySelectorAll("#app2 input");
-const app2Move = document.querySelectorAll("#app2 .move-edit");
-const reset = document.querySelector('#app2 .selected-image-position-reset');
-const chooseImg2 = "chooseImg2";
+const editImg2: Img = new Img();
+const transEvent2: TransEvent = new TransEvent();
+const moveText2: MoveText = new MoveText();
+const chooseFileApp2 = document.getElementById("chooseFileApp2") as HTMLInputElement;
+const selectedImageApp2 = document.getElementById("selectedImageApp2") as HTMLImageElement;
+const submitBtnApp2 = document.getElementById("submitBtnApp2") as HTMLButtonElement;
+const imageContainerApp2 = document.getElementById("imageContainerApp2") as HTMLDivElement;
+const app2Title = document.getElementById("app2Title") as HTMLInputElement;
+const app2TitleColor = document.getElementById("app2TitleColor") as HTMLInputElement;
+const app2Inputs = document.querySelectorAll("#app2 input") as NodeListOf<HTMLInputElement>;
+const app2Move = document.querySelectorAll("#app2 .move-edit") as NodeListOf<HTMLDivElement>;
+const reset = document.querySelector('#app2 .selected-image-position-reset') as HTMLDivElement;
+const chooseImg2: string = "chooseImg2";
 
 handleChangeImage(
   chooseFileApp2,
@@ -33,10 +33,10 @@ handleChangeImage(
   submitBtnApp2
 );
 handleMoveText(app2Move[0], moveText2);
-changeColor(app2TitleColor as HTMLInputElement, app2Title as HTMLInputElement);
+changeColor(app2TitleColor, app2Title);
 
 reset.addEventListener('click', (e) =>
-    resetPosition(e.target, transEvent2, chooseImg2));
+    resetPosition(e.target as HTMLElement, transEvent2, chooseImg2));
 
 isMobile() && submitBtnApp2.addEventListener("touchstart", makeImageApp2);
 !isMobile() && submitBtnApp2.addEventListener("click", makeImageApp2);
@@ -48,21 +48,21 @@ async function makeImageApp2() {
   });
   // initialize canvas.
   imageContainerApp2.innerHTML = "";
-  imageContainerApp2.nextElementSibling.innerHTML = "";
+  isEmpty(imageContainerApp2.nextElementSibling).innerHTML = "";
   inputNullCheck(app2Inputs, chooseFileApp2);
 
-  const file = chooseFileApp2.files[0];
+  const file = isEmpty(chooseFileApp2.files)[0];
   if (file) {
-    imageContainerApp2.parentElement.parentElement.style.display = "block";
+    imageContainerApp2.parentElement!.parentElement!.style.display = "block";
   }
   const reader = new FileReader();
-  const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d");
+  const canvas = document.createElement("canvas") as HTMLCanvasElement;
+  const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 
   reader.readAsDataURL(file);
   reader.onload = () => {
     const img = new Image();
-    img.src = reader.result;
+    img.src = reader.result as string;
 
     img.onload = async () => {
       canvas.width = 1000;
@@ -90,7 +90,7 @@ async function makeImageApp2() {
 
       addWatermarkCenterBottom(ctx, "white");
       imageContainerApp2.appendChild(canvas);
-      addDownloadButton(canvas, imageContainerApp2.nextElementSibling);
+      addDownloadButton(canvas, imageContainerApp2.nextElementSibling as HTMLDivElement);
     };
   };
 }
