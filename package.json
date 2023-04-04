@@ -1,12 +1,17 @@
 {
-  "name": "typo-image",
+  "name": "plus-typo",
   "version": "1.0.0",
-  "main": "index.js",
-  "repository": "https://clowncdi@github.com/clowncdi/typo-image.git",
   "author": "clowncdi <clowncdi85@gmail.com>",
   "license": "Apache",
+  "scripts": {
+    "dev": "parcel index.html",
+    "build": "parcel build index.html"
+  },
   "devDependencies": {
+    "@babel/core": "^7.21.4",
+    "@babel/plugin-transform-runtime": "^7.21.4",
     "@types/gtag.js": "^0.0.12",
+    "parcel-bundler": "^1.12.5",
     "typescript": "^5.0.3"
   }
 }

@@ -1,6 +1,6 @@
-const nav: HTMLElement | null = document.getElementById("nav");
-const links: NodeListOf<HTMLAnchorElement> = document.querySelectorAll("a[href^='#']");
-const moveList: NodeListOf<HTMLElement> = document.querySelectorAll(".move");
+const year = document.getElementById("year") as HTMLElement;
+const links = document.querySelectorAll("a[href^='#']") as NodeListOf<HTMLAnchorElement>;
+const moveList = document.querySelectorAll(".move") as NodeListOf<HTMLElement>;
 export const PRIMARYCOLOR: string = "#0F8EFF";
 export const BGCOLOR: string = "#19202c";
 export const TYPOURL: string = "typo.co.kr";
@@ -537,6 +537,7 @@ document.addEventListener("DOMContentLoaded", () => {
     item.classList.add("loaded");
   });
   handleTargetMove(moveList);
+  year.innerText = new Date().getFullYear().toString();
 });
 
 export function getLongImageStartPositionY(edit: Img): number {
@@ -549,16 +550,6 @@ export function setFormattingDate(value: string): string {
   date[2] = date[2].replace(/^0+/, "");
   return `${date[0]}.${date[1]}.${date[2]}`;
 }
-
-// nav bar scroll event
-document.addEventListener("scroll", () => {
-  const navEl = isEmpty<HTMLElement>(nav);
-  if (window.scrollY > 150) {
-    navEl.classList.add("show");
-  } else {
-    navEl.classList.remove("show");
-  }
-});
 
 links.forEach((link) => {
   link.addEventListener("click", (e) => {

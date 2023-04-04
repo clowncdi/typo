@@ -13,6 +13,7 @@ import {
 
 const editImg: Img = new Img();
 const transEvent: TransEvent = new TransEvent();
+const nav = document.getElementById("nav") as HTMLElement;
 const fileInput = document.getElementById("fileInput") as HTMLInputElement;
 const url = document.getElementById("url") as HTMLInputElement;
 const lowTemp = document.getElementById("lowTemp") as HTMLInputElement;
@@ -170,3 +171,12 @@ async function makeImageApp1(): Promise<void> {
     };
   };
 }
+
+// nav bar scroll event
+document.addEventListener("scroll", () => {
+  if (window.scrollY > 150) {
+    nav.classList.add("show");
+  } else {
+    nav.classList.remove("show");
+  }
+});

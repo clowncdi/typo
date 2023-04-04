@@ -39,7 +39,7 @@ changeColor(app7TitleColor, app7Title);
 changeColor(app7TitleColor, app7Date);
 
 reset.addEventListener('click', (e) =>
-    resetPosition(e.target, transEvent7, chooseImg7));
+    resetPosition(e.target as HTMLElement, transEvent7, chooseImg7));
 
 document.addEventListener("DOMContentLoaded", () => {
   app7Date.value = getToday();

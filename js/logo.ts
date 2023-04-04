@@ -1,5 +1,3 @@
-import {isEmpty} from "./common";
-
 const fonts: string[] = [
   "Alfa Slab One",
   "Arima",
@@ -161,79 +159,68 @@ const fadeOutLogoFont = () => {
 };
 
 class LogoState {
-  isLogoVisible: boolean | null | undefined;
-  visibility: number | undefined;
+  isVisible: boolean;
+  intervalId: number;
 
   constructor() {
-    this.isLogoVisible = this.getLogoVisibility();
-    this.visibility = setInterval(randomLetterStyle, CHANGE_LOGO_TIME);
+    this.isVisible = this.scrollVisible();
+    this.intervalId = this.initIntervalId();
   }
 
-  getLogoVisibility(visible?: string): boolean | null | undefined {
-    let boundary = logo.getBoundingClientRect().top > -100;
-    if (visible === "visible" && boundary === true) {
-      // visiblityState event
-      return true;
-    }
-    if (isEmpty(this.visibility) > 0 && boundary === true) {
-      // 이미 진행중인 경우
-      return null;
-    } else if (
-      boundary === true &&
-      (this.visibility === undefined || this.isLogoVisible === null)
-    ) {
-      return boundary;
-    } else if (isEmpty(this.visibility) > 0 && boundary === false) {
-      // 로고가 지정영역을 벗어난 경우
-      return boundary;
-    }
+  scrollVisible() {
+    return logo.getBoundingClientRect().top > -100;
   }
 
-  getLogoState() {
-    return this.isLogoVisible;
+  initIntervalId() {
+    return this.scrollVisible() ? setInterval(randomLetterStyle, CHANGE_LOGO_TIME) : 0;
   }
 
-  setLogoState(visible?: string) {
-    this.isLogoVisible = this.getLogoVisibility(visible);
+  getIntervalId() {
+    return this.intervalId;
   }
 
-  getVisibility() {
-    return this.visibility;
+  setLogoState(visible: Visible) {
+    this.isVisible = visible === "visible";
   }
 
   handleLogoEvent() {
-    if (this.isLogoVisible === null || this.isLogoVisible === undefined) {
+    if (this.isVisible && this.intervalId > 0) {
       return;
+    } else if (this.isVisible && this.intervalId === 0) {
+      this.intervalId = setInterval(randomLetterStyle, CHANGE_LOGO_TIME);
+    } else if (!this.isVisible) {
+      clearInterval(this.intervalId);
+      this.intervalId = 0;
     }
-    if (this.isLogoVisible) {
-      this.visibility = setInterval(randomLetterStyle, CHANGE_LOGO_TIME);
-    } else if (!this.isLogoVisible) {
-      clearInterval(this.visibility);
-      this.visibility = undefined;
-    }
+    
   }
 
-  handleLogoChange(visible?: string) {
+  handleLogoChange(visible: Visible) {
     this.setLogoState(visible);
     this.handleLogoEvent();
   }
 }
 
-const logoState = new LogoState();
+type Visible = "visible" | "hidden";
+let logoState = new LogoState();
 
-// visibilitychange event
+// intervalIdchange event
 document.addEventListener("visibilitychange", () => {
   if (document.visibilityState === "visible") {
-    logoState.handleLogoChange("visible");
+    logoState = logoState === undefined ? new LogoState() : logoState;
+    let result = logoState.scrollVisible() ? "visible" : "hidden";
+    logoState.handleLogoChange(result as Visible);
   } else {
-    clearInterval(logoState.getVisibility());
+    logoState.getIntervalId() !== 0 && clearInterval(logoState.getIntervalId());
+    logoState.intervalId = 0;
   }
 });
 
 randomLetterStyle();
-logoState.handleLogoChange();
+logoState.handleLogoChange('visible');
 
 // scroll event
 document.addEventListener("scroll", () => {
-  logoState.handleLogoChange();
+  let result = logoState.scrollVisible() ? "visible" : "hidden";
+  logoState.handleLogoChange(result as Visible);
 });
