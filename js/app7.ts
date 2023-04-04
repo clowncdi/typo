@@ -49,10 +49,6 @@ isMobile() && submitBtnApp7.addEventListener("touchstart", makeImageApp7);
 !isMobile() && submitBtnApp7.addEventListener("click", makeImageApp7);
 
 async function makeImageApp7() {
-  gtag("event", "app7_create", {
-    app_name: "Night Duty",
-    event_date: new Date().toLocaleString(),
-  });
   // initialize canvas.
   imageContainerApp7.innerHTML = "";
   isEmpty(imageContainerApp7.nextElementSibling).innerHTML = "";

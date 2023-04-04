@@ -1,6 +1,7 @@
 const year = document.getElementById("year") as HTMLElement;
 const links = document.querySelectorAll("a[href^='#']") as NodeListOf<HTMLAnchorElement>;
 const moveList = document.querySelectorAll(".move") as NodeListOf<HTMLElement>;
+const clearBtns = document.querySelectorAll(".clearBtn") as NodeListOf<HTMLElement>;
 export const PRIMARYCOLOR: string = "#0F8EFF";
 export const BGCOLOR: string = "#19202c";
 export const TYPOURL: string = "typo.co.kr";
@@ -279,7 +280,7 @@ export function handleMouseDragEvent(container: HTMLElement | null, trans: Trans
       }px`;
       selected.getElementsByTagName("span")[0].innerText = `X축: ${
         trans.moveX
-      }px, Y축: ${trans.moveY}px, 비율: ${trans.scale * 100}%`;
+      }px, Y축: ${trans.moveY}px, 비율: ${(trans.scale * 100).toFixed(0)}%`;
       selected.getElementsByTagName("span")[0].style.display = "block";
       selected.getElementsByTagName("span")[1].style.display = "block";
     }
@@ -445,7 +446,7 @@ export function resizeImage(imgApp: HTMLElement, edit: Img, trans: TransEvent): 
     )[0].style.translate = `${trans.scaleMoveX}px ${trans.scaleMoveY}px`;
     imgApp.getElementsByTagName("span")[0].innerText = `X축: ${
       trans.moveX
-    }px, Y축: ${trans.moveY}px, 비율: ${trans.scale * 100}%`;
+    }px, Y축: ${trans.moveY}px, 비율: ${(trans.scale * 100).toFixed(0)}%`;
     imgApp.getElementsByTagName("span")[0].style.display = "block";
     imgApp.getElementsByTagName("span")[1].style.display = "block";
   });
@@ -486,13 +487,6 @@ export function addDownloadButton(canvas: HTMLCanvasElement, download: HTMLEleme
   download.appendChild(a);
 }
 
-export function downloadCountGA(app: string, name: string): void {
-  gtag("event", `${app}_download`, {
-    app_name: name,
-    event_date: new Date().toLocaleString(),
-  });
-}
-
 // 오늘 날짜를 yyyy-mm-dd 형식으로 반환하는 함수
 export function getToday(): string {
   const today = new Date();
@@ -503,15 +497,15 @@ export function getToday(): string {
   return `${yyyy}-${mm}-${dd}`;
 }
 
-export function clearInput(btn: HTMLElement): void {
+function clearInput(btn: HTMLElement): void {
   isEmpty<HTMLInputElement>(btn.previousElementSibling as HTMLInputElement).value = "";
 }
 
 // input null check
 export function inputNullCheck(inputList: NodeListOf<HTMLInputElement>, inputFile: HTMLInputElement): void {
-  if (!inputFile.files) {
-    isEmpty<HTMLElement>(inputFile.previousElementSibling as HTMLElement).style.backgroundColor = "red";
-    isEmpty<HTMLElement>(inputFile.previousElementSibling as HTMLElement).style.color = "white";
+  if (inputFile.files?.length === 0) {
+    (inputFile.previousElementSibling as HTMLElement).style.backgroundColor = "#ff3333";
+    (inputFile.previousElementSibling as HTMLElement).style.color = "white";
   }
   inputList.forEach((input) => checkValue(input));
 }
@@ -538,6 +532,13 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   handleTargetMove(moveList);
   year.innerText = new Date().getFullYear().toString();
+});
+
+clearBtns.forEach((clearBtn) => {
+  clearBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    clearInput(clearBtn);
+  });
 });
 
 export function getLongImageStartPositionY(edit: Img): number {

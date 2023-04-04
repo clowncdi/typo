@@ -45,10 +45,6 @@ isMobile() && submitBtnApp3.addEventListener("touchstart", makeImageApp3);
 !isMobile() && submitBtnApp3.addEventListener("click", makeImageApp3);
 
 async function makeImageApp3() {
-  gtag("event", "app3_create", {
-    app_name: "Bicycle Repair Shop",
-    event_date: new Date().toLocaleString(),
-  });
   // initialize canvas.
   imageContainerApp3.innerHTML = "";
   isEmpty(imageContainerApp3.nextElementSibling).innerHTML = "";

@@ -8,7 +8,7 @@ import {
   TransEvent,
   isMobile,
   resetPosition,
-  isEmpty
+  isEmpty,
 } from './common';
 
 const editImg: Img = new Img();
@@ -46,31 +46,28 @@ reset.addEventListener('click', (e) =>
 document.addEventListener("DOMContentLoaded", () => {
   dateInput.value = getToday();
   url.value = "Weaco.co.kr";
-  weatherUrl = "/images/sun.svg";
-  const icon = isEmpty(icons.item(0) as HTMLElement);
-  isEmpty(icon.firstElementChild as SVGImageElement).style.fill = PRIMARYCOLOR;
   city.value = "서울";
   country.value = "S.Korea, Seoul";
+  const icon = icons.item(0).children[0] as HTMLImageElement;
+  icon.classList.add('active');
+  weatherUrl = icon.src.slice(icon.src.lastIndexOf('/'));
 });
 
 // 날씨 아이콘을 선택하면, 선택된 아이콘의 색을 chartreuse로 변경한다.
 icons.forEach((icon) => {
   icon.addEventListener("click", (e) => {
-    const target = isEmpty(e.target as HTMLOrSVGImageElement);
-    if (
-      target.style.fill === PRIMARYCOLOR ||
-      target.style.fill === "rgb(15, 142, 255)"
-    ) {
-      target.style.fill = "white";
+    const target = isEmpty(e.target as HTMLImageElement);
+    if (target.classList.contains('active')) {
+      target.classList.remove('active');
       weatherUrl = "";
       return;
     }
     if (target.tagName == "IMG" || target.tagName == "svg") {
       icons.forEach((icon) => {
-        (icon.children[0] as SVGAElement).style.fill = "white";
+        icon.children[0].classList.remove('active');
       });
-      target.style.fill = PRIMARYCOLOR;
-      weatherUrl = "/images/" + target.className.baseVal + ".svg";
+      target.classList.add('active');
+      weatherUrl = target.src.slice(target.src.lastIndexOf('/'));
     }
   });
 });
@@ -79,10 +76,6 @@ isMobile() && submitBtn.addEventListener("touchstart", makeImageApp1);
 !isMobile() && submitBtn.addEventListener("click", makeImageApp1);
 
 async function makeImageApp1(): Promise<void> {
-  gtag("event", "app1_create", {
-    app_name: "Today Weather",
-    event_date: new Date().toLocaleString(),
-  });
   // initialize canvas.
   imageContainer.innerHTML = "";
   isEmpty(imageContainer.nextElementSibling).innerHTML = "";
@@ -135,10 +128,9 @@ async function makeImageApp1(): Promise<void> {
       ctx.textAlign = "right";
       url && ctx.fillText(url.value, 950, 42 + height50);
 
-      // 날씨 아이콘을 추가한다.
-      iconImg.onload = () => {
-        weatherUrl !== "" && ctx.drawImage(iconImg, 50, 160);
-      }
+      // insert weather icon
+      ctx.filter = "opacity(1)";
+      ctx.drawImage(iconImg, 50, 160);
 
       ctx.font = "50px S-CoreDream-3Light";
       ctx.textAlign = "left";
