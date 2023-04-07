@@ -60,6 +60,7 @@ isMobile() && submitBtnApp8.addEventListener("touchstart", makeImageApp8);
 !isMobile() && submitBtnApp8.addEventListener("click", makeImageApp8);
 
 async function makeImageApp8() {
+  event?.stopPropagation();
   // initialize canvas.
   imageContainerApp8.innerHTML = "";
   isEmpty(imageContainerApp8.nextElementSibling).innerHTML = "";

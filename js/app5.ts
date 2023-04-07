@@ -54,6 +54,7 @@ isMobile() && submitBtnApp5.addEventListener("touchstart", makeImageApp5);
 !isMobile() && submitBtnApp5.addEventListener("click", makeImageApp5);
 
 async function makeImageApp5() {
+  event?.stopPropagation();
   // initialize canvas.
   imageContainerApp5.innerHTML = "";
   isEmpty(imageContainerApp5.nextElementSibling).innerHTML = "";
