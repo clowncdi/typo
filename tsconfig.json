@@ -1,14 +1,19 @@
 {
   "compilerOptions": {
-    "target": "ES5",
+    "target": "ES2017",
     "strict": true,
     "module": "CommonJS",
     "sourceMap": true,
     "types": ["@types/gtag.js"],
     "lib": [
-      "ES6",
+      "ES2017",
       "DOM",
       "ES2021.String"
-    ]
-  }
+    ],
+    "skipLibCheck": true
+  },
+  "include": [
+    "js/**/*.ts",
+    "js/types/**/*.d.ts"
+  ]
 }

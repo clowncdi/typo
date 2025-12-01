@@ -2,17 +2,16 @@ export {};
 
 declare global {
   interface Window {
-    // gtag: (param1: string, param2: string, param3?: object) => void;
-    dataLayer: Gtag.Gtag[];
+    dataLayer: unknown[];
   }
 }
 
-
-
 window.dataLayer = window.dataLayer || [];
-function gtag(...args) {
-  window.dataLayer.push(...args);
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function gtag(...args: any[]) {
+  window.dataLayer.push(args);
 }
 
 gtag('js', new Date());
-gtag("config", 'G-0T4BVMKTXC');
+gtag('config', 'G-0T4BVMKTXC');

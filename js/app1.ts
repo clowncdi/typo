@@ -1,15 +1,12 @@
-import {
-  addDownloadButton,
-  addWatermarkCenterBottom,
-  BGCOLOR, getToday, handleChangeImage,
-  Img,
-  inputNullCheck,
-  PRIMARYCOLOR,
-  TransEvent,
-  isMobile,
-  resetPosition,
-  isEmpty,
-} from './common';
+// 클래스
+import { Img } from './classes/Img';
+import { TransEvent } from './classes/TransEvent';
+// 상수
+import { BGCOLOR, PRIMARYCOLOR } from './core/constants';
+// 유틸리티
+import { getToday, isEmpty, isMobile, addDownloadButton, addWatermarkCenterBottom } from './core/utils';
+// 핸들러
+import { handleChangeImage, resetPosition, inputNullCheck } from './handlers/imageHandler';
 
 const editImg: Img = new Img();
 const transEvent: TransEvent = new TransEvent();
@@ -62,7 +59,7 @@ icons.forEach((icon) => {
       weatherUrl = "";
       return;
     }
-    if (target.tagName == "IMG" || target.tagName == "svg") {
+    if (target.tagName === "IMG" || target.tagName === "svg") {
       icons.forEach((icon) => {
         icon.children[0].classList.remove('active');
       });
@@ -75,28 +72,55 @@ icons.forEach((icon) => {
 isMobile() && submitBtn.addEventListener("touchstart", makeImageApp1);
 !isMobile() && submitBtn.addEventListener("click", makeImageApp1);
 
-async function makeImageApp1(): Promise<void> {
-  event?.stopPropagation();
+async function makeImageApp1(evt?: Event): Promise<void> {
+  evt?.stopPropagation();
   // initialize canvas.
   imageContainer.innerHTML = "";
   isEmpty(imageContainer.nextElementSibling).innerHTML = "";
   inputNullCheck(inputs, fileInput);
 
-  const file = isEmpty(fileInput.files)[0];
-  if (file) {
-    imageContainer.parentElement!.parentElement!.style.display = "block";
+  const files = fileInput.files;
+  if (!files || files.length === 0) {
+    return;
   }
+  const file = files[0];
+
+  const parentEl = imageContainer.parentElement?.parentElement;
+  if (parentEl) {
+    parentEl.style.display = "block";
+  }
+
   const low = lowTemp.value;
   const high = highTemp.value;
   const date = dateInput.value.replaceAll("-", "");
 
   const reader = new FileReader();
   const reader2 = new FileReader();
-  const canvas = document.createElement("canvas") as HTMLCanvasElement;
-  const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
-  const weatherIcon = await fetch(weatherUrl).then((response) =>
-    response.blob()
-  );
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+
+  if (!ctx) {
+    console.error("Canvas 2D 컨텍스트를 가져올 수 없습니다.");
+    return;
+  }
+
+  let weatherIcon: Blob;
+  try {
+    const response = await fetch(weatherUrl);
+    weatherIcon = await response.blob();
+  } catch (error) {
+    console.error("날씨 아이콘을 가져올 수 없습니다:", error);
+    return;
+  }
+
+  reader.onerror = () => {
+    console.error("파일 읽기 실패:", reader.error);
+    alert("파일을 읽을 수 없습니다.");
+  };
+
+  reader2.onerror = () => {
+    console.error("아이콘 파일 읽기 실패:", reader2.error);
+  };
 
   reader.readAsDataURL(file);
   reader2.readAsDataURL(weatherIcon);
@@ -106,6 +130,11 @@ async function makeImageApp1(): Promise<void> {
     img.src = reader.result as string;
     const iconImg = new Image();
     iconImg.src = reader2.result as string;
+
+    img.onerror = () => {
+      console.error("이미지 로드 실패");
+      alert("이미지를 불러올 수 없습니다.");
+    };
 
     img.onload = () => {
       const height50 = 48;

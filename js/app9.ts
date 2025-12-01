@@ -1,13 +1,14 @@
-import {
-  addDownloadButton,
-  BGCOLOR, handleChangeImage,
-  Img,
-  inputNullCheck,
-  TransEvent,
-  isMobile,
-  resetPosition,
-  MoveText, handleMoveText, changeColor, makeDouble, addWatermarkRightBottom, isEmpty
-} from './common';
+// 클래스
+import { Img } from './classes/Img';
+import { TransEvent } from './classes/TransEvent';
+import { MoveText } from './classes/MoveText';
+// 상수
+import { BGCOLOR } from './core/constants';
+// 유틸리티
+import { isEmpty, isMobile, makeDouble, addDownloadButton, addWatermarkRightBottom } from './core/utils';
+// 핸들러
+import { handleChangeImage, resetPosition, inputNullCheck, changeColor } from './handlers/imageHandler';
+import { handleMoveText } from './handlers/dragHandler';
 
 const editImg9: Img = new Img();
 const transEvent9: TransEvent = new TransEvent();
@@ -40,25 +41,47 @@ reset.addEventListener('click', (e) =>
 isMobile() && submitBtnApp9.addEventListener("touchstart", makeImageApp9);
 !isMobile() && submitBtnApp9.addEventListener("click", makeImageApp9);
 
-async function makeImageApp9() {
-  event?.stopPropagation();
+async function makeImageApp9(evt?: Event): Promise<void> {
+  evt?.stopPropagation();
   // initialize canvas.
   imageContainerApp9.innerHTML = "";
   isEmpty(imageContainerApp9.nextElementSibling).innerHTML = "";
   inputNullCheck(app9Inputs, chooseFileApp9);
 
-  const file = isEmpty(chooseFileApp9.files)[0];
-  if (file) {
-    imageContainerApp9.parentElement!.parentElement!.style.display = "block";
+  const files = chooseFileApp9.files;
+  if (!files || files.length === 0) {
+    return;
   }
+  const file = files[0];
+
+  const parentEl = imageContainerApp9.parentElement?.parentElement;
+  if (parentEl) {
+    parentEl.style.display = "block";
+  }
+
   const reader = new FileReader();
-  const canvas = document.createElement("canvas") as HTMLCanvasElement;
-  const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+
+  if (!ctx) {
+    console.error("Canvas 2D 컨텍스트를 가져올 수 없습니다.");
+    return;
+  }
+
+  reader.onerror = () => {
+    console.error("파일 읽기 실패:", reader.error);
+    alert("파일을 읽을 수 없습니다.");
+  };
 
   reader.readAsDataURL(file);
   reader.onload = () => {
     const img = new Image();
     img.src = reader.result as string;
+
+    img.onerror = () => {
+      console.error("이미지 로드 실패");
+      alert("이미지를 불러올 수 없습니다.");
+    };
 
     img.onload = async () => {
       canvas.width = 1000;

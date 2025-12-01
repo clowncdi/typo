@@ -1,4 +1,4 @@
-import {isEmpty, isMobile} from "./common";
+import { isEmpty, isMobile } from './core/utils';
 
 const lang_list = document.querySelectorAll(".btn-lang") as NodeListOf<HTMLElement>;
 const sub1 = document.querySelector(".about-sub-text1") as HTMLElement;

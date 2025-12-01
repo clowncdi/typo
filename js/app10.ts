@@ -1,4 +1,5 @@
-import {addDownloadButton, addWatermarkRightBottom, checkValue, isEmpty, isMobile} from "./common";
+// 유틸리티
+import { isEmpty, isMobile, checkValue, addDownloadButton, addWatermarkRightBottom } from './core/utils';
 
 const submitBtnApp10 = document.getElementById("submitBtnApp10") as HTMLButtonElement;
 const imageContainerApp10 = document.getElementById("imageContainerApp10") as HTMLDivElement;
@@ -14,18 +15,26 @@ const app10Textarea = document.querySelectorAll("#app10 textarea") as NodeListOf
 isMobile() && submitBtnApp10.addEventListener("touchstart", makeImageApp10);
 !isMobile() && submitBtnApp10.addEventListener("click", makeImageApp10);
 
-async function makeImageApp10() {
-  event?.stopPropagation();
+async function makeImageApp10(evt?: Event): Promise<void> {
+  evt?.stopPropagation();
   // initialize canvas.
   imageContainerApp10.innerHTML = "";
   isEmpty(imageContainerApp10.nextElementSibling).innerHTML = "";
   app10Inputs.forEach((input) => checkValue(input));
   app10Textarea.forEach((textarea) => checkValue(textarea));
 
-  imageContainerApp10.parentElement!.parentElement!.style.display = "block";
+  const parentEl = imageContainerApp10.parentElement?.parentElement;
+  if (parentEl) {
+    parentEl.style.display = "block";
+  }
 
-  const canvas = document.createElement("canvas") as HTMLCanvasElement;
-  const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+
+  if (!ctx) {
+    console.error("Canvas 2D 컨텍스트를 가져올 수 없습니다.");
+    return;
+  }
   canvas.width = 1000;
   canvas.height = 1000;
   ctx.fillStyle = app10BgColor.value;
