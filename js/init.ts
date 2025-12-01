@@ -3,6 +3,7 @@
 
 import { handleTargetMove } from './handlers/dragHandler';
 import { isEmpty } from './core/utils';
+import { AppFactory } from './classes/AppFactory';
 
 const year = document.getElementById("year");
 const links = document.querySelectorAll("a[href^='#']") as NodeListOf<HTMLAnchorElement>;
@@ -66,3 +67,6 @@ links.forEach((link) => {
     });
   });
 });
+
+// 모든 앱 초기화
+AppFactory.createAll();
