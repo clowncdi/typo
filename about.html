@@ -8,7 +8,7 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      gtag('config', 'G-0T4BVMKTXC');
+      gtag('config', process.env.GOOGLE_ANALYTICS_ID);
     </script>
     <meta name="naver-site-verification" content="b80724f695100998b426a24e78d65b2cdf2cfccc" />
     <meta charset="utf-8" />
@@ -39,6 +39,7 @@
     <meta property="twitter:url" content="https://typo.co.kr/" />
     <link rel="icon" type="image/png" href="./images/favicon.png" />
     <link rel="apple-touch-icon" href="./images/logo.png" />
+    <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/common.css" />
     <link rel="stylesheet" href="./css/about.css" />
     <link
@@ -109,6 +110,7 @@
                 fill="currentColor"
                 d="M20.664 5.253a1 1 0 0 1 .083 1.411l-10.666 12a1 1 0 0 1-1.495 0l-5.333-6a1 1 0 0 1 1.494-1.328l4.586 5.159l9.92-11.16a1 1 0 0 1 1.411-.082z"
               />
+            </svg>
             <span> Kor </span>
           </div>
         </div>
@@ -130,7 +132,7 @@
       </div>
 
       <footer>
-        <p>Copyright © 2023 PlusTypo</p>
+        <p>Copyright © <span id="year"></span> PlusTypo</p>
         <address>
           Send your feedback and creations to
           <a href="mailto:clowncdi85@gmail.com">clowncdi85@gmail.com</a>
@@ -140,8 +142,8 @@
         </p>
       </footer>
     </div>
-  </body>
 
-  <script src="./js/logo.js" defer></script>
-  <script src="./js/about.js" defer></script>
+    <script src="./js/logo.ts"></script>
+    <script type="module" src="./js/about.ts"></script>
+  </body>
 </html>

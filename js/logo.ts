@@ -1,4 +1,4 @@
-const fonts = [
+const fonts: string[] = [
   "Alfa Slab One",
   "Arima",
   "Arizonia",
@@ -49,15 +49,15 @@ const fonts = [
   "Waterfall",
   "Yesteryear",
 ];
-const plus = document.getElementById("logoPlus");
-const typo = document.getElementById("logoTypo");
-const plusFont = document.getElementById("plus-font");
-const typoFont = document.getElementById("typo-font");
-const logo = document.querySelector(".gnb-logo");
-const LOGO_TEXT = "plusTYPO";
-const CHANGE_LOGO_TIME = 10000;
-let currentIndex = 0;
-let opacity = 0;
+const plus = document.getElementById("logoPlus") as HTMLElement;
+const typo = document.getElementById("logoTypo") as HTMLElement;
+const plusFont = document.getElementById("plus-font") as HTMLElement;
+const typoFont = document.getElementById("typo-font") as HTMLElement;
+const logo = document.querySelector(".gnb-logo") as HTMLElement;
+const LOGO_TEXT: string = "plusTYPO";
+const CHANGE_LOGO_TIME: number = 10000;
+let currentIndex: number = 0;
+let opacity: number = 0;
 
 const randomFont = () => {
   const randomIndex = Math.floor(Math.random() * fonts.length);
@@ -103,7 +103,7 @@ const addLogoText = () => {
   }, 50);
 };
 
-const getLogoText = (text) => {
+const getLogoText = (text: string) => {
   return text !== undefined ? text : "";
 };
 
@@ -127,7 +127,7 @@ const deleteLogoText = () => {
 const fontCursor = document.createElement("span");
 fontCursor.innerHTML = "|";
 fontCursor.style.fontFamily = "Pretendard Variable";
-fontCursor.style.fontWeight = 100;
+fontCursor.style.fontWeight = '100';
 fontCursor.style.opacity = "0";
 fontCursor.style.color = "black";
 fontCursor.style.fontSize = "3rem";
@@ -142,8 +142,8 @@ setInterval(cursorBlink, cursorBlinkTime);
 
 const fadeInLogoFont = () => {
   opacity += 0.1;
-  plusFont.style.opacity = opacity;
-  typoFont.style.opacity = opacity;
+  plusFont.style.opacity = String(opacity);
+  typoFont.style.opacity = String(opacity);
   if (opacity < 1) {
     setTimeout(fadeInLogoFont, 50);
   }
@@ -151,87 +151,76 @@ const fadeInLogoFont = () => {
 
 const fadeOutLogoFont = () => {
   opacity -= 0.1;
-  plusFont.style.opacity = opacity;
-  typoFont.style.opacity = opacity;
+  plusFont.style.opacity = String(opacity);
+  typoFont.style.opacity = String(opacity);
   if (opacity > 0) {
     setTimeout(fadeOutLogoFont, 50);
   }
 };
 
 class LogoState {
-  isLogoVisible;
-  visibility;
+  isVisible: boolean;
+  intervalId: number;
 
   constructor() {
-    this.isLogoVisible = this.getLogoVisibility();
-    this.visibility = setInterval(randomLetterStyle, CHANGE_LOGO_TIME);
+    this.isVisible = this.scrollVisible();
+    this.intervalId = this.initIntervalId();
   }
 
-  getLogoVisibility(visible) {
-    let boundary = logo.getBoundingClientRect().top > -100;
-    if (visible === "visible" && boundary === true) {
-      // visiblityState event
-      return true;
-    }
-    if (this.visibility > 0 && boundary === true) {
-      // 이미 진행중인 경우
-      return null;
-    } else if (
-      boundary === true &&
-      (this.visibility === undefined || this.isLogoVisible === null)
-    ) {
-      return boundary;
-    } else if (this.visibility > 0 && boundary === false) {
-      // 로고가 지정영역을 벗어난 경우
-      return boundary;
-    }
+  scrollVisible() {
+    return logo.getBoundingClientRect().top > -100;
   }
 
-  getLogoState() {
-    return this.isLogoVisible;
+  initIntervalId() {
+    return this.scrollVisible() ? setInterval(randomLetterStyle, CHANGE_LOGO_TIME) : 0;
   }
 
-  setLogoState(visible) {
-    this.isLogoVisible = this.getLogoVisibility(visible);
+  getIntervalId() {
+    return this.intervalId;
   }
 
-  getVisibility() {
-    return this.visibility;
+  setLogoState(visible: Visible) {
+    this.isVisible = visible === "visible";
   }
 
   handleLogoEvent() {
-    if (this.isLogoVisible === null || this.isLogoVisible === undefined) {
+    if (this.isVisible && this.intervalId > 0) {
       return;
+    } else if (this.isVisible && this.intervalId === 0) {
+      this.intervalId = setInterval(randomLetterStyle, CHANGE_LOGO_TIME);
+    } else if (!this.isVisible) {
+      clearInterval(this.intervalId);
+      this.intervalId = 0;
     }
-    if (this.isLogoVisible) {
-      this.visibility = setInterval(randomLetterStyle, CHANGE_LOGO_TIME);
-    } else if (!this.isLogoVisible) {
-      clearInterval(this.visibility);
-      this.visibility = undefined;
-    }
+    
   }
 
-  handleLogoChange(visible) {
+  handleLogoChange(visible: Visible) {
     this.setLogoState(visible);
     this.handleLogoEvent();
   }
 }
 
-const logoState = new LogoState();
+type Visible = "visible" | "hidden";
+let logoState = new LogoState();
 
-// visibilitychange event
+// intervalIdchange event
 document.addEventListener("visibilitychange", () => {
   if (document.visibilityState === "visible") {
-    logoState.handleLogoChange("visible");
+    logoState = logoState === undefined ? new LogoState() : logoState;
+    let result = logoState.scrollVisible() ? "visible" : "hidden";
+    logoState.handleLogoChange(result as Visible);
   } else {
-    clearInterval(logoState.getVisibility());
+    logoState.getIntervalId() !== 0 && clearInterval(logoState.getIntervalId());
+    logoState.intervalId = 0;
   }
 });
 
 randomLetterStyle();
-logoState.handleLogoChange();
+logoState.handleLogoChange('visible');
 
 // scroll event
 document.addEventListener("scroll", () => {
-  logoState.handleLogoChange();
+  let result = logoState.scrollVisible() ? "visible" : "hidden";
+  logoState.handleLogoChange(result as Visible);
 });
