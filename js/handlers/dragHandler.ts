@@ -25,6 +25,7 @@ export function handleMouseDragEvent(
   let isMoveX = false;
 
   selected.addEventListener(mousedown, (e) => {
+    e.preventDefault();
     trans.drag = true;
     trans.startX = isMobile() ? (e as TouchEvent).touches[0].clientX : (e as MouseEvent).clientX;
     trans.startY = isMobile() ? (e as TouchEvent).touches[0].clientY : (e as MouseEvent).clientY;
@@ -78,6 +79,7 @@ export function handleMoveText(app: HTMLElement, moveText: MoveText): void {
   let isMoveX = false;
 
   app.addEventListener("mousedown", (e) => {
+    e.preventDefault();
     moveText.isDrag = true;
     moveText.startX = e.clientX;
     moveText.startY = e.clientY;
@@ -137,6 +139,7 @@ export function handleTargetMove(moveList: NodeListOf<HTMLElement>): void {
     }
 
     function onGrab(e: MouseEvent) {
+      e.preventDefault();
       x = e.clientX;
       y = e.clientY;
       document.addEventListener("mousemove", onDrag);

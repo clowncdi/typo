@@ -110,6 +110,8 @@ export function handleChangeImage(
         img.style.left = `${trans.startX}px`;
         img.style.top = `${trans.startY}px`;
         img.id = chooseImgId;
+        img.draggable = false;
+        img.style.userSelect = 'none';
         container.appendChild(img);
 
         handleMouseDragEvent(container, trans, chooseImgId);
