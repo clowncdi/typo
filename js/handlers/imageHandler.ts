@@ -48,17 +48,15 @@ export function resizeImage(
   imgApp.addEventListener("wheel", (e) => {
     e.preventDefault();
     const delta = e.deltaY > 0 ? 0.1 : -0.1;
-    trans.scale += delta;
-    trans.scale = Math.max(0.1, Math.min(trans.scale, 3));
-    if (trans.scale <= 0.1 || trans.scale >= 3) return;
+    const newScale = trans.scale + delta;
+    if (newScale <= 0.1 || newScale >= 3) return;
+    trans.scale = newScale;
     trans.scaleMoveX += (edit.width * delta) / 2;
     trans.scaleMoveY += (edit.height * delta) / 2;
-    trans.moveX = 0;
-    trans.moveY = 0;
     const firstImage = isEmpty(imgApp.getElementsByTagName("img")[0]);
     firstImage.style.scale = String(trans.scale);
-    imgApp.getElementsByTagName("img")[0].style.translate =
-      `${trans.scaleMoveX}px ${trans.scaleMoveY}px`;
+    firstImage.style.translate =
+      `${trans.moveX + trans.scaleMoveX}px ${trans.moveY + trans.scaleMoveY}px`;
     imgApp.getElementsByTagName("span")[0].innerText =
       `X축: ${trans.moveX}px, Y축: ${trans.moveY}px, 비율: ${(trans.scale * 100).toFixed(0)}%`;
     imgApp.getElementsByTagName("span")[0].style.display = "block";
