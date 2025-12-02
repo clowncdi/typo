@@ -79,6 +79,12 @@ export function handleMoveText(app: HTMLElement, moveText: MoveText): void {
   let isMoveX = false;
 
   app.addEventListener("mousedown", (e) => {
+    const target = e.target as HTMLElement;
+    const tagName = target.tagName.toLowerCase();
+    // input, textarea, button 요소는 기본 동작 허용
+    if (tagName === 'input' || tagName === 'textarea' || tagName === 'button') {
+      return;
+    }
     e.preventDefault();
     moveText.isDrag = true;
     moveText.startX = e.clientX;
@@ -86,6 +92,7 @@ export function handleMoveText(app: HTMLElement, moveText: MoveText): void {
   });
 
   app.addEventListener("mousemove", (e) => {
+    if (!moveText.isDrag) return;
     e.preventDefault();
     if (moveText.isDrag) {
       const moveX = isMoveX ? 0 : e.clientX - moveText.startX;
@@ -139,6 +146,12 @@ export function handleTargetMove(moveList: NodeListOf<HTMLElement>): void {
     }
 
     function onGrab(e: MouseEvent) {
+      const target = e.target as HTMLElement;
+      const tagName = target.tagName.toLowerCase();
+      // input, textarea, button 요소는 기본 동작 허용
+      if (tagName === 'input' || tagName === 'textarea' || tagName === 'button') {
+        return;
+      }
       e.preventDefault();
       x = e.clientX;
       y = e.clientY;
